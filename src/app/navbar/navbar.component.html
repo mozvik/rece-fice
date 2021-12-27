@@ -1,0 +1,131 @@
+<div class="container-fluid position-relative p-0 ">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4 d-none d-lg-block">
+    <div class="container-fluid position-relative ">
+      <div [@openClose]="advancedSearchIsOpen ? 'open' : 'closed'"
+      id="logoCenter"  class="overflow-visible d-none d-lg-block" style="z-index: 10;">
+        <div class="mt-5 rounded-circle position-absolute top-50 start-50 translate-middle  " style="width: 170px; height: 170px;">
+          <div id="centerLogoImg" class="" style="width: 150px; height: 150px;" ><img src="./assets/img/logo_ff7055_150.png" alt=""  class="position-absolute top-50 start-50 translate-middle">
+          </div>
+        </div>
+      </div>
+      <div class="container-xxl ">
+        
+        <div class="row align-items-center ps-1">
+          <div class="col-md-12 col-lg-2 bg-light pe-0 ">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0" placeholder="Keresés..." aria-label="Keresés..." aria-describedby="button-addon2">
+              <button class="btn btn-outline" type="button" id="button-addon2" style="z-index: 10;"><i class="fa fa-search text-dark" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-4">
+            <button (click)="advancedSearchIsOpen=!advancedSearchIsOpen"
+            class="btn btn-outline-secondary btn-sm col-auto p-2" id="advancedSearchBtn" type="button" >Részletes keresés</button>
+          </div>
+          <div class="col-lg-6 p-0">
+            <div class="collapse navbar-collapse justify-content-end" id="userNavbar">
+              <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" aria-selected="true" href="#">Üdvözlünk (d-none) </a>
+                </li>
+                <li class="nav-item nav-link disabled">|</li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Belépés</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <app-advanced-search [isOpen]="advancedSearchIsOpen"></app-advanced-search>
+
+  <!-- <div [@openClose]="advancedSearchIsOpen ? 'open' : 'closed'" class="open-close-container bg-dark">
+    <p>The box is now {{ advancedSearchIsOpen ? 'Open' : 'Closed' }}!</p>
+  </div> -->
+
+  <nav class="navbar navbar-expand-lg navbar-light py-4 py-lg-0 "
+  id="mainNavbar">
+
+  
+  
+    <div class="container-fluid">
+      <div class="container-xxl p-0">
+        
+        <div class="container d-flex justify-content-between">
+          
+          <button class="navbar-toggler border-0 w-25" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand d-lg-none" href="#">
+            <img src="./assets/img/logo_ff7055_80.png" alt=""  class="">
+          </a>
+          <button class="btn btn-outline d-lg-none" type="button" id="button-addon2" style="z-index: 10;"><i class="fa fa-search text-dark" aria-hidden="true"></i></button>
+        </div>
+        
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item pe-2">
+              <a class="nav-link active fs-6 text-uppercase my-1 my-lg-4" aria-current="page" href="#" id="homeLink">Főoldal</a>
+            </li>
+            <li (click)="dropdownShow=!dropdownShow"
+            class="nav-item dropdown pe-2">
+              <a class="nav-link dropdown-toggle fs-6 text-uppercase m-0 my-1 my-lg-4" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                Receptek
+              </a>
+              <ul [ngClass]="dropdownShow?'show':''"
+              class="dropdown-menu" style="width: 260px;">
+                <div class="row p-0 m-0">
+                  <div class="col-6  p-0 m-0">
+                    <li><a class="dropdown-item" href="#">Előételek</a></li>
+                    <li><a class="dropdown-item" href="#">Levesek</a></li>
+                    <li><a class="dropdown-item" href="#">Főételek</a></li>
+                  </div>
+                  <div class="col-6">
+                    <li><a class="dropdown-item" href="#">Köretek</a></li>
+                    <li><a class="dropdown-item" href="#">Desszertek</a></li>
+                    <li><a class="dropdown-item" href="#">Italok</a></li>
+                  </div>
+                </div>
+                 
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mr-3 my-1 my-lg-4 fs-6 text-uppercase" href="#" tabindex="-1" aria-disabled="true">Receptvarázsló</a>
+            </li>
+          </ul>
+          <hr class="dropdown-divider  d-lg-none">
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0" id="signedInMenu">
+            <li class="nav-item pe-2">
+              <a class="nav-link fs-6 text-uppercase  mr-3 my-1 my-lg-4" aria-current="page" href="#">Receptfeltöltés</a>
+            </li>
+            <li class="nav-item pe-2">
+              <a class="nav-link fs-6 text-uppercase  mr-3 my-1 my-lg-4" href="#">Receptjeim</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-6 text-uppercase  mr-3 my-1 my-lg-4" href="#" tabindex="-1" aria-disabled="true">Kedvenceim</a>
+            </li>
+          </ul>
+          <hr class="dropdown-divider  d-lg-none">
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0 d-lg-none" id="signedInMenu">
+            <li class="nav-item pe-2">
+              <a class="nav-link fs-6 text-uppercase  mr-3 my-1 my-lg-4" aria-current="page" href="#">Profilom</a>
+            </li>
+            <li class="nav-item pe-2">
+              <a class="nav-link fs-6 text-uppercase  mr-3 my-1 my-lg-4" href="#">Login/Logout</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+ 
+</div>
+<div id="logoMain" class="container-fluid py-3">
+  <div class="d-flex justify-content-center">
+    <img src="./assets/img/mainlogo_sm.png" alt=""  class="">
+  </div>
+</div>
+

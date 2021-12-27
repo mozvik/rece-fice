@@ -1,0 +1,15 @@
+.nav-link {
+  position: relative;
+  top: 1px;
+  left: 0;
+  border: 1px solid transparent;
+}
+.nav-link:focus {
+  border: 1px solid;
+  border-bottom: 1px solid white;
+}
+
+#borderBottom{
+  position: relative;
+  border-bottom: 1px solid ;
+}

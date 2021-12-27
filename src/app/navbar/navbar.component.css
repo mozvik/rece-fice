@@ -1,0 +1,75 @@
+#logoCenter:hover{
+  cursor: pointer;
+}
+#logoCenter>div{
+  background: var(--backgroundColor);
+}
+
+
+::placeholder{
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 14px;
+}
+#userNavbar .nav-link, #advancedSearchBtn{
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,.55);
+}
+#mainNavbar #homeLink{
+  color: var(--orangeRedDark);
+  
+}
+#mainNavbar .nav-link{
+  font-family: 'Karla', sans-serif;
+  font-size: 15px;
+  font-weight:bold;
+  color: var(--textColor);
+  transition: all 0.4s ease-in-out;
+}
+#mainNavbar .nav-link:hover{
+  color: var(--orangeRedDark);
+  transition: all 0.4s ease-in-out;
+}
+
+#mainNavbar .dropdown-item{
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  line-height: 26px;
+  font-weight:bold;
+  color: var(--textColor);
+  background: var(--backgroundColor);
+  transition: all 0.4s ease-in-out;
+}
+#mainNavbar .dropdown-item:hover{
+  color: var(--orangeRedDark);
+  transition: all 0.4s ease-in-out;
+}
+.form-control:focus, .btn:focus {
+  outline: none;
+  box-shadow:none ;
+  border: none;
+}
+#mainNavbar .dropdown-menu, #mainNavbar .dropdown-menu div{
+  background: var(--backgroundColor);
+} 
+@media (min-width: 992px) {
+  #mainNavbar .dropdown .dropdown-menu {
+    display: block;
+    height: 0;
+    transition: all .35s ease; 
+    opacity: 0;
+    visibility: hidden; 
+  }
+  #mainNavbar .dropdown:hover .dropdown-menu {
+    display: block;
+    transform: translateY(-25px) ; 
+    height: initial;
+    transition: all .35s ease;
+    opacity: 1;
+    visibility: visible; 
+  }
+  
+
+
+}
