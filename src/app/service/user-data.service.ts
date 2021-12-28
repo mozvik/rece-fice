@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { APIService } from './api.service';
 
 @Injectable({
@@ -6,13 +7,29 @@ import { APIService } from './api.service';
 })
 export class UserDataService {
 
+  public costList: any = [{
+    id: '',
+    name: '', 
+    selected: '1'
+  }];
+  public categoryList: any[] = [];
+  public difficulityList: any[] = [];
+  public nationalityList: any[] = [];
+  public labelList: any[] = [];
+
+ 
+
   constructor(
     private apiService: APIService
   ) { }
 
+
+  
   public checkConnection() {
     this.apiService.isServerReady().subscribe({
-      next: data => console.log('data :>> ', data),
+      next: data => {
+        console.log('data :>> ', data)
+      },
       // error: err => console.error('uds',err.message),
       complete: () => ''
     })
@@ -31,9 +48,9 @@ export class UserDataService {
       complete: () => ''
     })
   }
-  public getRecipesByUser(id: number, page?: number) {
+  public getRecipesByUser(id: number, page?: number):any {
     this.apiService.serviceRecipesByUser(id, page).subscribe({
-      next: data => console.log('data :>> ', data),
+      next:  data => console.log('data :>> ', data),
       // error: err => console.error('uds',err.message),
       complete: () => ''
     })
@@ -59,4 +76,34 @@ export class UserDataService {
       complete: () => ''
     })
   }
+  public getCategoryList( sqlTableName: string ): any {
+    this.apiService.serviceGetList(sqlTableName).subscribe({
+      next: data => {
+        switch (sqlTableName) {
+          case 'cost':
+            this.costList = data.items.map((item: any) => ({ ...item, selected: false }))
+            //this.costList.forEach( (item:any) => item.selected = false) //ez is jó
+            break;
+          case 'category':
+            this.categoryList = data.items.map((item: any) => ({ ...item, selected: false }))
+            break;
+          case 'difficulity':
+            this.difficulityList = data.items.map((item: any) => ({ ...item, selected: false }))
+            break;
+          case 'nationality':
+            this.nationalityList = data.items.map((item: any) => ({ ...item, selected: false }))
+            break;
+          case 'label':
+            this.labelList = data.items.map((item: any) => ({ ...item, selected: false }))
+            break;
+          default:
+            break;
+        }
+      },
+      // error: err => console.error('uds',err.message),
+      complete: () => ''
+    })
+  }
+
+  
 }

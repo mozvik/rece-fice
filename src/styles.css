@@ -9,10 +9,16 @@
 body, html{
   color: var(--textColor);
   background: var(--backgroundColor);
+
 }
 .btn:focus,.btn:active, input:focus, .input, .navbar-toggler:focus{
   box-shadow: none;
   outline: none;
+}
+.form-control:focus{
+  box-shadow: none;
+  outline: none;
+  border-color: #ced4da;
 }
 
 .title-with-divider{

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { delay } from 'rxjs';
 import { UserDataService } from '../service/user-data.service';
 
 @Component({
@@ -9,12 +10,22 @@ import { UserDataService } from '../service/user-data.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private dataService: UserDataService
+    public dataService: UserDataService
   ) { }
 
   ngOnInit(): void {
+    
+    
     this.dataService.checkConnection()
-    // this.dataService.getRecipesBy(3,'category',1)
+
+    
+     this.dataService.getCategoryList('cost')
+     this.dataService.getCategoryList('category')
+     this.dataService.getCategoryList('difficulity')
+     this.dataService.getCategoryList('nationality')
+     this.dataService.getCategoryList('label')
+    
+
     //this.dataService.getRecipeSearch("virs",[1,2],[1],[11],[1])
   }
 

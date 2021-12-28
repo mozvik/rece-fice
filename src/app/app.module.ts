@@ -11,7 +11,8 @@ import { HeadlineComponent } from './headline/headline.component';
 import { WizardComponent } from './wizard/wizard.component';
 import { UploadComponent } from './upload/upload.component';
 import { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,13 +22,15 @@ import { AdvancedSearchComponent } from './advanced-search/advanced-search.compo
     HeadlineComponent,
     WizardComponent,
     UploadComponent,
-    AdvancedSearchComponent
+    AdvancedSearchComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

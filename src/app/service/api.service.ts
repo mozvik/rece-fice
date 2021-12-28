@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, delay, map, Observable, of, Subject, take, throwError, timeout } from 'rxjs';
 import { query } from '@angular/animations';
 
 @Injectable({
@@ -10,19 +10,35 @@ export class APIService {
   //serverUrl: string = 'https://https:/teszt.esoguides.hu/api/';
   serverUrl: string = 'http://localhost/angular/rece-fice/api/';
   apiKey: string = '';
-  observables: any = {}
-
+  filterArray = new Subject()
+  
   constructor(
     private http: HttpClient,
-    ) { }
+  ) { 
+      this.filterArray.subscribe((val:any) => {
+        console.log(this.multiFilter(val))
+      })
+    }
+
+  // isServerReady(): Observable<any> {
+  //   return this.http
+  //     .get<any[]>(this.serverUrl + '?ready=' + this.apiKey)
+  //     .pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
 
   isServerReady(): Observable<any> {
-    return this.http
+    return  this.http
       .get<any[]>(this.serverUrl + '?ready=' + this.apiKey)
       .pipe(
-      catchError(this.handleError)
-    );
+        timeout(500),
+        catchError(this.handleError))
+      ;
   }
+
+
+
   serviceRecipesBy(id: number, searchBy: string, page?: number): Observable<any> {
     let query: string = this.serverUrl + '?' + searchBy + '=' + id
     if (page) query += '&page=' + page
@@ -105,6 +121,26 @@ export class APIService {
       catchError(this.handleError)
     );
   }
+
+  serviceGetList( sqlTableName: string ): Observable<any> {
+    let query: string = this.serverUrl + '?list=' + sqlTableName + '&apikey=' + this.apiKey
+    return this.http
+      .get<any[]>(query)
+      .pipe(
+      catchError(this.handleError)
+    );
+  }
+  
+  multiFilter(filter: any[]): Observable<any> {
+     let query: string = this.serverUrl + '?ready=' + this.apiKey //temp
+    console.log('filter :>> ', filter);
+    return this.http
+    .get<any[]>(query)
+    .pipe(
+    catchError(this.handleError)
+  );
+  }
+
  /**
  * Http hibakód kezelése
  * @param operation - hiba

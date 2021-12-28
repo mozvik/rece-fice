@@ -1,35 +1,119 @@
-<div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container bg-dark">
-  <div class="slide-up-container container-xxl text-light">
-    <div class="row">
-    
-    <div class="mb-3 col-3">
-      <label for="exampleFormControlInput1" class="form-label">Kategóriák</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="mb-3 col-3">
-      <label for="exampleFormControlInput1" class="form-label">Nemzetközi konyha</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="mb-3 col-3">
-      <label for="exampleFormControlInput1" class="form-label">Nehézség</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="mb-3 col-3">
-      <label for="exampleFormControlInput1" class="form-label">Ár</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="mb-3 col-3">
-      <label for="exampleFormControlInput1" class="form-label">Kategóriák</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, nulla. Facere reprehenderit deleniti inventore culpa accusamus, modi minus adipisci nisi, dolore optio doloremque minima vero facilis tempora saepe sequi corporis?
-      Repudiandae alias qui minima ratione dolorum maiores similique cum id! Est, delectus asperiores. Natus, quos, reprehenderit dolores molestias, veniam itaque voluptas delectus similique ducimus debitis dolorem nulla repellat. Ratione, recusandae!
-      Ad, nobis. Porro delectus voluptatem cupiditate modi dolore minus ea nisi nemo, optio doloremque perferendis necessitatibus aliquam, aut deleniti ab sit eius alias at repellat autem. Aspernatur harum id nobis.
-      Laboriosam fuga inventore, pariatur eligendi nostrum aliquam reprehenderit sed eos qui necessitatibus repudiandae. Provident omnis eveniet ullam cupiditate? Beatae consequuntur omnis nulla officiis, laboriosam cum vero consequatur exercitationem ut a.</div>
-      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, nulla. Facere reprehenderit deleniti inventore culpa accusamus, modi minus adipisci nisi, dolore optio doloremque minima vero facilis tempora saepe sequi corporis?
-        Repudiandae alias qui minima ratione dolorum maiores similique cum id! Est, delectus asperiores. Natus, quos, reprehenderit dolores molestias, veniam itaque voluptas delectus similique ducimus debitis dolorem nulla repellat. Ratione, recusandae!
-        Ad, nobis. Porro delectus voluptatem cupiditate modi dolore minus ea nisi nemo, optio doloremque perferendis necessitatibus aliquam, aut deleniti ab sit eius alias at repellat autem. Aspernatur harum id nobis.
-        Laboriosam fuga inventore, pariatur eligendi nostrum aliquam reprehenderit sed eos qui necessitatibus repudiandae. Provident omnis eveniet ullam cupiditate? Beatae consequuntur omnis nulla officiis, laboriosam cum vero consequatur exercitationem ut a.</div>
+<div
+  [@openClose]="isOpen ? 'open' : 'closed'"
+  class="open-close-container bg-dark"
+  style="transform-origin: top;">
+  <div 
+ 
+  class="slide-up-container container-xxl text-light pt-3">
+    <div class="row justify-content-between">
+      <div class="col-4 mb-5 d-none d-md-block"></div>
+      <div class="col-4 mb-5 p-0 border bg-secondary text-center"><input type="text" class="form-control" placeholder="keresés..."></div>
+      <div class="col-4 mb-5 d-none d-md-block"></div>
+      <div class="my-3 col-12 col-md-4">
+        <label for="" class="form-label">Kategória</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Bármely'"
+          [settings]="dropdownSettings"
+          [data]="dataService.categoryList"
+          [(ngModel)]="selectedItems.category"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (ngModelChange)="pillChange($event)"
+        >
+        </ng-multiselect-dropdown>
       </div>
+      <div class="my-3 col-12 col-md-4">
+        <label for="" class="form-label">Nehézség</label>
+        <ng-multiselect-dropdown
+        [placeholder]="'Bármely'"
+        [settings]="dropdownSettings"
+        [data]="dataService.difficulityList"
+        [(ngModel)]="selectedItems.difficulity"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (ngModelChange)="pillChange($event)"
+        >
+      </ng-multiselect-dropdown>
+    </div>
+    <div class="my-3 col-12 col-md-4">
+      <label for="" class="form-label">Ár</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'Bármely'"
+        [settings]="dropdownSettings"
+        [data]="dataService.costList"
+        [(ngModel)]="selectedItems.cost"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (ngModelChange)="pillChange($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+    <div class="my-3 col-12 col-md-6">
+      <label for="" class="form-label">Címke</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Bármely'"
+          [settings]="dropdownSettings"
+          [data]="dataService.labelList"
+          [(ngModel)]="selectedItems.label"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (ngModelChange)="pillChange($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+     
+    <div class="my-3 col-12 col-md-6">
+      <label for="" class="form-label">Nemzetközi</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'Bármely'"
+        [settings]="dropdownSettings"
+        [data]="dataService.nationalityList"
+        [(ngModel)]="selectedItems.nationality"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (ngModelChange)="pillChange($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+    
+      
+    </div>
+
+    <!-- [(ngModel)]="selectedItems" -->
+
+    <!-- <div class="container-xxl">
+      <div class="row">
+        <div *ngIf="dataService.categoryList.length != 0" class="col-2">
+          Kategóriák
+          <p *ngFor="let item of dataService.categoryList">
+            {{ item.id }} - {{ item.name }} - {{ item.selected }}
+          </p>
+        </div>
+        <div *ngIf="dataService.nationalityList.length != 0" class="col-2">
+          Nemzetközi
+          <p *ngFor="let item of dataService.nationalityList">
+            {{ item.id }} - {{ item.name }} - {{ item.selected }}
+          </p>
+        </div>
+        <div *ngIf="dataService.difficulityList.length != 0" class="col-2">
+          Nehézség
+          <p *ngFor="let item of dataService.difficulityList">
+            {{ item.id }} - {{ item.name }} - {{ item.selected }}
+          </p>
+        </div>
+        <div *ngIf="dataService.costList.length != 0" class="col-2">
+          Ár
+          <p *ngFor="let item of dataService.costList">
+            {{ item.id }} - {{ item.name }} - {{ item.selected }}
+          </p>
+        </div>
+        <div *ngIf="dataService.labelList.length != 0" class="col-2">
+          Címkék
+          <p *ngFor="let item of dataService.labelList">
+            {{ item.id }} - {{ item.name }} - {{ item.selected }}
+          </p>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>
