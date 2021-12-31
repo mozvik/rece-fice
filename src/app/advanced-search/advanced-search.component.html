@@ -1,15 +1,22 @@
 <div
-  [@openClose]="isOpen ? 'open' : 'closed'"
+  [@openClose]="isAVSearchOpen ? 'open' : 'closed'"
   class="open-close-container bg-dark"
-  style="transform-origin: top;">
-  <div 
- 
-  class="slide-up-container container-xxl text-light pt-3">
+  style="transform-origin: top"
+>
+  <div class="slide-up-container container-xxl text-light pt-3">
     <div class="row justify-content-between">
       <div class="col-4 mb-5 d-none d-md-block"></div>
-      <div class="col-4 mb-5 p-0 border bg-secondary text-center"><input type="text" class="form-control" placeholder="keresés..."></div>
+      <div class="col-4 mb-5 p-0">
+        <input
+          [(ngModel)]="inputText"
+          (ngModelChange)="inputChange()"
+          type="text"
+          class="form-control rounded-0"
+          placeholder="keresés..."
+        />
+      </div>
       <div class="col-4 mb-5 d-none d-md-block"></div>
-      <div class="my-3 col-12 col-md-4">
+      <div class="my-4 col-12 col-md-4">
         <label for="" class="form-label">Kategória</label>
         <ng-multiselect-dropdown
           [placeholder]="'Bármely'"
@@ -18,38 +25,38 @@
           [(ngModel)]="selectedItems.category"
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onSelectAll($event)"
-          (ngModelChange)="pillChange($event)"
+          (onDeSelect)="onDeSelect($event)"
         >
         </ng-multiselect-dropdown>
       </div>
-      <div class="my-3 col-12 col-md-4">
+      <div class="my-4 col-12 col-md-4">
         <label for="" class="form-label">Nehézség</label>
         <ng-multiselect-dropdown
-        [placeholder]="'Bármely'"
-        [settings]="dropdownSettings"
-        [data]="dataService.difficulityList"
-        [(ngModel)]="selectedItems.difficulity"
-        (onSelect)="onItemSelect($event)"
-        (onSelectAll)="onSelectAll($event)"
-        (ngModelChange)="pillChange($event)"
+          [placeholder]="'Bármely'"
+          [settings]="dropdownSettings"
+          [data]="dataService.difficulityList"
+          [(ngModel)]="selectedItems.difficulity"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelect)="onDeSelect($event)"
         >
-      </ng-multiselect-dropdown>
-    </div>
-    <div class="my-3 col-12 col-md-4">
-      <label for="" class="form-label">Ár</label>
-      <ng-multiselect-dropdown
-        [placeholder]="'Bármely'"
-        [settings]="dropdownSettings"
-        [data]="dataService.costList"
-        [(ngModel)]="selectedItems.cost"
-        (onSelect)="onItemSelect($event)"
-        (onSelectAll)="onSelectAll($event)"
-        (ngModelChange)="pillChange($event)"
-      >
-      </ng-multiselect-dropdown>
-    </div>
-    <div class="my-3 col-12 col-md-6">
-      <label for="" class="form-label">Címke</label>
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="my-4 col-12 col-md-4">
+        <label for="" class="form-label">Ár</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Bármely'"
+          [settings]="dropdownSettings"
+          [data]="dataService.costList"
+          [(ngModel)]="selectedItems.cost"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelect)="onDeSelect($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="my-3 col-12 col-md-6">
+        <label for="" class="form-label">Címke</label>
         <ng-multiselect-dropdown
           [placeholder]="'Bármely'"
           [settings]="dropdownSettings"
@@ -57,26 +64,29 @@
           [(ngModel)]="selectedItems.label"
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onSelectAll($event)"
-          (ngModelChange)="pillChange($event)"
+          (onDeSelect)="onDeSelect($event)"
         >
         </ng-multiselect-dropdown>
       </div>
-     
-    <div class="my-3 col-12 col-md-6">
-      <label for="" class="form-label">Nemzetközi</label>
-      <ng-multiselect-dropdown
-        [placeholder]="'Bármely'"
-        [settings]="dropdownSettings"
-        [data]="dataService.nationalityList"
-        [(ngModel)]="selectedItems.nationality"
-        (onSelect)="onItemSelect($event)"
-        (onSelectAll)="onSelectAll($event)"
-        (ngModelChange)="pillChange($event)"
-      >
-      </ng-multiselect-dropdown>
-    </div>
-    
-      
+
+      <div class="my-3 col-12 col-md-6">
+        <label for="" class="form-label">Nemzetközi</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Bármely'"
+          [settings]="dropdownSettings"
+          [data]="dataService.nationalityList"
+          [(ngModel)]="selectedItems.nationality"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelect)="onDeSelect($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="my-3 col-12 col-md-6">
+        <label class="form-label fst-italic fs-6 ps-2 text-danger"
+          >{{ recipesFound }} találat</label
+        >
+      </div>
     </div>
 
     <!-- [(ngModel)]="selectedItems" -->

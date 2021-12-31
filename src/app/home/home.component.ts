@@ -24,9 +24,6 @@ export class HomeComponent implements OnInit {
      this.dataService.getCategoryList('difficulity')
      this.dataService.getCategoryList('nationality')
      this.dataService.getCategoryList('label')
-    
-
-    //this.dataService.getRecipeSearch("virs",[1,2],[1],[11],[1])
   }
 
 }

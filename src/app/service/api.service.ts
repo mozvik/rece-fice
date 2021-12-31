@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, delay, map, Observable, of, Subject, take, throwError, timeout } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, debounceTime, delay, distinctUntilChanged, first, map, Observable, of, share, shareReplay, Subject, take, throwError, timeout } from 'rxjs';
 import { query } from '@angular/animations';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class APIService {
     private http: HttpClient,
   ) { 
       this.filterArray.subscribe((val:any) => {
-        console.log(this.multiFilter(val))
+        // console.log(this.multiFilter(val))
       })
     }
 
@@ -85,41 +85,19 @@ export class APIService {
 
   serviceRecipeSearch(
     text: string,
-    categories?: number[],
-    difficulity?: number[],
-    nationality?: number[],
-    cost?: number[],
-    page?: number
-    ): Observable<any> {
-    let query: string = this.serverUrl + '?search=' + text + '&'
-    if (categories) {
-      for (const item of categories) {
-        query += 'category[]=' + item + '&'
-      }
-    }
-    if (difficulity) {
-      for (const item of difficulity) {
-        query += 'difficulity[]=' + item + '&'
-      }
-    }
-    if (nationality) {
-      for (const item of nationality) {
-        query += 'nationality[]=' + item + '&'
-      }
-    }
-    if (cost) {
-      for (const item of cost) {
-        query += 'cost[]=' + item + '&'
-      }
-    }
-    query += 'apikey=' + this.apiKey
-    if (page) query += '&page=' + page
-    console.log('query :>> ', query);
+    filters: any,
+    justNumberOfResults: boolean = true, 
+    page: number = 10
+  ): Observable<any> {
+    filters.text = text
+    filters.justNumberOfResults = justNumberOfResults
+    filters.page = page
+
     return this.http
-      .get<any[]>(query)
+      .post<any[]>(this.serverUrl, filters)
       .pipe(
-      catchError(this.handleError)
-    );
+        // catchError(this.handleError),
+      );
   }
 
   serviceGetList( sqlTableName: string ): Observable<any> {
@@ -146,7 +124,7 @@ export class APIService {
  * @param operation - hiba
  */
   private handleError(error: HttpErrorResponse) {
-    console.log(`The backend returned an unsuccessful response code: ${error.status}`);
+    console.log(`The backend returned an unsuccessful response code: ${error.status} - ${error.message}`);
     return throwError(() => 'Something bad happened; please try again later.');
   };
 }

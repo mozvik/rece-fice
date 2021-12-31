@@ -1,75 +1,171 @@
-#logoCenter:hover{
+/* ::ng-deep .p-menuitem:first-child .p-menuitem-text {
+ 
+} */
+button:disabled{
+  opacity: .5;
+}
+#logoCenter:hover {
   cursor: pointer;
 }
-#logoCenter>div{
+#logoCenter > div {
   background: var(--backgroundColor);
 }
 
+#navContainer {
+  padding-top: 60px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 
-::placeholder{
-  font-family: 'Lora', serif;
+}
+::placeholder {
+  font-family: "Lora", serif;
   font-style: italic;
   font-size: 14px;
 }
-#userNavbar .nav-link, #advancedSearchBtn{
-  font-family: 'Karla', sans-serif;
-  font-size: 14px;
-  color: rgba(255,255,255,.55);
+.nav-link {
+  padding-left: 0 !important;
 }
-#mainNavbar #homeLink{
-  color: var(--orangeRedDark);
+ i{
+  font-size: 1.25rem;
+  display: block;
+  margin: 0 .75rem;
+} 
+#userNavbar .nav-link {
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.1rem;
+  color: var(--textColor);
+}
+#userNavbar,
+.navbar-toggler {
+  color: var(--textColor);
+}
+/* #userNavbar{
+  position: fixed;
+  bottom: 60px;
+  left: -100vw;
+  z-index: 3;
+} */
+#userNavbar{
   
 }
-#mainNavbar .nav-link{
-  font-family: 'Karla', sans-serif;
-  font-size: 15px;
-  font-weight:bold;
+#bothBars{
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0%;
+  /* overflow: auto; */
+}
+
+#mobileNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100vw;
+  z-index: 4;
+  background: var(--backgroundColorDarker);
+  padding: 0;
+}
+#mobileOverlay {
+  position: fixed;
+  top: 60px;
+  left: 0;
+
+  background: rgba(241, 238, 238, 1);
+  width: 0;
+  height: 100vh;
+  z-index: 1;
+}
+/* #mobileOverlay>div:first-child{
+  height: 70vh;
+  
+}
+#mobileOverlay>div:last-child{
+  height: 30vh;
+  background: rgb(206, 69, 69);
+} */
+
+/* #mainNavbar {
+  background: var(--backgroundColor);
+  position: fixed;
+  top: 60px;
+  left: -100vw;
+  z-index: 3;
+} */
+
+#mainNavbar #homeLink {
+  color: var(--orangeRedDark);
+}
+#mainNavbar .nav-link {
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--textColor);
   transition: all 0.4s ease-in-out;
 }
-#mainNavbar .nav-link:hover{
+#mainNavbar .nav-link:hover {
   color: var(--orangeRedDark);
   transition: all 0.4s ease-in-out;
 }
 
-#mainNavbar .dropdown-item{
-  font-family: 'Karla', sans-serif;
-  font-size: 14px;
-  line-height: 26px;
-  font-weight:bold;
+#mainNavbar .dropdown-item {
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.0rem;
+  line-height: 2rem;
+  display: block;
+  width: 100%;
   color: var(--textColor);
   background: var(--backgroundColor);
   transition: all 0.4s ease-in-out;
 }
-#mainNavbar .dropdown-item:hover{
+#mainNavbar .dropdown-item:hover {
   color: var(--orangeRedDark);
   transition: all 0.4s ease-in-out;
 }
-.form-control:focus, .btn:focus {
-  outline: none;
-  box-shadow:none ;
-  border: none;
-}
-#mainNavbar .dropdown-menu, #mainNavbar .dropdown-menu div{
+
+#mainNavbar .dropdown-menu,
+#mainNavbar .dropdown-menu div {
   background: var(--backgroundColor);
-} 
+}
+#recipeDropdown {
+  width: 120px;
+}
 @media (min-width: 992px) {
+  #userNavbar, #mainNavbar {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  #bothBars{
+    flex: 0 0 0%;
+    overflow: visible;
+  }
+  #navContainer {
+    padding-top: 0;
+    position: relative;
+    height: auto;
+  }
+
+  #userBackground {
+    /* background: var(--backgroundColorDarker); */
+    border-bottom: 1px solid var(--backgroundColorDarker);
+  }
   #mainNavbar .dropdown .dropdown-menu {
     display: block;
     height: 0;
-    transition: all .35s ease; 
+    transition: all 0.25s ease;
     opacity: 0;
-    visibility: hidden; 
+    visibility: hidden;
+
   }
   #mainNavbar .dropdown:hover .dropdown-menu {
     display: block;
-    transform: translateY(-25px) ; 
+    transform: translateY(-20px);
     height: initial;
-    transition: all .35s ease;
+    transition: all 0.25s ease;
     opacity: 1;
-    visibility: visible; 
+    visibility: visible;
   }
-  
-
-
 }

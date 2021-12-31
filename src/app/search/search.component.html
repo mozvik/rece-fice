@@ -1,0 +1,75 @@
+<div class="container-xl"
+  [@openClose]="isSearchOpen ? 'open' : 'closed'"
+  style="position: relative; z-index: 3;"
+  >
+<div class="row justify-content-center">
+  
+  <div class="col-8 mb-2 d-flex flex-column filter-item">
+    
+    <p-autoComplete
+    class="flex-grow" 
+    [(ngModel)]="inputText" 
+    [suggestions]="searchResults" 
+    (completeMethod)="inputChange($event)"
+    (onSelect)="onSelect($event)" 
+    (keyup)="onKeyup($event)"
+    field="recipeName"
+    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete >
+  </div>
+
+    <div class="col-8 mb-2 d-flex flex-column filter-item">
+      <label for="" class="form-label ">Kategória</label>
+      <p-multiSelect
+      [options]="dataService.categoryList"
+      [(ngModel)]="selectedItems.category" optionLabel="name" optionValue="id"  display="chip" placeholder="Bármely"
+      emptyMessage="Nincs adat"
+      emptyFilterMessage="Nincs találat"
+      (ngModelChange)="inputChange($event)"
+      [style]="{'width':'100%'}" ></p-multiSelect>
+    </div>
+    
+    <div class="col-8 mb-2 d-flex flex-column filter-item">
+      <label for="" class="form-label ">Nehézség</label>
+      <p-multiSelect
+      [options]="dataService.difficulityList"
+      [(ngModel)]="selectedItems.difficulity" optionLabel="name" optionValue="id"  display="chip" placeholder="Bármely"
+      emptyMessage="Nincs adat"
+      emptyFilterMessage="Nincs találat"
+      (ngModelChange)="inputChange($event)"
+      [style]="{'width':'100%'}"></p-multiSelect>
+    </div>
+
+    <div class="col-8 mb-2 d-flex flex-column filter-item">
+      <label for="" class="form-label ">Árkategória</label>
+      <p-multiSelect
+      [options]="dataService.costList"
+      [(ngModel)]="selectedItems.cost" optionLabel="name" optionValue="id"  display="chip" placeholder="Bármely"
+      emptyMessage="Nincs adat"
+      emptyFilterMessage="Nincs találat"
+      (ngModelChange)="inputChange($event)"
+      [style]="{'width':'100%'}"></p-multiSelect>
+    </div>
+
+    <div class="col-8 mb-2 d-flex flex-column filter-item">
+      <label for="" class="form-label ">Címkék</label>
+      <p-multiSelect
+      [options]="dataService.labelList"
+      [(ngModel)]="selectedItems.label" optionLabel="name" optionValue="id"  display="chip" placeholder="Bármely"
+      emptyMessage="Nincs adat"
+      emptyFilterMessage="Nincs találat"
+      (ngModelChange)="inputChange($event)" [style]="{'width':'100%'}"></p-multiSelect>
+    </div>
+
+    <div class="col-8 mb-2 d-flex flex-column filter-item">
+      <label for="" class="form-label ">Nemzetközi</label>
+      <p-multiSelect
+      [options]="dataService.nationalityList"
+      [(ngModel)]="selectedItems.nationality" optionLabel="name" optionValue="id"  display="chip" placeholder="Bármely"
+      emptyMessage="Nincs adat"
+      emptyFilterMessage="Nincs találat"
+      (ngModelChange)="inputChange($event)" 
+      
+      [style]="{'width':'100%'}"></p-multiSelect>
+    </div>
+</div>
+</div>

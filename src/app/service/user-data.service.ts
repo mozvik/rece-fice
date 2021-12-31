@@ -62,20 +62,19 @@ export class UserDataService {
       complete: () => ''
     })
   }
-  public getRecipeSearch(
-    text: string,
-    categories?: number[],
-    difficulity?: number[],
-    nationality?: number[],
-    cost?: number[],
-    page: number = 1
-  ) {
-    this.apiService.serviceRecipeSearch(text, categories, difficulity, nationality, cost, page).subscribe({
-      next: data => console.log('data :>> ', data),
-      // error: err => console.error('uds',err.message),
-      complete: () => ''
-    })
-  }
+  // public getRecipeSearch(
+  //   text: string,
+  //   categories?: number[],
+  //   difficulity?: number[],
+  //   nationality?: number[],
+  //   cost?: number[],
+  //   page: number = 1
+  // ) {
+  //   this.apiService.serviceRecipeSearch(text, categories, difficulity, nationality, cost, page).subscribe({
+  //     next: data => console.log('data :>> ', data),
+  //     complete: () => ''
+  //   })
+  // }
   public getCategoryList( sqlTableName: string ): any {
     this.apiService.serviceGetList(sqlTableName).subscribe({
       next: data => {

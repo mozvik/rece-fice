@@ -2,6 +2,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { MultiSelectModule } from 'primeng/multiselect';
+import {DividerModule} from 'primeng/divider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +16,7 @@ import { UploadComponent } from './upload/upload.component';
 import { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     WizardComponent,
     UploadComponent,
     AdvancedSearchComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,10 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    AutoCompleteModule,
+    MultiSelectModule,
+    DividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

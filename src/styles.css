@@ -1,32 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
+  /* --orangeRed: rgb(255, 112, 85); #ff7055 */
   --orangeRed: rgb(255, 112, 85); /*#ff7055*/
-  --orangeRedDark: rgb(172, 71, 51);
-  --textColor: #2c3b4b;
-  --backgroundColor: #FFFEF7;
-  --white: #ffffff;
-}
-body, html{
-  color: var(--textColor);
-  background: var(--backgroundColor);
+  --orangeRedDark: #df3e10;
+  /* --textColor: #2c3b4b; */
+  --textColor: #2d3a4b;
+  --backgroundColor: #fffef7;
+  --backgroundColorDarker: #eae8e0;
 
 }
-.btn:focus,.btn:active, input:focus, .input, .navbar-toggler:focus{
+body,
+html {
+  color: var(--textColor);
+  background: var(--backgroundColor);
+  margin: 0 auto;
+  font-size: 16px;
+}
+.btn:focus,
+.btn:active,
+input:focus,
+.input,
+.navbar-toggler:focus {
   box-shadow: none;
   outline: none;
 }
-.form-control:focus{
+.form-control:focus {
   box-shadow: none;
   outline: none;
   border-color: #ced4da;
 }
 
-.title-with-divider{
-    font-family: 'Oswald', sans-serif;
-    font-size: 45px;
-    text-align: center;
-    padding-top: 2.5rem;
-    padding-bottom: 1.5rem;
-    text-transform: uppercase;
-    border-bottom: 3px solid var(--textColor);
+.title-with-divider {
+  font-family: "Oswald", sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 3px solid var(--textColor);
+}
+@media (min-width: 992px) {
+  body,
+  html {
+    font-size: 12px;
+  }
+
 }

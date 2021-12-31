@@ -32,7 +32,7 @@ import { FormControl } from '@angular/forms';
   ]
 })
 export class AdvancedSearchComponent implements OnInit {
-  @Input() isOpen = false;
+  @Input() isAVSearchOpen = false;
   @Output() subject = new Subject();
 
   dropdownList: any = [];
@@ -43,6 +43,8 @@ export class AdvancedSearchComponent implements OnInit {
   selectedLabelItems: any = [];
   dropdownSettings: IDropdownSettings = {};
 
+  recipesFound: number = 0;
+  inputText: string = ""
   selectedItems: any = {
     category: undefined,
     difficulity: undefined,
@@ -56,6 +58,8 @@ export class AdvancedSearchComponent implements OnInit {
     private apiService: APIService
   ) { }
 
+  // https://stackblitz.com/edit/angular-wazyiq-xywdng?file=material-module.ts material autocomp
+
   ngOnInit(): void {
    
     this.dropdownSettings = {
@@ -65,18 +69,38 @@ export class AdvancedSearchComponent implements OnInit {
       selectAllText: 'Összes kiválasztása',
       unSelectAllText: 'Szűrők törlése',
       maxHeight: 200,
+      itemsShowLimit: 8,
       allowSearchFilter: true,
       searchPlaceholderText: 'Keresés...'
     };
     this.apiService.filterArray.next(this.selectedItems)
+    this.apiService.serviceRecipeSearch(this.inputText, this.selectedItems).subscribe(
+      (result) => {
+        console.log(result),
+        result.itemCount ? this.recipesFound = result.itemCount : this.recipesFound = 0
+      })
+    
   }
   onItemSelect(item: any) {
+    this.inputChange()
   }
   onSelectAll(items: any) {
+    this.inputChange()
   }
-  pillChange(e: any) {
-    if(e) this.apiService.filterArray.next(this.selectedItems)
+  onDeSelect(items: any) {
+    this.inputChange()
   }
+  inputChange() {
+    // if(e) this.apiService.filterArray.next(this.selectedItems)
+    console.log('this.selectedItems ADV :>> ', this.selectedItems);
+    this.apiService.serviceRecipeSearch(this.inputText, this.selectedItems).subscribe(
+      (result) => {
+        console.log(result),
+        result.itemCount ? this.recipesFound = result.itemCount: this.recipesFound = 0
+      }
+    )
+  }
+  
 }
 
 // Callback Methods
