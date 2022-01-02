@@ -9,8 +9,6 @@ import { animate, keyframes, query, stagger, state, style, transition, trigger }
     trigger('flyInOut', [
       state('in', style({
         transform: 'translateX(0)',
-        
-        // backgroundPosition: '200vw 0',
         opacity: 1
       })),
       state('out', style({
@@ -36,6 +34,21 @@ import { animate, keyframes, query, stagger, state, style, transition, trigger }
         animate(0)
       ])
     ]),
+    trigger('navDown', [
+      state('down', style({
+
+      })),
+      state('up', style({
+        top: '0px',
+
+      })),
+      transition('down => up', [
+        animate('400ms ease')
+      ]),
+      transition('up => down', [
+        animate('400ms ease')
+      ]),
+    ]),
   ]
 })
 export class NavbarComponent implements OnInit {
@@ -48,10 +61,16 @@ export class NavbarComponent implements OnInit {
   flyInOut: string = ""
   myTime: string = "500ms"
   displaySize!: number
+  isNavScrollFixed: boolean = false
+  navEle: any
+  sticky:number=0
+
   constructor() { }
 
   ngOnInit(): void {
     this.onResize()
+    this.navEle = document.getElementById("navContainer");
+    this.sticky = this.navEle.offsetTop;
   }
 
   toggleLogin() {
@@ -67,6 +86,11 @@ export class NavbarComponent implements OnInit {
     if (this.isOpen && this.advancedSearchIsOpen) {
       this.advancedSearchIsOpen = false
     }
+  }
+
+
+  showAdvancedSearch() {
+    this.advancedSearchIsOpen = !this.advancedSearchIsOpen;
   }
   getMenuState():string {
 
@@ -84,7 +108,14 @@ export class NavbarComponent implements OnInit {
 
     return ''
   }
-
+  onScroll(event: any) {
+    if (window.pageYOffset >= 108) {
+      this.isNavScrollFixed = true
+    }
+    if (window.pageYOffset == 0){
+      this.isNavScrollFixed = false
+    }
+  }
 
   onResize() {
     const ua = navigator.userAgent;

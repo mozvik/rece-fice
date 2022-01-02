@@ -14,16 +14,17 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    
     this.dataService.checkConnection()
-
-    
-     this.dataService.getCategoryList('cost')
-     this.dataService.getCategoryList('category')
-     this.dataService.getCategoryList('difficulity')
-     this.dataService.getCategoryList('nationality')
-     this.dataService.getCategoryList('label')
+    this.dataService.getCategoryList('cost')
+    this.dataService.getCategoryList('category')
+    this.dataService.getCategoryList('difficulity')
+    this.dataService.getCategoryList('nationality')
+    this.dataService.getCategoryList('label')
   }
+  onResize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+
 
 }

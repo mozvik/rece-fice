@@ -1,5 +1,5 @@
 import { animate, group, keyframes, query, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserDataService } from '../service/user-data.service';
 import { APIService } from '../service/api.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -13,17 +13,17 @@ import { SelectItem, PrimeNGConfig } from "primeng/api";
   animations: [
     trigger('openClose', [
       state('open', style({
-        height: '600px',
-        transform: 'scaleY(1) translateY(90px)',
+        
+        transform: 'scaleY(1) translateX(0)',
         opacity: '1'
       })),
       state('closed', style({
-        height: '0px',
-        transform: 'scaleY(0)',
+        left: '-100%',
+        transform: 'scaleY(1) translateX(-300px)',
         opacity: '0'
       })),
       transition('closed <=> open', [
-        animate("0.3s cubic-bezier(0.35, 0, 0.25, 1)"),
+        animate("0.6s cubic-bezier(0.35, 0, 0.25, 1)"),
         // animate("0.3s cubic-bezier(0.55, 0.31, 0.15, 0.93)"),
       ]),
     ]),
@@ -32,8 +32,11 @@ import { SelectItem, PrimeNGConfig } from "primeng/api";
 })
 export class SearchComponent implements OnInit {
   @Input() isSearchOpen = false;
+  @Input() displaySize = 0;
   @Output() subject = new Subject();
+  @Output() closed = new EventEmitter<boolean>();
 
+  modal: any
   inputText: any = ''
   recipesFound: number = 0;
   selectedItems: any = {
@@ -48,8 +51,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     public dataService: UserDataService,
-    private apiService: APIService
-  ) { }
+    private apiService: APIService,
+  ) {}
 
   ngOnInit(): void {
   
@@ -61,6 +64,7 @@ export class SearchComponent implements OnInit {
         this.searchResults = result.items,
         result.itemCount ? this.recipesFound = result.itemCount : this.recipesFound = 0
       })
+    this.modal = document.getElementById('s-modal')
   }
   onSelect(e: any) {
     console.log('választott: :>> ',e);

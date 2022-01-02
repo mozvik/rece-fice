@@ -12,13 +12,10 @@ button:disabled{
 }
 
 #navContainer {
-  padding-top: 60px;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-
+  z-index: 4;
 }
 ::placeholder {
   font-family: "Lora", serif;
@@ -53,9 +50,10 @@ button:disabled{
 }
 #bothBars{
   position: relative;
-  z-index: 1;
+  z-index: 2;
   flex: 1 1 0%;
   /* overflow: auto; */
+  /* padding-bottom: 60px; */
 }
 
 #mobileNavbar {
@@ -64,7 +62,7 @@ button:disabled{
   left: 0;
   height: 60px;
   width: 100vw;
-  z-index: 4;
+  z-index: 3;
   background: var(--backgroundColorDarker);
   padding: 0;
 }
@@ -132,11 +130,22 @@ button:disabled{
 #recipeDropdown {
   width: 120px;
 }
+#navPlaceholderBottom{
+  padding-top: 60px;
+}
 @media (min-width: 992px) {
+  
+  #navPlaceholderBottom{
+    padding-top: 148px;
+  }
+  
   #userNavbar, #mainNavbar {
     position: relative;
     left: 0;
     top: 0;
+  }
+  #mainNavbar {
+    border-bottom: 4px double var(--backgroundColorDarker);
   }
   #bothBars{
     flex: 0 0 0%;
@@ -144,12 +153,17 @@ button:disabled{
   }
   #navContainer {
     padding-top: 0;
-    position: relative;
+    top: 0px;
+    position: absolute;
     height: auto;
   }
-
-  #userBackground {
-    /* background: var(--backgroundColorDarker); */
+  #navContainer.navScroll{
+    position: fixed;
+    top: -108px;
+    background: var(--backgroundColor);
+    margin-bottom: 0;
+  }
+  #userNavbar {
     border-bottom: 1px solid var(--backgroundColorDarker);
   }
   #mainNavbar .dropdown .dropdown-menu {

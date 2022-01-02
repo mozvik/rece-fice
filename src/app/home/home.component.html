@@ -1,5 +1,8 @@
-<app-navbar></app-navbar>
-<app-headline></app-headline>
-<app-wizard></app-wizard>
-<app-upload></app-upload>
+<app-navbar (window:resize)="onResize()"></app-navbar>
+<div class="container-xxl">
+  <app-headline></app-headline>
+  <app-featured></app-featured>
+  <app-wizard></app-wizard>
+  <app-upload></app-upload>
+</div>
 <p>home works!</p>

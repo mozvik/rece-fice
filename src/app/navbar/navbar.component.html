@@ -1,12 +1,19 @@
-
+<app-search (closed)="$event ? advancedSearchIsOpen=false:''" [isSearchOpen]="advancedSearchIsOpen" [displaySize]="displaySize"></app-search>
   
 
 
 
 
-
-<div (window:resize)="onResize()"
-class="container-fluid d-flex flex-column" id="navContainer">
+ <div id="navPlaceholder" class="container d-block d-lg-none bg dark"
+ style="width: 100%; height: 60px;"
+ ></div>
+<div 
+(window:resize)="onResize()"
+(window:scroll)="onScroll($event)"
+class="container-fluid d-flex flex-column" id="navContainer"
+[class]="isNavScrollFixed ? 'navScroll' : ''"
+[@navDown]="isNavScrollFixed ? 'up' : 'down'"
+>
     <nav id="mobileNavbar" class="d-lg-none navbar navbar-expand-lg">
       <div class="container-fluid">
           <div class="container-xxl d-flex justify-content-between p-0">
@@ -16,7 +23,7 @@ class="container-fluid d-flex flex-column" id="navContainer">
             class="navbar-toggler" type="button" >
               <i
               (click)="toggleBurger()" 
-              [class]="isOpen ? 'fa fa-times':'fa fa-bars'"
+              [class]="isOpen ? 'pi pi-times':'pi pi-bars'"
               class="p-0"
               style="font-size: 32px; width: 32px;"></i>
             </button>
@@ -28,18 +35,19 @@ class="container-fluid d-flex flex-column" id="navContainer">
                 class=""
               />
             </div>
+            
             <button 
-            (click)="advancedSearchIsOpen = !advancedSearchIsOpen"
+            (click)="showAdvancedSearch()"
             class="navbar-toggler " type="button" 
             [disabled]="isOpen ? 'disabled':''">
-              <i class="fa fa-search"
+              <i class="pi pi-search"
               style="font-size: 32px;"></i>
             </button>
           </div>
       </div>
     </nav>
     
-    <div class="container d-flex flex-column   justify-content-between" id="bothBars" 
+    <div class="container-xxl d-flex flex-column  justify-content-between" id="bothBars" 
     >
       <nav id="userNavbar" class="navbar navbar-expand-lg mb-5 pb-5 mb-lg-0 py-lg-0 order-2 order-lg-1 "
       
@@ -63,12 +71,12 @@ class="container-fluid d-flex flex-column" id="navContainer">
                     <a class="nav-link" href="#"></a>
                   </li>
                   <li class="">
-                    <a class="nav-link " href="#" (click)="toggleLogin()"><i [class]="loginIcon"></i></a>
+                    <a class="nav-link" href="#" (click)="toggleLogin()"><i [class]="loginIcon"></i></a>
                   </li>
                   <li class="">
-                    <a 
-                    (click)="advancedSearchIsOpen = !advancedSearchIsOpen"
-                    class="nav-link " href="#"><i class="pi pi-search"></i></a>
+                    <button 
+                    (click)="showAdvancedSearch()"
+                    class="nav-link btn"><i class="pi pi-search"></i></button>
                   </li>
                 </ul>
               </div>
@@ -159,8 +167,10 @@ class="container-fluid d-flex flex-column" id="navContainer">
     </div>
     
 </div>
+<div id="navPlaceholderBottom" class="container d-block bg dark"
+></div>
 
-<div style="position: relative;"><app-search class="" style="z-index: 14;" [isSearchOpen]="advancedSearchIsOpen"></app-search></div>
+
 
 
 
@@ -170,6 +180,8 @@ class="container-fluid d-flex flex-column" id="navContainer">
   <div></div>
   <div></div>
 </div>
+
+
 
 
 
