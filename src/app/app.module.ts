@@ -24,6 +24,7 @@ import { SearchComponent } from './search/search.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { ResultsComponent } from './results/results.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -39,6 +40,7 @@ import { LoginComponent } from './login/login.component';
     FeaturedComponent,
     ResultsComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

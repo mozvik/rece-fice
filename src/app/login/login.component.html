@@ -15,11 +15,7 @@
             <input id="password" type="password" name="password" aria-describedby="input-help" pInputText [(ngModel)]="password" />
             <small class="input-help">{{passwordError}}&nbsp;</small>
           </div>
-          <div class="col-12 mb-4 align-items-end">
-            <p-checkbox [(ngModel)]="checkedNewsletter" name="newsletter" [binary]="true" inputId="newsletter"></p-checkbox>
-            <label for="newsletter" class="ps-3">A hírlevelére feliratkozom</label>
-            
-          </div>
+         
           <div class="col-12 mb-5">
             <a href="">Elfelejtetted a jelszavad?</a>
           </div>
@@ -45,7 +41,9 @@
           <li class="pt-1">Kedvenc receptek elmentése</li>
           <li class="pt-1">Hozzáférés a csevegőhöz</li>
         </ul>
-        <button pButton type="button" label="REGISZTRÁCIÓ" class="p-button-danger"></button>
+        <button pButton 
+        routerLink="/register"
+        type="button" label="REGISZTRÁCIÓ" class="p-button-danger"></button>
       </div>
     </div>
   </div>
