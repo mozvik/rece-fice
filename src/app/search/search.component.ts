@@ -1,6 +1,6 @@
 import { animate, group, keyframes, query, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserDataService } from '../service/user-data.service';
+import { DataService } from '../service/data.service';
 import { APIService } from '../service/api.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -32,11 +32,10 @@ import { SelectItem, PrimeNGConfig } from "primeng/api";
 })
 export class SearchComponent implements OnInit {
   @Input() isSearchOpen = false;
-  @Input() displaySize = 0;
+  @Input() displaySize!: number;
   @Output() subject = new Subject();
   @Output() closed = new EventEmitter<boolean>();
 
-  modal: any
   inputText: any = ''
   recipesFound: number = 0;
   selectedItems: any = {
@@ -50,7 +49,7 @@ export class SearchComponent implements OnInit {
   
   constructor(
     private primengConfig: PrimeNGConfig,
-    public dataService: UserDataService,
+    public dataService: DataService,
     private apiService: APIService,
   ) {}
 
@@ -64,7 +63,6 @@ export class SearchComponent implements OnInit {
         this.searchResults = result.items,
         result.itemCount ? this.recipesFound = result.itemCount : this.recipesFound = 0
       })
-    this.modal = document.getElementById('s-modal')
   }
   onSelect(e: any) {
     console.log('választott: :>> ',e);
@@ -74,6 +72,12 @@ export class SearchComponent implements OnInit {
       console.log('ENTER go search: :>> ',this.inputText);
     }
     
+  }
+
+  closeModal(event: any) {
+    if (event.srcElement.id == 's-modal') {
+      this.closed.emit(true)
+    }
   }
   inputChange(e: any) {
     // if(e) this.apiService.filterArray.next(this.selectedItems)

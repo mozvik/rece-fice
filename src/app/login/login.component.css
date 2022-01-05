@@ -1,0 +1,19 @@
+.content{
+
+}
+p, form, input, label, small, ul {
+  font-family: 'Lora', sans-serif;
+  font-size: 1.15rem;
+}
+button, .p-button-label{
+  font-family: 'Oswald', serif!important;
+}
+.input-help{
+  font-size: .9rem;
+}
+
+@media (min-width: 992px) {
+  p, form, input, label, small, ul {
+    font-size: 1.35rem;
+  }
+}

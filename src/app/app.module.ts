@@ -7,6 +7,11 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DividerModule} from 'primeng/divider';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +22,10 @@ import { WizardComponent } from './wizard/wizard.component';
 import { UploadComponent } from './upload/upload.component';
 import { SearchComponent } from './search/search.component';
 import { FeaturedComponent } from './featured/featured.component';
+import { ResultsComponent } from './results/results.component';
+import { LoginComponent } from './login/login.component';
+
+
 
 @NgModule({
   declarations: [
@@ -28,6 +37,8 @@ import { FeaturedComponent } from './featured/featured.component';
     UploadComponent,
     SearchComponent,
     FeaturedComponent,
+    ResultsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +50,16 @@ import { FeaturedComponent } from './featured/featured.component';
     MultiSelectModule,
     DividerModule,
     DialogModule,
-  ],
+    InputTextModule,
+    PasswordModule,
+    CheckboxModule,
+    ButtonModule
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+
+  
+}

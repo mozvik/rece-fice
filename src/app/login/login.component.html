@@ -1,0 +1,53 @@
+<div class="container-fluid content">
+  <div class="container-xl ">
+    <div class="row py-0 my-0 py-lg-5 my-lg-5">
+      <div class="col-12 col-lg-4">
+        <h4 class="title-h4">Belépés</h4><br>
+        <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p><br>
+        <form action="">
+          <div class="col-12 d-flex flex-column mb-4">
+            <label for="email">Email cím<sup>*</sup></label>
+              <input id="email" type="email" name="email" aria-describedby="input-help" pInputText [(ngModel)]="email" />
+              <small class="input-help">{{emailError}}&nbsp;</small>
+            </div>
+          <div class="col-12 d-flex flex-column mb-4">
+            <label for="password">Jelszó<sup>*</sup></label>
+            <input id="password" type="password" name="password" aria-describedby="input-help" pInputText [(ngModel)]="password" />
+            <small class="input-help">{{passwordError}}&nbsp;</small>
+          </div>
+          <div class="col-12 mb-4 align-items-end">
+            <p-checkbox [(ngModel)]="checkedNewsletter" name="newsletter" [binary]="true" inputId="newsletter"></p-checkbox>
+            <label for="newsletter" class="ps-3">A hírlevelére feliratkozom</label>
+            
+          </div>
+          <div class="col-12 mb-5">
+            <a href="">Elfelejtetted a jelszavad?</a>
+          </div>
+          <div class="col-12 mb-5">
+            <button pButton type="submit" label="BELÉPÉS" class="p-button-danger"
+            (click)="dataService.user.id='valaki'"></button>
+          </div>
+        </form>
+        
+      </div>
+      <div class="col-12 col-lg-4 d-none d-lg-block">
+        <p-divider layout="vertical">Vagy</p-divider>
+      </div>
+      <div class="col-12 col-lg-4 d-block d-lg-none pb-4">
+        <p-divider>Vagy</p-divider>
+      </div>
+      <div class="col-12 col-lg-4 pb-4">
+        <h4 class="title-h4">Regisztráció</h4><br>
+        <p>Hozz létre egy felhasználói fiókot, hogy hozzáférj a következő szolgáltatásokhoz: </p>
+        <ul class="pb-5">
+          <li class="pt-3">Receptfeltöltés</li>
+          <li class="pt-1">Értékelések, hozzászólások</li>
+          <li class="pt-1">Kedvenc receptek elmentése</li>
+          <li class="pt-1">Hozzáférés a csevegőhöz</li>
+        </ul>
+        <button pButton type="button" label="REGISZTRÁCIÓ" class="p-button-danger"></button>
+      </div>
+    </div>
+  </div>
+
+</div>

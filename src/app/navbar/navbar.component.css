@@ -12,10 +12,10 @@ button:disabled{
 }
 
 #navContainer {
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  position: fixed;
-  z-index: 4;
+  /* height: 100vh; */
+  /* height: calc(var(--vh, 1vh) * 100); */
+  /* position: fixed; */
+  /* z-index: 10; */
 }
 ::placeholder {
   font-family: "Lora", serif;
@@ -46,12 +46,15 @@ button:disabled{
   z-index: 3;
 } */
 #userNavbar{
-  
+  padding-top: 50px;
 }
+
+
 #bothBars{
-  position: relative;
+  position: fixed;
   z-index: 2;
   flex: 1 1 0%;
+  left: -100vw;
   /* overflow: auto; */
   /* padding-bottom: 60px; */
 }
@@ -62,7 +65,7 @@ button:disabled{
   left: 0;
   height: 60px;
   width: 100vw;
-  z-index: 3;
+  z-index: 1;
   background: var(--backgroundColorDarker);
   padding: 0;
 }
@@ -138,30 +141,41 @@ button:disabled{
   #navPlaceholderBottom{
     padding-top: 148px;
   }
-  
+  #mobileOverlay {
+    position: fixed;
+    z-index: 0;
+  }
   #userNavbar, #mainNavbar {
-    position: relative;
+    /* position: relative;
     left: 0;
-    top: 0;
+    top: 0; */
   }
   #mainNavbar {
     border-bottom: 4px double var(--backgroundColorDarker);
+    position: relative;
+    /* z-index: 13; */
   }
   #bothBars{
-    flex: 0 0 0%;
-    overflow: visible;
+    /* flex: 0 0 0%; */
+    left:0;
+    position: relative;
+    /* z-index: 15; */
   }
   #navContainer {
     padding-top: 0;
     top: 0px;
+    left: 50%;
     position: absolute;
     height: auto;
+    width: 100%;
+    transform: translateX(-50%);
   }
   #navContainer.navScroll{
     position: fixed;
     top: -108px;
     background: var(--backgroundColor);
     margin-bottom: 0;
+    z-index: 1;
   }
   #userNavbar {
     border-bottom: 1px solid var(--backgroundColorDarker);

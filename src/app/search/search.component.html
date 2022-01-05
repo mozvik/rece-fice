@@ -7,26 +7,27 @@
 [keepInViewport]="false"
 (onHide)="closed.emit(true)"
 > -->
-  <div class="container-xl" id="s-modal"
-    (window:click)="$event.target == modal ? closed.emit(true):''"
+
+<div class="container-xl" id="s-modal"
+    (click)="closeModal($event)"
     (window:keyup)="$event.key == 'Escape' ? closed.emit(true):''"
     [style]="isSearchOpen ? 'display: block':'display: none'"
     >
     <div 
     [@openClose]="isSearchOpen ? 'open' : 'closed'"
-    class="row justify-content-start justify-content-lg-center align-items-end border m-1 py-3" 
+    class="row justify-content-start justify-content-lg-center align-items-end border m-1 py-0 py-lg-3" 
     id="s-content">
 
-      <div class="col-6 offset-5 pb-5 d-flex flex-column filter-item">
+      <div class="col-10 offset-1 pb-2 d-flex flex-column filter-item text-center">
         <h4 class="title-h4">Részletes kereső</h4>
       </div>
-      <div class="col-1  p-0 d-flex flex-column filter-item">
+      <div class="col-1 p-0 d-flex flex-column filter-item align-self-start">
         <button 
         (click)="closed.emit(true)"
-        class="btn py-1"><i class="pi pi-times d-block"></i></button>
+        class="btn px-0 py-3 "><i class="pi pi-times d-block text-right"></i></button>
       </div>
       
-      <div class="col-6 col-lg-4 px-1 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
+      <div class="col-6 col-lg-4 px-2 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
         
         <p-autoComplete
         class="flex-grow" 
@@ -40,7 +41,7 @@
       </div>
       
 
-      <div class="col-6 col-lg-4 px-1 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
+      <div class="col-6 col-lg-4 px-2 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
         <label for="" class="form-label ">Kategória</label>
         <p-multiSelect
         [options]="dataService.categoryList"
@@ -51,7 +52,7 @@
         [style]="{'width':'100%'}" ></p-multiSelect>
       </div>
       
-      <div class="col-6 col-lg-4 px-1 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
+      <div class="col-6 col-lg-4 px-2 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
         <label for="" class="form-label ">Nehézség</label>
         <p-multiSelect
         [options]="dataService.difficulityList"
@@ -62,7 +63,7 @@
         [style]="{'width':'100%'}"></p-multiSelect>
       </div>
 
-      <div class="col-6 col-lg-4 px-1 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
+      <div class="col-6 col-lg-4 px-2 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
         <label for="" class="form-label ">Árkategória</label>
         <p-multiSelect
         [options]="dataService.costList"
@@ -73,7 +74,7 @@
         [style]="{'width':'100%'}"></p-multiSelect>
       </div>
 
-      <div class="col-6 col-lg-4 px-1 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
+      <div class="col-6 col-lg-4 px-2 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
         <label for="" class="form-label ">Címkék</label>
         <p-multiSelect
         [options]="dataService.labelList"
@@ -83,7 +84,7 @@
         (ngModelChange)="inputChange($event)" [style]="{'width':'100%'}"></p-multiSelect>
       </div>
 
-      <div class="col-6 col-lg-4 px-1 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
+      <div class="col-6 col-lg-4 px-2 py-2 p-lg-4 mb-2 d-flex flex-column filter-item">
         <label for="" class="form-label ">Nemzetközi</label>
         <p-multiSelect
         [options]="dataService.nationalityList"
@@ -99,5 +100,5 @@
         <button style="padding: 0.3rem; font-size: 1.05rem;">324 találat. Mutasd!</button>
       </div>
     </div>
-  </div>
+</div>
 <!-- </p-dialog> -->

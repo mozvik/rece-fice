@@ -1,11 +1,17 @@
-import { Injectable } from '@angular/core';
+import { HostListener, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { APIService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserDataService {
+export class DataService {
+
+  public user: any = {
+    id: '',
+    name: '', 
+    hasUploadAccess: false
+  };
 
   public costList: any = [{
     id: '',
@@ -16,12 +22,16 @@ export class UserDataService {
   public difficulityList: any[] = [];
   public nationalityList: any[] = [];
   public labelList: any[] = [];
-
+  public displaySize!: number
+  public advancedSearchIsOpen: boolean = false
  
+  
 
   constructor(
     private apiService: APIService
-  ) { }
+  ) {
+    
+   }
 
 
   
@@ -62,19 +72,7 @@ export class UserDataService {
       complete: () => ''
     })
   }
-  // public getRecipeSearch(
-  //   text: string,
-  //   categories?: number[],
-  //   difficulity?: number[],
-  //   nationality?: number[],
-  //   cost?: number[],
-  //   page: number = 1
-  // ) {
-  //   this.apiService.serviceRecipeSearch(text, categories, difficulity, nationality, cost, page).subscribe({
-  //     next: data => console.log('data :>> ', data),
-  //     complete: () => ''
-  //   })
-  // }
+  
   public getCategoryList( sqlTableName: string ): any {
     this.apiService.serviceGetList(sqlTableName).subscribe({
       next: data => {
@@ -104,5 +102,6 @@ export class UserDataService {
     })
   }
 
+  
   
 }

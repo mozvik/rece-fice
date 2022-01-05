@@ -1,6 +1,4 @@
-<!-- <div class="container-xxl">
-  <div class="title-with-divider"><a href="">kiemelt receptek</a></div>
-</div> -->
+<app-search (closed)="$event ? dataService.advancedSearchIsOpen=false:''" [isSearchOpen]="dataService.advancedSearchIsOpen" [displaySize]="dataService.displaySize"></app-search>
 
 
 
@@ -23,13 +21,20 @@
       <p-divider layout="vertical" class="col-1 d-none d-lg-block"></p-divider>
       <p-divider class="col-1 d-block d-lg-none w-100"></p-divider>
       <div class="col-12 col-lg-6 p-3 text-center">
-        <h3 class="title-h3 mb-3"><i class="pi pi-search" style="font-size: 3rem"></i></h3>
+        <h3 class="title-h3 mb-3">
+          <button 
+          (click)="dataService.advancedSearchIsOpen=!dataService.advancedSearchIsOpen"
+          class="btn "><i class="pi pi-search" style="font-size: 3rem"></i></button>
+        </h3>
         <p>Egészséges ételeket keresel, vagy csak ötleteket az otthonodban megtalálható alapanyagok felhasználására?</p> <p>A recepttárban biztosan megtalálod amit szeretnél. </p>
       </div>
       <p-divider layout="vertical" class="col-1 d-none d-lg-block"></p-divider>
       <p-divider class="col-1 d-block d-lg-none w-100"></p-divider>
       <div class="col-12 col-lg-2 p-3 text-center">
-      <h3 class="title-h3 mb-3"><i class="pi pi-upload" style="font-size: 3rem"></i></h3> 
+      <h3 class="title-h3 mb-3">
+        <button 
+        [routerLink]="dataService.user.id!='' ? '/home':'/login'"
+        class="btn "> <i class="pi pi-upload" style="font-size: 3rem"></i></button></h3> 
       Tölts fel saját receptet!
       </div>
     </div>

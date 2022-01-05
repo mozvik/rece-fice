@@ -1,16 +1,12 @@
-<app-search (closed)="$event ? advancedSearchIsOpen=false:''" [isSearchOpen]="advancedSearchIsOpen" [displaySize]="displaySize"></app-search>
-  
-
-
-
+<app-search (closed)="$event ? dataService.advancedSearchIsOpen=false:''" [isSearchOpen]="dataService.advancedSearchIsOpen" [displaySize]="dataService.displaySize"></app-search>
 
  <div id="navPlaceholder" class="container d-block d-lg-none bg dark"
  style="width: 100%; height: 60px;"
  ></div>
+
 <div 
-(window:resize)="onResize()"
 (window:scroll)="onScroll($event)"
-class="container-fluid d-flex flex-column" id="navContainer"
+class="container-xxl" id="navContainer"
 [class]="isNavScrollFixed ? 'navScroll' : ''"
 [@navDown]="isNavScrollFixed ? 'up' : 'down'"
 >
@@ -47,7 +43,7 @@ class="container-fluid d-flex flex-column" id="navContainer"
       </div>
     </nav>
     
-    <div class="container-xxl d-flex flex-column  justify-content-between" id="bothBars" 
+    <div class="container-xxl d-flex flex-column justify-content-between" id="bothBars" 
     >
       <nav id="userNavbar" class="navbar navbar-expand-lg mb-5 pb-5 mb-lg-0 py-lg-0 order-2 order-lg-1 "
       
@@ -64,14 +60,23 @@ class="container-fluid d-flex flex-column" id="navContainer"
               <div class="col-lg-6 order-1 order-lg-2 mb-3 mb-lg-0 p-0" [@flyInOut]="{value: getMenuState(), params: {delay: '.5s ease',
               duration: '.83s'}}">
                 <ul class="navbar-nav justify-content-start justify-content-lg-end flex-row align-items-center">
-                  <li *ngIf="login" class="">
+                  <li *ngIf="dataService.user.id!=''" class="">
                     <a class="nav-link" href="#"><i class="pi pi-bell"></i></a>
                   </li>
-                  <li *ngIf="!login" class=" ">
+                  <li *ngIf="dataService.user.id==''" class=" ">
                     <a class="nav-link" href="#"></a>
                   </li>
-                  <li class="">
-                    <a class="nav-link" href="#" (click)="toggleLogin()"><i [class]="loginIcon"></i></a>
+                  <li *ngIf="dataService.user.id==''">
+                    <a class="nav-link" 
+                    routerLink="/login"
+                    (click)="isOpen=false"
+                    ><i [class]="loginIcon"></i></a>
+                  </li>
+                  <li *ngIf="dataService.user.id!=''">
+                    <a class="nav-link" 
+                    routerLink="/login"
+                    (click)="isOpen=false"
+                    ><i class="pi pi-user"></i></a>
                   </li>
                   <li class="">
                     <button 
@@ -95,13 +100,13 @@ class="container-fluid d-flex flex-column" id="navContainer"
                     <a
                       class="nav-link active text-uppercase my-1 my-lg-4"
                       aria-current="page"
-                      href="#"
+                      routerLink="/home"
                       id="homeLink"
                       >Főoldal</a
                     >
                   </li>
                   <li
-                    (click)="displaySize <= 2 ?dropdownShow = !dropdownShow:''"
+                    (click)="dataService.displaySize <= 2 ?dropdownShow = !dropdownShow:''"
                     class="nav-item dropdown pe-lg-5 slidein"
                     [@flyInOut]="{value: getMenuState(), params: {delay: '.2s ease',
                     duration: '.63s'}}"
@@ -167,18 +172,16 @@ class="container-fluid d-flex flex-column" id="navContainer"
     </div>
     
 </div>
-<div id="navPlaceholderBottom" class="container d-block bg dark"
-></div>
+<div id="navPlaceholderBottom" class="container d-block bg dark">
+</div>
 
 
 
 
 
 <div id="mobileOverlay"
-[style]="isOpen && displaySize<=2 ? 'width:100vw; transition: all .8s ease;':'width:0; transition: all .5s ease;'"
+[style]="isOpen && dataService.displaySize<=2 ? 'width:100vw; transition: all .8s ease;':'width:0; transition: all .5s ease;'"
 >
-  <div></div>
-  <div></div>
 </div>
 
 
