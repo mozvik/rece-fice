@@ -17,18 +17,25 @@
 } */
 
 :host ::ng-deep .p-multiselect-label{
-  padding: .30rem;
+  padding: 0.30rem;
 }
-:host ::ng-deep  .p-inputtext{
-  padding-top: .30rem;
+/* :host ::ng-deep .p-dropdown-label{
+  padding: .30rem;
+} */
+:host ::ng-deep  .p-inputtext, ::ng-deep .p-dropdown-label{
+  padding-top: 0.30rem;
   padding-bottom: .30rem;
   
   
   /* font-style: italic; */
 }
-:host ::ng-deep  .p-component{
+:host ::ng-deep  .p-component,  ::ng-deep .p-dropdown-label{
   font-family: 'Lora', serif;
   font-size: 1.15rem;
+}
+:host ::ng-deep .p-button-label{
+  font-family: 'Oswald', serif!important;
+  letter-spacing: .1rem;
 }
 
 </style>
@@ -36,5 +43,6 @@
 <div class="container-xxl">
   <app-navbar (window:resize)="onResize()"></app-navbar>
   <router-outlet></router-outlet>
+  <app-subscribe></app-subscribe>
 </div>
 <a href=""></a>

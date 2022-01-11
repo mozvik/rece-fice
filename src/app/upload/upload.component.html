@@ -1,5 +1,218 @@
-<h2 class="fs-1 text-uppercase text-center m-0 py-5 bg-light">receptfeltöltés</h2>
-<h3 class="fs-4 text-uppercase text-center m-0 py-5 bg-light">if logged in - tölts fel recepteket!</h3>
-<h3 class="fs-4 text-uppercase text-center m-0 py bg-light">else - <i>Jelentkezz be</i> és tölts fel recepteket!</h3>
-<h3 class="fs-4 text-uppercase text-center m-0 py bg-light">vagy <i>csatlakozz</i> közösségünkhöz, ha még nincs felhasználói fiókod!</h3>
-<section class="bg-warning" style="height: 500px;"></section>
+<div class="container-fluid content">
+  <div class="container-xl ">
+    <div class="row py-0 my-0 py-lg-5 my-lg-5 justify-content-center">
+      <div class="col-12" >
+        <h4 class="title-h4 text-center">Receptfeltöltés</h4><br>
+        <div class="row ">
+          <div class="col-12 col-lg-12 px-0 px-lg-5 ">
+            <form action="" 
+            [formGroup]="recipeFormGroup"
+            class="justify-content-center justify-content-md-start row">
+              <div class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
+                <label for="name">Recept neve<sup>*</sup></label>
+                <input 
+                id="name" type="text" name="name" 
+                pInputText formControlName="name" required minlength="4"/>
+                <div *ngIf="!recipeFormGroup.controls['name']?.valid && (recipeFormGroup.controls['name']?.dirty
+                ||recipeFormGroup.controls['name']?.touched)">
+                  <small [hidden]="!recipeFormGroup.get('name')?.hasError('required')"
+                  class="input-help text-danger">Kötelező kitölteni</small>
+                  <small [hidden]="!recipeFormGroup.controls['name']?.errors?.['minlength']"
+                  class="input-help text-danger">Minimum 4 karakter hosszú legyen</small>
+                </div>
+                <small class="input-help">&nbsp;{{recipeNameHelp}}</small>
+              </div>
+              
+              <div class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
+                <label for="category">Kategória<sup>*</sup></label>
+                <p-dropdown [options]="dataService.categoryList" optionLabel="name" optionValue="id" name="category"  formControlName="category"
+                autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
+              
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['category'].value}}{{recipeFormGroup.status}}</small>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
+                <label for="nationality">Nemzetközi konyha<sup>*</sup></label>
+                <p-dropdown [options]="dataService.nationalityList" optionLabel="name" optionValue="id" name="nationality"  formControlName="nationality" 
+                autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['nationality'].value}}</small>
+              </div>
+
+              <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
+                <label for="" >Címkék</label>
+                <p-multiSelect
+                [options]="dataService.labelList"
+                optionLabel="name" optionValue="id" display="chip" placeholder="Nincs címke"
+                formControlName="label"
+                emptyMessage="Nincs adat"
+                emptyFilterMessage="Nincs találat"
+                [style]="{'width':'100%'}"></p-multiSelect>
+                <small class="input-help">&nbsp;{{recipeLabelHelp}}&nbsp;{{recipeFormGroup.controls['label'].value}}</small>
+              </div>
+              <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
+                <label for="difficulity" class="pb-3">Elkészítés nehézsége<sup>*</sup></label>
+                <p-radioButton class="mb-2" name="difficulity" value="1" label="Könnyű" formControlName="difficulity"></p-radioButton>
+                <p-radioButton class="mb-2" name="difficulity" value="2" label="Közepes" formControlName="difficulity"></p-radioButton>
+                <p-radioButton class="mb-2" name="difficulity" value="3" label="Nehéz" formControlName="difficulity"></p-radioButton>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['difficulity'].value}}{{recipeFormGroup.status}}</small>
+              </div>
+
+              <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
+                <label for="difficulity" class="pb-3">Elkészítés költsége<sup>*</sup></label>
+                <p-radioButton class="mb-2" name="price" value="1" label="Olcsó" formControlName="price"></p-radioButton>
+                <p-radioButton class="mb-2" name="price" value="2" label="Átlagos" formControlName="price"></p-radioButton>
+                <p-radioButton class="mb-2" name="price" value="3" label="Drága" formControlName="price"></p-radioButton>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['price'].value}}{{recipeFormGroup.status}}</small>
+              </div>
+              
+
+
+              <p>Kép feltöltése<sup>*</sup></p>
+              <div class="col-12 col-lg-12 d-flex flex-column mb-4">
+                  <p-fileUpload 
+                  value="files"
+                  name="images[]" [showUploadButton]="false" chooseLabel="Tallózás" cancelLabel="Mégsem" invalidFileSizeMessageSummary="{0}: Túl nagy fájlméret!" invalidFileSizeMessageDetail="Max. fájlméret: {0}" invalidFileTypeMessageSummary="A fájl formátuma nem megfelelő" invalidFileTypeMessageDetail="Feltölthető fájlformátum: {0}"
+                [multiple]="true" accept="image/*" [maxFileSize]="1000000" [fileLimit]="3"
+                (onSelect)="onPhotoSelect($event)" (onRemove)="onPhotoRemove($event)" (onClear)="onPhotoRemove($event)">
+                <ng-template pTemplate="content">
+                    <!-- <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                    </ul> -->
+                    
+                </ng-template> 
+                </p-fileUpload>
+                <div *ngIf="recipeFormGroup.controls['photos'].value.length === 0">
+                  <small 
+                  class="input-help text-danger">Legalább egy képet fel kell tölteni.</small>
+                </div>
+                <small class="input-help">{{recipePhotoHelp}}&nbsp;{{recipeFormGroup.controls['photos'].value.length}}</small>
+              </div>
+              
+              <p>Elkészítési útmutató<sup>*</sup></p>
+              <div formArrayName="directions">
+                <div class="row" *ngFor="let dir of directions.controls; index as i"
+                   [formGroupName]="i"
+                >
+                  <div class="col-12 col-lg-10 d-flex flex-column mb-2">
+                    <label for="directions-{{ i }}">{{i+1}}. lépés</label>
+                    <textarea 
+                    [rows]="3" [cols]="30" 
+                    [autoResize]=true
+                    id="directions-{{ i }}" type="text" name="directions-{{ i }}" aria-describedby="input-help" pInputTextarea formControlName="dField" required></textarea>
+                    <small class="input-help text-danger" *ngIf="!dir?.valid && dir?.dirty">Nem maradhat üresen</small>
+                    <small class="input-help">&nbsp;{{dir?.valid}}</small>
+                  </div>
+                  <div class="col-12 col-lg-2 d-flex flex-column justify-content-end">
+                    <button *ngIf="i != 0"
+                    pButton label="Lépés törlése" class="p-button-warning mb-2 mt-4" 
+                    (click)="removeDirection(i)" 
+                    type="button" ></button>
+                  
+                    <button *ngIf="i == recipeFormGroup.controls['directions'].value.length - 1"
+                    pButton label="Lépés hozzáadása" class="p-button-primary mb-2" 
+                    (click)="addDirection()" 
+                    type="button" [disabled]="!recipeFormGroup.controls['directions']?.valid"></button>
+                    <small class="input-help">&nbsp;</small>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row" *ngFor="let dir of directions.controls; index as i"
+              formArrayName="directions"
+            >
+              <div class="col-12 col-lg-10 d-flex flex-column mb-2">
+                <label for="directions-{{ i }}">{{i+1}}. lépés</label>
+                <textarea 
+                [rows]="3" [cols]="30" 
+                [autoResize]=true
+                id="directions-{{ i }}" type="text" name="directions-{{ i }}" aria-describedby="input-help" pInputTextarea [formControlName]="i" required></textarea>
+                <small class="input-help" *ngIf="!recipeFormGroup.controls['directions-{{ i }}']?.valid && (recipeFormGroup.controls['directions-{{ i }}']?.dirty
+                ||recipeFormGroup.controls['directions-{{ i }}']?.touched)"></small>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['directions'].value[i]}}{{recipeFormGroup.controls['directions-{{ i }}']?.valid}}</small>
+              </div>
+              <div class="col-12 col-lg-2 d-flex flex-column justify-content-end">
+                <button *ngIf="i != 0"
+                pButton label="Lépés törlése" class="p-button-warning mb-2 mt-4" 
+                (click)="removeDirection(i)" 
+                type="button" ></button>
+              
+                <button *ngIf="i == recipeFormGroup.controls['directions'].value.length - 1"
+                pButton label="Lépés hozzáadása" class="p-button-primary mb-2" 
+                (click)="addDirection()" 
+                type="button" [disabled]="recipeFormGroup.controls['directions-{{ i }}']?.errors?.['required']"></button>
+                <small class="input-help">&nbsp;</small>
+              </div>
+            </div> -->
+
+              <div class="col-12"></div>
+              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+                <label for="" class="form-label ">Elkészítési idő</label>
+                <p-inputNumber
+                formControlName="time"
+                [min]="1" [max]="1440"
+                [style]="{'width':'100%'}"></p-inputNumber>
+                <small class="input-help">{{recipeTimeHelp}}&nbsp;{{recipeFormGroup.controls['time'].value}}{{recipeFormGroup.status}}</small>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+                <label for="" class="form-label ">Hány főre</label>
+                <p-inputNumber
+                formControlName="serving"
+                [min]="1" [max]="24"
+                [style]="{'width':'100%'}"></p-inputNumber>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['serving'].value}}{{recipeFormGroup.status}}</small>
+              </div>
+              <div class="col-12"></div>
+              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+                <label for="" class="form-label ">Kalória</label>
+                <p-inputNumber
+                formControlName="calorie"
+                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+                [style]="{'width':'100%'}"></p-inputNumber>
+                <small class="input-help">{{recipeLabelHelp}}&nbsp;{{recipeFormGroup.controls['calorie'].value}}{{recipeFormGroup.status}}</small>
+              </div>
+              <div class="col-12"></div>
+              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+                <label for="" class="form-label ">Szénhidrát</label>
+                <p-inputNumber
+                formControlName="carbonh"
+                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+                [style]="{'width':'100%'}"></p-inputNumber>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['carbonh'].value}}</small>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+                <label for="" class="form-label ">Fehérje</label>
+                <p-inputNumber
+                formControlName="protein"
+                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+                [style]="{'width':'100%'}"></p-inputNumber>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['protein'].value}}</small>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+                <label for="" class="form-label ">Zsír</label>
+                <p-inputNumber
+                formControlName="fat"
+                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+                [style]="{'width':'100%'}"></p-inputNumber>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['fat'].value}}</small>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+                <label for="" class="form-label ">Cukor</label>
+                <p-inputNumber
+                formControlName="sugar"
+                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+                [style]="{'width':'100%'}"></p-inputNumber>
+                <small class="input-help">&nbsp;{{recipeFormGroup.controls['sugar'].value}}</small>
+              </div>
+              
+             
+              <div class="col-12 col-lg-7 mb-5">
+                <button pButton type="submit" label="Recept feltöltése" class="p-button-danger"
+                (click)="dataService.user.id='valaki'" [disabled]="!recipeFormGroup.valid"></button>
+              </div>
+              <!-- [disabled]="!recipeFormGroup.valid" -->
+            </form>
+          </div>
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

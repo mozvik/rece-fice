@@ -1,4 +1,4 @@
-p, form, input, label, small, ul {
+form, input, label, small {
   font-family: 'Lora', sans-serif;
   font-size: 1.15rem;
 }
@@ -7,14 +7,11 @@ button, .p-button-label{
   letter-spacing: .1rem;
 }
 .input-help{
-  font-family: 'Merriweather Sans', serif!important;
   font-size: .9rem;
-  font-weight: 300;
-  font-style: italic;
 }
 
 @media (min-width: 992px) {
-  p, form, input, label, small, ul {
+  form, input, label, small {
     font-size: 1.35rem;
   }
 }

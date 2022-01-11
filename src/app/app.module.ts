@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -11,7 +12,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
-
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +30,7 @@ import { FeaturedComponent } from './featured/featured.component';
 import { ResultsComponent } from './results/results.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 
 
 
@@ -41,10 +47,12 @@ import { RegisterComponent } from './register/register.component';
     ResultsComponent,
     LoginComponent,
     RegisterComponent,
+    SubscribeComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -55,7 +63,12 @@ import { RegisterComponent } from './register/register.component';
     InputTextModule,
     PasswordModule,
     CheckboxModule,
-    ButtonModule
+    ButtonModule,
+    RadioButtonModule,
+    DropdownModule,
+    InputTextareaModule,
+    InputNumberModule,
+    FileUploadModule
    ],
   providers: [],
   bootstrap: [AppComponent]
