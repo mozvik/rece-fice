@@ -4,16 +4,23 @@
       <div class="col-12 col-lg-4">
         <h4 class="title-h4">Belépés</h4><br>
         <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p><br>
-        <form action="">
+        <form action=""
+        [formGroup]="loginFormGroup">
           <div class="col-12 d-flex flex-column mb-4">
             <label for="email">Email cím<sup>*</sup></label>
-              <input id="email" type="email" name="email" aria-describedby="input-help" pInputText [(ngModel)]="email" />
-              <small class="input-help">{{emailError}}&nbsp;</small>
+              <input id="email" type="email" name="email" aria-describedby="input-help" pInputText required formControlName="email" />
+              <small *ngIf="email?.errors?.['required'] && email?.dirty"
+              class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
+              <small *ngIf="!email?.errors?.['required'] && email?.errors && email?.dirty && email?.touched,"
+              class="input-help text-danger">&nbsp;Rossz email formátum</small>
             </div>
           <div class="col-12 d-flex flex-column mb-4">
             <label for="password">Jelszó<sup>*</sup></label>
-            <input id="password" type="password" name="password" aria-describedby="input-help" pInputText [(ngModel)]="password" />
-            <small class="input-help">{{passwordError}}&nbsp;</small>
+            <input id="password" type="password" name="password" aria-describedby="input-help" pInputText formControlName="password" />
+            <small *ngIf="password?.errors?.['required'] && password?.dirty"
+              class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
+              <small *ngIf="password?.errors?.['minlength'] && password?.dirty && password?.touched"
+              class="input-help text-danger">&nbsp;Min. 8 karakter hosszú legyen</small>
           </div>
          
           <div class="col-12 mb-5">
