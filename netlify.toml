@@ -2,7 +2,7 @@
 [build]
   command = "ng build --prod"
   functions = "netlify/functions"
-  publish = "dist"
+  publish = "dist/rece-fice"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
