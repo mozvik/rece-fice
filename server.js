@@ -7,7 +7,6 @@ function requireHTTPS(req, res, next) {
 }
 const express = require('express');
 const app = express();
-const app = express();
 app.use(requireHTTPS);
 app.use(express.static('./dist/<name-on-package.json>'));
 app.get('/*', function(req, res) {
