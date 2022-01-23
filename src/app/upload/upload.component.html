@@ -1,193 +1,489 @@
-<div class="container-fluid content">
-  <div class="container-xl ">
-    <div class="row py-0 my-0 py-lg-5 my-lg-5 justify-content-center">
-      <div class="col-12" >
-        <h4 class="title-h4 text-center">Receptfeltöltés</h4><br>
-        <div class="row ">
-          <div class="col-12 col-lg-12 px-0 px-lg-5 ">
-            <form action="" 
-            [formGroup]="recipeFormGroup"
-            class="justify-content-center justify-content-md-start row">
-              <div class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
-                <label for="name">Recept neve<sup>*</sup></label>
-                <input 
-                id="name" type="text" name="name" 
-                pInputText formControlName="name" required minlength="4"/>
-                <div *ngIf="!recipeFormGroup.controls['name']?.valid && (recipeFormGroup.controls['name']?.dirty
-                ||recipeFormGroup.controls['name']?.touched); else elseBlockName">
-                  <small [hidden]="!recipeFormGroup.get('name')?.hasError('required')"
-                  class="input-help text-danger">Kötelező kitölteni</small>
-                  <small [hidden]="!recipeFormGroup.controls['name']?.errors?.['minlength']"
-                  class="input-help text-danger">Minimum 4 karakter hosszú legyen</small>
-                  
-                </div>
-                <ng-template #elseBlockName><small class="input-help">&nbsp;{{recipeNameHelp}}</small></ng-template>
-              </div>
-              
-              <div class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
-                <label for="category">Kategória<sup>*</sup></label>
-                <p-dropdown [options]="dataService.categoryList" optionLabel="name" optionValue="id" name="category"  formControlName="category"
-                autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
-              
-                <small class="input-help">&nbsp;</small>
-              </div>
-              <div class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
-                <label for="nationality">Nemzetközi konyha<sup>*</sup></label>
-                <p-dropdown [options]="dataService.nationalityList" optionLabel="name" optionValue="id" name="nationality"  formControlName="nationality" 
-                autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
-                <small class="input-help">&nbsp;</small>
-              </div>
 
-              <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
-                <label for="" >Címkék</label>
-                <p-multiSelect
-                [options]="dataService.labelList"
-                optionLabel="name" optionValue="id" display="chip" placeholder="Nincs címke"
-                formControlName="label"
-                emptyMessage="Nincs adat"
-                emptyFilterMessage="Nincs találat"
-                [style]="{'width':'100%'}"></p-multiSelect>
-                <small class="input-help">&nbsp;{{recipeLabelHelp}}&nbsp;{{recipeFormGroup.controls['label'].value}}</small>
-              </div>
-              <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
-                <label for="difficulity" class="pb-3">Elkészítés nehézsége<sup>*</sup></label>
-                <p-radioButton class="mb-2" name="difficulity" value="1" label="Könnyű" formControlName="difficulity"></p-radioButton>
-                <p-radioButton class="mb-2" name="difficulity" value="2" label="Közepes" formControlName="difficulity"></p-radioButton>
-                <p-radioButton class="mb-2" name="difficulity" value="3" label="Nehéz" formControlName="difficulity"></p-radioButton>
-                <small class="input-help">&nbsp;</small>
-              </div>
+<!-- <div class="container"> -->
+  <mat-stepper
+  [linear]="false"
+  [orientation]="dataService.displaySize > 2 ? 'horizontal' : 'vertical'">
+  <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
+    <form [formGroup]="firstFormGroup">
+      <div class="flex flex-row flex-wrap">
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Min. 4 karakter"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Név</mat-label>
+          <input
+            id="name" type="text" name="name" placeholder="A recepted neve"
+            matInput formControlName="name" required minlength="4"/>
+            <mat-hint align="end">{{firstFormGroup.get('name')?.value?.length || 0}}/4</mat-hint>
+            <mat-error *ngIf="firstFormGroup.get('name')?.invalid && firstFormGroup.get('name')?.hasError('minlength')">Legalább 4 karakter hosszú legyen!</mat-error>
+            <mat-error *ngIf="firstFormGroup.get('name')?.invalid && firstFormGroup.get('name')?.hasError('required')">Kötelező kitölteni!</mat-error>
+        </mat-form-field>
 
-              <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
-                <label for="difficulity" class="pb-3">Elkészítés költsége<sup>*</sup></label>
-                <p-radioButton class="mb-2" name="price" value="1" label="Olcsó" formControlName="price"></p-radioButton>
-                <p-radioButton class="mb-2" name="price" value="2" label="Átlagos" formControlName="price"></p-radioButton>
-                <p-radioButton class="mb-2" name="price" value="3" label="Drága" formControlName="price"></p-radioButton>
-                <small class="input-help">&nbsp;</small>
-              </div>
-              
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Kategória</mat-label>
+          <mat-select 
+          [formControlName]="'category'" 
+          required
+          >
+            <mat-option *ngFor="let option of dataService.categoryList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Nemzetközi konyha</mat-label>
+          <mat-select 
+          [formControlName]="'nationality'" 
+          required
+          >
+            <mat-option *ngFor="let option of dataService.nationalityList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-              <p>Kép feltöltése<sup>*</sup></p>
-              <div class="col-12 col-lg-12 d-flex flex-column mb-4">
-                  <p-fileUpload 
-                  value="files"
-                  name="images[]" [showUploadButton]="false" chooseLabel="Tallózás" cancelLabel="Mégsem" invalidFileSizeMessageSummary="{0}: Túl nagy fájlméret!" invalidFileSizeMessageDetail="Max. fájlméret: {0}" 
-                  invalidFileTypeMessageSummary="A fájl formátuma nem megfelelő" invalidFileTypeMessageDetail="Feltölthető fájlformátum: {0}"
-                  invalidFileLimitMessageSummary="Túl sok fájl."
-                  invalidFileLimitMessageDetail="Max. 3 fájl tölthető fel."
-                [multiple]="true" accept="image/*" [maxFileSize]="1000000" [fileLimit]="3"
-                (onSelect)="onPhotoSelect($event)" (onRemove)="onPhotoRemove($event)" (onClear)="onPhotoRemove($event)">
-                <ng-template pTemplate="content"></ng-template> 
-                </p-fileUpload>
-                <div *ngIf="recipeFormGroup.controls['photos'].value.length === 0; else elseBlockPhotos">
-                  <small 
-                  class="input-help text-danger">Legalább egy képet fel kell tölteni.</small>
-                </div>
-                <ng-template #elseBlockPhotos><small class="input-help">{{recipePhotoHelp}}&nbsp;</small></ng-template>
-              </div>
-              
-              <p>Elkészítési útmutató<sup>*</sup></p>
-              <div formArrayName="directions">
-                <div class="row" *ngFor="let dir of directions.controls; index as i"
-                   [formGroupName]="i"
-                >
-                  <div class="col-12 col-lg-10 d-flex flex-column mb-2">
-                    <label for="directions-{{ i }}">{{i+1}}. lépés</label>
-                    <textarea 
-                    [rows]="3" [cols]="30" 
-                    [autoResize]=true
-                    id="directions-{{ i }}" type="text" name="directions-{{ i }}" aria-describedby="input-help" pInputTextarea formControlName="dField" required></textarea>
-                    <small *ngIf="!dir?.valid && dir?.dirty" 
-                    class="input-help text-danger" >Nem maradhat üresen</small>
-                    <small class="input-help">&nbsp;</small>
-                  </div>
-                  <div class="col-12 col-lg-2 d-flex flex-column justify-content-end">
-                    <button *ngIf="i != 0"
-                    pButton label="Lépés törlése" class="p-button-warning mb-2 mt-4" 
-                    (click)="removeDirection(i)" 
-                    type="button" ></button>
-                  
-                    <button *ngIf="i == recipeFormGroup.controls['directions'].value.length - 1"
-                    pButton label="Lépés hozzáadása" class="p-button-primary mb-2" 
-                    (click)="addDirection()" 
-                    type="button" [disabled]="!recipeFormGroup.controls['directions']?.valid"></button>
-                    <small class="input-help">&nbsp;</small>
-                  </div>
-                </div>
-              </div>
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Elkészítés nehézsége</mat-label>
+          <mat-select 
+          [formControlName]="'difficulity'" 
+          required
+          (selectionChange)="'aaa($event)'"
+          >
+            <mat-option *ngFor="let option of dataService.difficulityList" [value]="option" selected="">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Költsége</mat-label>
+          <mat-select 
+          [formControlName]="'cost'" 
+          required
+          >
+            <mat-option *ngFor="let option of dataService.costList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Címkék</mat-label>
+          <mat-select 
+          [formControlName]="'label'" 
+          required
+          multiple
+          >
+            <mat-option *ngFor="let option of dataService.labelList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        {{firstFormGroup.invalid}}
+        <button mat-button matStepperNext>Következő</button>
+      </div>
+    </form>
+  </mat-step>
+  
+  <mat-step [stepControl]="secondFormGroup" label="Elkészítési útmutató">
+    <form [formGroup]="secondFormGroup">
+      <div formArrayName="directions">
+        <div *ngFor="let dir of directions.controls; index as i"
+        [formGroupName]="i"
+        class="flex flex-col lg:flex-row"
+        >
+          <mat-form-field appearance="legacy"
+          class="basis-full lg:basis-4/6"
+          >
+            <mat-label>{{i+1}}. lépés</mat-label>
+            <textarea 
+            matInput 
+            [rows]="1" [cols]="30" 
+            id="directions-{{ i }}" name="directions-{{ i }}" 
+            formControlName="dField" required
+            ></textarea>
+
             
-              <div class="col-12"></div>
-              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
-                <label for="" class="form-label ">Elkészítési idő</label>
-                <p-inputNumber
-                formControlName="time"
-                [min]="1" [max]="1440"
-                [style]="{'width':'100%'}"></p-inputNumber>
-                <small *ngIf="recipeFormGroup.controls['time']?.valid && (recipeFormGroup.controls['time']?.dirty
-                || !recipeFormGroup.controls['time']?.touched); else elseBlockTime"
-                class="input-help">&nbsp;{{recipeTimeHelp}}</small>
-                <ng-template #elseBlockTime><small class="input-help text-danger" >Kötelező kitölteni</small></ng-template>
-              </div>
-              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
-                <label for="" class="form-label ">Hány főre</label>
-                <p-inputNumber
-                formControlName="serving"
-                [min]="1" [max]="24"
-                [style]="{'width':'100%'}"></p-inputNumber>
-                <small *ngIf="recipeFormGroup.controls['serving']?.valid && (recipeFormGroup.controls['serving']?.dirty
-                || !recipeFormGroup.controls['serving']?.touched); else elseBlockTime"
-                class="input-help">&nbsp;{{recipeTimeHelp}}</small>
-                <ng-template #elseBlockTime><small class="input-help text-danger" >Kötelező kitölteni</small></ng-template>
-                
-              </div>
-              <div class="col-12"></div>
-              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
-                <label for="" class="form-label ">Kalória</label>
-                <p-inputNumber
-                formControlName="calorie"
-                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
-                [style]="{'width':'100%'}"></p-inputNumber>
-              </div>
-              <div class="col-12"></div>
-              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
-                <label for="" class="form-label ">Szénhidrát</label>
-                <p-inputNumber
-                formControlName="carbonh"
-                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
-                [style]="{'width':'100%'}"></p-inputNumber>
-              </div>
-              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
-                <label for="" class="form-label ">Fehérje</label>
-                <p-inputNumber
-                formControlName="protein"
-                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
-                [style]="{'width':'100%'}"></p-inputNumber>
-              </div>
-              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
-                <label for="" class="form-label ">Zsír</label>
-                <p-inputNumber
-                formControlName="fat"
-                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
-                [style]="{'width':'100%'}"></p-inputNumber>
-              </div>
-              <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
-                <label for="" class="form-label ">Cukor</label>
-                <p-inputNumber
-                formControlName="sugar"
-                mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
-                [style]="{'width':'100%'}"></p-inputNumber>
-              </div>
-              
-             
-              <div class="col-12 col-lg-7 mb-5">
-                <button pButton type="submit" label="Recept feltöltése" class="p-button-danger"
-                (click)="dataService.user.id='valaki'" [disabled]="!recipeFormGroup.valid"></button>
-              </div>
-            </form>
+          </mat-form-field>
+         
+          <div class="basis-2/6 flex flex-row">
+            <button *ngIf="i != 0"
+            mat-button class="" 
+            (click)="removeDirection(i)" 
+            type="button" >Lépés törlése</button>
+          
+            <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1"
+            mat-button class="" 
+            (click)="addDirection()" 
+            type="button" [disabled]="!secondFormGroup.controls['directions']?.valid">Lépés hozzáadása</button>
           </div>
+        </div>
       </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
       </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" label="Egyéb jellemzők">
+    <form [formGroup]="thirdFormGroup">
+      <div class="flex flex-row flex-wrap">
+        <mat-form-field
+          appearance="legacy"
+          hintLabel="Percben add meg"
+          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+            <mat-label>Elkészítési idő</mat-label>
+            <input
+            id="time" type="number" name="time"
+            matInput
+            formControlName="time"
+            required
+            ><mat-icon matSuffix>schedule</mat-icon>
+        
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        <mat-label>Hány főre</mat-label>
+        <input
+        id="serving" type="number" name="serving"
+        matInput
+        formControlName="serving"
+        required
+        ><mat-icon matSuffix>people_outline</mat-icon>
+        
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row flex-wrap">
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Kalória</mat-label>
+          <input
+          id="calorie" type="number" name="calorie"
+          matInput
+          formControlName="calorie"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Szénhidrát</mat-label>
+          <input
+          id="carbonh" type="number" name="carbonh"
+          matInput
+          formControlName="carbonh"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Fehérje</mat-label>
+          <input
+          id="protein" type="number" name="protein"
+          matInput
+          formControlName="protein"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Zsír</mat-label>
+          <input
+          id="fat" type="number" name="fat"
+          matInput
+          formControlName="fat"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Cukor</mat-label>
+          <input
+          id="sugar" type="number" name="sugar"
+          matInput
+          formControlName="sugar"
+          >
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form> 
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Kép feltöltése</ng-template>
+    <form [formGroup]="fourthFormGroup">
+      <div class="flex flex-col">
+        <!-- <input type="file"
+        multiple
+        formControlName="photos2"
+        > -->
+        <mat-label>Válassz legalább egy képet</mat-label>
+        
+        <!-- <app-ng-mat-file-input
+        [multiple]="true"
+        [required]="true"
+        [accept]="'image/*'"
+        [previewHeight]="'100'"
+        [disabledInput]="false"
+        [formControl]="fourthFormGroup.controls['photos']"
+        (change)="bbb($event)"
+        ></app-ng-mat-file-input> -->
+        <mat-form-field appearance="legacy">
+          <app-ngx-mat-file-input-dnd 
+          formControlName="photos"
+          [preview]="true"
+          accept="image/*"
+          multiple
+          [buttonBrowseText]="'Tallózás'"
+          [buttonUploadText]="'Feltöltés'"
+          [buttonRemoveAllText]="'Összes törlése'"
+          required
+          >
+          </app-ngx-mat-file-input-dnd>
+          </mat-form-field>
+        <div *ngFor="let item of fourthFormGroup.controls['photos'].value">
+          {{item.name}}
+        </div>
+        <div>
+          status: {{fourthFormGroup.controls['photos'].status}} | 
+          requiredError: {{fourthFormGroup.controls['photos'].hasError('required')}} | 
+          minError: {{fourthFormGroup.controls['photos'].hasError('minlength')}}
+        </div>
+        <div>
+         
+        </div>
+        
+        </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="bbb('1')">Next</button>
+      </div>
+    </form> 
+  </mat-step>
+  </mat-stepper> 
+<!-- </div> -->
+
+
+<div class="col-12" >
+  <h4 class="title-h4 text-center">Receptfeltöltés</h4><br>
+  <div class="row ">
+    <div class="col-12 col-lg-12 px-0 px-lg-5 ">
+      <form action="" 
+      [formGroup]="recipeFormGroup"
+      class="justify-content-center justify-content-md-start row">
+        <!-- <mat-form-field 
+        appearance="outline"
+        hintLabel="Rövid, de lényegretörő nevet válassz."
+        class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4"> -->
+          <!-- <input 
+          id="name" type="text" name="name" placeholder="Recept neve"
+          matInput formControlName="name" required minlength="4"/>
+          <mat-error *ngIf="recipeFormGroup.get('name')?.invalid">Hiba</mat-error> -->
+          <!-- <div *ngIf="!recipeFormGroup.controls['name']?.valid && (recipeFormGroup.controls['name']?.dirty
+          ||recipeFormGroup.controls['name']?.touched)">
+            <small [hidden]="!recipeFormGroup.get('name')?.hasError('required')"
+            class="input-help text-danger">Kötelező kitölteni</small>
+            <small [hidden]="!recipeFormGroup.controls['name']?.errors?.['minlength']"
+            class="input-help text-danger">Minimum 4 karakter hosszú legyen</small>
+            
+          </div> -->
+          <!-- <ng-template #elseBlockName><small class="input-help">&nbsp;{{recipeNameHelp}}</small></ng-template> -->
+        <!-- </mat-form-field> -->
+        
+        <!-- <mat-form-field 
+        appearance="outline"
+        class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
+          <mat-label for="category">Kategória<sup>*</sup></mat-label>
+          <mat-select>
+            <mat-option *ngFor="let data of dataService.categoryList" [value]="data">
+              {{data.name}}
+            </mat-option>
+          
+          </mat-select>
+          <small class="input-help">&nbsp;</small>
+        </mat-form-field> -->
+        <!-- <div class="col-12 col-md-6 col-lg-4 d-flex flex-column mb-4">
+          <label for="nationality">Nemzetközi konyha<sup>*</sup></label>
+          <p-dropdown [options]="dataService.nationalityList" optionLabel="name" name="nationality"  formControlName="nationality" 
+          autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
+          <small class="input-help">&nbsp;</small>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
+          <label for="" >Címkék</label>
+          <p-multiSelect
+          [options]="dataService.labelList"
+          optionLabel="name" display="chip" placeholder="Nincs címke"
+          formControlName="label"
+          emptyMessage="Nincs adat"
+          emptyFilterMessage="Nincs találat"
+          [style]="{'width':'100%'}"></p-multiSelect>
+          <small class="input-help">&nbsp;{{recipeLabelHelp}}&nbsp;{{recipeFormGroup.controls['label'].value}}</small>
+        </div>
+        <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
+          <label for="difficulity" class="pb-3">Elkészítés nehézsége<sup>*</sup></label>
+          <p-radioButton class="mb-2" name="difficulity" value="1" label="Könnyű" formControlName="difficulity"></p-radioButton>
+          <p-radioButton class="mb-2" name="difficulity" value="2" label="Közepes" formControlName="difficulity"></p-radioButton>
+          <p-radioButton class="mb-2" name="difficulity" value="3" label="Nehéz" formControlName="difficulity"></p-radioButton>
+          <small class="input-help">&nbsp;</small>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-12 d-flex flex-column mb-4">
+          <label for="difficulity" class="pb-3">Elkészítés költsége<sup>*</sup></label>
+          <p-radioButton class="mb-2" name="price" value="1" label="Olcsó" formControlName="price"></p-radioButton>
+          <p-radioButton class="mb-2" name="price" value="2" label="Átlagos" formControlName="price"></p-radioButton>
+          <p-radioButton class="mb-2" name="price" value="3" label="Drága" formControlName="price"></p-radioButton>
+          <small class="input-help">&nbsp;</small>
+        </div> -->
+        
+
+
+        <p>Kép feltöltése<sup>*</sup></p>
+        <div class="col-12 col-lg-12 d-flex flex-column mb-4">
+            <p-fileUpload 
+            value="files"
+            name="images[]" [showUploadButton]="false" chooseLabel="Tallózás" cancelLabel="Mégsem" invalidFileSizeMessageSummary="{0}: Túl nagy fájlméret!" invalidFileSizeMessageDetail="Max. fájlméret: {0}" 
+            invalidFileTypeMessageSummary="A fájl formátuma nem megfelelő" invalidFileTypeMessageDetail="Feltölthető fájlformátum: {0}"
+            invalidFileLimitMessageSummary="Túl sok fájl."
+            invalidFileLimitMessageDetail="Max. 3 fájl tölthető fel."
+          [multiple]="true" accept="image/*" [maxFileSize]="1000000" [fileLimit]="3"
+          (onSelect)="onPhotoSelect($event)" (onRemove)="onPhotoRemove($event)" (onClear)="onPhotoRemove($event)">
+          <ng-template pTemplate="content"></ng-template> 
+          </p-fileUpload>
+          <div *ngIf="recipeFormGroup.controls['photos'].value.length === 0; else elseBlockPhotos">
+            <small 
+            class="input-help text-danger">Legalább egy képet fel kell tölteni.</small>
+          </div>
+          <ng-template #elseBlockPhotos><small class="input-help">{{recipePhotoHelp}}&nbsp;</small></ng-template>
+        </div>
+        
+        <p>Elkészítési útmutató<sup>*</sup></p>
+        <div formArrayName="directions">
+          <div class="row" *ngFor="let dir of directions.controls; index as i"
+              [formGroupName]="i"
+          >
+            <div class="col-12 col-lg-10 d-flex flex-column mb-2">
+              <label for="directions-{{ i }}">{{i+1}}. lépés</label>
+              <textarea 
+              [rows]="3" [cols]="30" 
+              [autoResize]=true
+              id="directions-{{ i }}" type="text" name="directions-{{ i }}" aria-describedby="input-help" pInputTextarea formControlName="dField" required></textarea>
+              <small *ngIf="!dir?.valid && dir?.dirty" 
+              class="input-help text-danger" >Nem maradhat üresen</small>
+              <small class="input-help">&nbsp;</small>
+            </div>
+            <div class="col-12 col-lg-2 d-flex flex-column justify-content-end">
+              <button *ngIf="i != 0"
+              pButton label="Lépés törlése" class="p-button-warning mb-2 mt-4" 
+              (click)="removeDirection(i)" 
+              type="button" ></button>
+            
+              <button *ngIf="i == recipeFormGroup.controls['directions'].value.length - 1"
+              pButton label="Lépés hozzáadása" class="p-button-primary mb-2" 
+              (click)="addDirection()" 
+              type="button" [disabled]="!recipeFormGroup.controls['directions']?.valid"></button>
+              <small class="input-help">&nbsp;</small>
+            </div>
+          </div>
+        </div>
       
+        <div class="col-12"></div>
+        <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+          <label for="" class="form-label ">Elkészítési idő</label>
+          <p-inputNumber
+          formControlName="time"
+          [min]="1" [max]="1440"
+          [style]="{'width':'100%'}"></p-inputNumber>
+          <small *ngIf="recipeFormGroup.controls['time']?.valid && (recipeFormGroup.controls['time']?.dirty
+          || !recipeFormGroup.controls['time']?.touched); else elseBlockTime"
+          class="input-help">&nbsp;{{recipeTimeHelp}}</small>
+          <ng-template #elseBlockTime><small class="input-help text-danger" >Kötelező kitölteni</small></ng-template>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+          <label for="" class="form-label ">Hány főre</label>
+          <p-inputNumber
+          formControlName="serving"
+          [min]="1" [max]="24"
+          [style]="{'width':'100%'}"></p-inputNumber>
+          <small *ngIf="recipeFormGroup.controls['serving']?.valid && (recipeFormGroup.controls['serving']?.dirty
+          || !recipeFormGroup.controls['serving']?.touched); else elseBlockTime"
+          class="input-help">&nbsp;{{recipeTimeHelp}}</small>
+          <ng-template #elseBlockTime><small class="input-help text-danger" >Kötelező kitölteni</small></ng-template>
+          
+        </div>
+        <div class="col-12"></div>
+        <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+          <label for="" class="form-label ">Kalória</label>
+          <p-inputNumber
+          formControlName="calorie"
+          mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+          [style]="{'width':'100%'}"></p-inputNumber>
+        </div>
+        <div class="col-12"></div>
+        <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+          <label for="" class="form-label ">Szénhidrát</label>
+          <p-inputNumber
+          formControlName="carbonh"
+          mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+          [style]="{'width':'100%'}"></p-inputNumber>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+          <label for="" class="form-label ">Fehérje</label>
+          <p-inputNumber
+          formControlName="protein"
+          mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+          [style]="{'width':'100%'}"></p-inputNumber>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+          <label for="" class="form-label ">Zsír</label>
+          <p-inputNumber
+          formControlName="fat"
+          mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+          [style]="{'width':'100%'}"></p-inputNumber>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 d-flex flex-column mb-4">
+          <label for="" class="form-label ">Cukor</label>
+          <p-inputNumber
+          formControlName="sugar"
+          mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="2"
+          [style]="{'width':'100%'}"></p-inputNumber>
+        </div>
+        
+        
+        <div class="col-12 col-lg-7 mb-5">
+          <button pButton type="submit" label="Recept feltöltése" class="p-button-danger"
+          (click)="submitForm()" ></button>
+          <!-- [disabled]="!recipeFormGroup.valid" -->
+        </div>
+      </form>
     </div>
-  </div>
 </div>
+</div>
+  

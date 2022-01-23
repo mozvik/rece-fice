@@ -1,0 +1,74 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" 
+  mode="over"
+  fixedInViewport="true"
+  fixedTopGap=56
+  [(opened)]="dataService.sidenavOpened" 
+  (opened)="events.push('open!')"
+  (closed)="events.push('close!')"
+  (closedStart)="dataService.sidenavOpened = false"
+  (openedStart)="dataService.sidenavOpened = true">
+    <nav id="mobileNavbar" 
+    [@inOut]="dataService.sidenavOpened ? true:false" 
+    >
+      <ul class="sideMenu">
+        <li class="nav-item">
+          <button mat-button
+            class=""
+            aria-current="page"
+            routerLink="/home"
+            id="homeLink"
+            >Főoldal</button>
+        </li>
+        <li
+          class="nav-item">
+          <button  (click)="submenuCollapsed = !submenuCollapsed"
+          mat-button
+            class=""
+            role="button"
+            data-bs-toggle=""
+            aria-expanded="false"
+          >Receptek<mat-icon [@chevronRotate]="!submenuCollapsed">
+            arrow_drop_down
+            </mat-icon></button>
+        </li>
+        <ul *ngIf="!submenuCollapsed" [@collapseSubmenu]
+        class="nav-item">
+          <li class="nav-link"><button mat-button>Előételek</button></li>
+          <li class="nav-link"><button mat-button>Levesek</button></li>
+          <li class="nav-link"><button mat-button>Főételek</button></li>
+          <li class="nav-link"><button mat-button>Köretek</button></li>
+          <li class="nav-link"><button mat-button>Desszertek</button></li>
+          <li class="nav-link"><button mat-button>Italok</button></li>
+        </ul>
+      
+        <li class="nav-item">
+          <button mat-button
+            class=""
+            routerLink="/upload"
+            (click)="'isOpen=false'"
+            tabindex="-1"
+            aria-disabled="true"
+            >Receptfeltöltés</button>
+        </li>
+        <li class="nav-item">
+          <button mat-button
+            class=""
+            href="#"
+            tabindex="-1"
+            aria-disabled="true"
+            >Mi van otthon?</button>
+        </li>
+      
+      </ul>
+    </nav>
+  </mat-sidenav>
+  
+
+  <mat-sidenav-content>
+    <p><mat-checkbox [(ngModel)]="dataService.sidenavOpened">sidenav.opened</mat-checkbox></p>
+    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+    <router-outlet></router-outlet>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>

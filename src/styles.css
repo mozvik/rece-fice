@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* You can add global styles to this file, and also import other style files */
 :root {
   /* --orangeRed: rgb(255, 112, 85); #ff7055 */
@@ -10,12 +14,25 @@
   --backgroundColorDarker: #eae8e0;
 
   /*8e9092*/
+  --aa: #DF3E10;
+  --ab: #2D3A4B;
+  --ac: #EAE0D5;
+  --ad: #2292A4;
+  --ae: #0A8754;
+
+  /*
+  DF3E10
+  2D3A4B
+  EAE0D5
+  2292A4
+  0A8754
+  */
 }
 
 body,
 html {
-  color: var(--textColor);
-  background: var(--backgroundColor);
+  color: var(--textColor)!important;
+  background: var(--backgroundColor)!important;
   margin: 0 auto;
   font-size: 16px;
 }
@@ -76,3 +93,5 @@ input:focus,
   }
 
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

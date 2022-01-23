@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { APIService } from './service/api.service';
 import { DataService } from './service/data.service';
+import { IconService } from './service/icon.service';
+
 
 @Component({
   selector: 'app-root',
@@ -10,21 +13,49 @@ import { DataService } from './service/data.service';
   ]
 })
 export class AppComponent {
-  title = 'rece-fice';
-
+  private aaa: any[] = []
   constructor(
-    public dataService: DataService
-  ) { }
-
+    public dataService: DataService, 
+    private iconService: IconService,
+    private apiService: APIService,
+  ) {
+    this.iconService.registerIcons();
+  }
+  
   ngOnInit(): void {
     this.dataService.checkConnection()
-    this.dataService.getCategoryList('cost')
-    this.dataService.getCategoryList('category')
-    this.dataService.getCategoryList('difficulity')
-    this.dataService.getCategoryList('nationality')
-    this.dataService.getCategoryList('label')
+
+    this.apiService.categories.subscribe(response => {
+      this.dataService.categoryList = response.items
+    })
+    this.apiService.difficulities.subscribe(response => {
+      this.dataService.difficulityList = response.items
+    })
+   
+    this.apiService.costs.subscribe(response => {
+      this.dataService.costList = response.items
+    })
+
+    this.apiService.nationalities.subscribe(response => {
+      this.dataService.nationalityList = response.items
+    })
+
+    this.apiService.labels.subscribe(response => {
+      this.dataService.labelList = response.items
+    })
+
+    this.apiService.getCategories()
+    this.apiService.getCosts()
+    this.apiService.getDifficulities()
+    this.apiService.getNationalities()
+    this.apiService.getLabels()
     
-    this.onResize()
+    // this.apiService.getDiff().subscribe(response => {
+    //   this.dataService.difficulityList = response
+     
+    // })
+
+     this.onResize()
   }
 
   onResize() {
@@ -45,13 +76,13 @@ export class AppComponent {
       return;
     }
 
-    if (window.innerWidth <= 480) {
+    if (window.innerWidth <= 640) {
       this.dataService.displaySize = 0; //mobile
     } else if (window.innerWidth <= 768) {
       this.dataService.displaySize = 1; //tablet
-    } else if (window.innerWidth < 992) {
+    } else if (window.innerWidth < 1024) {
       this.dataService.displaySize = 2; //small screen/laptop
-    } else if (window.innerWidth <= 1200) {
+    } else if (window.innerWidth <= 1280) {
       this.dataService.displaySize = 3; //desktop
     } else this.dataService.displaySize = 4; //large screens
     return;

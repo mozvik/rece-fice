@@ -1,45 +1,59 @@
-<app-search (closed)="$event ? dataService.advancedSearchIsOpen=false:''" [isSearchOpen]="dataService.advancedSearchIsOpen" [displaySize]="dataService.displaySize"></app-search>
+<app-search (closed)="$event ? dataService.searchIsOpen=false:''" [isSearchOpen]="dataService.searchIsOpen"></app-search>
 
 
 
-
-<div class="container-fluid content pb-5">
-  <div id="logoMain" class="container-fluid py-3 py-lg-5">
-    <div class="d-flex justify-content-center pb-5">
-      <img src="./assets/img/mainlogo_sm.png" alt="" class="img-fluid py-0 py-lg-3 d-block d-lg-none" />
+<div class="container mx-auto">
+  <div id="logoMain" class="">
+    <div class="flex justify-center">
+      <img src="./assets/img/mainlogo_sm.png" alt="" class="block lg:hidden" />
     </div>
-    <div class="d-flex justify-content-center pb-5">
-      <img src="./assets/img/mainlogo.png" alt="" class="img-fluid py-0 py-lg-3 d-none d-lg-block" />
+    <div class="flex justify-center">
+      <img src="./assets/img/mainlogo.png" alt="" class="hidden lg:block" />
     </div>
   </div>
-  <hr class="pt-1">
-  <div class="container-xxl pt-3 py-lg-5">
-    <div class="row justify-content-center pt-3 py-lg-5">
-      <div class="col-12 col-lg-2 p-3 text-center">
-        <h3 class="title-h3 mb-3">345+</h3> recept közül válogathatsz
-      </div>
-      <p-divider layout="vertical" class="col-1 d-none d-lg-block"></p-divider>
-      <p-divider class="col-1 d-block d-lg-none w-100"></p-divider>
-      <div class="col-12 col-lg-6 p-3 text-center">
-        <h3 class="title-h3 mb-3">
-          <button 
-          (click)="dataService.advancedSearchIsOpen=!dataService.advancedSearchIsOpen"
-          class="btn "><i class="pi pi-search" style="font-size: 3rem"></i></button>
-        </h3>
-        <p>Egészséges ételeket keresel, vagy csak ötleteket az otthonodban megtalálható alapanyagok felhasználására?</p> <p>A recepttárban biztosan megtalálod amit szeretnél. </p>
-      </div>
-      <p-divider layout="vertical" class="col-1 d-none d-lg-block"></p-divider>
-      <p-divider class="col-1 d-block d-lg-none w-100"></p-divider>
-      <div class="col-12 col-lg-2 p-3 text-center">
+  <mat-divider></mat-divider>
+
+<form action="" [formGroup]="fourthFormGroup">
+
+  <div>
+    form control status: {{fourthFormGroup.controls['photos'].valid}} | touched: {{fourthFormGroup.controls['photos'].touched}}| required state: {{fourthFormGroup.controls['photos'].hasError('required')}}
+    <span *ngFor="let item of fourthFormGroup.controls['photos'].value">
+      {{item.name}}
+    </span>
+  </div>
+
+  <mat-form-field appearance="legacy">
+  <app-ngx-mat-file-input-dnd formControlName="photos">
+  </app-ngx-mat-file-input-dnd>
+  </mat-form-field>
+ 
+</form>
+
+
+  <div class="flex flex-col lg:flex-row columns-5 gap-8 p-5">
+    <div class="text-center">
+      <h3 class="title-h3">
+        <mat-icon color="primary" style="font-size: 4rem; transform: translateX(-15px);">receipt_long</mat-icon>
+        
+      </h3><p>345+</p> <p>recept közül válogathatsz</p>
+    </div>
+    <mat-divider [vertical]="true" class="hidden lg:block " ></mat-divider>
+    <div class="col-span-1 text-center">
       <h3 class="title-h3 mb-3">
-        <button 
-        [routerLink]="dataService.user.id!='' ? '/upload':'/login'"
-        class="btn "> <i class="pi pi-upload" style="font-size: 3rem"></i></button></h3> 
-      Tölts fel saját receptet!
-      </div>
+        <button mat-icon-button (click)="dataService.searchIsOpen=true" [disableRipple]="true"><mat-icon color="accent" style="font-size: 4rem; transform: translateX(-10px);">search</mat-icon></button>
+      </h3><br>
+      <p>Egészséges ételeket keresel, vagy csak ötleteket az otthonodban megtalálható alapanyagok felhasználására?</p> <p>A recepttárban biztosan megtalálod amit szeretnél. </p>
+    </div>
+    <mat-divider [vertical]="true" class="hidden lg:block "></mat-divider>
+    <div class="col-12 col-lg-2 p-3 text-center">
+    <h3 class="title-h3 mb-3">
+      <button mat-icon-button [routerLink]="dataService.user.id!='' ? '/upload':'/login'" [disableRipple]="true"><mat-icon color="warn" style="font-size: 4rem; transform: translateX(-10px);">file_upload</mat-icon></button>
+    </h3> <br>
+      <p>Mutasd meg mit tudsz!</p>
+      <p>Tölts fel saját receptet!</p>
     </div>
   </div>
-  <hr class="pt-1">
+  <mat-divider></mat-divider>
 </div>
 
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, debounceTime, delay, distinctUntilChanged, first, map, Observable, of, share, shareReplay, Subject, take, throwError, timeout } from 'rxjs';
-import { query } from '@angular/animations';
+import { AsyncSubject, BehaviorSubject, catchError, debounceTime, delay, distinctUntilChanged, first, map, Observable, of, ReplaySubject, share, shareReplay, Subject, take, throwError, timeout } from 'rxjs';
+import { OptionsData } from '../interface/options-data';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +11,26 @@ export class APIService {
   serverUrl: string = 'http://localhost/angular/rece-fice/api/';
   apiKey: string = '';
   filterArray = new Subject()
+
+  
+  public categories = new ReplaySubject<any>(1);
+  public costs = new ReplaySubject<any>(1);
+  public nationalities = new ReplaySubject<any>(1);
+  public difficulities = new ReplaySubject<any>(1);
+  public labels = new ReplaySubject<any>(1);
+  
   
   constructor(
     private http: HttpClient,
   ) { 
-      this.filterArray.subscribe((val:any) => {
+      //this.filterArray.subscribe((val:any) => {
         // console.log(this.multiFilter(val))
-      })
+      //})
     }
 
+  
+  
+  
   // isServerReady(): Observable<any> {
   //   return this.http
   //     .get<any[]>(this.serverUrl + '?ready=' + this.apiKey)
@@ -100,13 +111,67 @@ export class APIService {
       );
   }
 
-  serviceGetList( sqlTableName: string ): Observable<any> {
-    let query: string = this.serverUrl + '?list=' + sqlTableName + '&apikey=' + this.apiKey
-    return this.http
+  // serviceGetList( sqlTableName: string ): Observable<any> {
+  //   let query: string = this.serverUrl + '?list=' + sqlTableName + '&apikey=' + this.apiKey
+  //   return this.http
+  //     .get<any[]>(query)
+  //     .pipe(
+  //     shareReplay(1),
+  //     catchError(this.handleError)
+  //   )
+  // }
+  
+
+  getDifficulities() {
+    let query: string = this.serverUrl + '?list=difficulity&apikey=' + this.apiKey
+    this.http
       .get<any[]>(query)
-      .pipe(
-      catchError(this.handleError)
-    );
+      .subscribe
+      (
+        (response: any) => {this.difficulities.next(response)}
+      ),
+      (err: any) => console.error("loadDifficulities: ERROR")
+  }
+
+  getCategories() {
+    let query: string = this.serverUrl + '?list=category&apikey=' + this.apiKey
+    this.http
+    .get<any[]>(query)
+    .subscribe
+      (
+        (response: any) => {this.categories.next(response)}
+      ),
+      (err: any) => console.error("loadCategories: ERROR")
+  }
+  getCosts() {
+    let query: string = this.serverUrl + '?list=cost&apikey=' + this.apiKey
+    this.http
+      .get<any[]>(query)
+      .subscribe
+      (
+        (response: any) => {this.costs.next(response)}
+      ),
+      (err: any) => console.error("loadCosts: ERROR")
+  }
+  getNationalities() {
+    let query: string = this.serverUrl + '?list=nationality&apikey=' + this.apiKey
+    this.http
+      .get<any[]>(query)
+      .subscribe
+      (
+        (response: any) => {this.nationalities.next(response)}
+      ),
+      (err: any) => console.error("loadNationalities: ERROR")
+  }
+  getLabels() {
+    let query: string = this.serverUrl + '?list=label&apikey=' + this.apiKey
+    this.http
+      .get<any[]>(query)
+      .subscribe
+      (
+        (response: any) => {this.labels.next(response)}
+      ),
+      (err: any) => console.error("loadLabels: ERROR")
   }
   
   multiFilter(filter: any[]): Observable<any> {

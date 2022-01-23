@@ -1,11 +1,13 @@
 import { animate, group, keyframes, query, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DataService } from '../service/data.service';
 import { APIService } from '../service/api.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
-import { SelectItem, PrimeNGConfig } from "primeng/api";
-
+import {  map, Observable, ReplaySubject, startWith, Subject, take, takeUntil, } from 'rxjs';
+import { PrimeNGConfig } from "primeng/api";
+import { FormGroup, FormControl } from '@angular/forms';
+import { MatSelect } from '@angular/material/select';
+import { OptionsData } from '../interface/options-data';
+  
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -25,6 +27,7 @@ import { SelectItem, PrimeNGConfig } from "primeng/api";
       transition('closed <=> open', [
         animate("0.6s cubic-bezier(0.35, 0, 0.25, 1)"),
         // animate("0.3s cubic-bezier(0.55, 0.31, 0.15, 0.93)"),
+        
       ]),
     ]),
    
@@ -32,12 +35,34 @@ import { SelectItem, PrimeNGConfig } from "primeng/api";
 })
 export class SearchComponent implements OnInit {
   @Input() isSearchOpen = false;
-  @Input() displaySize!: number;
+  // @Input() displaySize!: number;
   @Output() subject = new Subject();
   @Output() closed = new EventEmitter<boolean>();
 
+  @ViewChild('multiSelect', { static: true }) multiSelect!: MatSelect;
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
+
+  // protected optionsData: OptionsData[] = []
+
+  searchForm = new FormGroup({
+    searchCtrl: new FormControl(''),
+    categoryCtrl: new FormControl(''),
+    categoryFilterCtrl: new FormControl(''),
+    difficulityCtrl: new FormControl(''),
+    difficulityFilterCtrl: new FormControl(''),
+    labelCtrl: new FormControl(''),
+    labelFilterCtrl: new FormControl(''),
+    nationalityCtrl: new FormControl(''),
+    nationalityFilterCtrl: new FormControl(''),
+    costCtrl: new FormControl(''),
+    costFilterCtrl: new FormControl(''),
+  });
+
+  // searchControl = new FormControl();
+  filteredOptions!: Observable<any[]>;
   inputText: any = ''
-  recipesFound: number = 0;
+  recipesFound: string = 'Keresés';
   selectedItems: any = {
     category: undefined,
     difficulity: undefined,
@@ -45,29 +70,125 @@ export class SearchComponent implements OnInit {
     nationality: undefined,
     label: undefined,
   }
+
+  /** ngx-mat-select-search */
+  public filteredCategory: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
+  protected filteredCategoryCache: OptionsData[] = [];
+  public filteredDifficulity: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
+  protected filteredDifficulityCache: OptionsData[] = [];
+  public filteredLabel: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
+  protected filteredLabelCache: OptionsData[] = [];
+  public filteredNationality: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
+  protected filteredNationalityCache: OptionsData[] = [];
+  public filteredCost: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
+  protected filteredCostCache: OptionsData[] = [];
+  isIndeterminate = false;
+  isChecked = false;
+ 
+  /** ngx-mat-select-search */
+
+  fCat: any = [];
   searchResults: any[] = [];
-  
+
   constructor(
-    private primengConfig: PrimeNGConfig,
+    //private primengConfig: PrimeNGConfig,
     public dataService: DataService,
     private apiService: APIService,
-  ) {}
+  ) {  }
 
   ngOnInit(): void {
   
-    this.primengConfig.ripple = true;
-    this.apiService.filterArray.next(this.selectedItems)
-    this.apiService.serviceRecipeSearch(this.inputText, this.selectedItems).subscribe(
-      (result) => {
-        console.log(result),
-        this.searchResults = result.items,
-        result.itemCount ? this.recipesFound = result.itemCount : this.recipesFound = 0
-      })
+    /** ngx-mat-select-search */
+    this.apiService.categories.subscribe(categories => {
+      this.filteredCategory.next(categories.items.slice())
+      this.ngxSearchListen(
+        'categoryFilterCtrl',
+        'categoryCtrl',
+        this.filteredCategory,
+        this.filteredCategoryCache,
+        this.dataService.categoryList)
+    })
+    this.apiService.difficulities.subscribe(categories => {
+      this.filteredDifficulity.next(categories.items.slice())
+      this.ngxSearchListen(
+        'difficulityFilterCtrl',
+        'difficulityCtrl',
+        this.filteredDifficulity,
+        this.filteredDifficulityCache,
+        this.dataService.difficulityList)
+    })
+    this.apiService.labels.subscribe(categories => {
+      this.filteredLabel.next(categories.items.slice())
+      this.ngxSearchListen(
+        'labelFilterCtrl',
+        'labelCtrl',
+        this.filteredLabel,
+        this.filteredLabelCache,
+        this.dataService.labelList)
+    })
+    this.apiService.nationalities.subscribe(categories => {
+      this.filteredNationality.next(categories.items.slice())
+      this.ngxSearchListen(
+        'nationalityFilterCtrl',
+        'nationalityCtrl',
+        this.filteredNationality,
+        this.filteredNationalityCache,
+        this.dataService.nationalityList)
+    })
+    this.apiService.costs.subscribe(categories => {
+      this.filteredCost.next(categories.items.slice())
+      this.ngxSearchListen(
+        'costFilterCtrl',
+        'costCtrl',
+        this.filteredCost,
+        this.filteredCostCache,
+        this.dataService.costList)
+    })
+    /** ngx-mat-select-search */
+
+    
+    this.filteredOptions = this.searchForm.controls['searchCtrl'].valueChanges.pipe(
+      startWith(''),
+      map( value => this._filter(value) ),
+    );
+    this.searchForm.controls['searchCtrl']!.valueChanges
+    .subscribe(value=> {
+      if ( this.searchForm.controls['searchCtrl'].dirty) {
+        this.inputChange(value)
+      }
+    });
+    
+    this.subsValueChange('categoryCtrl', 'category')
+    this.subsValueChange('nationalityCtrl', 'nationality')
+    this.subsValueChange('difficulityCtrl', 'difficulity')
+    this.subsValueChange('labelCtrl', 'label')
+    this.subsValueChange('costCtrl', 'cost')
+    
+    
+   
   }
+  private _filter(value: string): string[] {
+    return this.searchResults.map(searchResults => searchResults.recipeName);
+  }
+
+  subsValueChange(control: string, selectedCategory: string) {
+    
+    this.searchForm.controls[control].valueChanges
+    .subscribe(value=> {
+      this.selectedItems[selectedCategory] = value.map((val: { id: any; }) => val.id)
+      this.inputChange(value)
+    });
+  }
+
   onSelect(e: any) {
-    console.log('választott: :>> ',e);
+    console.log('választott: :>> ',e.option.value);
+  }
+  onMultiSelect(e: any, data: any[]) {
+      data = e.value      
+      console.log('multi választott: :>> ',e.value[0],this.selectedItems);
   }
   onKeyup(e: any) {
+    console.log('keyup :>> ');
     if (e.key === "Enter") {
       console.log('ENTER go search: :>> ',this.inputText);
     }
@@ -79,17 +200,114 @@ export class SearchComponent implements OnInit {
       this.closed.emit(true)
     }
   }
-  inputChange(e: any) {
-    // if(e) this.apiService.filterArray.next(this.selectedItems)
-    let filtered: any[] = [];
-    let query = e.query;
-    console.log('this.selectedItems :>> ' , e.query);
-    this.apiService.serviceRecipeSearch(this.inputText, this.selectedItems).subscribe(
+  getOptionText(option: any) {
+    return option ? option.recipeName: null;
+  }
+  
+  inputChange(e: any, filters: any[] = []) {
+   
+    console.log('this.selectedItems :>> ', this.selectedItems);
+    this.apiService.serviceRecipeSearch(e?.hasOwnProperty('recipeName') ? e.recipeName:'', this.selectedItems).subscribe(
       (result) => {
-        console.log(result),
         this.searchResults = result.items,
-        result.itemCount ? this.recipesFound = result.itemCount: this.recipesFound = 0
+        result.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
+        console.log(this.searchResults)
+        this.filteredOptions =  this.searchForm.controls['searchCtrl'].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value)),
+        );
+       
       }
     )
+  }
+
+
+
+
+  /** ngx-mat-select-search */
+  // ngxAfterViewInit() {
+  //   this.ngxSetInitialValue(this.filteredCategory);
+  // }
+
+  ngxOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+    console.log('destroyed advsrch :>> ');
+  }
+  
+
+  ngxToggleSelectAll(selectAllValue: boolean, control: string, filteredData: ReplaySubject<OptionsData[]>) {
+    filteredData.pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(val => {
+        if (selectAllValue) {
+          this.searchForm.controls[control].patchValue(val);
+        } else {
+          this.searchForm.controls[control].patchValue([]);
+        }
+      });
+  }
+  // protected ngxSetInitialValue(filteredData: ReplaySubject<OptionsData[]>) {
+  //   filteredData
+  //     .pipe(take(1), takeUntil(this._onDestroy))
+  //     .subscribe(() => {
+  //       // setting the compareWith property to a comparison function
+  //       // triggers initializing the selection according to the initial value of
+  //       // the form control (i.e. _initializeSelection())
+  //       // this needs to be done after the filteredBanks are loaded initially
+  //       // and after the mat-option elements are available
+  //       this.multiSelect.compareWith = (a: OptionsData, b: OptionsData) => a && b && a.id === b.id;
+  //     });
+  //  }
+  
+  ngxSearchListen(
+    filterControl: string,
+    selectControl: string,
+    filterData: ReplaySubject<OptionsData[]>,
+    filterCache: OptionsData[],
+    originalData: OptionsData[]) {
+    // listen for search field value changes
+    this.searchForm.controls[filterControl].valueChanges
+    .pipe(takeUntil(this._onDestroy))
+    .subscribe(() => {
+      this.ngxFilterOptionsData(filterControl, filterData, filterCache, originalData);
+      this.ngxSetToggleAllCheckboxState(selectControl, filterCache);
+    });
+ }
+  
+  protected ngxFilterOptionsData(
+    filterControl: string,
+    filterData: ReplaySubject<OptionsData[]>,
+    filterCache: OptionsData[],
+    originalData: OptionsData[]) {
+    if (!originalData) {
+      return;
+    }
+    // get the search keyword
+    let search = this.searchForm.controls[filterControl].value;
+    if (!search) {
+      filterCache = originalData.slice();
+      filterData.next(filterCache);
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+
+    filterCache = originalData.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
+    filterData.next(filterCache);
+  }
+
+  protected ngxSetToggleAllCheckboxState(
+    selectControl: string,   
+    filterCache: OptionsData[],) {
+    let filteredLength = 0;
+    if (this.searchForm.controls[selectControl] && this.searchForm.controls[selectControl].value) {
+      filterCache.forEach(el => {
+        if (this.searchForm.controls[selectControl].value.indexOf(el) > -1) {
+          filteredLength++;
+        }
+      });
+      this.isIndeterminate = filteredLength > 0 && filteredLength < filterCache.length;
+      this.isChecked = filteredLength > 0 && filteredLength === filterCache.length;
+    }
   }
 }

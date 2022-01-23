@@ -1,6 +1,9 @@
 import { HostListener, Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { APIService } from './api.service';
+import { OptionsData } from '../interface/options-data';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root'
@@ -13,27 +16,56 @@ export class DataService {
     hasUploadAccess: false
   };
 
-  public costList: any = [{
-    id: '',
-    name: '', 
-    selected: '1'
-  }];
-  public categoryList: any[] = [];
-  public difficulityList: any[] = [];
-  public nationalityList: any[] = [];
-  public labelList: any[] = [];
+  public costList: OptionsData[] = [];
+  public categoryList: OptionsData[] = [];
+  public difficulityList: OptionsData[] = [];
+  public difficulities: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
+  public nationalityList: OptionsData[] = [];
+  public labelList: OptionsData[] = [];
   public displaySize!: number
-  public advancedSearchIsOpen: boolean = false
- 
+  public searchIsOpen: boolean = false
+  public sidenavOpened: boolean = false;
+  public currentScreenSize: string = ""
+
+   // Create a map to display breakpoint names for demonstration purposes.
+   displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
   
 
   constructor(
-    private apiService: APIService
+    private apiService: APIService,
+    breakpointObserver: BreakpointObserver
   ) {
-    
+      breakpointObserver.observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
+      .subscribe(result => {
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+          }
+        }
+    });
    }
 
-
+  public toggleSearch(): boolean{
+    this.searchIsOpen = !this.searchIsOpen
+    return this.searchIsOpen
+  }
+  public toggleSidenav(): boolean{
+    this.sidenavOpened = !this.sidenavOpened
+    return this.sidenavOpened
+  }
+  
   
   public checkConnection() {
     this.apiService.isServerReady().subscribe({
@@ -73,34 +105,7 @@ export class DataService {
     })
   }
   
-  public getCategoryList( sqlTableName: string ): any {
-    this.apiService.serviceGetList(sqlTableName).subscribe({
-      next: data => {
-        switch (sqlTableName) {
-          case 'cost':
-            this.costList = data.items.map((item: any) => ({ ...item, selected: false }))
-            //this.costList.forEach( (item:any) => item.selected = false) //ez is jó
-            break;
-          case 'category':
-            this.categoryList = data.items.map((item: any) => ({ ...item, selected: false }))
-            break;
-          case 'difficulity':
-            this.difficulityList = data.items.map((item: any) => ({ ...item, selected: false }))
-            break;
-          case 'nationality':
-            this.nationalityList = data.items.map((item: any) => ({ ...item, selected: false }))
-            break;
-          case 'label':
-            this.labelList = data.items.map((item: any) => ({ ...item, selected: false }))
-            break;
-          default:
-            break;
-        }
-      },
-      // error: err => console.error('uds',err.message),
-      complete: () => ''
-    })
-  }
+ 
 
   
   

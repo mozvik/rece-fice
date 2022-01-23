@@ -1,50 +1,45 @@
-<div class="container-fluid content">
-  <div class="container-xl ">
-    <div class="row py-0 my-0 py-lg-5 my-lg-5 justify-content-center">
-      <div class="col-12 col-lg-6" >
-        <h4 class="title-h4 text-center">Felhasználói fiók létrehozása</h4><br>
-        <div class="row ">
-          <div class="col-12 col-lg-12 px-0 px-lg-5 ">
-            <form action="" class="justify-content-center row">
-              <div class="col-12 col-lg-7 d-flex flex-column mb-4">
-                <label for="email">Email cím<sup>*</sup></label>
-                  <input id="email" type="email" name="email" aria-describedby="input-help" pInputText [(ngModel)]="email" />
-                  <small class="input-help">{{emailError}}&nbsp;</small>
-              </div>
-              <div class="col-12 col-lg-7 d-flex flex-column mb-4">
-                <label for="username">Felhasználói név<sup>*</sup></label>
-                  <input id="username" type="username" name="username" aria-describedby="input-help" pInputText [(ngModel)]="username" />
-                  <small class="input-help">{{usernameError}}&nbsp;</small>
-              </div>
-              <div class="col-12 col-lg-7 d-flex flex-column mb-4">
-                <label for="password">Jelszó<sup>*</sup></label>
-                <input id="password" type="password" name="password" aria-describedby="input-help" pInputText [(ngModel)]="password" />
-                <small class="input-help">{{passwordError}}&nbsp;</small>
-              </div>
-              <div class="col-12 col-lg-7 d-flex flex-column mb-4">
-                <label for="password2">Jelszó újra<sup>*</sup></label>
-                <input id="password2" type="password2" name="password2" aria-describedby="input-help" pInputText [(ngModel)]="password2" />
-                <small class="input-help">{{passwordError}}&nbsp;</small>
-              </div>
-              <div class="col-12 col-lg-7 mb-4  d-flex align-items-start">
-                <p-checkbox [(ngModel)]="checkedNewsletter" name="newsletter" [binary]="true" inputId="newsletter" class="col-1"></p-checkbox>
-                <label for="newsletter" class="ps-3 col-11">A hírlevelére feliratkozom</label>
-              </div>
-              <div class="col-12 col-lg-7 mb-4 d-flex align-items-start">
-                <p-checkbox [(ngModel)]="checkedGDPR" name="gdpr" [binary]="true" inputId="gdpr" class="col-1"></p-checkbox>
-                <label for="gdpr" class="ps-3 col-11">Elfogadom a felhasználási feltételeket bla lba bla Lorem, ipsum.</label>
-                
-              </div>
-             
-              <div class="col-12 col-lg-7 mb-5">
-                <button pButton type="submit" label="FIÓK LÉTREHOZÁSA" class="p-button-danger"
-                (click)="dataService.user.id='valaki'"></button>
-              </div>
-            </form>
-          </div>
+
+<div class="flex flex-col items-center" >
+  <h4 class="title-h4 text-center">Felhasználói fiók létrehozása</h4><br>
+  
+    <form action="" 
+    [formGroup]="registerFormGroup"
+    class="flex flex-col">
+      <mat-form-field class="flex flex-col"
+      hintLabel="Max 10 characters"
+        appearance="legacy">
+        <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email" #inputEmail/>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-icon matPrefix>phone</mat-icon>
+        <mat-hint align="end">{{inputEmail.value?.length || 0}}/10</mat-hint>
+        <mat-error *ngIf="registerFormGroup.get('email')?.invalid">Hiba</mat-error>
+      </mat-form-field>
+      <div class="flex flex-col">
+        <label for="username">Felhasználói név<sup>*</sup></label>
+          <input id="username" type="username" name="username" aria-describedby="input-help"  formControlName="username" />
+          <!-- <small class="input-help">{{usernameError}}&nbsp;</small> -->
       </div>
+      <div class="flex flex-col">
+        <label for="password">Jelszó<sup>*</sup></label>
+        <input id="password" type="password" name="password" aria-describedby="input-help"  formControlName="password" />
+        <!-- <small class="input-help">{{passwordError}}&nbsp;</small> -->
+      </div>
+      <div class="flex flex-col">
+        <label for="password2">Jelszó újra<sup>*</sup></label>
+        <input id="password2" type="password2" name="password2" aria-describedby="input-help"  formControlName="password2" />
+        <!-- <small class="input-help">{{passwordError}}&nbsp;</small> -->
+      </div>
+      <div class="">
+        <mat-checkbox formControlName="newsletter" name="newsletter" inputId="newsletter">A hírlevelére feliratkozom</mat-checkbox>
+      </div>
+      <div class="">
+        <mat-checkbox formControlName="gdpr" name="gdpr" inputId="gdpr">Elfogadom a felhasználási feltételeket Lorem, ipsum.</mat-checkbox>
       </div>
       
-    </div>
-  </div>
+      <div class="flex flex-col">
+        <button color="primary" mat-flat-button type="submit" label=""
+        (click)="dataService.user.id='valaki'">FIÓK LÉTREHOZÁSA</button>
+      </div>
+    </form>
 </div>
+      

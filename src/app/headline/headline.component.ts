@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../service/data.service';
 
 @Component({
@@ -8,6 +9,10 @@ import { DataService } from '../service/data.service';
 })
 export class HeadlineComponent implements OnInit {
 
+  public fourthFormGroup = new FormGroup({
+    photos: new FormControl('', Validators.required),
+  })
+  
   constructor(public dataService: DataService) { }
 
   ngOnInit(): void {

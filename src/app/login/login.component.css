@@ -1,8 +1,8 @@
-p, form, input, label, small, ul {
+p, form, input, label, small, ul, span {
   font-family: 'Lora', sans-serif;
   font-size: 1.15rem;
 }
-button, .p-button-label{
+button{
   font-family: 'Oswald', serif!important;
   letter-spacing: .1rem;
 }

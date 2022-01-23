@@ -1,0 +1,67 @@
+
+<input
+#ngx_mat_file_input
+type="file" 
+[accept]="accept"
+
+hidden
+multiple
+required
+(change)="selectionChange($event)"
+>
+
+
+<div class="ngx-mf-toolbar">
+  <div>
+    <button mat-flat-button color="primary"
+    (click)="ngx_mat_file_input.click()">{{buttonBrowseText}}</button>
+    <button mat-flat-button color="primary"
+    [disabled]="fileCount() === 0 || fileCount() > maxFileCount || fileCount() < minFileCount"
+    >{{buttonUploadText}}</button>
+    <div *ngIf="fileCount() > maxFileCount" 
+    class="ngx-mf-error">
+      <div>{{invalidMaxFileCountMessage}}</div>
+    </div>
+  </div>
+  <div>
+    <button mat-flat-button color="warn"
+    [disabled]="fileCount() === 0"
+    (click)="removeAll()"
+    >{{buttonRemoveAllText}}</button>
+  </div>
+</div>
+
+<div class="ngx-mf-dropzone" >
+  <div *ngFor="let item of selectedFiles; index as i" >
+    <div class="ngx-mf-img-card">
+      <div class="ngx-mf-img-card-header">
+        <div>{{item.name}}</div>
+        <button mat-icon-button color="warn"
+        (click)="removeFile(i)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="!fileSizeValid(item.size)">
+        <div class="ngx-mf-error">
+          <p>{{invalidFileSizeMessage}}</p>
+        </div>
+      </div>
+      <div *ngIf="!fileTypeValid(item.type)">
+        <div class="ngx-mf-error">
+          <p>{{invalidFileTypeMessage}}</p>
+        </div>
+      </div>
+
+      <div *ngIf="
+        fileSizeValid(item.size && fileTypeValid(item.type))"
+        class="">
+        <img 
+        [src]="previewData[i]" [style]="previewWidth" style="border: none;">
+      </div>
+      <div class="ngx-mf-img-card-footer">
+        <div>{{byteToMegabyte(item.size) | number: '1.0-2'}} MB</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fileCount() === 0" class="ngx-mf-dragndrop"><h3>{{dragAndDropText}}</h3></div>
+</div>

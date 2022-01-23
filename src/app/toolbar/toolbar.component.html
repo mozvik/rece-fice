@@ -1,0 +1,138 @@
+<app-search 
+  (closed)="$event ? dataService.searchIsOpen=false:''" [isSearchOpen]="dataService.searchIsOpen">
+</app-search>
+
+<div id="navPlaceholder"
+[style]="dataService.displaySize > 2 ? 'width: 100%;height: 124px;':'width: 100%;height: 56px;'"></div>
+
+<div id="desktopBar" class="container hidden lg:block mx-auto" 
+[style]="'background-color: var(--backgroundColor);'"
+(window:scroll)="onScroll($event)"
+[@toolbarSlideDown]="toolbarDown"
+[class]="toolbarDown ? 'toolbarScroll' : ''"
+>
+  
+
+  <mat-toolbar id="userBar"
+  class="flex flex-row justify-between"
+  >
+  <div class="container flex flex-row">
+    <ul class="flex flex-row">
+      <li><button mat-icon-button><mat-icon svgIcon="facebook"></mat-icon></button></li>
+      <li><button mat-icon-button><mat-icon svgIcon="twitter"></mat-icon></button></li>
+      <li><button mat-icon-button><mat-icon svgIcon="instagram"></mat-icon></button></li>
+    </ul>
+  </div>
+  <div class="container flex flex-row justify-end">
+    <ul class="flex flex-row">
+      <li *ngIf="dataService.user.id!=''" class="">
+        <button mat-icon-button><mat-icon>notifications_none</mat-icon></button>
+      </li>
+      <li *ngIf="dataService.user.id==''"><button mat-icon-button
+      routerLink="/login"
+      (click)="'isOpen=false'"
+        ><mat-icon>login</mat-icon>
+      </button>
+    
+      </li>
+      <li *ngIf="dataService.user.id!=''">
+        <button mat-icon-button
+        routerLink="/login"
+        (click)="'isOpen=false'"
+        ><mat-icon>person_outline</mat-icon></button>
+      </li>
+      <li class="">
+        <button mat-icon-button
+        (click)="dataService.toggleSearch()"
+        ><mat-icon>search</mat-icon></button>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+
+  </div>
+
+  </mat-toolbar>
+  <mat-toolbar id="mainbBar"
+  
+   >
+  <ul class="flex flex-row justify-between mx-auto"> 
+    <li class="">
+      <button mat-button
+        class=""
+        aria-current="page"
+        routerLink="/home"
+        id="homeLink"
+        >Főoldal</button>
+    </li>
+    <li class="">
+      <button mat-button
+        class=""
+        role="button"
+        data-bs-toggle=""
+        aria-expanded="false"
+        #recipeDropdown
+        [matMenuTriggerFor]="recipeMenu"
+        (menuOpened)="dropdownCollapsed = false"
+        (menuClosed)="dropdownCollapsed = true"
+      >Receptek<mat-icon [@chevronRotate]="!dropdownCollapsed">
+        arrow_drop_down
+        </mat-icon></button>
+    </li>
+    <mat-menu #recipeMenu="matMenu" xPosition="after"
+    >
+      <button mat-menu-item>Előételek</button>
+      <button mat-menu-item>Levesek</button>
+      <button mat-menu-item>Főételek</button>
+      <button mat-menu-item>Köretek</button>
+      <button mat-menu-item>Desszertek</button>
+      <button mat-menu-item>Italok</button>
+    </mat-menu>
+    
+    <li class="">
+      <button mat-button
+        class=""
+        routerLink="/upload"
+        (click)="'isOpen=false'"
+        tabindex="-1"
+        aria-disabled="true"
+        >Receptfeltöltés</button>
+    </li>
+    <li class="">
+      <button mat-button
+        class=""
+        tabindex="-1"
+        aria-disabled="true"
+        >Mi van otthon?</button>
+    </li>
+    
+  </ul>
+
+   <div>
+
+   </div>
+    
+  </mat-toolbar>
+</div>
+
+<div id="mobileBar" class="container fixed top-0 left-0 right-0 mx-auto z-10 lg:hidden min-w-full"
+[style]="'background-color: var(--backgroundColor);'"
+>
+ 
+  <mat-toolbar>
+   <div class="container flex flex-row justify-between">
+    <button mat-icon-button (click)="dataService.toggleSidenav()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">menu</mat-icon></button>
+    <div class="" style="width: 50px; height: 50px" (click)="'isOpen = !isOpen'">
+      <img
+        src="./assets/img/logo_ff7055_50.png"
+        alt=""
+        class=""
+      />
+    </div>
+    <button mat-icon-button (click)="dataService.toggleSearch()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">search</mat-icon></button>
+   </div>
+   
+    
+  </mat-toolbar>
+</div>

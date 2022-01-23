@@ -10,12 +10,10 @@ import { DataService } from '../service/data.service';
 export class LoginComponent implements OnInit {
 
 
-  //public email: string = ''
-  //public password: string = ''
-  public emailError: string = 'errorPlaceholder'
-  public passwordError: string = 'errorPlaceholder'
-  public checkedGDPR: boolean = false
-  public checkedNewsletter: boolean = false
+  // public emailError: string = 'errorPlaceholder'
+  // public passwordError: string = 'errorPlaceholder'
+  // public checkedGDPR: boolean = false
+  // public checkedNewsletter: boolean = false
 
   public loginFormGroup = new FormGroup({
     email: new FormControl('', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required]),
