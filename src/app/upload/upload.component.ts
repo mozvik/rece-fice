@@ -52,34 +52,32 @@ export class UploadComponent implements OnInit {
     fat: [''],
     sugar: [''],
   })
-  sourceControl = new FormControl("",Validators['required']);
+
   public fourthFormGroup = new FormGroup({
-    photos: new FormControl('', [Validators.required, Validators.maxLength(5), Validators.minLength(2)]),
+    photos: new FormControl('', [Validators.required, Validators.maxLength(5), Validators.minLength(3)]),
     photos2: new FormControl('', Validators.required),
   })
 
-  public recipeFormGroup = this.fb.group({
-    name: ['', [Validators.minLength(4), Validators.required]],
-    difficulity: ['', Validators.required],
-    price: ['', Validators.required],
-    category: ['', Validators.required],
-    nationality: ['', Validators.required],
-    label: [''],
-    directions: this.fb.array(
-      [this.createDirectionsFormGroup()]
-    ),
-    // directions: this.fb.array([
-    //   this.fb.control('', Validators.required)
-    // ], Validators.required),
-    time: ['', Validators.required],
-    serving: ['', Validators.required],
-    calorie: [''],
-    protein: [''],
-    carbonh: [''],
-    fat: [''],
-    sugar: [''],
-    photos: ['', Validators.required],
-  })
+  // public recipeFormGroup = this.fb.group({
+  //   name: ['', [Validators.minLength(4), Validators.required]],
+  //   difficulity: ['', Validators.required],
+  //   price: ['', Validators.required],
+  //   category: ['', Validators.required],
+  //   nationality: ['', Validators.required],
+  //   label: [''],
+  //   directions: this.fb.array(
+  //     [this.createDirectionsFormGroup()]
+  //   ),
+  
+  //   time: ['', Validators.required],
+  //   serving: ['', Validators.required],
+  //   calorie: [''],
+  //   protein: [''],
+  //   carbonh: [''],
+  //   fat: [''],
+  //   sugar: [''],
+  //   photos: ['', Validators.required],
+  // })
     
   public get directions() {
     return this.secondFormGroup.get('directions') as FormArray;
@@ -146,9 +144,14 @@ export class UploadComponent implements OnInit {
   bbb(e: any) {
     console.log('e :>> ', this.fourthFormGroup.controls['photos'].value, this.fourthFormGroup.controls['photos'].hasError('required'), this.fourthFormGroup.controls['photos'].status);
   }
+  // private createDirectionsFormGroup(): FormGroup {
+  //   return new FormGroup({
+  //     'dField': new FormControl('', Validators.required)
+  //   })
+  // }
   private createDirectionsFormGroup(): FormGroup {
-    return new FormGroup({
-      'dField': new FormControl('', Validators.required)
+    return this.fb.group({
+      dField: ""
     })
   }
   
@@ -165,23 +168,20 @@ export class UploadComponent implements OnInit {
       this.directions.removeAt(i)
     }
   }
-  onPhotoSelect(e: any) {
-    this.recipeFormGroup.controls['photos'].setValue(e.currentFiles)
-    
-    // if (this.recipeFormGroup.controls['photos'].value.length) {
-      
-    // }
-    console.log('{{recipeFormGroup.controls :>> ', this.recipeFormGroup.controls['photos'].value);
-  }
-  onPhotoRemove(e: any) { 
+  // onPhotoSelect(e: any) {
     // this.recipeFormGroup.controls['photos'].setValue(e.currentFiles)
-    // console.log('e :>> ', this.recipeFormGroup.controls['photos'].value);
-    console.log('e :>> ', e, this.recipeFormGroup.controls['photos'].value);
+    
+    
+    // console.log('{{recipeFormGroup.controls :>> ', this.recipeFormGroup.controls['photos'].value);
+  // }
+  // onPhotoRemove(e: any) { 
+  
+  //   console.log('e :>> ', e, this.recipeFormGroup.controls['photos'].value);
    
-  }
+  // }
 
   submitForm() {
-    console.log('recipeFormGroup :>> ', this.recipeFormGroup.value, this.recipe);
+    console.log('recipeFormGroup :>> ', this.fourthFormGroup.value, this.recipe);
   }
 
 }

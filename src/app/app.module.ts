@@ -36,6 +36,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
 
 
+
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,8 +54,7 @@ import { RegisterComponent } from './register/register.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { NgMatFileInputComponent } from './ng-mat-file-input/ng-mat-file-input.component';
+
 import { NgxMatFileInputDndComponent } from './ngx-mat-file-input-dnd/ngx-mat-file-input-dnd.component';
 
 
@@ -76,8 +76,8 @@ import { NgxMatFileInputDndComponent } from './ngx-mat-file-input-dnd/ngx-mat-fi
     SubscribeComponent,
     ToolbarComponent,
     SidebarComponent,
-    NgMatFileInputComponent,
     NgxMatFileInputDndComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -114,7 +114,7 @@ import { NgxMatFileInputDndComponent } from './ngx-mat-file-input-dnd/ngx-mat-fi
     MatCheckboxModule,
     LayoutModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
    ],
   providers: [],
   bootstrap: [AppComponent]

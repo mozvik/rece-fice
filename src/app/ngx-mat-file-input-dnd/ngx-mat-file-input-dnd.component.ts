@@ -1,26 +1,26 @@
-import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, HostBinding, Input, OnInit, Optional, Self, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-ngx-mat-file-input-dnd',
   templateUrl: './ngx-mat-file-input-dnd.component.html',
   styleUrls: ['./ngx-mat-file-input-dnd.component.css'],
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: NgxMatFileInputDndComponent,
-      multi: true
-    },
-    { provide: MatFormFieldControl, useExisting: NgxMatFileInputDndComponent }
+    { provide: MatFormFieldControl, useExisting: NgxMatFileInputDndComponent },
   ]
 })
-export class NgxMatFileInputDndComponent implements OnInit, ControlValueAccessor, MatFormFieldControl<any>  {
+export class NgxMatFileInputDndComponent implements OnInit, ControlValueAccessor, MatFormFieldControl<Array<File>>  {
+  [x: string]: any;
 
   @Input() accept = ""
   @Input() preview = true
-  @Input() multiple = false 
+  @Input() multiple?: boolean
+  @Input() dragAndDrop = true
   @Input() hiddenUpload = false;
   @Input() previewWidth = "200" 
   @Input() buttonBrowseText = "Browse";
@@ -34,30 +34,33 @@ export class NgxMatFileInputDndComponent implements OnInit, ControlValueAccessor
   @Input() maxFileSize = 5;
   @Input() invalidFileSizeMessage = "Maximum size: {0} MB";
   @Input() dragAndDropText = "Drag & drop files here";
-
-  @ViewChild('ngx_mat_file_input') ngx_mat_file_input!: ElementRef;
-  onChange: any = () => {}
-  onTouch: any = () => { }
-  selectedFiles: Array<File> = [];   
-  previewData: any = [];   
-
-  constructor() {
-   
+  @Input()
+  get required() {
+    return this._required;
   }
+  set required(req) {
+    this._required = coerceBooleanProperty(req);
+    this.stateChanges.next();
+  }
+  private _required = false;
 
-  //MatFormFieldControl
+
+  @ViewChild('ngx_mat_file_input', { static: true }) ngx_mat_file_input?: NgControl;
+
+  private onChange: any = () => {}
+  private onTouch: any = () => { }
+  public selectedFiles: Array<File> = [];;   
+  public invalidFiles: Array<any> = [];
+  public previewData: any = [];  
+
+  //MatFormFieldControl Interface
   static nextId = 0;
-  stateChanges = new Observable<void>();
+  stateChanges = new Subject<void>();
   @HostBinding() id = `app-ngx-mat-file-input-dnd-${NgxMatFileInputDndComponent.nextId++}`;
   placeholder: string = "";
-  ngControl!: NgControl | null;
   focused: boolean = false;
-  // empty: boolean = true;
+  touched: boolean = false;
   shouldLabelFloat: boolean = false;
-  required: boolean = false;
-  disabled: boolean = false;
-  errorState: boolean = false;
-  // @HostBinding() controlType = `ngx-mat-file-input-dnd-${NgxMatFileInputDndComponent.nextId++}`;
   controlType: string = "app-ngx-mat-file-input-dnd";
   autofilled?: boolean | undefined;
   userAriaDescribedBy?: string | undefined;
@@ -67,27 +70,61 @@ export class NgxMatFileInputDndComponent implements OnInit, ControlValueAccessor
   }
   onContainerClick(event: MouseEvent): void {
   }
+  get errorState(): boolean {
+    return this.ngControl.control?.errors != null && this.ngControl?.control?.touched;
+  }
   get empty() {
-    if (this.selectedFiles.length === 0) {
-        return true;
+    let n = this.value;
+    return !n.area && !n.exchange && !n.subscriber;
+  }
+  onFocusIn(event: FocusEvent) {
+    if (!this.focused) {
+      this.focused = true;
+      this.stateChanges.next();
     }
-    return false;
-}
- //MatFormFieldControl
+  }
+  
+  onFocusOut(event: FocusEvent) {
+    this.touched = true;
+    this.focused = false;
+    this.onTouch();
+    this.stateChanges.next();
+  }
 
+  
+
+  @Input()
+  get disabled(): boolean { return this._disabled; }
+  set disabled(value: boolean) {
+  this._disabled = coerceBooleanProperty(value);
+  this._disabled ? this.ngControl.control?.enable() : this.ngControl.control?.disable();
+  this.stateChanges.next();
+}
+private _disabled = false;
+ //MatFormFieldControl Interface
 
   set value(val: any){  
-    this.selectedFiles = val
+    this.stateChanges.next();
     this.onChange(val)
     this.onTouch(val)
   }
+
+  constructor(@Optional() @Self() public ngControl: NgControl) {
+     if (this.ngControl != null) {
+      // Setting the value accessor directly (instead of using
+      // the providers) to avoid running into a circular import.
+      this.ngControl.valueAccessor = this;
+    }
+  }
+
   ngOnInit(): void {
     this.interpolation()
-    
   }
-  ngAfterViewInit() {
-    console.log('this.multiple :>> ', this.ngx_mat_file_input.nativeElement.getAttribute('multiple') ? 'true':'false');
+
+  ngOnDestroy() {
+    this.stateChanges.complete();
   }
+
   writeValue(value: any) { 
     this.value = value
   }
@@ -109,36 +146,51 @@ export class NgxMatFileInputDndComponent implements OnInit, ControlValueAccessor
   }  
 
   selectionChange(e: any): void {
+    this.invalidFiles = []
     
     if (this.selectedFiles.length == 0) {
-      this.selectedFiles = Array.from(e.target.files) as Array<File>
-      for (const file of e.target.files) {
-        this.computePreviewData(file)
-      }
-    } else
-    {
-      let arr = [...this.selectedFiles] as Array<File>
-      
-      for (const file of e.target.files) {
+      this.selectedFiles = []
+    } 
+    let arr = [...this.selectedFiles] as Array<File>
+    
+    for (const file of e.target.files) {
+
+      if ( this.fileSizeValid(file.size) && 
+        this.fileTypeValid(file.type))
+      {
         if (arr.find(f =>
-          f.name == file.name &&
-          f.size == file.size &&
-          f.type == file.type) === undefined) {
+        f.name == file.name &&
+        f.size == file.size &&
+        f.type == file.type) === undefined) {
           this.selectedFiles.push(file)
           this.computePreviewData(file)
         }
       }
+      else if(!this.fileSizeValid(file.size)) {
+        this.invalidFiles.push({
+          name: file.name,
+          size: file.size,
+        })      
+      } else {
+        this.invalidFiles.push({
+          name: file.name,
+          type: file.type,
+        })   
+      }
     }
-     this.writeValue(this.selectedFiles)
+
+    this.writeValue(this.selectedFiles)
   }
 
   removeAll() {
     this.selectedFiles = []
+    this.invalidFiles = []
     this.previewData = []
     this.writeValue(this.selectedFiles)
   }
 
   removeFile(index: number) {
+    this.invalidFiles = []
     this.selectedFiles.splice(index, 1)  
     this.previewData.splice(index, 1)  
     this.writeValue(this.selectedFiles)
@@ -150,7 +202,6 @@ export class NgxMatFileInputDndComponent implements OnInit, ControlValueAccessor
     }
     
     const reader = new FileReader()
-    console.log('file :>> ', file, this.previewData);
     reader.onload = (value) => {
        this.previewData.push(value.target?.result)
     }
@@ -165,6 +216,11 @@ export class NgxMatFileInputDndComponent implements OnInit, ControlValueAccessor
   fileCount(): number {
     return this.selectedFiles.length;
   }
+
+  invalidFileCount(): number {
+    return this.invalidFiles.length;
+  }
+
   fileTypeValid(fileType: string): boolean {
     return fileType.search(this.accept) != -1
   }
