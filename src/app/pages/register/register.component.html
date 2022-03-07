@@ -1,0 +1,45 @@
+
+<div class="flex flex-col items-center" >
+  <h4 class="title-h4 text-center">Felhasználói fiók létrehozása</h4><br>
+  
+    <form action="" 
+    [formGroup]="registerFormGroup"
+    class="flex flex-col">
+      <mat-form-field class="flex flex-col"
+      hintLabel="Max 10 characters"
+        appearance="legacy">
+        <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email" #inputEmail/>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-icon matPrefix>phone</mat-icon>
+        <mat-hint align="end">{{inputEmail.value?.length || 0}}/10</mat-hint>
+        <mat-error *ngIf="registerFormGroup.get('email')?.invalid">Hiba</mat-error>
+      </mat-form-field>
+      <div class="flex flex-col">
+        <label for="username">Felhasználói név<sup>*</sup></label>
+          <input id="username" type="username" name="username" aria-describedby="input-help"  formControlName="username" />
+          <!-- <small class="input-help">{{usernameError}}&nbsp;</small> -->
+      </div>
+      <div class="flex flex-col">
+        <label for="password">Jelszó<sup>*</sup></label>
+        <input id="password" type="password" name="password" aria-describedby="input-help"  formControlName="password" />
+        <!-- <small class="input-help">{{passwordError}}&nbsp;</small> -->
+      </div>
+      <div class="flex flex-col">
+        <label for="password2">Jelszó újra<sup>*</sup></label>
+        <input id="password2" type="password2" name="password2" aria-describedby="input-help"  formControlName="password2" />
+        <!-- <small class="input-help">{{passwordError}}&nbsp;</small> -->
+      </div>
+      <div class="">
+        <mat-checkbox formControlName="newsletter" name="newsletter" inputId="newsletter">A hírlevelére feliratkozom</mat-checkbox>
+      </div>
+      <div class="">
+        <mat-checkbox formControlName="gdpr" name="gdpr" inputId="gdpr">Elfogadom a felhasználási feltételeket Lorem, ipsum.</mat-checkbox>
+      </div>
+      
+      <div class="flex flex-col">
+        <button color="primary" mat-flat-button type="submit" label=""
+        (click)="dataService.user.id='valaki'">FIÓK LÉTREHOZÁSA</button>
+      </div>
+    </form>
+</div>
+      

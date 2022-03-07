@@ -1,0 +1,197 @@
+<p>search works!</p>
+
+
+<div class="container" id="s-modal"
+    (click)="closeModal($event)"
+    (window:keyup)="$event.key == 'Escape' ? closed.emit(true):''"
+    [style]="isSearchOpen ? 'display: block':'display: none'"
+    >
+    <div 
+    [@openClose]="isSearchOpen ? 'open' : 'closed'"
+    class="" 
+    id="s-content">
+
+      <form action=""
+      
+      [formGroup]="searchForm"
+      class="grid lg:grid-cols-3 col-auto lg:col-span-3  justify-items-center">
+      <div class="filter-item col-auto lg:col-span-3 justify-self-end">
+        <button
+        mat-button
+        (click)="closed.emit(true)"
+        class=""><mat-icon>
+          close
+          </mat-icon></button>
+      </div>
+      <div class="filter-item text-center col-auto lg:col-span-3">
+        <h4 class="title-h4">Részletes kereső</h4>
+      </div>
+      
+        <div class="filter-item flex flex-col justify-end">
+
+          <mat-form-field color="primary" >
+            <input type="text"
+                  placeholder="Keresés név alapján"
+                  matInput
+                  formControlName="searchCtrl"
+                  [matAutocomplete]="auto"
+                  (keyup)="onKeyup($event)">
+            <mat-autocomplete #auto="matAutocomplete"
+            [displayWith]="getOptionText"
+            (optionSelected)="onSelect($event)"
+            >
+              <mat-option *ngFor="let option of searchResults" [value]="option"
+              >
+                {{option.recipeName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+       
+        <div class="filter-item flex flex-col justify-end">
+          <mat-label>Kategória</mat-label>
+          <mat-form-field color="accent">
+            <mat-select 
+            [formControlName]="'categoryCtrl'" 
+            [multiple]="true" #multiSelect
+            >
+              <mat-option>
+                <ngx-mat-select-search 
+                  [showToggleAllCheckbox]="true"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  (toggleAll)="ngxToggleSelectAll(
+                    $event,
+                    'categoryCtrl',
+                    filteredCategory)"
+                  [formControlName]="'categoryFilterCtrl'"
+                  placeholderLabel="keresés..."
+                  noEntriesFoundLabel="nincs találat"
+                  toggleAllCheckboxTooltipMessage="Összes kijelölése"
+                  ></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let option of filteredCategory | async" [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="filter-item flex flex-col justify-end">
+          <mat-label>Nemzetközi konyha</mat-label>
+          <mat-form-field color="accent">
+            <mat-select 
+            [formControlName]="'nationalityCtrl'" 
+            [multiple]="true" #multiSelect
+            >
+              <mat-option>
+                <ngx-mat-select-search 
+                  [showToggleAllCheckbox]="true"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  (toggleAll)="ngxToggleSelectAll(
+                    $event,
+                    'nationalityCtrl',
+                    filteredNationality)"
+                  [formControlName]="'nationalityFilterCtrl'"
+                  placeholderLabel="keresés..."
+                  noEntriesFoundLabel="nincs találat"
+                  toggleAllCheckboxTooltipMessage="Összes kijelölése"
+                  ></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let option of filteredNationality | async" [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="filter-item flex flex-col justify-end">
+          <mat-label>Címkék</mat-label>
+          <mat-form-field color="accent">
+            <mat-select 
+            [formControlName]="'labelCtrl'" 
+            [multiple]="true" #multiSelect
+            >
+              <mat-option>
+                <ngx-mat-select-search 
+                  [showToggleAllCheckbox]="true"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  (toggleAll)="ngxToggleSelectAll(
+                    $event,
+                    'labelCtrl',
+                    filteredLabel)"
+                  [formControlName]="'labelFilterCtrl'"
+                  placeholderLabel="keresés..."
+                  noEntriesFoundLabel="nincs találat"
+                  toggleAllCheckboxTooltipMessage="Összes kijelölése"
+                  ></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let option of filteredLabel | async" [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="filter-item flex flex-col justify-end">
+          <mat-label>Nehézség</mat-label>
+          <mat-form-field color="accent">
+            <mat-select 
+            [formControlName]="'difficulityCtrl'" 
+            [multiple]="true" #multiSelect
+            >
+              <mat-option>
+                <ngx-mat-select-search 
+                  [showToggleAllCheckbox]="true"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  (toggleAll)="ngxToggleSelectAll(
+                    $event,
+                    'difficulityCtrl',
+                    filteredDifficulity)"
+                  [formControlName]="'difficulityFilterCtrl'"
+                  placeholderLabel="keresés..."
+                  noEntriesFoundLabel="nincs találat"
+                  toggleAllCheckboxTooltipMessage="Összes kijelölése"
+                  ></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let option of filteredDifficulity | async" [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="filter-item flex flex-col justify-end">
+          <mat-label>Ár</mat-label>
+          <mat-form-field color="accent">
+            <mat-select 
+            [formControlName]="'costCtrl'" 
+            [multiple]="true" #multiSelect
+            >
+              <mat-option>
+                <ngx-mat-select-search 
+                  [showToggleAllCheckbox]="true"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  (toggleAll)="ngxToggleSelectAll(
+                    $event,
+                    'costCtrl',
+                    filteredCost)"
+                  [formControlName]="'costFilterCtrl'"
+                  placeholderLabel="keresés..."
+                  noEntriesFoundLabel="nincs találat"
+                  toggleAllCheckboxTooltipMessage="Összes kijelölése"
+                  ></ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let option of filteredCost | async" [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+       
+        <div class="filter-item col-auto lg:col-span-3">
+          <button mat-flat-button color="primary" style="padding: 0.3rem; font-size: 1.05rem;">{{recipesFound}}</button>
+        </div> 
+      </form>
+    </div>
+</div>

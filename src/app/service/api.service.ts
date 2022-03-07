@@ -13,43 +13,80 @@ export class APIService {
   filterArray = new Subject()
 
   
-  public categories = new ReplaySubject<any>(1);
-  public costs = new ReplaySubject<any>(1);
-  public nationalities = new ReplaySubject<any>(1);
-  public difficulities = new ReplaySubject<any>(1);
-  public labels = new ReplaySubject<any>(1);
+  public categories = new Subject<any>();
+  public costs = new Subject<any>();
+  public nationalities = new Subject<any>();
+  public difficulities = new Subject<any>();
+  public labels = new Subject<any>();
   
-  
-  constructor(
-    private http: HttpClient,
-  ) { 
-      //this.filterArray.subscribe((val:any) => {
-        // console.log(this.multiFilter(val))
-      //})
-    }
+  public isReady = new Subject<any>()
 
   
-  
-  
-  // isServerReady(): Observable<any> {
-  //   return this.http
-  //     .get<any[]>(this.serverUrl + '?ready=' + this.apiKey)
-  //     .pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
 
-  isServerReady(): Observable<any> {
-    return  this.http
+
+  private isServerReady(): Observable<any> {
+    console.log('isServerReady emits :>> ');
+    return this.http
       .get<any[]>(this.serverUrl + '?ready=' + this.apiKey)
       .pipe(
-        timeout(500),
+        timeout(1000),
         catchError(this.handleError))
       ;
   }
 
+  private getCategories(): Observable<any>{
+    let query: string = this.serverUrl + '?list=category&apikey=' + this.apiKey
+    console.log('getCategories emits :>> ');
+    return this.http
+      .get<any[]>(query)
+      .pipe(
+        timeout(1000),
+        catchError(this.handleError))
+      ;
+  }
+  
+  private getDifficulities(): Observable<any> {
+    let query: string = this.serverUrl + '?list=difficulity&apikey=' + this.apiKey
+    return this.http
+      .get<any[]>(query)
+  }
+  
+  private getCosts(): Observable<any> {
+    let query: string = this.serverUrl + '?list=cost&apikey=' + this.apiKey
+    return this.http
+      .get<any[]>(query)
+  }
+  
+  private getNationalities(): Observable<any> {
+    let query: string = this.serverUrl + '?list=nationality&apikey=' + this.apiKey
+    return this.http
+      .get<any[]>(query)
+  }
 
+  private getLabels(): Observable<any> {
+    let query: string = this.serverUrl + '?list=label&apikey=' + this.apiKey
+    return this.http
+      .get<any[]>(query)
+  }
 
+  serviceRecipeSearch(
+    text: string,
+    filters: any,
+    justNumberOfResults: boolean = true, 
+    page: number = 10
+  ): Observable<any> {
+    let filterData = {...filters}
+    filterData.text = text
+    filterData.justNumberOfResults = justNumberOfResults
+    filterData.page = page
+    return this.http
+      .post<any[]>(this.serverUrl, filterData)
+      .pipe(
+        // catchError(this.handleError),
+      );
+  }
+
+////////felulvizsgalat szükséges
   serviceRecipesBy(id: number, searchBy: string, page?: number): Observable<any> {
     let query: string = this.serverUrl + '?' + searchBy + '=' + id
     if (page) query += '&page=' + page
@@ -94,85 +131,11 @@ export class APIService {
     );
   }
 
-  serviceRecipeSearch(
-    text: string,
-    filters: any,
-    justNumberOfResults: boolean = true, 
-    page: number = 10
-  ): Observable<any> {
-    filters.text = text
-    filters.justNumberOfResults = justNumberOfResults
-    filters.page = page
-
-    return this.http
-      .post<any[]>(this.serverUrl, filters)
-      .pipe(
-        // catchError(this.handleError),
-      );
-  }
-
-  // serviceGetList( sqlTableName: string ): Observable<any> {
-  //   let query: string = this.serverUrl + '?list=' + sqlTableName + '&apikey=' + this.apiKey
-  //   return this.http
-  //     .get<any[]>(query)
-  //     .pipe(
-  //     shareReplay(1),
-  //     catchError(this.handleError)
-  //   )
-  // }
+  
   
 
-  getDifficulities() {
-    let query: string = this.serverUrl + '?list=difficulity&apikey=' + this.apiKey
-    this.http
-      .get<any[]>(query)
-      .subscribe
-      (
-        (response: any) => {this.difficulities.next(response)}
-      ),
-      (err: any) => console.error("loadDifficulities: ERROR")
-  }
-
-  getCategories() {
-    let query: string = this.serverUrl + '?list=category&apikey=' + this.apiKey
-    this.http
-    .get<any[]>(query)
-    .subscribe
-      (
-        (response: any) => {this.categories.next(response)}
-      ),
-      (err: any) => console.error("loadCategories: ERROR")
-  }
-  getCosts() {
-    let query: string = this.serverUrl + '?list=cost&apikey=' + this.apiKey
-    this.http
-      .get<any[]>(query)
-      .subscribe
-      (
-        (response: any) => {this.costs.next(response)}
-      ),
-      (err: any) => console.error("loadCosts: ERROR")
-  }
-  getNationalities() {
-    let query: string = this.serverUrl + '?list=nationality&apikey=' + this.apiKey
-    this.http
-      .get<any[]>(query)
-      .subscribe
-      (
-        (response: any) => {this.nationalities.next(response)}
-      ),
-      (err: any) => console.error("loadNationalities: ERROR")
-  }
-  getLabels() {
-    let query: string = this.serverUrl + '?list=label&apikey=' + this.apiKey
-    this.http
-      .get<any[]>(query)
-      .subscribe
-      (
-        (response: any) => {this.labels.next(response)}
-      ),
-      (err: any) => console.error("loadLabels: ERROR")
-  }
+  
+  
   
   multiFilter(filter: any[]): Observable<any> {
      let query: string = this.serverUrl + '?ready=' + this.apiKey //temp
@@ -183,6 +146,10 @@ export class APIService {
     catchError(this.handleError)
   );
   }
+//////felülvizsg eddig
+
+
+
 
  /**
  * Http hibakód kezelése
@@ -192,5 +159,16 @@ export class APIService {
     console.log(`The backend returned an unsuccessful response code: ${error.status} - ${error.message}`);
     return throwError(() => 'Something bad happened; please try again later.');
   };
+
+  constructor(
+    private http: HttpClient,
+  ) { 
+      this.isServerReady().subscribe(this.isReady)
+      this.getCategories().subscribe(this.categories)
+      this.getDifficulities().subscribe(this.difficulities)
+      this.getCosts().subscribe(this.costs)
+      this.getNationalities().subscribe(this.nationalities)
+      this.getLabels().subscribe(this.labels)
+    }
 }
   

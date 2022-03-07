@@ -13,7 +13,11 @@ import { IconService } from './service/icon.service';
   ]
 })
 export class AppComponent {
-  private aaa: any[] = []
+  private aaa = this.apiService.isReady.subscribe({
+    next: (data: any) => console.log(data),
+    error: (err: any) => console.log(err)
+  })
+
   constructor(
     public dataService: DataService, 
     private iconService: IconService,
@@ -23,37 +27,31 @@ export class AppComponent {
   }
   
   ngOnInit(): void {
-    this.dataService.checkConnection()
 
-    this.apiService.categories.subscribe(response => {
-      this.dataService.categoryList = response.items
+
+    this.apiService.categories.subscribe({
+      next: response => this.dataService.categoryList = response.items,
+      error: e => console.log(e.error.text)
     })
-    this.apiService.difficulities.subscribe(response => {
-      this.dataService.difficulityList = response.items
+    this.apiService.difficulities.subscribe({
+      next: response => this.dataService.difficulityList = response.items,
+      error: e => console.log(e.error.text)
     })
    
-    this.apiService.costs.subscribe(response => {
-      this.dataService.costList = response.items
+    this.apiService.costs.subscribe({
+      next: response => this.dataService.costList = response.items,
+      error: e => console.log(e.error.text)
     })
 
-    this.apiService.nationalities.subscribe(response => {
-      this.dataService.nationalityList = response.items
+    this.apiService.nationalities.subscribe({
+      next: response => this.dataService.nationalityList = response.items,
+      error: e => console.log(e.error.text)
     })
 
-    this.apiService.labels.subscribe(response => {
-      this.dataService.labelList = response.items
+    this.apiService.labels.subscribe({
+      next: response => this.dataService.labelList = response.items,
+      error: e => console.log(e.error.text)
     })
-
-    this.apiService.getCategories()
-    this.apiService.getCosts()
-    this.apiService.getDifficulities()
-    this.apiService.getNationalities()
-    this.apiService.getLabels()
-    
-    // this.apiService.getDiff().subscribe(response => {
-    //   this.dataService.difficulityList = response
-     
-    // })
 
      this.onResize()
   }

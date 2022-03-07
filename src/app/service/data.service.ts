@@ -19,7 +19,7 @@ export class DataService {
   public costList: OptionsData[] = [];
   public categoryList: OptionsData[] = [];
   public difficulityList: OptionsData[] = [];
-  public difficulities: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
+  // public difficulities: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
   public nationalityList: OptionsData[] = [];
   public labelList: OptionsData[] = [];
   public displaySize!: number
@@ -38,7 +38,7 @@ export class DataService {
   
 
   constructor(
-    private apiService: APIService,
+    // private apiService: APIService,
     breakpointObserver: BreakpointObserver
   ) {
       breakpointObserver.observe([
@@ -67,43 +67,39 @@ export class DataService {
   }
   
   
-  public checkConnection() {
-    this.apiService.isServerReady().subscribe({
-      next: data => {
-        console.log('data :>> ', data)
-      },
-      // error: err => console.error('uds',err.message),
-      complete: () => ''
-    })
-  }
-  public getRecipesBy(id: number, searchBy: string, page?: number) {
-    this.apiService.serviceRecipesBy(id, searchBy, page).subscribe({
-      next: data => console.log('data :>> ', data),
-      // error: err => console.error('uds',err.message),
-      complete: () => ''
-    })
-  }
-  public getRecipesByLabel(id: number[], page?: number) {
-    this.apiService.serviceRecipesByLabel(id, page).subscribe({
-      next: data => console.log('data :>> ', data),
-      // error: err => console.error('uds',err.message),
-      complete: () => ''
-    })
-  }
-  public getRecipesByUser(id: number, page?: number):any {
-    this.apiService.serviceRecipesByUser(id, page).subscribe({
-      next:  data => console.log('data :>> ', data),
-      // error: err => console.error('uds',err.message),
-      complete: () => ''
-    })
-  }
-  public getRecipeById(id: number) {
-    this.apiService.serviceRecipeById(id).subscribe({
-      next: data => console.log('data :>> ', data),
-      // error: err => console.error('uds',err.message),
-      complete: () => ''
-    })
-  }
+  // public checkConnection() {
+  //   this.apiService.isServerReady().subscribe({
+  //     next: data => {
+  //       console.log('data :>> ', data)
+  //     },
+      
+  //     complete: () => ''
+  //   })
+  // }
+  // public getRecipesBy(id: number, searchBy: string, page?: number) {
+  //   this.apiService.serviceRecipesBy(id, searchBy, page).subscribe({
+  //     next: data => console.log('data :>> ', data),
+  //     complete: () => ''
+  //   })
+  // }
+  // public getRecipesByLabel(id: number[], page?: number) {
+  //   this.apiService.serviceRecipesByLabel(id, page).subscribe({
+  //     next: data => console.log('data :>> ', data),
+  //     complete: () => ''
+  //   })
+  // }
+  // public getRecipesByUser(id: number, page?: number):any {
+  //   this.apiService.serviceRecipesByUser(id, page).subscribe({
+  //     next:  data => console.log('data :>> ', data),
+  //     complete: () => ''
+  //   })
+  // }
+  // public getRecipeById(id: number) {
+  //   this.apiService.serviceRecipeById(id).subscribe({
+  //     next: data => console.log('data :>> ', data),
+  //     complete: () => ''
+  //   })
+  // }
   
  
 

@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UploadComponent } from './upload/upload.component';
+// import { HomeComponent } from './home/home.component';
+// import { LoginComponent } from './login/login.component';
+// import { RegisterComponent } from './register/register.component';
+// import { UploadComponent } from './upload/upload.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'upload', component: UploadComponent },
+  { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  // { path: 'login', component: LoginComponent},
+  // { path: 'register', component: RegisterComponent},
+  // { path: 'upload', component: UploadComponent },
+  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
+  { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule) },
+  { path: 'upload', loadChildren: () => import('./pages/upload/upload.module').then(m => m.UploadModule) },
+  { path: 'fridge', loadChildren: () => import('./pages/fridge/fridge.module').then(m => m.FridgeModule) },
+  { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
     // { path: 'details/:data.id', component: DetailsComponent },
-  { path: '**', component: HomeComponent},
+  { path: '**', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
 ];
 
 @NgModule({
