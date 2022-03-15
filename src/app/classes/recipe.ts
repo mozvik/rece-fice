@@ -11,7 +11,7 @@ export class Recipe {
   cost?: number;
   category?: any[];
   nationality?: any[];
-  image?: any[];
+  image: any[];
   calorie?: number;
   protein?: number;
   carbonhydrate?: number;

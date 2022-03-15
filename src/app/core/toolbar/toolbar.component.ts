@@ -38,16 +38,10 @@ export class ToolbarComponent implements OnInit {
   onScroll(event: any) {
     if (window.pageYOffset >= 128) {
       this.toolbarDown = true
-      console.log('true :>> ');
     }
     if (window.pageYOffset == 0){
       this.toolbarDown = false
-      console.log('false :>> ');
-
     }
     this.recipeDropdown.closeMenu()
   }
-
-
-
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AsyncSubject, BehaviorSubject, catchError, debounceTime, delay, distinctUntilChanged, first, map, Observable, of, ReplaySubject, share, shareReplay, Subject, take, throwError, timeout } from 'rxjs';
 import { OptionsData } from '../interface/options-data';
+import { Recipe } from '../classes/recipe';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +70,8 @@ export class APIService {
       .get<any[]>(query)
   }
 
+
+
   serviceRecipeSearch(
     text: string,
     filters: any,
@@ -85,6 +88,56 @@ export class APIService {
         // catchError(this.handleError),
       );
   }
+
+  public postRecipeImages(
+    file: File
+  ): Observable<any> {
+    
+    let fData = new FormData();
+    fData.append('file', file)
+    fData.append('submit', 'images')
+
+    return this.http
+      .post<any[]>(this.serverUrl, fData)
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
+  public postRecipe(
+    formData: any
+  ): Observable<any> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+        
+      })
+    }
+    
+    let fData = new FormData();
+    
+    fData.append('postRecipe',JSON.stringify(formData))
+
+    for (let i = 0; i < formData.image.length; i++) {
+      const ele = formData.image[i];
+      fData.append(i.toString(), ele, ele.name)
+      
+    }
+    
+
+    console.log('fd :>> ',fData);
+
+    
+    
+    
+    return this.http
+      .post<any[]>(this.serverUrl, fData)
+      .pipe(
+        //catchError(this.handleError),
+      );
+  }
+
 
 ////////felulvizsgalat szükséges
   serviceRecipesBy(id: number, searchBy: string, page?: number): Observable<any> {
@@ -156,7 +209,7 @@ export class APIService {
  * @param operation - hiba
  */
   private handleError(error: HttpErrorResponse) {
-    console.log(`The backend returned an unsuccessful response code: ${error.status} - ${error.message}`);
+    console.log(`The backend returned an unsuccessful response code: ${error} - ${error.status} - ${error.message}`);
     return throwError(() => 'Something bad happened; please try again later.');
   };
 

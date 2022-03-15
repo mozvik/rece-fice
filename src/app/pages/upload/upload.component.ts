@@ -140,10 +140,21 @@ export class UploadComponent implements OnInit {
 
   submitForm() {
     this.createRecipe()
-    console.log('recipeFormGroup :>> ', this.secondFormGroup.value, this.recipe);
+    console.log('recipeFormGroup :>> ', this.recipe);
+    for (const image of this.recipe.image) {
+    //   this.apiService.postRecipeImages(image).subscribe({
+    //   next: (response: any) => console.log(response)
+    // })
+     
+    }
+    this.apiService.postRecipe(this.recipe).subscribe({
+      next: (response: any) => console.log(response)
+    })
   }
 
   createRecipe() {
+    this.recipe.userId = '1' //ideiglenes, amíg nincs auth
+
     this.recipe.recipeName = this.firstFormGroup.get('name')?.value
     this.recipe.category = this.firstFormGroup.get('category')?.value
     this.recipe.nationality = this.firstFormGroup.get('nationality')?.value

@@ -1,5 +1,5 @@
-import { animate, group, keyframes, query, state, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { APIService } from '../../service/api.service';
 import {  map, Observable, ReplaySubject, startWith, Subject, take, takeUntil, } from 'rxjs';
@@ -25,8 +25,6 @@ import { OptionsData } from '../../interface/options-data';
       })),
       transition('closed <=> open', [
         animate("0.6s cubic-bezier(0.35, 0, 0.25, 1)"),
-        // animate("0.3s cubic-bezier(0.55, 0.31, 0.15, 0.93)"),
-        
       ]),
     ]),
    
@@ -34,15 +32,12 @@ import { OptionsData } from '../../interface/options-data';
 })
 export class SearchComponent implements OnInit {
   @Input() isSearchOpen = false;
-  // @Input() displaySize!: number;
   @Output() subject = new Subject();
   @Output() closed = new EventEmitter<boolean>();
 
   @ViewChild('multiSelect', { static: true }) multiSelect!: MatSelect;
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
-
-  // protected optionsData: OptionsData[] = []
 
   searchForm = new FormGroup({
     searchCtrl: new FormControl(''),
@@ -83,20 +78,11 @@ export class SearchComponent implements OnInit {
   protected filteredCostCache: OptionsData[] = [];
   isIndeterminate = false;
   isChecked = false;
- 
   /** ngx-mat-select-search */
 
-  fCat: any = [];
   searchResults: any[] = [];
-  private aaa = this.apiService.isReady.subscribe({
-    next: (data: any) => console.log(data),
-    error: (err: any) => console.log(err)
-  }
-    
-  )
 
   constructor(
-    //private primengConfig: PrimeNGConfig,
     public dataService: DataService,
     private apiService: APIService,
   ) {  }
@@ -170,9 +156,6 @@ export class SearchComponent implements OnInit {
     this.subsValueChange('difficulityCtrl', 'difficulity')
     this.subsValueChange('labelCtrl', 'label')
     this.subsValueChange('costCtrl', 'cost')
-    
-    
-   
   }
   private _filter(value: string): string[] {
     return this.searchResults.map(searchResults => searchResults.recipeName);
@@ -184,7 +167,6 @@ export class SearchComponent implements OnInit {
     .subscribe(value=> {
       this.selectedItems[selectedCategory] = value.map((val: { id: any; }) => val.id)
       this.inputChange()
-      // this.inputChange(value)
     });
   }
 
@@ -230,14 +212,8 @@ export class SearchComponent implements OnInit {
       }
     )
   }
-
-
-
-
   /** ngx-mat-select-search */
-  // ngxAfterViewInit() {
-  //   this.ngxSetInitialValue(this.filteredCategory);
-  // }
+
 
   ngxOnDestroy() {
     this._onDestroy.next();
@@ -256,18 +232,6 @@ export class SearchComponent implements OnInit {
         }
       });
   }
-  // protected ngxSetInitialValue(filteredData: ReplaySubject<OptionsData[]>) {
-  //   filteredData
-  //     .pipe(take(1), takeUntil(this._onDestroy))
-  //     .subscribe(() => {
-  //       // setting the compareWith property to a comparison function
-  //       // triggers initializing the selection according to the initial value of
-  //       // the form control (i.e. _initializeSelection())
-  //       // this needs to be done after the filteredBanks are loaded initially
-  //       // and after the mat-option elements are available
-  //       this.multiSelect.compareWith = (a: OptionsData, b: OptionsData) => a && b && a.id === b.id;
-  //     });
-  //  }
   
   ngxSearchListen(
     filterControl: string,
