@@ -1,0 +1,13 @@
+<p>results works!</p>
+<div class="flex flex-row">
+  <div *ngFor="let recipe of recipes"
+  class="border">
+    <h3>{{recipe.recipeName}}</h3>
+    <!-- <div><img [src]="recipe.image[0]" alt="" width="200" height="100"></div> -->
+    <button [routerLink]="['/details', recipe.recipeId]">Részletek</button>
+  </div>
+  <div>
+    <button>Mutass többet</button>
+  </div>
+</div>
+<!-- <p>{{recipes | json}}</p> -->

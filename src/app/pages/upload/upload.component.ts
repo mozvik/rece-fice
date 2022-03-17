@@ -31,7 +31,7 @@ export class UploadComponent implements OnInit {
   private recipe = new Recipe();
   public filePath: string = ''
   public unitArray: string[] = [
-    'darab', 'liter', 'deciliter', 'centiliter', 'milliliter', 'csepp', 'kilogramm', 'dekagramm', 'gramm', 'mokkáskanál', 'kávéskanál', 'teáskanál', 'evőkanál', 'pohár', 'csésze', 'bögre', 'ujjnyi', 'csomag', 'tábla', 'gerezd', 'csokor' 
+    'darab', 'liter', 'deciliter', 'centiliter', 'milliliter', 'csepp', 'kilogramm', 'dekagramm', 'gramm', 'mokkáskanál', 'kávéskanál', 'teáskanál', 'evőkanál', 'pohár', 'csésze', 'bögre', 'ujjnyi', 'csomag', 'tábla', 'gerezd', 'csokor', 'csipet' 
   ];
   public hungary: any
 
@@ -141,12 +141,12 @@ export class UploadComponent implements OnInit {
   submitForm() {
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
-    for (const image of this.recipe.image) {
+    // for (const image of this.recipe.image) {
     //   this.apiService.postRecipeImages(image).subscribe({
     //   next: (response: any) => console.log(response)
     // })
      
-    }
+    // }
     this.apiService.postRecipe(this.recipe).subscribe({
       next: (response: any) => console.log(response)
     })

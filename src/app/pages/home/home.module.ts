@@ -13,8 +13,8 @@ import { FeaturedComponent } from './featured.component';
 @NgModule({
   declarations: [
     HomeComponent,
-    //HeadlineComponent,
-    //FeaturedComponent,
+    HeadlineComponent,
+    FeaturedComponent,
     // SearchComponent
   ],
   imports: [

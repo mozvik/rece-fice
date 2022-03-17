@@ -19,13 +19,14 @@ export class DataService {
   public costList: OptionsData[] = [];
   public categoryList: OptionsData[] = [];
   public difficulityList: OptionsData[] = [];
-  // public difficulities: ReplaySubject<OptionsData[]> = new ReplaySubject<OptionsData[]>(1);
   public nationalityList: OptionsData[] = [];
   public labelList: OptionsData[] = [];
   public displaySize!: number
   public searchIsOpen: boolean = false
   public sidenavOpened: boolean = false;
   public currentScreenSize: string = ""
+  //searchResults: any[] = [];
+  
 
    // Create a map to display breakpoint names for demonstration purposes.
    displayNameMap = new Map([

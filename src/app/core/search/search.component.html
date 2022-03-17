@@ -35,12 +35,13 @@
                   matInput
                   formControlName="searchCtrl"
                   [matAutocomplete]="auto"
-                  (keyup)="onKeyup($event)">
+                  >
+                  <!-- (keyup)="onKeyup($event)" -->
             <mat-autocomplete #auto="matAutocomplete"
             [displayWith]="getOptionText"
             (optionSelected)="onSelect($event)"
             >
-              <mat-option *ngFor="let option of searchResults" [value]="option"
+              <mat-option *ngFor="let option of apiService.searchResults?.items" [value]="option"
               >
                 {{option.recipeName}}
               </mat-option>
@@ -188,9 +189,17 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <!-- [disabled]="!searchResults || searchResults.itemCount == 0" -->
        
         <div class="filter-item col-auto lg:col-span-3">
-          <button mat-flat-button color="primary" style="padding: 0.3rem; font-size: 1.05rem;">{{recipesFound}}</button>
+          <!-- {{searchResults?.itemCount | json}} -->
+          <!-- (keyup.enter)="submitForm()" -->
+          <button mat-flat-button color="primary" 
+          type="submit"
+          (click)="submitForm()"
+          (ngSubmit)="submitForm()"
+          routerLink="/results"
+          style="padding: 0.3rem; font-size: 1.05rem;">{{recipesFound}}</button>
         </div> 
       </form>
     </div>

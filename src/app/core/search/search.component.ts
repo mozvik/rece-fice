@@ -6,6 +6,7 @@ import {  map, Observable, ReplaySubject, startWith, Subject, take, takeUntil, }
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { OptionsData } from '../../interface/options-data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -79,16 +80,25 @@ export class SearchComponent implements OnInit {
   isIndeterminate = false;
   isChecked = false;
   /** ngx-mat-select-search */
+  itemCount: number = 0;
 
   searchResults: any[] = [];
 
   constructor(
     public dataService: DataService,
-    private apiService: APIService,
+    public apiService: APIService,
+    private router: Router
   ) {  }
 
   ngOnInit(): void {
-  
+    // this.apiService.searchResultsSubject.subscribe((results) => {
+    //   this.searchResults = results
+    //   console.log('this.searchResults search :>> ', this.searchResults);
+    // })
+    // this.apiService.searchResultsSubject.subscribe((results) => {
+      
+    //   console.log('this.searchResults search :>> ', results);
+    // })
     /** ngx-mat-select-search */
     this.apiService.categories.subscribe(categories => {
       this.filteredCategory.next(categories.items.slice())
@@ -133,7 +143,8 @@ export class SearchComponent implements OnInit {
         'costCtrl',
         this.filteredCost,
         this.filteredCostCache,
-        this.dataService.costList)
+        this.dataService.costList
+      )
     })
     /** ngx-mat-select-search */
 
@@ -158,7 +169,9 @@ export class SearchComponent implements OnInit {
     this.subsValueChange('costCtrl', 'cost')
   }
   private _filter(value: string): string[] {
-    return this.searchResults.map(searchResults => searchResults.recipeName);
+    //return this.searchResults.map(searchResults => searchResults.recipeName);
+    // console.log('object :>> ', this.apiService.searchResults.items);
+    return this.apiService.searchResults.items.map((searchResults: { recipeName: any; }) => searchResults.recipeName);
   }
 
   subsValueChange(control: string, selectedCategory: string) {
@@ -171,19 +184,12 @@ export class SearchComponent implements OnInit {
   }
 
   onSelect(e: any) {
-    console.log('választott: :>> ',e.option.value);
+    console.log('választott: :>> ', e.option.value);
+    this.closed.emit(true)
+    this.apiService.searchResultsSubject.next({ items: [e.option.value] })
+    this.router.navigate(['/details',e.option.value.recipeId]);
   }
-  onMultiSelect(e: any, data: any[]) {
-      data = e.value      
-      console.log('multi választott: :>> ',e.value[0],this.selectedItems);
-  }
-  onKeyup(e: any) {
-    console.log('keyup :>> ');
-    if (e.key === "Enter") {
-      console.log('ENTER go search: :>> ',this.inputText);
-    }
-    
-  }
+  
 
   closeModal(event: any) {
     if (event.srcElement.id == 's-modal') {
@@ -196,14 +202,17 @@ export class SearchComponent implements OnInit {
   
   inputChange() {
    
-    console.log('this.selectedItems,e :>> ', this.selectedItems);
+    //console.log('this.selectedItems,e :>> ', this.selectedItems);
     this.apiService.serviceRecipeSearch(this.inputText,
       this.selectedItems).subscribe(
         (result) => {
-          console.log(result)
-        this.searchResults = result.items,
-        result.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
-        console.log(this.searchResults)
+          this.apiService.searchResults = result;
+          
+          //this.apiService.searchResultsSubject.next(result);
+          console.log("inputChange php results",result)
+        this.searchResults = result?.items,
+        result?.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
+
         this.filteredOptions =  this.searchForm.controls['searchCtrl'].valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value)),
@@ -212,6 +221,13 @@ export class SearchComponent implements OnInit {
       }
     )
   }
+  submitForm() {
+    this.closed.emit(true)
+    this.apiService.searchResultsSubject.next(this.apiService.searchResults)
+  }
+
+
+
   /** ngx-mat-select-search */
 
 

@@ -9,9 +9,9 @@ export class Recipe {
   cookingTime?: number;
   difficulity?: number;
   cost?: number;
-  category?: any[];
-  nationality?: any[];
-  image: any[];
+  category?: string;
+  nationality?: string;
+  image?: any[];
   calorie?: number;
   protein?: number;
   carbonhydrate?: number;
@@ -19,18 +19,18 @@ export class Recipe {
   sugar?: number;
   servings?: number;
   ratings?: number;
-  reviews?: any[];
-  labels?: any[];
+  reviews?: string;
+  labels?: string;
 
   get id() {
     return this.recipeId 
   } 
 
-  constructor(recipeId: string = '', recipeName: string = '', ingredients: string[]=[], directions: string[]=[], created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulity: number = 1, cost: number = 1, category: any[]=[], nationality: any[]=[], image: any[]=[], calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: any[]=[], labels: any[]=[]) {
+  constructor( recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulity: number = 1, cost: number = 1, category: string = '', nationality: string = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: string = '', labels: string = '' ) {
     this.recipeId = recipeId;
     this.recipeName = recipeName;
-    this.ingredients = ingredients;
-    this.directions = directions;
+    this.ingredients = ingredients.split('||');
+    this.directions = directions.split('||');
     this.created = created;
     this.updated = updated;
     this.userId = userId;
@@ -39,7 +39,7 @@ export class Recipe {
     this.cost = cost;
     this.category = category;
     this.nationality = nationality;
-    this.image = image;
+    this.image = [image1,image2,image3];
     this.calorie = calorie;
     this.protein = protein;
     this.carbonhydrate = carbonhydrate;

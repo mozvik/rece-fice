@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'upload', loadChildren: () => import('./pages/upload/upload.module').then(m => m.UploadModule) },
   { path: 'fridge', loadChildren: () => import('./pages/fridge/fridge.module').then(m => m.FridgeModule) },
   { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
+  { path: 'results', loadChildren: () => import('./pages/results/results.module').then(m => m.ResultsModule) },
+  { path: 'details/:id', loadChildren: () => import('./pages/details/details.module').then(m => m.DetailsModule) },
     // { path: 'details/:data.id', component: DetailsComponent },
   { path: '**', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
 ];

@@ -22,8 +22,10 @@ export class APIService {
   
   public isReady = new Subject<any>()
 
-  
-
+  //searchResultsSubject: Subject<any> = new Subject();
+  searchResultsSubject = new BehaviorSubject<any>({});
+  detailedRecipesSubject = new BehaviorSubject<Recipe[]>([]);
+  searchResults: any
 
   private isServerReady(): Observable<any> {
     console.log('isServerReady emits :>> ');
@@ -85,35 +87,29 @@ export class APIService {
     return this.http
       .post<any[]>(this.serverUrl, filterData)
       .pipe(
+        
         // catchError(this.handleError),
       );
   }
 
-  public postRecipeImages(
-    file: File
-  ): Observable<any> {
+  // public postRecipeImages(
+  //   file: File
+  // ): Observable<any> {
     
-    let fData = new FormData();
-    fData.append('file', file)
-    fData.append('submit', 'images')
+  //   let fData = new FormData();
+  //   fData.append('file', file)
+  //   fData.append('submit', 'images')
 
-    return this.http
-      .post<any[]>(this.serverUrl, fData)
-      .pipe(
-        catchError(this.handleError),
-      );
-  }
+  //   return this.http
+  //     .post<any[]>(this.serverUrl, fData)
+  //     .pipe(
+  //       catchError(this.handleError),
+  //     );
+  // }
 
   public postRecipe(
     formData: any
   ): Observable<any> {
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
-        
-      })
-    }
     
     let fData = new FormData();
     
@@ -124,13 +120,7 @@ export class APIService {
       fData.append(i.toString(), ele, ele.name)
       
     }
-    
 
-    console.log('fd :>> ',fData);
-
-    
-    
-    
     return this.http
       .post<any[]>(this.serverUrl, fData)
       .pipe(
@@ -138,6 +128,24 @@ export class APIService {
       );
   }
 
+  public getRecipes(idList: string[], page: number, itemsPerPage: number = 5 ): Observable<any[]> {
+    let fData = new FormData();
+    if (idList) {
+      fData.append('getRecipes','true')
+      fData.append('page', page.toString())
+      fData.append('itemsPerPage', itemsPerPage.toString())
+      for (let i = 0; i < idList.length; i++) {
+         const ele = idList[i];
+        fData.append('idList[]',ele)
+      }
+    }
+
+    return this.http
+    .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
 
 ////////felulvizsgalat szükséges
   serviceRecipesBy(id: number, searchBy: string, page?: number): Observable<any> {
