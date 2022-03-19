@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
   { path: 'results', loadChildren: () => import('./pages/results/results.module').then(m => m.ResultsModule) },
   { path: 'details/:id', loadChildren: () => import('./pages/details/details.module').then(m => m.DetailsModule) },
+  { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
     // { path: 'details/:data.id', component: DetailsComponent },
   { path: '**', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
 ];

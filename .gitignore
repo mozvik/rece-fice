@@ -2,6 +2,7 @@
 
 # compiled output
 /api
+/src/api
 /dist
 /tmp
 /out-tsc

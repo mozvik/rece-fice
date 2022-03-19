@@ -9,7 +9,8 @@ import { Recipe } from '../classes/recipe';
 })
 export class APIService {
   //serverUrl: string = 'https://https:/teszt.esoguides.hu/api/';
-  serverUrl: string = 'http://localhost/angular/rece-fice/api/';
+  // serverUrl: string = 'http://localhost/angular/rece-fice/api/';
+  serverUrl: string = 'http://localhost/angular/rece-fice/src/api/';
   apiKey: string = '';
   filterArray = new Subject()
 
@@ -138,6 +139,21 @@ export class APIService {
          const ele = idList[i];
         fData.append('idList[]',ele)
       }
+    }
+
+    return this.http
+    .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
+
+  public getRecipesByUser(userID: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
+    let fData = new FormData();
+    if (userID) {
+      fData.append('getRecipesByUser',userID)
+      fData.append('page', page.toString())
+      fData.append('itemsPerPage', itemsPerPage.toString())
     }
 
     return this.http

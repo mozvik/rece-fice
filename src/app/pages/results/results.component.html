@@ -1,13 +1,45 @@
-<p>results works!</p>
-<div class="flex flex-row">
-  <div *ngFor="let recipe of recipes"
-  class="border">
-    <h3>{{recipe.recipeName}}</h3>
-    <!-- <div><img [src]="recipe.image[0]" alt="" width="200" height="100"></div> -->
-    <button [routerLink]="['/details', recipe.recipeId]">Részletek</button>
+<!-- <p>results works! {{dataService.searchResultsFull | json}}</p> -->
+<div class="container flex flex-row justify-center mt-8 mx-auto">
+  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">
+    <ng-container *ngFor="let item of dataService.searchResultsFull; let i=index"
+    class="border">
+      <div class="recipe-card" [@enterAnimation]
+      [routerLink]="['/details', item.recipeId]">
+        <div class="card-image relative"
+        (mouseover)="showImgText(i)" (mouseout)="hideImgText(i)">
+          <img [src]="item.image[0]" alt="" width="358" height="220" alt="image not found">
+          <div
+          *ngIf="showImgOverlay[i]" [@enterHoverAnimation]
+          class="img-overlay absolute left-8 top-8 lora-i">
+            <div class="mb-2">Elkészítési ideje: {{item.cookingTime}} perc</div>
+            <div class="mb-2">Nehézsége: {{item.difficulityName(this.dataService.difficulityList)}}</div>
+            <div class="">Költsége: {{item.costName(this.dataService.costList)}}</div>
+          </div>
+        </div>
+    
+    
+        <div class="card-footer my-3 title-h4">
+          <div class="flex flex-row justify-between">
+            <div class="rating">*****</div>
+            <div class="flex flex-row justify-between items-center">
+              <mat-icon
+              matTooltip="Kedvenc"
+              [matTooltipPosition]="'left'">favorite</mat-icon>
+            </div>
+          </div>
+          <div>{{item.recipeName}}</div>
+        </div>
+        <div class="card-subtitle flex flex-row justify-between lora-i mb-3">
+    
+          <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon><div>{{item.userId}}&nbsp;Gipsz Jakab</div></div>
+          <div class="flex flex-row items-center"><div>{{item.categoryName(this.dataService.categoryList)}}</div></div>
+        </div>
+      </div>
+    </ng-container>
   </div>
   <div>
-    <button>Mutass többet</button>
+    
   </div>
 </div>
+<button (click)="incrementIndex()">Mutass többet</button>
 <!-- <p>{{recipes | json}}</p> -->

@@ -9,6 +9,7 @@
   --orangeRedDark: #df3e10;
   /* --textColor: #2c3b4b; */
   --textColor: #2d3a4b;
+  --textColorRGB: 45, 58, 75;
   --textColorMuted: #8e9092;
   --backgroundColor: #fffef7;
   --backgroundColorDarker: #eae8e0;
@@ -35,6 +36,7 @@ html {
   background: var(--backgroundColor)!important;
   margin: 0 auto;
   font-size: 16px;
+  font-family: "Merriweather Sans", sans-serif!important;
 }
 .btn:focus,
 .btn:active,
@@ -48,6 +50,18 @@ input:focus,
   box-shadow: none;
   outline: none;
   border-color: #ced4da;
+}
+.lora{
+  font-family: "Lora", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 100;
+  font-style: normal;
+}
+.lora-i{
+  font-family: "Lora", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 100;
+  font-style: italic;
 }
 .title-h4{
   font-family: "Oswald", sans-serif;
@@ -86,6 +100,10 @@ input:focus,
   text-transform: uppercase;
   border-bottom: 3px solid var(--textColor);
 }
+.mat-tooltip{
+  font-family: "Oswald", sans-serif;
+  font-size: 1.25rem;
+}
 @media (min-width: 992px) {
   body,
   html {
@@ -94,4 +112,4 @@ input:focus,
 
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }

@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ResultsRoutingModule } from './results-routing.module';
 import { ResultsComponent } from './results.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { ResultsComponent } from './results.component';
   ],
   imports: [
     CommonModule,
-    ResultsRoutingModule
+    ResultsRoutingModule,
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class ResultsModule { }

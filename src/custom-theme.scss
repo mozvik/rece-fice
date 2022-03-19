@@ -31,6 +31,11 @@ $rece-fice-theme: mat.define-light-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($rece-fice-theme);
 //@include mat.core-theme($rece-fice-theme);
+@include mat.all-component-themes($rece-fice-theme);
+
+@import '~@angular/material/theming';
+$custom-typography: mat-typography-config($font-family: '"Oswald", sans-serif;');
+@include mat.core($custom-typography);
+
 

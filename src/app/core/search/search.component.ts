@@ -169,8 +169,7 @@ export class SearchComponent implements OnInit {
     this.subsValueChange('costCtrl', 'cost')
   }
   private _filter(value: string): string[] {
-    //return this.searchResults.map(searchResults => searchResults.recipeName);
-    // console.log('object :>> ', this.apiService.searchResults.items);
+
     return this.apiService.searchResults.items.map((searchResults: { recipeName: any; }) => searchResults.recipeName);
   }
 
@@ -201,15 +200,13 @@ export class SearchComponent implements OnInit {
   }
   
   inputChange() {
-   
-    //console.log('this.selectedItems,e :>> ', this.selectedItems);
     this.apiService.serviceRecipeSearch(this.inputText,
       this.selectedItems).subscribe(
         (result) => {
           this.apiService.searchResults = result;
-          
-          //this.apiService.searchResultsSubject.next(result);
-          console.log("inputChange php results",result)
+          this.dataService.searchResultsSimple = result.items;
+
+          console.log("inputChange php results",result, this.dataService.searchResultsSimple)
         this.searchResults = result?.items,
         result?.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
 
@@ -223,7 +220,13 @@ export class SearchComponent implements OnInit {
   }
   submitForm() {
     this.closed.emit(true)
-    this.apiService.searchResultsSubject.next(this.apiService.searchResults)
+    //this.apiService.searchResultsSubject.next(this.apiService.searchResults)
+    this.dataService.searchResultsPageIndex = 0
+    this.dataService.searchResultsFull = []
+    this.apiService.getRecipes(this.dataService.searchResultsSimple.map((item: { recipeId: any; }) => item.recipeId), 0)
+      .subscribe({
+      next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
+    })
   }
 
 

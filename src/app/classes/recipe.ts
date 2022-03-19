@@ -1,3 +1,5 @@
+import { OptionsData } from "../interface/options-data";
+
 export class Recipe {
   private recipeId?: string;
   recipeName?: string;
@@ -7,8 +9,8 @@ export class Recipe {
   updated?: string;
   userId?: string;
   cookingTime?: number;
-  difficulity?: number;
-  cost?: number;
+  difficulity?: string;
+  cost?: string;
   category?: string;
   nationality?: string;
   image?: any[];
@@ -26,7 +28,7 @@ export class Recipe {
     return this.recipeId 
   } 
 
-  constructor( recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulity: number = 1, cost: number = 1, category: string = '', nationality: string = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: string = '', labels: string = '' ) {
+  constructor( recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulity: string = '', cost: string = '', category: string = '', nationality: string = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: string = '', labels: string = '' ) {
     this.recipeId = recipeId;
     this.recipeName = recipeName;
     this.ingredients = ingredients.split('||');
@@ -51,6 +53,14 @@ export class Recipe {
     this.labels = labels;
   }
 
-  
+  public categoryName(categoryList: OptionsData[]): string {
+    return categoryList.filter(item => item.id == this.category)[0].name
+  }
+  public difficulityName(difficulityList: OptionsData[]): string {
+    return difficulityList.filter(item => item.id == this.difficulity)[0].name
+  }
+  public costName(costList: OptionsData[]): string {
+    return costList.filter(item => item.id == this.cost)[0].name
+  }
 
 }

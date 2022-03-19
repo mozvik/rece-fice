@@ -4,6 +4,7 @@ import { APIService } from './api.service';
 import { OptionsData } from '../interface/options-data';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { Recipe } from '../classes/recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,20 @@ export class DataService {
   public searchIsOpen: boolean = false
   public sidenavOpened: boolean = false;
   public currentScreenSize: string = ""
-  //searchResults: any[] = [];
   
+  
+  
+  //searchResults module global data
+  public searchResultsFull: Recipe[] = [];
+  public searchResultsSimple: any[] = [];
+  public searchResultsPageIndex = 0 
+
+  //profile module global data
+  public activeProfileTab = 0
+  public userRecipes: Recipe[] = []
+  public userRecipePageIndex = 0 
+  public userFavsRecipePageIndex = 0 
+  ///
 
    // Create a map to display breakpoint names for demonstration purposes.
    displayNameMap = new Map([
@@ -67,42 +80,24 @@ export class DataService {
     return this.sidenavOpened
   }
   
-  
-  // public checkConnection() {
-  //   this.apiService.isServerReady().subscribe({
-  //     next: data => {
-  //       console.log('data :>> ', data)
-  //     },
-      
-  //     complete: () => ''
-  //   })
-  // }
-  // public getRecipesBy(id: number, searchBy: string, page?: number) {
-  //   this.apiService.serviceRecipesBy(id, searchBy, page).subscribe({
-  //     next: data => console.log('data :>> ', data),
-  //     complete: () => ''
-  //   })
-  // }
-  // public getRecipesByLabel(id: number[], page?: number) {
-  //   this.apiService.serviceRecipesByLabel(id, page).subscribe({
-  //     next: data => console.log('data :>> ', data),
-  //     complete: () => ''
-  //   })
-  // }
-  // public getRecipesByUser(id: number, page?: number):any {
-  //   this.apiService.serviceRecipesByUser(id, page).subscribe({
-  //     next:  data => console.log('data :>> ', data),
-  //     complete: () => ''
-  //   })
-  // }
-  // public getRecipeById(id: number) {
-  //   this.apiService.serviceRecipeById(id).subscribe({
-  //     next: data => console.log('data :>> ', data),
-  //     complete: () => ''
-  //   })
-  // }
-  
- 
+  public createRecipes(data: any[], ): Recipe[] {
+    const array: Recipe[] = []
+    if (Array.isArray(data)) {
+      for (const item of data) {
+        const recipe = new Recipe(
+          item.recipeId, item.recipeName, item.ingredients, item.directions,
+          item.created, item.updated, item.userId, item.cookingTime,
+          item.difficulityId, item.costId, item.categoryId, item.nationalityId,
+          item.image1, item.image2, item.image3, item.calorie, item.protein, item.carbonhydrate,
+          item.fat, item.sugar, item.servings,
+          item.ratings, item.reviews, item.labels
+        )
+        array.push(recipe)
+      }
+      return array
+    }
+    return []
+  }
 
   
   
