@@ -6,6 +6,7 @@ import { Recipe } from '../../classes/recipe';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { APIService } from '../../service/api.service';
 import { filter, find, last, single, take } from 'rxjs/operators';
+import { Measurements } from 'src/app/interface/measurements';
 
 @Component({
   selector: 'app-upload',
@@ -19,20 +20,17 @@ import { filter, find, last, single, take } from 'rxjs/operators';
   ]
 })
 export class UploadComponent implements OnInit {
-  // public teszt: any
-  // public tesztData: any[] = []
-  @ViewChildren('formRow') rows?: QueryList<ElementRef>;
+ 
+  //@ViewChildren('formRow') rows?: QueryList<ElementRef>;
 
-  public activeIndex: number = 0;
-  // public recipeNameHelp: string = 'Rövid, de lényegretörő nevet válassz.'
-  // public recipeLabelHelp: string = 'Adj receptedhez címkéket, hogy könnyebben megtalálhatóak legyenek.'
-
-  // public recipePhotoHelp: string = 'A jól sikerült fotók népszerűbbé tehetik receptjeidet. Maximum 3 képet tölthetsz fel.'
+  //public activeIndex: number = 0;
+  
   private recipe = new Recipe();
-  public filePath: string = ''
-  public unitArray: string[] = [
-    'darab', 'liter', 'deciliter', 'centiliter', 'milliliter', 'csepp', 'kilogramm', 'dekagramm', 'gramm', 'mokkáskanál', 'kávéskanál', 'teáskanál', 'evőkanál', 'pohár', 'csésze', 'bögre', 'ujjnyi', 'csomag', 'tábla', 'gerezd', 'csokor', 'csipet' 
-  ];
+  //public filePath: string = ''
+  // public unitArray: string[] = [
+  //   'darab', 'liter', 'deciliter', 'centiliter', 'milliliter', 'csepp', 'kilogramm', 'dekagramm', 'gramm', 'mokkáskanál', 'kávéskanál', 'teáskanál', 'evőkanál', 'pohár', 'csésze', 'bögre', 'ujjnyi', 'csomag', 'tábla', 'gerezd', 'csokor', 'csipet' 
+  // ];
+  public unitArray = Measurements
   public hungary: any
 
   public firstFormGroup = this.fb.group({
@@ -133,10 +131,7 @@ export class UploadComponent implements OnInit {
       this.ingredients.removeAt(i)
     }
   }
-  
-  ngOnChanges(changes: SimpleChanges):void {
-    console.log('form changed :>> ', changes);
-  }
+
 
   submitForm() {
     this.createRecipe()

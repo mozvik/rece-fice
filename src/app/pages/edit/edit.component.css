@@ -1,0 +1,9 @@
+.uploaded-card{
+  border-bottom: 1px solid rgba(var(--textColorRGB),.2);
+  max-width: 360px;
+}
+.card-image{
+  width: 360px;
+  height: 220px;
+  object-fit: cover;  
+}

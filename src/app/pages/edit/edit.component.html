@@ -1,0 +1,405 @@
+<div *ngIf="dataService.user.id == '1'; else elseBlock">
+  <div>edit: {{recipe.recipeName}} |  {{thirdFormGroup.ingredients | json}}</div>
+
+  <mat-stepper
+  [linear]="false"
+  [orientation]="dataService.displaySize > 2 ? 'horizontal' : 'vertical'">
+  <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
+    <form [formGroup]="firstFormGroup">
+      <div class="flex flex-row flex-wrap">
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Min. 4 karakter"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Név</mat-label>
+          <input 
+            id="name" type="text" name="name" placeholder="A recepted neve"
+            matInput formControlName="name" required minlength="4"
+            />
+            <mat-hint align="end">{{firstFormGroup.get('name')?.value?.length || 0}}/4</mat-hint>
+            <mat-error *ngIf="firstFormGroup.get('name')?.invalid && firstFormGroup.get('name')?.hasError('minlength')">Legalább 4 karakter hosszú legyen!</mat-error>
+            <mat-error *ngIf="firstFormGroup.get('name')?.invalid && firstFormGroup.get('name')?.hasError('required')">Kötelező kitölteni!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Kategória</mat-label>
+          <mat-select 
+          [formControlName]="'category'" 
+          required
+          >
+            <mat-option *ngFor="let option of dataService.categoryList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Nemzetközi konyha</mat-label>
+          <mat-select 
+          [formControlName]="'nationality'" 
+          required
+          >
+            <mat-option *ngFor="let option of dataService.nationalityList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Elkészítés nehézsége</mat-label>
+          <mat-select 
+          [formControlName]="'difficulity'" 
+          required
+          >
+            <mat-option *ngFor="let option of dataService.difficulityList" [value]="option" selected="">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Költsége</mat-label>
+          <mat-select 
+          [formControlName]="'cost'" 
+          required
+          >
+            <mat-option *ngFor="let option of dataService.costList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field 
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Címkék</mat-label>
+          <mat-select 
+          [formControlName]="'label'" 
+          required
+          multiple
+          >
+            <mat-option *ngFor="let option of dataService.labelList" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        {{firstFormGroup.invalid}}
+        <button mat-button matStepperNext>Következő</button>
+      </div>
+    </form>
+  </mat-step>
+  
+  <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
+    <form [formGroup]="secondFormGroup">
+      <div formArrayName="directions">
+        <div #formRow *ngFor="let dir of directions.controls; index as i"
+        [formGroupName]="i"
+        class="flex flex-col lg:flex-row"
+        >
+          <mat-form-field appearance="legacy"
+          class="basis-full lg:basis-4/6"
+          >
+            <mat-label>{{i+1}}. lépés</mat-label>
+            <textarea 
+            cdkTextareaAutosize 
+            #autosize="cdkTextareaAutosize"cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+            matInput 
+            
+            id="directions-{{i}}" name="directions-{{i}}" 
+            formControlName="dField" required
+            ></textarea>
+
+            
+          </mat-form-field>
+         
+          <div class="basis-2/6 flex flex-row">
+            <button *ngIf="i != 0"
+            mat-button class="" 
+            (click)="removeDirection(i)" 
+            type="button" >Lépés törlése</button>
+          
+            <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1"
+            mat-button class="" 
+            (click)="addDirection(i)" 
+            type="button" [disabled]="!secondFormGroup.controls['directions']?.valid">Lépés hozzáadása</button>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók">
+    <form [formGroup]="thirdFormGroup">
+      <div formArrayName="ingredients">
+        <div #formRow *ngFor="let dir of ingredients.controls; index as i"
+        [formGroupName]="i"
+        class="flex flex-col lg:flex-row"
+        >
+          <mat-form-field
+          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+            <mat-label>Hozzávaló neve</mat-label>
+            <input
+            type="text"
+            matInput
+            id="iName-{{i}}" name="iName-{{i}}" 
+            formControlName="iName" required
+            >
+          </mat-form-field>
+          <mat-form-field 
+          appearance="legacy"
+          hintLabel=""
+          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/6 p-5">
+            <mat-label>Mennyiségi egysége</mat-label>
+            <mat-select 
+            formControlName="iUnit" 
+            required
+            >
+            <mat-option *ngFor="let unit of unitArray" [value]="unit">
+                {{unit}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+          <mat-form-field
+          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/6 p-5">
+            <mat-label>Mennyisége</mat-label>
+            <input
+            type="number" min="0" step="1"
+            matInput
+            id="iQuantity-{{i}}" name="iQuantity-{{i}}" 
+            formControlName="iQuantity" required
+            >
+          </mat-form-field>
+                 
+          <div class="basis-2/6 flex flex-row">
+            <button *ngIf="i != 0"
+            mat-button class="" 
+            (click)="removeIngredient(i)" 
+            type="button" >Hozzávaló törlése</button>
+          
+            <button *ngIf="i == thirdFormGroup.controls['ingredients'].value.length - 1"
+            mat-button class="" 
+            (click)="addIngredient(i)" 
+            type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid">Új hozzávaló</button>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="fourthFormGroup" label="Egyéb jellemzők">
+    <form [formGroup]="fourthFormGroup">
+      <div class="flex flex-row flex-wrap">
+        <mat-form-field
+          appearance="legacy"
+          hintLabel="Percben add meg"
+          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+            <mat-label>Elkészítési idő</mat-label>
+            <input
+            id="time" type="number" name="time"
+            matInput
+            formControlName="time"
+            required
+            ><mat-icon matSuffix>schedule</mat-icon>
+        
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel=""
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        <mat-label>Hány főre</mat-label>
+        <input
+        id="serving" type="number" name="serving"
+        matInput
+        formControlName="serving"
+        required
+        ><mat-icon matSuffix>people_outline</mat-icon>
+        
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row flex-wrap">
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Kalória</mat-label>
+          <input
+          id="calorie" type="number" name="calorie"
+          matInput
+          formControlName="calorie"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Szénhidrát</mat-label>
+          <input
+          id="carbonh" type="number" name="carbonh"
+          matInput
+          formControlName="carbonh"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Fehérje</mat-label>
+          <input
+          id="protein" type="number" name="protein"
+          matInput
+          formControlName="protein"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Zsír</mat-label>
+          <input
+          id="fat" type="number" name="fat"
+          matInput
+          formControlName="fat"
+          >
+        </mat-form-field>
+        <mat-form-field
+        appearance="legacy"
+        hintLabel="Nem kötelező"
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          <mat-label>Cukor</mat-label>
+          <input
+          id="sugar" type="number" name="sugar"
+          matInput
+          formControlName="sugar"
+          >
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form> 
+  </mat-step>
+
+  <mat-step [stepControl]="fifthFormGroup">
+    <ng-template matStepLabel>Kép feltöltése</ng-template>
+    <form [formGroup]="fifthFormGroup">
+      <div class="flex flex-col">
+        <h4>A recept feltöltött képei:</h4>
+        <div class="flex flex-row flex-wrap gap-3">
+          <div 
+          class="inline-block uploaded-card"
+          *ngFor="let img of uploadedImages">
+            <img *ngIf="img != '' && img != null" class="card-image" [src]="img.name" alt="" width="360" height="">
+            <div><button (click)="openDeleteDialog(img)">Kép törlése</button></div>
+          </div>
+          
+        </div>
+       
+        <mat-label class="mt-5">A jól sikerült fotók népszerűbbé tehetik receptjeidet. </mat-label>
+
+        <mat-form-field appearance="outline">
+          <ngx-mat-file 
+          [required]="isImageRequired"
+          formControlName="photos"
+          [preview]="true"
+          accept=".png,.jpg"
+          multiple
+          [minlength]="minLength" 
+          [maxlength]="maxLength"
+          [hiddenUpload]="true"
+          [buttonBrowseText]="'Tallózás'"
+          [buttonUploadText]="'Feltöltés'"
+          [buttonRemoveAllText]="'Összes törlése'"
+          >
+          </ngx-mat-file>
+          </mat-form-field>
+        <div *ngFor="let item of fifthFormGroup.controls['photos'].value">
+          {{item.name}}
+        </div>
+         
+        <div>
+          status: {{fifthFormGroup.controls['photos'].status}} | 
+          requiredError: {{fifthFormGroup.controls['photos']?.errors}} | 
+          minError: {{fifthFormGroup.controls['photos'].errors}}
+          | 
+          touched: {{fifthFormGroup.controls['photos'].touched}}
+        </div>
+        <div>
+         
+        </div>
+        
+        
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form> 
+  </mat-step>
+
+  </mat-stepper> 
+  <div class="col-12" >
+    <h4 class="title-h4 text-center">Receptfeltöltés</h4><br>
+    <div class="row ">
+      <div class="col-12 col-lg-12 px-0 px-lg-5 ">
+        <form action="" 
+        
+        class="justify-content-center justify-content-md-start row">
+        
+          
+          <div class="col-12 col-lg-7 mb-5">
+            <button pButton type="submit" label="Recept feltöltése" class="p-button-danger"
+            (click)="submitForm()"
+            [disabled]="firstFormGroup.invalid 
+            || secondFormGroup.invalid || 
+            thirdFormGroup.invalid || 
+            fourthFormGroup.invalid"
+            >submit</button>
+            
+          </div>
+        </form>
+      </div>
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<ng-template #elseBlock>
+  <div>Hozzáférés megtagadva! {{dataService.user.id}}</div>
+</ng-template>

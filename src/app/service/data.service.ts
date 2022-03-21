@@ -1,5 +1,5 @@
 import { HostListener, Injectable } from '@angular/core';
-import { Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { APIService } from './api.service';
 import { OptionsData } from '../interface/options-data';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -12,7 +12,7 @@ import { Recipe } from '../classes/recipe';
 export class DataService {
 
   public user: any = {
-    id: '',
+    id: '1',
     name: '', 
     hasUploadAccess: false
   };
@@ -27,7 +27,8 @@ export class DataService {
   public sidenavOpened: boolean = false;
   public currentScreenSize: string = ""
   
-  
+  //global active Recipe
+  public selectedRecipe = new BehaviorSubject<Recipe>(new Recipe());
   
   //searchResults module global data
   public searchResultsFull: Recipe[] = [];

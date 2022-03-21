@@ -45,11 +45,7 @@ export class ResultsComponent implements OnInit {
     //   console.log('recipes :>> ', this.recipes)
     // })
   }
-  ngOnDestroy(): void{
-    // this.apiService.detailedRecipesSubject.unsubscribe
-    // this.apiService.searchResultsSubject.unsubscribe
-    console.log("results destroyed")
-  }
+
   showImgText(index: number): void {
     this.showImgOverlay[index] = true;
   }

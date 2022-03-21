@@ -185,7 +185,14 @@ export class SearchComponent implements OnInit {
   onSelect(e: any) {
     console.log('választott: :>> ', e.option.value);
     this.closed.emit(true)
-    this.apiService.searchResultsSubject.next({ items: [e.option.value] })
+    //this.apiService.searchResultsSubject.next({ items: [e.option.value] })
+    
+    // this.apiService.getRecipes([e.option.value.recipeId], 0)
+    //   .subscribe({
+    //     next: (response: any) => {
+    //       this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
+    //     }
+    // })
     this.router.navigate(['/details',e.option.value.recipeId]);
   }
   
@@ -200,7 +207,8 @@ export class SearchComponent implements OnInit {
   }
   
   inputChange() {
-    this.apiService.serviceRecipeSearch(this.inputText,
+    if(typeof this.inputText != "object"){
+      this.apiService.serviceRecipeSearch(this.inputText,
       this.selectedItems).subscribe(
         (result) => {
           this.apiService.searchResults = result;
@@ -216,7 +224,8 @@ export class SearchComponent implements OnInit {
         );
        
       }
-    )
+      )
+    }
   }
   submitForm() {
     this.closed.emit(true)

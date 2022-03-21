@@ -1,11 +1,12 @@
-<!-- <div>{{userRecipes}}</div> -->
+
 
 <div class="container flex flex-row justify-center mt-8 mx-auto">
   <!-- <div class="recipe-container flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap"> -->
   <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">
   <ng-container *ngFor="let item of userRecipes; let i=index"  >
     <div class="recipe-card" [@enterAnimation]>
-      <div class="card-image relative" 
+      <div class="card-image relative"
+      [routerLink]="['/details', item.recipeId]" 
       (mouseover)="showImgText(i)" (mouseout)="hideImgText(i)">
         <img [src]="item.image[0]" alt="" width="358" height="220" alt="image not found">
         <div 
@@ -25,12 +26,12 @@
             <mat-icon 
             (click)="openDeleteDialog(item)"
             matTooltip="Recept törlése"
-            [matTooltipPosition]="'left'">delete_outline</mat-icon>&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<mat-icon [routerLink]="['/details', item.recipeId]"
+            [matTooltipPosition]="'left'">delete_outline</mat-icon>&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<mat-icon [routerLink]="['/edit', item.recipeId]"
             matTooltip="Recept szerkesztése"
             [matTooltipPosition]="'right'">edit_note</mat-icon>
           </div>
         </div>
-        <div>{{item.recipeName}}</div>
+        <div [routerLink]="['/details', item.recipeId]">{{item.recipeName}}</div>
       </div>
       <div class="card-subtitle flex flex-row justify-between lora-i mb-3">
         

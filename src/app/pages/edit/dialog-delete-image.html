@@ -1,0 +1,11 @@
+<h1 mat-dialog-title class="mat-typography title-h4"></h1>
+<div mat-dialog-content>
+  <div>
+    Ez a kép visszavonhatatlanul törlődni fog a szerverről.
+  </div>
+  <div>Valóban ezt akarod?</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false" >Mégsem</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Törlés jóváhagyása</button>
+</div>

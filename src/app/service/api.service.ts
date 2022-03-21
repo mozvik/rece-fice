@@ -11,6 +11,7 @@ export class APIService {
   //serverUrl: string = 'https://https:/teszt.esoguides.hu/api/';
   // serverUrl: string = 'http://localhost/angular/rece-fice/api/';
   serverUrl: string = 'http://localhost/angular/rece-fice/src/api/';
+  imageUrl: string = 'http://localhost/angular/rece-fice/src/assets/'
   apiKey: string = '';
   filterArray = new Subject()
 
@@ -23,9 +24,6 @@ export class APIService {
   
   public isReady = new Subject<any>()
 
-  //searchResultsSubject: Subject<any> = new Subject();
-  searchResultsSubject = new BehaviorSubject<any>({});
-  detailedRecipesSubject = new BehaviorSubject<Recipe[]>([]);
   searchResults: any
 
   private isServerReady(): Observable<any> {
@@ -93,31 +91,23 @@ export class APIService {
       );
   }
 
-  // public postRecipeImages(
-  //   file: File
-  // ): Observable<any> {
-    
-  //   let fData = new FormData();
-  //   fData.append('file', file)
-  //   fData.append('submit', 'images')
-
-  //   return this.http
-  //     .post<any[]>(this.serverUrl, fData)
-  //     .pipe(
-  //       catchError(this.handleError),
-  //     );
-  // }
-
+  /**
+   * 
+   * @param formData 
+   * @param method default:"postRecipe" || "updateRecipe"
+   * @returns Observable<any>
+   */
   public postRecipe(
-    formData: any
+    formData: any, method:string = 'postRecipe',
   ): Observable<any> {
     
     let fData = new FormData();
     
-    fData.append('postRecipe',JSON.stringify(formData))
+    fData.append(method,JSON.stringify(formData))
 
     for (let i = 0; i < formData.image.length; i++) {
       const ele = formData.image[i];
+      console.log('object :>> ', formData.image);
       fData.append(i.toString(), ele, ele.name)
       
     }
@@ -127,6 +117,34 @@ export class APIService {
       .pipe(
         //catchError(this.handleError),
       );
+  }
+  // public getImgBlob(url: string) {
+  //   fetch(url)
+  //     .then(response => {
+  //       console.log('response :>> ', response);
+  //       response.blob().then(blob => {
+  //         const t = new File([blob], 'ww')
+  //         console.log('t :>> ', t);
+  //         return t
+  //       })
+  //     })
+  // }
+
+  public getImgBlob(url: string): Observable<any> {
+    return this.http
+      .get(url, {responseType: 'blob'})
+      .pipe(
+      //catchError(this.handleError)
+    );
+    // fetch(url)
+    //   .then(response => {
+    //     console.log('response :>> ', response);
+    //     response.blob().then(blob => {
+    //       const t = new File([blob], 'ww')
+    //       console.log('t :>> ', t);
+    //       return t
+    //     })
+    //   })
   }
 
   public getRecipes(idList: string[], page: number, itemsPerPage: number = 5 ): Observable<any[]> {
