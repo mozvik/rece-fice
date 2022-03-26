@@ -1,1 +1,22 @@
-<p>fridge works!</p>
+<h2>Sorold fel az otthonodban megtalálható alapanyagokat és megmutatjuk mit készíthetsz belőlük!</h2>
+
+<mat-form-field class="example-chip-list" appearance="fill">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let item of ingredients" (removed)="remove(item)">
+      {{item}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input placeholder="Új alapanyag..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-hint>Sorold fel vesszővel az alapanyagaidat, majd nyomj entert, vagy akár írd be egyenként!</mat-hint>
+</mat-form-field>
+<button mat-stroked-button color="primary" 
+(click)="submitForm()"
+routerLink="/results"
+>Mutasd, mit főzzek!</button>

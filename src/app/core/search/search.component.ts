@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
   animations: [
     trigger('openClose', [
       state('open', style({
-        
         transform: 'scaleY(1) translateX(0)',
         opacity: '1'
       })),
@@ -28,7 +27,6 @@ import { Router } from '@angular/router';
         animate("0.6s cubic-bezier(0.35, 0, 0.25, 1)"),
       ]),
     ]),
-   
   ]
 })
 export class SearchComponent implements OnInit {
@@ -208,7 +206,7 @@ export class SearchComponent implements OnInit {
   
   inputChange() {
     if(typeof this.inputText != "object"){
-      this.apiService.serviceRecipeSearch(this.inputText,
+      this.apiService.recipeSearch(this.inputText,
       this.selectedItems).subscribe(
         (result) => {
           this.apiService.searchResults = result;
@@ -234,7 +232,8 @@ export class SearchComponent implements OnInit {
     this.dataService.searchResultsFull = []
     this.apiService.getRecipes(this.dataService.searchResultsSimple.map((item: { recipeId: any; }) => item.recipeId), 0)
       .subscribe({
-      next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
+        next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
+        
     })
   }
 

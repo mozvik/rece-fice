@@ -8,12 +8,13 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     ToolbarComponent,
     SidebarComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   exports: [
     ToolbarComponent,

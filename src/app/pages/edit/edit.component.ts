@@ -7,6 +7,7 @@ import { APIService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
 import { Measurements } from 'src/app/interface/measurements';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-edit',
@@ -77,6 +78,7 @@ export class EditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     public dataService: DataService,
     private apiService: APIService,
+    private msgService: MessageService,
     private fb: FormBuilder,
     public dialogDelete: MatDialog) { }
   
@@ -134,7 +136,7 @@ export class EditComponent implements OnInit {
       this.ingredients.removeAt(i)
     }
   }
-
+ 
   private fillUpFirstForm() { 
     const labels: any[] = []
     this.firstFormGroup.controls['name'].setValue(this.recipe.recipeName)
@@ -233,7 +235,16 @@ export class EditComponent implements OnInit {
     console.log('recipeFormGroup :>> ', this.recipe);
    
     this.apiService.postRecipe(this.recipe,'updateRecipe').subscribe({
-      next: (response: any) => console.log(response)
+      next: (response: any) => {
+        this.msgService.showSnackBar(`${this.recipe.recipeName} recept sikeresen módosítva.`, 'success')
+        if (this.dataService.userRecipeList.length > 0) {
+          const idx = this.dataService.userRecipeList.findIndex(f => f.id == response.recipeId)
+          const updatedRecipe = this.dataService.createRecipes([response])
+          this.dataService.userRecipeList[idx] = updatedRecipe[0]
+        }
+
+      },
+      error: (error: any) => this.msgService.showSnackBar(error,'error')
     })
   }
 

@@ -12,12 +12,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
     EditComponent,
-    DialogDeleteImage
+    DialogDeleteImage,
   ],
   imports: [
     CommonModule,
@@ -31,6 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule, 
     MatIconModule,
     MatDialogModule,
+    MatButtonModule,
   ]
 })
 export class EditModule { }

@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { FridgeRoutingModule } from './fridge-routing.module';
 import { FridgeComponent } from './fridge.component';
-import { SharedModule } from '../../shared/shared.module';
+import {MatChipsModule} from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -12,7 +15,10 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     FridgeRoutingModule,
-    SharedModule
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class FridgeModule { }

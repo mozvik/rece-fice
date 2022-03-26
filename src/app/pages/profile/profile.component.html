@@ -8,7 +8,7 @@ animationDuration="600ms">
   <mat-tab label="Saját receptek">
     <app-user-recipes 
     [user]="userID"
-    [userRecipes]="dataService.userRecipes"
+    [userRecipes]="dataService.userRecipeList"
     [userPageIndex]="dataService.userRecipePageIndex"
     (userPageIndexChange)="userPageIndexChanged($event)"
     ></app-user-recipes>

@@ -37,7 +37,9 @@ export class DataService {
 
   //profile module global data
   public activeProfileTab = 0
-  public userRecipes: Recipe[] = []
+  public userRecipeList: Recipe[] = []
+  public userRecipes: Subject<Recipe[]> = new Subject<Recipe[]>()
+  //public userRecipes: Observable<Recipe[]> = new Observable<Recipe[]>()
   public userRecipePageIndex = 0 
   public userFavsRecipePageIndex = 0 
   ///
@@ -81,7 +83,7 @@ export class DataService {
     return this.sidenavOpened
   }
   
-  public createRecipes(data: any[], ): Recipe[] {
+  public createRecipes(data: any[],): Recipe[] {
     const array: Recipe[] = []
     if (Array.isArray(data)) {
       for (const item of data) {

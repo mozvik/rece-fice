@@ -29,6 +29,7 @@ export class UserRecipesComponent implements OnInit {
 
   showImgOverlay: boolean[] = [];
   dialogDeleteRef: any
+  xxx: Recipe[] = []
 
   constructor(public dataService: DataService, public dialogDelete: MatDialog) { }
 

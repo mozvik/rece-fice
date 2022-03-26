@@ -73,7 +73,7 @@ export class APIService {
 
 
 
-  serviceRecipeSearch(
+  recipeSearch(
     text: string,
     filters: any,
     justNumberOfResults: boolean = true, 
@@ -118,17 +118,7 @@ export class APIService {
         //catchError(this.handleError),
       );
   }
-  // public getImgBlob(url: string) {
-  //   fetch(url)
-  //     .then(response => {
-  //       console.log('response :>> ', response);
-  //       response.blob().then(blob => {
-  //         const t = new File([blob], 'ww')
-  //         console.log('t :>> ', t);
-  //         return t
-  //       })
-  //     })
-  // }
+  
 
   public getImgBlob(url: string): Observable<any> {
     return this.http
@@ -136,15 +126,7 @@ export class APIService {
       .pipe(
       //catchError(this.handleError)
     );
-    // fetch(url)
-    //   .then(response => {
-    //     console.log('response :>> ', response);
-    //     response.blob().then(blob => {
-    //       const t = new File([blob], 'ww')
-    //       console.log('t :>> ', t);
-    //       return t
-    //     })
-    //   })
+    
   }
 
   public getRecipes(idList: string[], page: number, itemsPerPage: number = 5 ): Observable<any[]> {
@@ -156,6 +138,26 @@ export class APIService {
       for (let i = 0; i < idList.length; i++) {
          const ele = idList[i];
         fData.append('idList[]',ele)
+      }
+    }
+
+    return this.http
+    .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
+
+  public getRecipesFridge(ingredientList: string[], page: number, itemsPerPage: number = 8 ): Observable<any[]> {
+    let fData = new FormData();
+    if (ingredientList &&
+      ingredientList.length > 0) {
+      fData.append('getRecipesFridge','true')
+      fData.append('page', page.toString())
+      fData.append('itemsPerPage', itemsPerPage.toString())
+      for (let i = 0; i < ingredientList.length; i++) {
+         const ele = ingredientList[i];
+        fData.append('ingredientList[]',ele)
       }
     }
 
@@ -182,49 +184,49 @@ export class APIService {
   }
 
 ////////felulvizsgalat szükséges
-  serviceRecipesBy(id: number, searchBy: string, page?: number): Observable<any> {
-    let query: string = this.serverUrl + '?' + searchBy + '=' + id
-    if (page) query += '&page=' + page
-    query += '&apikey=' + this.apiKey
-    return this.http
-      .get<any[]>(query)
-      .pipe(
-      catchError(this.handleError)
-    );
-  }
+  // serviceRecipesBy(id: number, searchBy: string, page?: number): Observable<any> {
+  //   let query: string = this.serverUrl + '?' + searchBy + '=' + id
+  //   if (page) query += '&page=' + page
+  //   query += '&apikey=' + this.apiKey
+  //   return this.http
+  //     .get<any[]>(query)
+  //     .pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
 
-  serviceRecipesByLabel(id: number[], page?: number): Observable<any> {
-    let query: string = this.serverUrl + '?'
-    for (const item of id) {
-      query += 'label[]=' + item + '&'
-    }
-    query += 'apikey=' + this.apiKey
-    if (page) query += '&page=' + page
+  // serviceRecipesByLabel(id: number[], page?: number): Observable<any> {
+  //   let query: string = this.serverUrl + '?'
+  //   for (const item of id) {
+  //     query += 'label[]=' + item + '&'
+  //   }
+  //   query += 'apikey=' + this.apiKey
+  //   if (page) query += '&page=' + page
     
-    return this.http
-      .get<any[]>(query)
-      .pipe(
-      catchError(this.handleError)
-    );
-  }
-  serviceRecipesByUser(id: number, page?: number): Observable<any> {
-    let query: string = this.serverUrl + '?user=' + id + '&apikey=' + this.apiKey
-    if (page) query += '&page=' + page
+  //   return this.http
+  //     .get<any[]>(query)
+  //     .pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+  // serviceRecipesByUser(id: number, page?: number): Observable<any> {
+  //   let query: string = this.serverUrl + '?user=' + id + '&apikey=' + this.apiKey
+  //   if (page) query += '&page=' + page
     
-    return this.http
-      .get<any[]>(query)
-      .pipe(
-      catchError(this.handleError)
-    );
-  }
-  serviceRecipeById(id: number): Observable<any> {
-    let query: string = this.serverUrl + '?recipe=' + id + '&apikey=' + this.apiKey
-    return this.http
-      .get<any[]>(query)
-      .pipe(
-      catchError(this.handleError)
-    );
-  }
+  //   return this.http
+  //     .get<any[]>(query)
+  //     .pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+  // serviceRecipeById(id: number): Observable<any> {
+  //   let query: string = this.serverUrl + '?recipe=' + id + '&apikey=' + this.apiKey
+  //   return this.http
+  //     .get<any[]>(query)
+  //     .pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
 
   
   
@@ -232,15 +234,15 @@ export class APIService {
   
   
   
-  multiFilter(filter: any[]): Observable<any> {
-     let query: string = this.serverUrl + '?ready=' + this.apiKey //temp
-    console.log('filter :>> ', filter);
-    return this.http
-    .get<any[]>(query)
-    .pipe(
-    catchError(this.handleError)
-  );
-  }
+  // multiFilter(filter: any[]): Observable<any> {
+  //    let query: string = this.serverUrl + '?ready=' + this.apiKey //temp
+  //   console.log('filter :>> ', filter);
+  //   return this.http
+  //   .get<any[]>(query)
+  //   .pipe(
+  //   catchError(this.handleError)
+  // );
+  // }
 //////felülvizsg eddig
 
 

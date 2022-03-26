@@ -89,7 +89,18 @@ input:focus,
   text-transform: uppercase;
   font-style: normal;
 }
-
+.snack-success{
+  background: green;
+  color: var(--backgroundColor);
+}
+.snack-info{
+  background: dodgerblue;
+  color: var(--backgroundColor);
+}
+.snack-error{
+  background: brown;
+  color: var(--backgroundColor);
+}
 
 .title-with-divider {
   font-family: "Oswald", sans-serif;
@@ -113,3 +124,6 @@ input:focus,
 }
 html, body { height: 100%; }
 body { margin: 0; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

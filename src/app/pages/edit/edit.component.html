@@ -98,8 +98,7 @@
         </mat-form-field>
       </div>
       <div>
-        {{firstFormGroup.invalid}}
-        <button mat-button matStepperNext>Következő</button>
+        <button mat-stroked-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -142,8 +141,8 @@
       </div>
       
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
+        <button mat-stroked-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -205,8 +204,8 @@
       </div>
       
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
+        <button mat-stroked-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -299,8 +298,8 @@
         </mat-form-field>
       </div>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
+        <button mat-stroked-button color="primary" matStepperNext>Következő</button>
       </div>
     </form> 
   </mat-step>
@@ -332,6 +331,7 @@
           [minlength]="minLength" 
           [maxlength]="maxLength"
           [hiddenUpload]="true"
+          [buttonVariant]="'mat-stroked-button'"
           [buttonBrowseText]="'Tallózás'"
           [buttonUploadText]="'Feltöltés'"
           [buttonRemoveAllText]="'Összes törlése'"
@@ -356,8 +356,7 @@
         
       </div>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
       </div>
     </form> 
   </mat-step>
@@ -403,3 +402,5 @@
 <ng-template #elseBlock>
   <div>Hozzáférés megtagadva! {{dataService.user.id}}</div>
 </ng-template>
+
+

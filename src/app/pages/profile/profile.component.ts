@@ -18,10 +18,12 @@ export class ProfileComponent implements OnInit {
     public dataService: DataService) { }
 
   ngOnInit(): void {
-    if (this.dataService.userRecipes.length == 0) {
-      this.apiService.getRecipesByUser(this.userID, this.dataService.userRecipePageIndex).subscribe({
-        next: (response: any) =>  this.createRecipes(response?.items)
-      })
+    if (this.dataService.userRecipeList.length === 0){
+    this.apiService.getRecipesByUser(this.userID, this.dataService.userRecipePageIndex).subscribe({
+      next: (response: any) => {
+        this.createRecipes(response?.items)
+      }
+    })
     }
   }
 
@@ -46,6 +48,7 @@ export class ProfileComponent implements OnInit {
         array.push(recipe)
       }
     }
-     this.dataService.userRecipes = this.dataService.userRecipes.concat(array)
+    this.dataService.userRecipeList = this.dataService.userRecipeList.concat(array)
+    this.dataService.userRecipes.next(this.dataService.userRecipeList)
   }
 }
