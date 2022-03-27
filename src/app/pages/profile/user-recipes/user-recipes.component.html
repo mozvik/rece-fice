@@ -2,7 +2,7 @@
 
 <div class="container flex flex-row justify-center mt-8 mx-auto">
   <!-- <div class="recipe-container flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap"> -->
-  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">{{dataService.userRecipePageIndex}}
+  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">
   <ng-container *ngFor="let item of userRecipes; let i=index"  >
     
     <div class="recipe-card" [@enterAnimation]>
@@ -39,7 +39,6 @@
         <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon><div>{{item.userId}}&nbsp;Gipsz Jakab</div></div>
         <div class="flex flex-row items-center"><div>{{item.categoryName(this.dataService.categoryList)}}</div></div>
       </div>
-  
     </div>
   </ng-container>
   </div>

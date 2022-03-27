@@ -7,6 +7,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { APIService } from '../../service/api.service';
 import { filter, find, last, single, take } from 'rxjs/operators';
 import { Measurements } from 'src/app/interface/measurements';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-upload',
@@ -78,7 +79,9 @@ export class UploadComponent implements OnInit {
     return this.thirdFormGroup.get('ingredients') as FormArray;
   }
 
-  constructor(public apiService: APIService, public dataService: DataService, private fb: FormBuilder) {
+  constructor(public apiService: APIService, public dataService: DataService,
+  private messageService: MessageService,
+  private fb: FormBuilder) {
   }
 
   
@@ -143,7 +146,10 @@ export class UploadComponent implements OnInit {
      
     // }
     this.apiService.postRecipe(this.recipe).subscribe({
-      next: (response: any) => console.log(response)
+      next: (response: any) => {
+        this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
+        console.log(response)
+      }
     })
   }
 

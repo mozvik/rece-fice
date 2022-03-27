@@ -8,6 +8,11 @@ export class MessageService {
 
   constructor(private snackBar: MatSnackBar) { }
 
+  /**
+   * 
+   * @param text üzenet szövege
+   * @param state üzenet státusza (success, error, -warning-, info)
+   */
   public showSnackBar(text: string, state: string = 'info'): void {
     this.snackBar.open(text, '', {
       verticalPosition: 'bottom',

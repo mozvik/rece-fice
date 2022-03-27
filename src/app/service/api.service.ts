@@ -183,6 +183,19 @@ export class APIService {
     );
   }
 
+  public deleteRecipe(recipeId: string | undefined): Observable<any[]> {
+    let fData = new FormData();
+    if (recipeId) {
+      fData.append('deleteRecipe',recipeId)
+    }
+    return this.http
+    .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
+
+
 ////////felulvizsgalat szükséges
   // serviceRecipesBy(id: number, searchBy: string, page?: number): Observable<any> {
   //   let query: string = this.serverUrl + '?' + searchBy + '=' + id

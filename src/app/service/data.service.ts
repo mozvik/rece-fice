@@ -38,7 +38,7 @@ export class DataService {
   //profile module global data
   public activeProfileTab = 0
   public userRecipeList: Recipe[] = []
-  public userRecipes: Subject<Recipe[]> = new Subject<Recipe[]>()
+  //public userRecipes: Subject<Recipe[]> = new Subject<Recipe[]>()
   //public userRecipes: Observable<Recipe[]> = new Observable<Recipe[]>()
   public userRecipePageIndex = 0 
   public userFavsRecipePageIndex = 0 
