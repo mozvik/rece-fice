@@ -83,6 +83,7 @@ input:focus,
   font-style: normal;
 }
 .title-h1{
+  color: var(--textColor);
   text-align: center;
   font-family: "Oswald", sans-serif;
   font-size: 3.5rem;
@@ -114,6 +115,9 @@ input:focus,
 .mat-tooltip{
   font-family: "Oswald", sans-serif;
   font-size: 1.25rem;
+}
+.mat-divider{
+  margin: 0 auto!important;
 }
 @media (min-width: 992px) {
   body,

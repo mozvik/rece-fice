@@ -8,26 +8,9 @@ import { DataService } from '../../service/data.service';
   styleUrls: ['./headline.component.css']
 })
 export class HeadlineComponent implements OnInit {
-
-  // myForm: FormGroup = new FormGroup();
-  data?: Array<File>;
-
-  // public fourthFormGroup = new FormGroup({
-  //   files: new FormControl('',[Validators.required, Validators.minLength(3)]),
-  // })
-  minFileCount = 1
-  preview = 100
   
   constructor(public dataService: DataService) { }
 
-  aaa(e: any) {
-    console.log('e :>> ', e);
-  }
-  onSubmit() {
-    // alert("hurra")
-  }
-
   ngOnInit(): void {
   }
-
 }

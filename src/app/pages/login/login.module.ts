@@ -4,10 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 
-// import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './login.component';
-// import { MatDividerModule } from '@angular/material/divider';
-// import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
@@ -19,10 +19,10 @@ import { SharedModule } from '../../shared/shared.module';
     LoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
-    // MatFormFieldModule,
-    // MatDividerModule,
-    // MatInputModule
+    //SharedModule
+    MatFormFieldModule,
+    MatDividerModule,
+    MatInputModule
   ]
 })
 export class LoginModule { }

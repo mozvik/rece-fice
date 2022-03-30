@@ -4,13 +4,15 @@
   fixedInViewport="true"
   fixedTopGap=56
   [(opened)]="dataService.sidenavOpened" 
-  (opened)="events.push('open!')"
-  (closed)="events.push('close!')"
-  (closedStart)="dataService.sidenavOpened = false"
-  (openedStart)="dataService.sidenavOpened = true">
-    <nav id="mobileNavbar" 
-    [@inOut]="dataService.sidenavOpened ? true:false" 
-    >
+  >
+  <!-- (opened)="events.push('open!')"
+  (closed)="events.push('close!')" -->
+  <!-- (closedStart)="dataService.sidenavOpened = false"
+  (openedStart)="dataService.sidenavOpened = true" -->
+  <nav id="mobileNavbar" 
+  class="w-60 relative"
+  >
+  <!-- [@inOut]="dataService.sidenavOpened"  -->
       <ul class="sideMenu">
         <li class="nav-item">
           <button mat-button
@@ -32,7 +34,8 @@
             arrow_drop_down
             </mat-icon></button>
         </li>
-        <ul *ngIf="!submenuCollapsed" [@collapseSubmenu]
+        <!-- [@collapseSubmenu] -->
+        <ul *ngIf="!submenuCollapsed" 
         class="nav-item">
           <li class="nav-link"><button mat-button>Előételek</button></li>
           <li class="nav-link"><button mat-button>Levesek</button></li>

@@ -1,51 +1,40 @@
-<!-- <app-search (closed)="$event ? dataService.searchIsOpen=false:''" [isSearchOpen]="dataService.searchIsOpen"></app-search> -->
-
 <div class="container mx-auto">
-  <!-- <div id="logoMain" class="">
+  <div id="logoMain" class="py-20 px-5">
     <div class="flex justify-center">
-      <img src="./assets/img/mainlogo_sm.png" alt="" class="block lg:hidden" />
+      <img src="./assets/img/headline-logo.png" alt="" class="block lg:hidden object-cover" width="480"/>
     </div>
     <div class="flex justify-center">
-      <img src="./assets/img/mainlogo.png" alt="" class="hidden lg:block" />
+      <img src="./assets/img/headline-logo.png" alt="" class="hidden lg:block" width="710"/>
     </div>
   </div>
-  <mat-divider></mat-divider>
+  <mat-divider class="py-5"></mat-divider>
 
-<form action="" #myForm="ngForm" name="myForm" class="container">
-
-  
-    <span *ngFor="let item of data">
-      {{item.name}}
-    </span>
-   
- 
-</form>
-
-
-  <div class="flex flex-col lg:flex-row columns-5 gap-8 p-5">
-    <div class="text-center">
+  <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4 content-center	">
+    <div class="text-center lg:col-span-3">
       <h3 class="title-h3">
         <mat-icon color="primary" style="font-size: 4rem; transform: translateX(-15px);">receipt_long</mat-icon>
-        
       </h3><p>345+</p> <p>recept közül válogathatsz</p>
     </div>
-    <mat-divider [vertical]="true" class="hidden lg:block " ></mat-divider>
-    <div class="col-span-1 text-center">
+    <mat-divider [vertical]="true" class="hidden lg:block col-span-1 mx-auto"></mat-divider>
+    
+    <div class=" lg:col-span-4 text-center"> 
       <h3 class="title-h3 mb-3">
         <button mat-icon-button (click)="dataService.searchIsOpen=true" [disableRipple]="true"><mat-icon color="accent" style="font-size: 4rem; transform: translateX(-10px);">search</mat-icon></button>
       </h3><br>
       <p>Egészséges ételeket keresel, vagy csak ötleteket az otthonodban megtalálható alapanyagok felhasználására?</p> <p>A recepttárban biztosan megtalálod amit szeretnél. </p>
     </div>
-    <mat-divider [vertical]="true" class="hidden lg:block "></mat-divider>
-    <div class="col-12 col-lg-2 p-3 text-center">
-    <h3 class="title-h3 mb-3">
-      <button mat-icon-button [routerLink]="dataService.user.id!='' ? '/upload':'/login'" [disableRipple]="true"><mat-icon color="warn" style="font-size: 4rem; transform: translateX(-10px);">file_upload</mat-icon></button>
-    </h3> <br>
-      <p>Mutasd meg mit tudsz!</p>
-      <p>Tölts fel saját receptet!</p>
+    <mat-divider [vertical]="true" class="hidden lg:block col-span-1 "></mat-divider>
+    <div class="col-12 col-lg-2 p-3 text-center lg:col-span-3 ">
+      <h3 class="title-h3 mb-3">
+        <button mat-icon-button [routerLink]="dataService.user.id!='' ? '/upload':'/login'" [disableRipple]="true"><mat-icon color="warn" style="font-size: 4rem; transform: translateX(-10px);">file_upload</mat-icon></button>
+      </h3> <br>
+        <p>Mutasd meg mit tudsz!</p>
+        <p>Tölts fel saját receptet!</p>
     </div>
   </div>
-  <mat-divider></mat-divider> -->
+  <div>&nbsp;</div>
+  <mat-divider></mat-divider>
+
 </div>
 
 

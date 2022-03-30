@@ -2,17 +2,15 @@
   (closed)="$event ? dataService.searchIsOpen=false:''" [isSearchOpen]="dataService.searchIsOpen">
 </app-search>
 
-<div id="navPlaceholder"
-[style]="dataService.displaySize > 2 ? 'width: 100%;height: 124px;':'width: 100%;height: 56px;'"></div>
+<div id="navPlaceholder" [style.height]="dataService.displaySize > 2 ? '124px':'56px'">
+</div>
 
-<div id="desktopBar" class="container hidden lg:block mx-auto" 
+<div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full" 
 [style]="'background-color: var(--backgroundColor);'"
 (window:scroll)="onScroll($event)"
 [@toolbarSlideDown]="toolbarDown"
-[class]="toolbarDown ? 'toolbarScroll' : ''"
+[class.toolbarScroll]="toolbarDown"
 >
-  
-
   <mat-toolbar id="userBar"
   class="flex flex-row justify-between"
   >

@@ -42,38 +42,18 @@ import { DataService } from '../../service/data.service';
         ])
       ]),
     ]),
-    trigger('inOut', [
-      transition('false => true', [
-        query('.nav-item', [
-          style({ opacity: 0, transform: 'translateX(0)' }),
-          stagger(60, [
-            animate('400ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'translateX(100px)', offset: 1 }))
-          ])
-        ])
-      ])
-    ]),
-    //  trigger('chevronRotate', [
+  
+    // trigger('navbarDown', [
     //   state(
-    //     'true', style({ transform: "rotate(-180deg)" })
+    //     'true', style({ top: "0px" })
     //   ),
     //   state(
-    //     'false', style({ transform: "rotate(0deg)" })
+    //     'false', style({ top: '*' })
     //   ),
-    //    transition('false <=> true', [
-    //      useAnimation(chevronRotate)
-    //    ]),
-    //  ]),
-    trigger('navbarDown', [
-      state(
-        'true', style({ top: "0px" })
-      ),
-      state(
-        'false', style({ top: '*' })
-      ),
-      transition('false => true', [
-        animate('400ms cubic-bezier(0.35, 0, 0.25, 1)')
-      ]),
-    ]),
+    //   transition('false => true', [
+    //     animate('400ms cubic-bezier(0.35, 0, 0.25, 1)')
+    //   ]),
+    // ]),
     
   ]
 })

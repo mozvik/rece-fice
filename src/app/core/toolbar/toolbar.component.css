@@ -1,12 +1,12 @@
 #desktopBar{
-  padding-top: 0;
-  top: 0;
+  /* padding-top: 0; */
+  /* top: 0;
   left: 0;
   right: 0;
-  position: absolute;
-  height: auto;
-  width: 100%;
-  z-index: 2;
+  position: absolute; */
+  /* height: auto;
+  width: 100%; */
+  /* z-index: 2; */
 }
 
 #desktopBar.toolbarScroll{
@@ -15,8 +15,4 @@
   background: var(--backgroundColor);
   margin-bottom: 0; 
   z-index: 2; 
-  /* transition: all 0.4s ease-in-out; */
 }
-/* #navPlaceholderBottom{
-  margin-top: -124px;
-}  */

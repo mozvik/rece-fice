@@ -1,0 +1,40 @@
+<div class="container mx-auto p-5 lg:px-0">
+  <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4">
+    <div class="col-span-3">
+      <img src="logo" alt="">
+      <h3 class="title-h3">
+        RECEFICE RECEPTTÁR
+      </h3>
+      <h4>Szakácskönyv, ami mindig kéznél van</h4>
+    </div>
+    <mat-divider [vertical]="true" class="hidden lg:block col-span-1 mx-auto"></mat-divider>
+    <div class="col-span-4">
+      <h3>Feliratkozás hírlevélre</h3>
+      <form class="flex flex-col" [formGroup]="newsletterFormGroup">
+        <div class="flex flex-row">
+          <mat-form-field class="pr-3" appearance="legacy">
+            <mat-label>Add meg az email címed</mat-label>
+            <input matInput placeholder="valami@mail.com" value="" formControlName="email">
+          </mat-form-field>
+          <div><button mat-stroked-button (click)="clo($event)" [disabled]="newsletterFormGroup.invalid">Feliratkozom</button></div>
+        </div>
+        
+        <mat-checkbox  color="primary"
+         name="gdpr" formControlName="gdpr">Check me
+        </mat-checkbox>
+      </form>
+
+    </div>
+    <mat-divider [vertical]="true" class="hidden lg:block col-span-1 mx-auto"></mat-divider>
+    <div class="col-span-3">
+      <ul>
+        <li>Főoldal</li>
+        <li>Receptkeresés</li>
+        <li>Mi van otthon?</li>
+        <li>Kapcsolatfelvétel</li>
+        <li>Adatvédelmi tájékoztató</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pt-10 text-center">copyright &copy; 2022 Mozvik Attila</div>
+</div>
