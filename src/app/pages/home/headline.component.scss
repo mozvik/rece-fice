@@ -1,0 +1,23 @@
+@import "../../../mixins";
+@import "../../../colors";
+
+.container{
+  @include lora;
+}
+
+#h-list{
+  color: $green;
+}
+#h-search{
+  color: $info;
+}
+#h-upload{
+  color: $orangeRedDark;
+}
+
+// @media (min-width: 992px) {
+// .content{
+//   font-size: 1.5rem;
+// }
+
+// }

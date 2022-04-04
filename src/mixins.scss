@@ -1,0 +1,35 @@
+$fontSource: "Source Sans Pro", sans-serif;
+$fontLora: "Lora", sans-serif;
+$fontOswald: "Oswald", sans-serif;
+
+@mixin source{
+  font-family: $fontSource;
+  font-size: 1.30rem;
+  text-transform:none;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin source-upper{
+  font-family: $fontSource;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-style: normal;
+}
+@mixin lora{
+  font-family: $fontLora;
+  font-size: 1.20rem;
+  font-weight: 100;
+}
+@mixin lora-italic{
+  font-family: $fontLora;
+  font-size: 1.30rem;
+  font-weight: 400;
+  font-style: italic;
+}
+@mixin oswald{
+  font-family: $fontOswald;
+  font-size: 1.20rem;
+  font-weight: 400;
+}

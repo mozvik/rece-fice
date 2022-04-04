@@ -1,9 +1,7 @@
-import { HostListener, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
-import { APIService } from './api.service';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { OptionsData } from '../interface/options-data';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Recipe } from '../classes/recipe';
 
 @Injectable({
@@ -38,8 +36,6 @@ export class DataService {
   //profile module global data
   public activeProfileTab = 0
   public userRecipeList: Recipe[] = []
-  //public userRecipes: Subject<Recipe[]> = new Subject<Recipe[]>()
-  //public userRecipes: Observable<Recipe[]> = new Observable<Recipe[]>()
   public userRecipePageIndex = 0 
   public userFavsRecipePageIndex = 0 
   ///
@@ -55,7 +51,6 @@ export class DataService {
   
 
   constructor(
-    // private apiService: APIService,
     breakpointObserver: BreakpointObserver
   ) {
       breakpointObserver.observe([
@@ -76,6 +71,7 @@ export class DataService {
 
   public toggleSearch(): boolean{
     this.searchIsOpen = !this.searchIsOpen
+    
     return this.searchIsOpen
   }
   public toggleSidenav(): boolean{
@@ -101,7 +97,4 @@ export class DataService {
     }
     return []
   }
-
-  
-  
 }

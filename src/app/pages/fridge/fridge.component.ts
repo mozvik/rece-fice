@@ -8,7 +8,7 @@ import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-fridge',
   templateUrl: './fridge.component.html',
-  styleUrls: ['./fridge.component.css']
+  styleUrls: ['./fridge.component.scss']
 })
 export class FridgeComponent implements OnInit {
   addOnBlur = true;

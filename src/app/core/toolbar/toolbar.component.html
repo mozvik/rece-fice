@@ -2,11 +2,13 @@
   (closed)="$event ? dataService.searchIsOpen=false:''" [isSearchOpen]="dataService.searchIsOpen">
 </app-search>
 
-<div id="navPlaceholder" [style.height]="dataService.displaySize > 2 ? '124px':'56px'">
+
+
+<div id="navPlaceholder" [style.height]="dataService.displaySize > 2 ? '128px':'56px'">
 </div>
 
 <div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full" 
-[style]="'background-color: var(--backgroundColor);'"
+
 (window:scroll)="onScroll($event)"
 [@toolbarSlideDown]="toolbarDown"
 [class.toolbarScroll]="toolbarDown"
@@ -16,13 +18,76 @@
   >
   <div class="container flex flex-row">
     <ul class="flex flex-row">
-      <li><button mat-icon-button><mat-icon svgIcon="facebook"></mat-icon></button></li>
-      <li><button mat-icon-button><mat-icon svgIcon="twitter"></mat-icon></button></li>
-      <li><button mat-icon-button><mat-icon svgIcon="instagram"></mat-icon></button></li>
+      
     </ul>
   </div>
   <div class="container flex flex-row justify-end">
-    <ul class="flex flex-row">
+   
+  </div>
+
+  <div>
+
+  </div>
+
+  </mat-toolbar>
+  <mat-toolbar id="mainBar" class="flex flex-row justify-between w-100">
+
+    <ul class="flex flex-row justify-between">
+      <li class="">
+        <button mat-button
+          class=""
+          aria-current="page"
+          routerLink="/home"
+          id="homeLink"
+          >Főoldal</button>
+      </li>
+      <li class="">
+        <button mat-button
+          class=""
+          role="button"
+          data-bs-toggle=""
+          aria-expanded="false"
+          #recipeDropdown
+          [matMenuTriggerFor]="recipeMenu"
+          (menuOpened)="dropdownCollapsed = false"
+          (menuClosed)="dropdownCollapsed = true"
+        >Receptek<mat-icon [@chevronRotate]="!dropdownCollapsed">
+          arrow_drop_down
+          </mat-icon></button>
+      </li>
+      <mat-menu #recipeMenu="matMenu" xPosition="after"
+      >
+        <button mat-menu-item>Előételek</button>
+        <button mat-menu-item>Levesek</button>
+        <button mat-menu-item>Főételek</button>
+        <button mat-menu-item>Köretek</button>
+        <button mat-menu-item>Desszertek</button>
+        <button mat-menu-item>Italok</button>
+      </mat-menu>
+    
+      <li class="">
+        <button mat-button
+          class=""
+          routerLink="/upload"
+          (click)="'isOpen=false'"
+          tabindex="-1"
+          aria-disabled="true"
+          >Receptfeltöltés</button>
+      </li>
+      <li class="">
+        <button mat-button
+          class=""
+          routerLink="/fridge"
+          tabindex="-1"
+          aria-disabled="true"
+          >Mi van itthon?</button>
+      </li>
+    
+    </ul>
+    <ul class="flex flex-row ml-auto">
+      <!-- <li><button mat-icon-button><mat-icon svgIcon="facebook"></mat-icon></button></li>
+      <li><button mat-icon-button><mat-icon svgIcon="twitter"></mat-icon></button></li>
+      <li><button mat-icon-button><mat-icon svgIcon="instagram"></mat-icon></button> | </li> -->
       <li *ngIf="dataService.user.id!=''" class="">
         <button mat-icon-button><mat-icon>notifications_none</mat-icon></button>
       </li>
@@ -45,79 +110,11 @@
         ><mat-icon>search</mat-icon></button>
       </li>
     </ul>
-  </div>
-
-  <div>
-
-  </div>
-
-  </mat-toolbar>
-  <mat-toolbar id="mainbBar"
-  
-   >
-  <ul class="flex flex-row justify-between mx-auto"> 
-    <li class="">
-      <button mat-button
-        class=""
-        aria-current="page"
-        routerLink="/home"
-        id="homeLink"
-        >Főoldal</button>
-    </li>
-    <li class="">
-      <button mat-button
-        class=""
-        role="button"
-        data-bs-toggle=""
-        aria-expanded="false"
-        #recipeDropdown
-        [matMenuTriggerFor]="recipeMenu"
-        (menuOpened)="dropdownCollapsed = false"
-        (menuClosed)="dropdownCollapsed = true"
-      >Receptek<mat-icon [@chevronRotate]="!dropdownCollapsed">
-        arrow_drop_down
-        </mat-icon></button>
-    </li>
-    <mat-menu #recipeMenu="matMenu" xPosition="after"
-    >
-      <button mat-menu-item>Előételek</button>
-      <button mat-menu-item>Levesek</button>
-      <button mat-menu-item>Főételek</button>
-      <button mat-menu-item>Köretek</button>
-      <button mat-menu-item>Desszertek</button>
-      <button mat-menu-item>Italok</button>
-    </mat-menu>
-    
-    <li class="">
-      <button mat-button
-        class=""
-        routerLink="/upload"
-        (click)="'isOpen=false'"
-        tabindex="-1"
-        aria-disabled="true"
-        >Receptfeltöltés</button>
-    </li>
-    <li class="">
-      <button mat-button
-        class=""
-        routerLink="/fridge"
-        tabindex="-1"
-        aria-disabled="true"
-        >Mi van itthon?</button>
-    </li>
-    
-  </ul>
-
-   <div>
-
-   </div>
-    
+ 
   </mat-toolbar>
 </div>
 
-<div id="mobileBar" class="container fixed top-0 left-0 right-0 mx-auto z-10 lg:hidden min-w-full"
-[style]="'background-color: var(--backgroundColor);'"
->
+<div id="mobileBar" class="container fixed top-0 left-0 right-0 mx-auto z-10 lg:hidden min-w-full">
  
   <mat-toolbar>
    <div class="container flex flex-row justify-between  min-w-full">

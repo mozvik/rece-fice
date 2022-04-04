@@ -1,15 +1,15 @@
-
-<!-- <div class="container"> -->
+<div class="container mx-auto">
+  <h4 class="title-h4 text-center py-20">Receptfeltöltés</h4>
   <mat-stepper
   [linear]="false"
   [orientation]="dataService.displaySize > 2 ? 'horizontal' : 'vertical'">
   <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
     <form [formGroup]="firstFormGroup">
-      <div class="flex flex-row flex-wrap">
+      <div class="flex flex-row flex-wrap md:gap-x-5 xl:gap-x-10 gap-y-20 pt-10">
         <mat-form-field
         appearance="legacy"
         hintLabel="Min. 4 karakter"
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 ">
           <mat-label>Név</mat-label>
           <input
             id="name" type="text" name="name" placeholder="A recepted neve"
@@ -22,7 +22,7 @@
         <mat-form-field 
         appearance="legacy"
         hintLabel=""
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5">
           <mat-label>Kategória</mat-label>
           <mat-select 
           [formControlName]="'category'" 
@@ -37,7 +37,7 @@
         <mat-form-field 
         appearance="legacy"
         hintLabel=""
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5">
           <mat-label>Nemzetközi konyha</mat-label>
           <mat-select 
           [formControlName]="'nationality'" 
@@ -52,7 +52,7 @@
         <mat-form-field 
         appearance="legacy"
         hintLabel=""
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5">
           <mat-label>Elkészítés nehézsége</mat-label>
           <mat-select 
           [formControlName]="'difficulity'" 
@@ -67,7 +67,7 @@
         <mat-form-field 
         appearance="legacy"
         hintLabel=""
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5">
           <mat-label>Költsége</mat-label>
           <mat-select 
           [formControlName]="'cost'" 
@@ -82,7 +82,7 @@
         <mat-form-field 
         appearance="legacy"
         hintLabel=""
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5">
           <mat-label>Címkék</mat-label>
           <mat-select 
           [formControlName]="'label'" 
@@ -95,15 +95,15 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div>
+      <div class="mt-5">
         {{firstFormGroup.invalid}}
-        <button mat-button matStepperNext>Következő</button>
+        <button mat-flat-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
   
   <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
-    <form [formGroup]="secondFormGroup">
+    <form [formGroup]="secondFormGroup" class="mt-10">
       <div formArrayName="directions">
         <div #formRow *ngFor="let dir of directions.controls; index as i"
         [formGroupName]="i"
@@ -128,34 +128,37 @@
           </mat-form-field>
          
           <div class="basis-2/6 flex flex-row">
-            <button *ngIf="i != 0"
-            mat-button class="" 
-            (click)="removeDirection(i)" 
-            type="button" >Lépés törlése</button>
+            
           
-            <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1"
-            mat-button class="" 
+            <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1 && secondFormGroup.controls['directions']?.valid"
+            mat-icon-button disableRipple="true" class="btn-icon" 
+            title="Új lépés hozzáadása"
             (click)="addDirection(i)" 
-            type="button" [disabled]="!secondFormGroup.controls['directions']?.valid">Lépés hozzáadása</button>
+            type="button" [disabled]="!secondFormGroup.controls['directions']?.valid"><mat-icon color="accent">create</mat-icon></button>
+            <button *ngIf="i != 0"
+            mat-icon-button disableRipple="true" class="btn-icon" 
+            title="Lépés törlése"
+            (click)="removeDirection(i)" 
+            type="button"><mat-icon color="warn">delete_outline</mat-icon></button>
           </div>
         </div>
       </div>
       
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="mt-5">
+        <button  mat-flat-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button  mat-flat-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók">
-    <form [formGroup]="thirdFormGroup">
+  <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók" class="pt-10">
+    <form [formGroup]="thirdFormGroup" class="mt-10">
       <div formArrayName="ingredients">
         <div #formRow *ngFor="let dir of ingredients.controls; index as i"
         [formGroupName]="i"
-        class="flex flex-col lg:flex-row"
+        class="flex flex-col lg:flex-row lg:gap-x-10"
         >
           <mat-form-field
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/4">
             <mat-label>Hozzávaló neve</mat-label>
             <input
             type="text"
@@ -167,7 +170,7 @@
           <mat-form-field 
           appearance="legacy"
           hintLabel=""
-          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/6 p-5">
+          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/5">
             <mat-label>Mennyiségi egysége</mat-label>
             <mat-select 
             formControlName="iUnit" 
@@ -179,7 +182,7 @@
           </mat-select>
         </mat-form-field>
           <mat-form-field
-          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/6 p-5">
+          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/12">
             <mat-label>Mennyisége</mat-label>
             <input
             type="number" min="0" step="1"
@@ -189,62 +192,68 @@
             >
           </mat-form-field>
                  
-          <div class="basis-2/6 flex flex-row">
-            <button *ngIf="i != 0"
-            mat-button class="" 
-            (click)="removeIngredient(i)" 
-            type="button" >Hozzávaló törlése</button>
-          
-            <button *ngIf="i == thirdFormGroup.controls['ingredients'].value.length - 1"
-            mat-button class="" 
+          <div class="basis-1/12 flex flex-row">
+            <button *ngIf="i == thirdFormGroup.controls['ingredients'].value.length - 1 && thirdFormGroup.controls['ingredients']?.valid"
+            mat-icon-button class="btn-icon" 
+            disableRipple="true"
+            title="Új hozzávaló hozzáadása"
             (click)="addIngredient(i)" 
-            type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid">Új hozzávaló</button>
+            type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid"><mat-icon color="accent">create</mat-icon></button>
+            <button *ngIf="i != 0"
+            mat-icon-button class="btn-icon" 
+            disableRipple="true"
+            title="Hozzávaló törlése"
+            (click)="removeIngredient(i)" 
+            type="button" ><mat-icon color="warn">delete_outline</mat-icon></button>
+          
           </div>
         </div>
       </div>
       
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="mt-5">
+        <button  mat-flat-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button  mat-flat-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
 
   <mat-step [stepControl]="fourthFormGroup" label="Egyéb jellemzők">
-    <form [formGroup]="fourthFormGroup">
-      <div class="flex flex-row flex-wrap">
+    <form [formGroup]="fourthFormGroup" class="mt-10">
+      <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 md:mb-20 ">
         <mat-form-field
           appearance="legacy"
           hintLabel="Percben add meg"
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/12">
             <mat-label>Elkészítési idő</mat-label>
             <input
             id="time" type="number" name="time"
             matInput
             formControlName="time"
             required
-            ><mat-icon matSuffix>schedule</mat-icon>
+            >
+            <!-- <mat-icon matSuffix>schedule</mat-icon> -->
         
         </mat-form-field>
         <mat-form-field
         appearance="legacy"
         hintLabel=""
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/12">
         <mat-label>Hány főre</mat-label>
         <input
         id="serving" type="number" name="serving"
         matInput
         formControlName="serving"
         required
-        ><mat-icon matSuffix>people_outline</mat-icon>
+        >
+        <!-- <mat-icon matSuffix>people_outline</mat-icon> -->
         
         </mat-form-field>
       </div>
-      <div class="flex flex-row flex-wrap">
+      <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 my-20 md:my-0">
         <mat-form-field
         appearance="legacy"
         hintLabel="Nem kötelező"
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/12">
           <mat-label>Kalória</mat-label>
           <input
           id="calorie" type="number" name="calorie"
@@ -255,7 +264,7 @@
         <mat-form-field
         appearance="legacy"
         hintLabel="Nem kötelező"
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/12">
           <mat-label>Szénhidrát</mat-label>
           <input
           id="carbonh" type="number" name="carbonh"
@@ -266,7 +275,7 @@
         <mat-form-field
         appearance="legacy"
         hintLabel="Nem kötelező"
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/12">
           <mat-label>Fehérje</mat-label>
           <input
           id="protein" type="number" name="protein"
@@ -277,7 +286,7 @@
         <mat-form-field
         appearance="legacy"
         hintLabel="Nem kötelező"
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/12">
           <mat-label>Zsír</mat-label>
           <input
           id="fat" type="number" name="fat"
@@ -288,7 +297,7 @@
         <mat-form-field
         appearance="legacy"
         hintLabel="Nem kötelező"
-        class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+        class="basis-full md:basis-1/12">
           <mat-label>Cukor</mat-label>
           <input
           id="sugar" type="number" name="sugar"
@@ -297,15 +306,15 @@
           >
         </mat-form-field>
       </div>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="mt-10">
+        <button mat-flat-button color="primary"  matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button mat-flat-button color="primary"  matStepperNext>Következő</button>
       </div>
     </form> 
   </mat-step>
   <mat-step [stepControl]="fifthFormGroup">
     <ng-template matStepLabel>Kép feltöltése</ng-template>
-    <form [formGroup]="fifthFormGroup">
+    <form [formGroup]="fifthFormGroup" class="mt-10">
       <div class="flex flex-col">
        
         <mat-label>A jól sikerült fotók népszerűbbé tehetik receptjeidet. Maximum 3 képet tölthetsz fel.</mat-label>
@@ -316,6 +325,7 @@
           [preview]="true"
           accept=".png,.jpg"
           multiple
+          dragAndDropText="Húzz ide egy képet"
           [minlength]=1 
           [maxlength]=3
           [hiddenUpload]="true"
@@ -330,11 +340,11 @@
         </div>
          
         <div>
-          status: {{fifthFormGroup.controls['photos'].status}} | 
+          <!-- status: {{fifthFormGroup.controls['photos'].status}} | 
           requiredError: {{fifthFormGroup.controls['photos']?.errors}} | 
           minError: {{fifthFormGroup.controls['photos'].errors}}
           | 
-          touched: {{fifthFormGroup.controls['photos'].touched}}
+          touched: {{fifthFormGroup.controls['photos'].touched}} -->
         </div>
         <div>
          
@@ -342,35 +352,24 @@
         
         </div>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-flat-button color="primary" matStepperPrevious>Előző</button>
       </div>
     </form> 
   </mat-step>
   </mat-stepper> 
 
 
-<div class="col-12" >
-  <h4 class="title-h4 text-center">Receptfeltöltés</h4><br>
-  <div class="row ">
-    <div class="col-12 col-lg-12 px-0 px-lg-5 ">
-      <form action="" 
-      
-      class="justify-content-center justify-content-md-start row">
-      
-        
-        <div class="col-12 col-lg-7 mb-5">
-          <button pButton type="submit" label="Recept feltöltése" class="p-button-danger"
-          (click)="submitForm()"
-          >submit</button>
-          <!-- [disabled]="firstFormGroup.invalid 
-          || secondFormGroup.invalid || 
-          thirdFormGroup.invalid || 
-          fourthFormGroup.invalid" -->
-          
-        </div>
-      </form>
+  <div class="flex flex-row justify-center mb-28" >
+    <div class="">
+      <button mat-flat-button color="primary" type="submit" class=""
+      (click)="submitForm()"
+      [disabled]="firstFormGroup.invalid 
+      || secondFormGroup.invalid || 
+      thirdFormGroup.invalid || 
+      fourthFormGroup.invalid"
+      >Recept feltöltése</button>
     </div>
-</div>
+  </div>
+
 </div>
   

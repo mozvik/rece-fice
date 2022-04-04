@@ -12,7 +12,7 @@ import { MessageService } from 'src/app/service/message.service';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css'],
+  styleUrls: ['./edit.component.scss'],
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,

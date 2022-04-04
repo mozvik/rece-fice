@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class UploadModule { }

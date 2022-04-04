@@ -1,0 +1,18 @@
+@import "../../../colors";
+@import "../../../mixins";
+
+.container{
+  color: $backgroundColor;
+  background-color: $textColor;
+}
+
+button{
+  @include oswald;
+  letter-spacing: .05rem;
+}
+::ng-deep  .mat-form-field-label, .mat-input-element::placeholder, .mat-focused {
+  color: $textColorMuted!important;
+}
+::ng-deep .mat-checkbox-frame { 
+  border-color: grey!important;
+}

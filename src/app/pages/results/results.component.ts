@@ -9,7 +9,7 @@ import { hoverImageAnimation, scaleEnterAnimation } from 'src/app/animations';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
-  styleUrls: ['./results.component.css'],
+  styleUrls: ['./results.component.scss'],
   animations: [
     trigger(
       'enterHoverAnimation', hoverImageAnimation

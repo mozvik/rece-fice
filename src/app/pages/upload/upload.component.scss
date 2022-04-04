@@ -1,0 +1,19 @@
+@import "../../../mixins";
+@import "../../../colors";
+
+.mat-stepper-vertical, .mat-stepper-horizontal{
+  background-color: $backgroundColor;
+  @include lora;
+  form{
+    min-height: 400px;
+  }
+}
+
+
+button{
+  @include oswald;
+  letter-spacing: .05rem;
+}
+.btn-icon .mat-icon{
+  font-size: 2.5rem;
+}

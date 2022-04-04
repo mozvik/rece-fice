@@ -4,10 +4,11 @@ import { DataService } from '../../service/data.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { chevronRotate } from '../../animations';
 
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css'],
+  styleUrls: ['./toolbar.component.scss'],
   animations: [
     chevronRotate,
     trigger('toolbarSlideDown', [
@@ -27,13 +28,16 @@ import { chevronRotate } from '../../animations';
 export class ToolbarComponent implements OnInit {
   @ViewChild(MatMenuTrigger) recipeDropdown!: MatMenuTrigger;
 
+
   dropdownCollapsed: boolean = true;
   toolbarDown: boolean = false;
 
-  constructor(public dataService: DataService) { }
+  constructor(public dataService: DataService,) { }
 
   ngOnInit(): void {
+
   }
+  
 
   onScroll(event: any) {
     if (window.pageYOffset >= 128) {

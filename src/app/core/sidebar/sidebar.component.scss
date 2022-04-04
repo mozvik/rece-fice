@@ -1,0 +1,13 @@
+@import "../../../mixins";
+@import "../../../colors";
+
+.nav-item button{
+  @include source-upper;
+}
+.nav-link button{
+  @include source;
+}
+
+.mat-sidenav-content{ 
+  background: $backgroundColor;
+}

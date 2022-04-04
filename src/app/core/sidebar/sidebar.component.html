@@ -5,10 +5,7 @@
   fixedTopGap=56
   [(opened)]="dataService.sidenavOpened" 
   >
-  <!-- (opened)="events.push('open!')"
-  (closed)="events.push('close!')" -->
-  <!-- (closedStart)="dataService.sidenavOpened = false"
-  (openedStart)="dataService.sidenavOpened = true" -->
+  
   <nav id="mobileNavbar" 
   class="w-60 relative"
   >
@@ -70,9 +67,6 @@
   
 
   <mat-sidenav-content>
-    <!-- <p><mat-checkbox [(ngModel)]="dataService.sidenavOpened">sidenav.opened</mat-checkbox></p>
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p> -->
     <router-outlet></router-outlet>
-    
   </mat-sidenav-content>
 </mat-sidenav-container>

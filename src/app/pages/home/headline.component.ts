@@ -5,7 +5,7 @@ import { DataService } from '../../service/data.service';
 @Component({
   selector: 'app-headline',
   templateUrl: './headline.component.html',
-  styleUrls: ['./headline.component.css']
+  styleUrls: ['./headline.component.scss']
 })
 export class HeadlineComponent implements OnInit {
   

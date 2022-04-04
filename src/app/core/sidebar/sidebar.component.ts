@@ -6,7 +6,7 @@ import { DataService } from '../../service/data.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'],
+  styleUrls: ['./sidebar.component.scss'],
   animations: [
     chevronRotate,
     trigger("collapseSubmenu", [

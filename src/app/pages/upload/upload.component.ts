@@ -12,7 +12,7 @@ import { MessageService } from 'src/app/service/message.service';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css'],
+  styleUrls: ['./upload.component.scss'],
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,

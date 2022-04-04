@@ -1,0 +1,26 @@
+@import "../../../mixins";
+@import "../../../colors";
+
+li button{
+  @include source-upper;
+}
+.mat-menu-item{
+  @include source;
+}
+
+#userBar, #mainBar, .mat-toolbar {
+  color: $textColor;
+  background-color: $backgroundColor;
+}
+#mobileBar{
+
+}
+
+#desktopBar.toolbarScroll{
+  position: fixed;
+  
+  top: -128px;
+  background:  $info;
+  margin-bottom: 0; 
+  z-index: 2; 
+}

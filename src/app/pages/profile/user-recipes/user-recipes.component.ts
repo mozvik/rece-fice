@@ -12,7 +12,7 @@ import { MessageService } from 'src/app/service/message.service';
 @Component({
   selector: 'app-user-recipes',
   templateUrl: './user-recipes.component.html',
-  styleUrls: ['./user-recipes.component.css'],
+  styleUrls: ['./user-recipes.component.scss'],
   animations: [
     trigger(
       'enterHoverAnimation', hoverImageAnimation
