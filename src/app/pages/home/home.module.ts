@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
+import { SharedModule } from 'src/app/shared/shared.module';
 // import { SearchComponent } from 'src/app/search/search.component';
 
 @NgModule({
@@ -25,13 +26,15 @@ import { MatTabsModule } from '@angular/material/tabs';
   ],
   imports: [
     CommonModule,
+    SharedModule.forRoot(),
     HomeRoutingModule,
     MatDividerModule, 
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    
   ]
 })
 export class HomeModule { }

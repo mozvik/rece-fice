@@ -11,16 +11,69 @@ li button{
 #userBar, #mainBar, .mat-toolbar {
   color: $textColor;
   background-color: $backgroundColor;
-}
-#mobileBar{
 
 }
+#userBar, #mobileImgWrapper{
+  img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+#potMobile{
+  transform: translate(-50%,-60%)
+}
+#flameMobile{
+  transform: translate(35%, -76%)
+}
+
 
 #desktopBar.toolbarScroll{
   position: fixed;
   
-  top: -128px;
+  top: -126px;
   background:  $info;
   margin-bottom: 0; 
   z-index: 2; 
+}
+
+@media (min-width: 1024px){
+  #mainBar::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    height: 126px;
+    border-bottom: 1px solid $textColor;
+    
+    opacity: .3;
+  }
+  #mainBar::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    height: 122px;
+    border-bottom: 1px solid $textColor;
+    pointer-events: none;
+    opacity: .3;
+  }
+   #pot{
+    transform: translate(-50%,-80%)
+  }
+  #flame{
+    transform: translate(32%, -100%)
+  }
+}
+@media (min-width: 1280px){
+  #pot{
+    transform: translate(-50%,-30%)
+  }
+  #flame{
+    transform: translate(32%, -41%)
+  }
 }

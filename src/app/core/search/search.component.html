@@ -1,4 +1,4 @@
-<div class="container" id="s-modal"
+<div class="container mt-10" id="s-modal"
     (click)="closeModal($event)"
     (window:keyup)="$event.key == 'Escape' ? closed.emit(true):''"
     [style]="isSearchOpen ? 'display: block':'display: none'"

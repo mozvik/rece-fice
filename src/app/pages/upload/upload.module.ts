@@ -16,7 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
-    UploadComponent
+    UploadComponent,
   ],
   imports: [
     CommonModule,

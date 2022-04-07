@@ -1,0 +1,13 @@
+<div *ngIf="!small; else elseBlock" class="wrapper flex flex-col items-center">
+  <div class="diviLeft flex flex-row items-center">
+    <img src="../../../assets/img/divider-left.png" alt="" width="70">
+    <div class="">{{subtitle}}</div>
+  </div>
+  <div class="diviRight flex flex-row items-center">
+    <div class="uppercase">{{title}}</div>
+    <img src="../../../assets/img/divider-right.png" alt="" width="70" class="">
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div><img src="../../../assets/img/divider-small.png" alt="" width="140" class=""></div>
+</ng-template>

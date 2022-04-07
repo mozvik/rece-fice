@@ -4,31 +4,24 @@
 
 
 
-<div id="navPlaceholder" [style.height]="dataService.displaySize > 2 ? '128px':'56px'">
-</div>
+<!-- <div id="navPlaceholder" [style.height]="dataService.displaySize > 2 ? '128px':'56px'">
+</div> -->
 
-<div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full" 
+<div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full z-10" 
 
 (window:scroll)="onScroll($event)"
 [@toolbarSlideDown]="toolbarDown"
-[class.toolbarScroll]="toolbarDown"
->
+[class.toolbarScroll]="toolbarDown">
   <mat-toolbar id="userBar"
-  class="flex flex-row justify-between"
-  >
-  <div class="container flex flex-row">
-    <ul class="flex flex-row">
-      
-    </ul>
-  </div>
-  <div class="container flex flex-row justify-end">
-   
-  </div>
-
-  <div>
-
-  </div>
-
+  class="flex flex-row justify-between w-100">
+      <img src="./assets/img/pot.png"
+          alt=""
+          width="80" id="pot"
+          class=""/>
+      <img src="./assets/img/flame.png"
+          alt=""
+          width="50" id="flame"
+          class=""/>
   </mat-toolbar>
   <mat-toolbar id="mainBar" class="flex flex-row justify-between w-100">
 
@@ -119,12 +112,15 @@
   <mat-toolbar>
    <div class="container flex flex-row justify-between  min-w-full">
     <button mat-icon-button (click)="dataService.toggleSidenav()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">menu</mat-icon></button>
-    <div class="" style="width: 50px; height: 50px" (click)="'isOpen = !isOpen'">
-      <img
-        src="./assets/img/logo_ff7055_50.png"
-        alt=""
-        class=""
-      />
+    <div class="relative" id="mobileImgWrapper" style="width: 50px; height: 50px" (click)="'isOpen = !isOpen'">
+      <img src="./assets/img/pot.png"
+          alt=""
+          width="50" id="potMobile"
+          class=""/>
+      <img src="./assets/img/flame.png"
+          alt=""
+          width="30" id="flameMobile"
+          class=""/>
     </div>
     <button mat-icon-button (click)="dataService.toggleSearch()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">search</mat-icon></button>
    </div>

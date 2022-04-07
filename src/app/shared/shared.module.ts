@@ -5,12 +5,16 @@ import { APIService } from '../service/api.service';
 import { DataService } from '../service/data.service';
 import { IconService } from '../service/icon.service';
 import { MessageService } from '../service/message.service';
+import { DividerComponent } from './divider/divider.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DividerComponent
+  ],
   imports: [ CommonModule ],
   exports: [
     CommonModule,
+    DividerComponent
   ]
 })
 export class SharedModule {

@@ -1,40 +1,36 @@
 <div class="container mx-auto lora">
-  <div id="logoMain" class="py-20 px-5">
-    <div class="flex justify-center">
-      <img src="./assets/img/headline-logo.png" alt="" class="block lg:hidden object-cover" width="480"/>
+  <div id="logoMain" class="flex flex-col justify-center px-10">
+    <div class="hero-title">RECEFICE</div>
+    <div class="hero-title">RECEPTTÁR</div>
+    <div class="hero-subtitle">A szakácskönyv,</div>
+    <div class="hero-subtitle">ami mindig kéznél van.</div>
+  </div>
+  <div class="mt-32">
+    <app-divider title="A kínálatból" subtitle="Válogass"></app-divider>
+  </div>
+  <div id="about" class="grid grid-rows-6 md:grid-rows-3 xl:grid-rows-2 grid-flow-col gap-0 md:gap-16 pt-28 justify-center md:justify-between">
+    <div class="border headline-img order-2 xl:order-1"><img src="../../../assets/img/donuts.jpg" alt=""></div>
+    <div class="border headline-txt order-1 xl:order-2 flex flex-col items-center justify-around p-10 text-center">
+      <div class="title-h3">Részletes kereső</div>
+      <app-divider small="true"></app-divider>
+      <div>Egészséges ételeket keresel, vagy csak ötleteket az otthonodban megtalálható alapanyagok felhasználására?</div>
+      <div>A recepttárban biztosan megtalálod amit szeretnél.</div>
     </div>
-    <div class="flex justify-center">
-      <img src="./assets/img/headline-logo.png" alt="" class="hidden lg:block" width="710"/>
+    <div class="headline-txt order-3 flex flex-col items-center justify-around p-10 text-center">
+      <div class="title-h3">Receptek</div>
+      <app-divider small="true"></app-divider>
+      <div>Több mint 234 darab</div>
+      <div>különféle recept közül válogathatsz.</div>
+    </div>
+    <div class="border headline-img order-4"><img src="../../../assets/img/korean.jpg" alt=""></div>
+    <div class="border headline-img order-6  xl:order-5"><img src="../../../assets/img/decorating.jpg" alt=""></div>
+    <div class="border headline-txt order-5  xl:order-6 flex flex-col items-center justify-around p-10 text-center">
+      <div class="title-h3">Receptfeltöltés</div>
+      <app-divider small="true"></app-divider>
+      <div>Ismersz egy remek receptet, amit megosztanál másokkal? Van saját ételkülönlegességed, specialitásod?</div>
+      <div>Mutasd meg mit tudsz, ne habozz! Tölts fel saját receptet!</div>
     </div>
   </div>
-  <mat-divider class="py-5"></mat-divider>
-
-  <div class="flex flex-col lg:grid lg:grid-cols-12 gap-4 content-center	py-10">
-    <div class="text-center lg:col-span-3">
-      <h3 class="title-h3">
-        <mat-icon id="h-list" style="font-size: 4rem; transform: translateX(-15px);">receipt_long</mat-icon>
-      </h3><p>345+</p> <p class="lora">recept közül válogathatsz</p>
-    </div>
-    <mat-divider [vertical]="true" class="hidden lg:block col-span-1 mx-auto"></mat-divider>
-    
-    <div class=" lg:col-span-4 text-center"> 
-      <h3 class="title-h3 mb-3">
-        <button mat-icon-button (click)="dataService.searchIsOpen=true" [disableRipple]="true"><mat-icon id="h-search" style="font-size: 4rem; transform: translateX(-10px);">search</mat-icon></button>
-      </h3><br>
-      <p>Egészséges ételeket keresel, vagy csak ötleteket az otthonodban megtalálható alapanyagok felhasználására?</p> <p>A recepttárban biztosan megtalálod amit szeretnél. </p>
-    </div>
-    <mat-divider [vertical]="true" class="hidden lg:block col-span-1 "></mat-divider>
-    <div class="col-12 col-lg-2 p-3 text-center lg:col-span-3 ">
-      <h3 class="title-h3 mb-3">
-        <button mat-icon-button [routerLink]="dataService.user.id!='' ? '/upload':'/login'" [disableRipple]="true"><mat-icon id="h-upload" style="font-size: 4rem; transform: translateX(-10px);">file_upload</mat-icon></button>
-      </h3> <br>
-        <p>Mutasd meg mit tudsz!</p>
-        <p>Tölts fel saját receptet!</p>
-    </div>
-  </div>
-  <div>&nbsp;</div>
-  <mat-divider></mat-divider>
-
 </div>
 
 

@@ -1,6 +1,8 @@
 $fontSource: "Source Sans Pro", sans-serif;
 $fontLora: "Lora", sans-serif;
 $fontOswald: "Oswald", sans-serif;
+$fontPoppins: "Poppins", sans-serif;
+$fontDancing: "Dancing Script", cursive;
 
 @mixin source{
   font-family: $fontSource;
@@ -30,6 +32,16 @@ $fontOswald: "Oswald", sans-serif;
 }
 @mixin oswald{
   font-family: $fontOswald;
+  font-size: 1.20rem;
+  font-weight: 400;
+}
+@mixin poppins{
+  font-family: $fontPoppins;
+  font-size: 1.20rem;
+  font-weight: 400;
+}
+@mixin dancing{
+  font-family: $fontDancing;
   font-size: 1.20rem;
   font-weight: 400;
 }

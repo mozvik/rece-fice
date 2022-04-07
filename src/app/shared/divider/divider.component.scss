@@ -1,0 +1,25 @@
+@import "../../../mixins";
+@import "../../../colors";
+
+.diviLeft{
+  @include dancing;
+  transform: translate(-38%,21%);
+  >div{
+    font-size: 2.5rem;
+    opacity: .4;
+    color: $textColor;
+  }
+}
+.diviRight{
+  @include poppins;
+  transform: translate(38%,-21%);
+  >div{
+    font-size: 2rem;
+    color: $textColor;
+   }
+}
+
+img{
+  height: 100%;
+  opacity: .5;
+}
