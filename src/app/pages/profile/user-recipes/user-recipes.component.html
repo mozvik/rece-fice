@@ -1,18 +1,17 @@
 
 
 <div class="container flex flex-row justify-center mt-8 mx-auto">
-  <!-- <div class="recipe-container flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap"> -->
   <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">
-  <ng-container *ngFor="let item of userRecipes; let i=index"  >
+  <ng-container *ngFor="let item of userRecipes; let i=index">
     
-    <div class="recipe-card" [@enterAnimation]>
+    <div class="recipe-card flex flex-col justify-between" [@enterAnimation]>
       <div class="card-image relative"
       [routerLink]="['/details', item.recipeId]" 
       (mouseover)="showImgText(i)" (mouseout)="hideImgText(i)">
         <img [src]="item.image[0]" alt="" width="358" height="220" alt="image not found">
         <div 
         *ngIf="showImgOverlay[i]" [@enterHoverAnimation]
-        class="img-overlay absolute left-8 top-8 lora-i">
+        class="img-overlay absolute left-8 top-8">
           <div class="mb-2">Elkészítési ideje: {{item.cookingTime}} perc</div>
           <div class="mb-2">Nehézsége: {{item.difficulityName(this.dataService.difficulityList)}}</div>
           <div class="">Költsége: {{item.costName(this.dataService.costList)}}</div>
@@ -20,27 +19,36 @@
       </div>
       
       
-      <div class="card-footer my-3 title-h4">
-        <div class="flex flex-row justify-between">
-          <div class="rating">*****</div>
-          <div class="flex flex-row justify-between items-center">
-            <mat-icon 
-            (click)="openDeleteDialog(item)"
-            matTooltip="Recept törlése"
-            [matTooltipPosition]="'left'">delete_outline</mat-icon>&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<mat-icon [routerLink]="['/edit', item.recipeId]"
-            matTooltip="Recept szerkesztése"
-            [matTooltipPosition]="'right'">edit_note</mat-icon>
+      <div class="flex flex-col justify-between grow ">
+        <div>
+          <div class="flex flex-row justify-between">
+            <div class="rating title-h4">*****</div>
+            <div class="flex flex-row justify-between items-center">
+              <mat-icon
+              (click)="openDeleteDialog(item)"
+              matTooltip="Recept törlése"
+              [matTooltipPosition]="'left'">delete_outline</mat-icon>&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<mat-icon [routerLink]="['/edit', item.recipeId]"
+              matTooltip="Recept szerkesztése"
+              [matTooltipPosition]="'right'">edit_note</mat-icon>
+            </div>
+          
+          </div>
+          <div class="title-h6" [routerLink]="['/details', item.recipeId]">{{item.recipeName}}
+
           </div>
         </div>
-        <div [routerLink]="['/details', item.recipeId]">{{item.recipeName}}</div>
-      </div>
-      <div class="card-subtitle flex flex-row justify-between lora-i mb-3">
         
-        <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon><div>{{item.userId}}&nbsp;Gipsz Jakab</div></div>
-        <div class="flex flex-row items-center"><div>{{item.categoryName(this.dataService.categoryList)}}</div></div>
+        <div class="card-subtitle flex flex-row justify-between mb-3">
+          <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon>
+            <div>{{item.userId}}&nbsp;Gipsz Jakab</div>
+          </div>
+          <div class="flex flex-row items-center"><div>{{item.categoryName(this.dataService.categoryList)}}</div>
+          </div>
+        </div>
       </div>
+
     </div>
   </ng-container>
   </div>
 </div>
-<button (click)="incrementIndex()">Mutass többet</button>
+<div class="text-center m-5"><button mat-flat-button color="primary" (click)="incrementIndex()">Mutass többet</button></div>

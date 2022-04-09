@@ -1,9 +1,12 @@
 <div class="container mx-auto">
-  <h4 class="title-h4 text-center py-20">Receptfeltöltés</h4>
+  <h4 class="title-h4 text-center mt-48 mb-20">Receptfeltöltés</h4>
   <mat-stepper
   [linear]="false"
   [orientation]="dataService.displaySize > 2 ? 'horizontal' : 'vertical'">
   <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
+    <div class="relative">
+      <img class="absolute hidden md:block right-20 lg:-right-8 top-28" src="../../../assets/img/vanilia.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*100:0">
+    </div>
     <form [formGroup]="firstFormGroup">
       <div class="flex flex-row flex-wrap md:gap-x-5 xl:gap-x-10 gap-y-20 pt-10">
         <mat-form-field
@@ -103,6 +106,9 @@
   </mat-step>
   
   <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
+    <div class="relative">
+      <img class="absolute hidden md:block right-20 lg:-right-8 top-32 lg:top-8" src="../../../assets/img/mak.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*110:0">
+    </div>
     <form [formGroup]="secondFormGroup" class="mt-10">
       <div formArrayName="directions">
         <div #formRow *ngFor="let dir of directions.controls; index as i"
@@ -151,6 +157,9 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók" class="pt-10">
+    <div class="relative">
+      <img class="absolute hidden md:block right-10 lg:-right-8 top-72 lg:top-10" src="../../../assets/img/anizs.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*110:0">
+    </div>
     <form [formGroup]="thirdFormGroup" class="mt-10">
       <div formArrayName="ingredients">
         <div #formRow *ngFor="let dir of ingredients.controls; index as i"
@@ -218,6 +227,9 @@
   </mat-step>
 
   <mat-step [stepControl]="fourthFormGroup" label="Egyéb jellemzők">
+    <div class="relative">
+      <img class="absolute hidden md:block right-16 lg:right-0 top-0 lg:top-8" src="../../../assets/img/fahej.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*110:0">
+    </div>
     <form [formGroup]="fourthFormGroup" class="mt-10">
       <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 md:mb-20 ">
         <mat-form-field

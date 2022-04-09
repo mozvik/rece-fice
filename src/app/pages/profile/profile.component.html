@@ -1,19 +1,22 @@
 <!-- <p>profile works! index: {{userPageIndex}}</p> -->
-<mat-tab-group 
-[(selectedIndex)]="dataService.activeProfileTab"
-animationDuration="600ms">
-  <mat-tab label="Profilom">
-    <app-user-profile [user]="userID"></app-user-profile>
-  </mat-tab>
-  <mat-tab label="Saját receptek">
-    <app-user-recipes 
-    [user]="userID"
-    [userRecipes]="dataService.userRecipeList"
-    [userPageIndex]="dataService.userRecipePageIndex"
-    (userPageIndexChange)="userPageIndexChanged($event)"
-    ></app-user-recipes>
-  </mat-tab>
-  <mat-tab label="Kedvenceim">
-    <app-user-favorites [user]="userID"></app-user-favorites>
-  </mat-tab>
-</mat-tab-group>
+<div class="container mx-auto mt-48 min-h-screen">
+  <mat-tab-group mat-align-tabs="center"
+  class="title-h4"
+  [(selectedIndex)]="dataService.activeProfileTab"
+  animationDuration="600ms">
+    <mat-tab label="Profilom">
+      <app-user-profile [user]="userID"></app-user-profile>
+    </mat-tab>
+    <mat-tab label="Saját receptek">
+      <app-user-recipes
+      [user]="userID"
+      [userRecipes]="dataService.userRecipeList"
+      [userPageIndex]="dataService.userRecipePageIndex"
+      (userPageIndexChange)="userPageIndexChanged($event)"
+      ></app-user-recipes>
+    </mat-tab>
+    <mat-tab label="Kedvenceim">
+      <app-user-favorites [user]="userID"></app-user-favorites>
+    </mat-tab>
+  </mat-tab-group>
+</div>

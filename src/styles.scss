@@ -11,30 +11,22 @@
 
 /* You can add global styles to this file, and also import other style files */
 :root {
-  /* --orangeRed: rgb(255, 112, 85); #ff7055 */
+
   --orangeRed: rgb(255, 112, 85); /*#ff7055*/
   --orangeRedDark: #df3e10;
-  /* --textColor: #2c3b4b; */
+
   --textColor: #2d3a4b;
   --textColorRGB: 45, 58, 75;
   --textColorMuted: #8e9092;
   --backgroundColor: #fffef7;
   --backgroundColorDarker: #eae8e0;
 
-  /*8e9092*/
   --aa: #DF3E10;
   --ab: #2D3A4B;
   --ac: #EAE0D5;
   --ad: #2292A4;
   --ae: #0A8754;
 
-  /*
-  DF3E10
-  2D3A4B
-  EAE0D5
-  2292A4
-  0A8754
-  */
 }
 
 body,
@@ -56,35 +48,7 @@ input:focus,
   box-shadow: none;
   outline: none;
 }
-// .form-control:focus {
-//   box-shadow: none;
-//   outline: none;
-//   border-color: #ced4da;
-// }
-// .lora{
-//   font-family: $fontLora;
-//   font-size: 1.25rem;
-//   font-weight: 100;
-//   font-style: normal;
-// }
-// .lora-i{
-//   font-family: "Lora", sans-serif;
-//   font-size: 1.25rem;
-//   font-weight: 100;
-//   font-style: italic;
-// }
-// .oswald{
-//   font-family: $fontOswald;
-//   font-size: 1.25rem;
-//   font-weight: 100;
-//   font-style: normal;
-// }
-// .oswald-i{
-//   font-family: "Lora", sans-serif;
-//   font-size: 1.25rem;
-//   font-weight: 100;
-//   font-style: italic;
-// }
+
 .title{
   text-transform: uppercase;
   font-style: normal;
@@ -110,6 +74,11 @@ input:focus,
     @extend .title;
     font-size: 1.5rem;
   }
+  .title-h6{
+    @extend .title;
+    font-size: 1.25rem;
+  }
+
 
 .snack-success{
   background: green;
@@ -135,7 +104,7 @@ input:focus,
 }
 .mat-tooltip{
   font-family: $fontOswald;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 .mat-divider{
   margin: 0 auto!important;
@@ -143,6 +112,7 @@ input:focus,
 .mat-option-text{
   @include source;
 }
+
 
 
 

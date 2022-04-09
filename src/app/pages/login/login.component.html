@@ -1,62 +1,65 @@
-<div class="flex flex-col lg:flex-row">
-  <div class="basis-auto w-full flex flex-col p-10">
-    <h4 class="title-h4">Belépés</h4><br>
-    <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p><br>
-    <form action="" class="flex flex-col"
-    [formGroup]="loginFormGroup">
-      <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col">
-          <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email" />
-          <small *ngIf="email?.errors?.['required'] && email?.dirty"
-          class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
-          <small *ngIf="!email?.errors?.['required'] && email?.errors && email?.dirty && email?.touched,"
-          class="input-help text-danger">&nbsp;Rossz email formátum</small>
+<div class="container mx-auto">
+  <div class="flex flex-col lg:flex-row mt-64 mb-32 h-full wrapper">
+    <div class="basis-auto w-full flex flex-col p-20">
+      <h4 class="title-h4 mb-12">Belépés</h4>
+      <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p><br>
+      <form action="" class="flex flex-col"
+      [formGroup]="loginFormGroup">
+        <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col">
+            <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email" />
+            <small *ngIf="email?.errors?.['required'] && email?.dirty"
+            class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
+            <small *ngIf="!email?.errors?.['required'] && email?.errors && email?.dirty && email?.touched,"
+            class="input-help text-danger">&nbsp;Rossz email formátum</small>
+          </mat-form-field>
+        <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col">
+          <input id="password" type="password" name="password" placeholder="Jelszó" aria-describedby="input-help" matInput formControlName="password" />
+          <small *ngIf="password?.errors?.['required'] && password?.dirty"
+            class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
+            <small *ngIf="password?.errors?.['minlength'] && password?.dirty && password?.touched"
+            class="input-help text-danger">&nbsp;Min. 8 karakter hosszú legyen</small>
         </mat-form-field>
-      <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col">
-        <input id="password" type="password" name="password" placeholder="Jelszó" aria-describedby="input-help" matInput formControlName="password" />
-        <small *ngIf="password?.errors?.['required'] && password?.dirty"
-          class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
-          <small *ngIf="password?.errors?.['minlength'] && password?.dirty && password?.touched"
-          class="input-help text-danger">&nbsp;Min. 8 karakter hosszú legyen</small>
-      </mat-form-field>
+        
+        <div class="my-8 forgotten">
+          <a href="">Elfelejtetted a jelszavad?</a>
+        </div>
+        <div class="">
+          <button color="primary" mat-flat-button type="submit" 
+          routerLink="/profile"
+          (click)="dataService.user.id='1'">BELÉPÉS</button>
+        </div>
+      </form>
       
-      <div class="">
-        <a href="">Elfelejtetted a jelszavad?</a>
+    </div>
+    <div class="hidden lg:block basis-1/12">
+      <div class="flex flex-col items-center py-20">
+        <mat-divider [vertical]="true" class="mb-4" style="width: 1px; height:150px"></mat-divider>
+        <span class="text-center block py-5">Vagy</span>
+        <mat-divider [vertical]="true" class="mt-4" style="width: 1px; height:150px"></mat-divider>
       </div>
-      <div class="">
-        <button color="primary" mat-flat-button type="submit" 
-        routerLink="/profile"
-        (click)="dataService.user.id='1'">BELÉPÉS</button>
-      </div>
-    </form>
-    
-  </div>
-  <div class="hidden lg:block basis-1/12">
-    <div class="flex flex-col items-center">
-      <mat-divider [vertical]="true" class="mb-4" style="width: 1px; height:150px"></mat-divider>
-      <span class="text-center block">Vagy</span>
-      <mat-divider [vertical]="true" class="mt-4" style="width: 1px; height:150px"></mat-divider>
+      
     </div>
     
-  </div>
-  
-  <div class="block lg:hidden flex flex-row w-full col-span-2 justify-center items-center">
-    <mat-divider class="w-2/5"></mat-divider>
-    <span class="text-center block">Vagy</span>
-    <mat-divider class="w-2/5"></mat-divider>
-  </div>
+    <div class="block lg:hidden flex flex-row w-full col-span-2 justify-center items-center">
+      <mat-divider class="w-2/5"></mat-divider>
+      <span class="text-center block">Vagy</span>
+      <mat-divider class="w-2/5"></mat-divider>
+    </div>
 
-  <div class="basis-auto w-full p-10">
-    <h4 class="title-h4">Regisztráció</h4><br>
-    <p>Hozz létre egy felhasználói fiókot, hogy hozzáférj a következő szolgáltatásokhoz: </p>
-    <ul class="">
-      <li class="">Receptfeltöltés</li>
-      <li class="">Értékelések, hozzászólások</li>
-      <li class="">Kedvenc receptek elmentése</li>
-      <li class="">Hozzáférés a csevegőhöz</li>
-    </ul>
-    <button
-    routerLink="/register"
-    type="button"  color="primary" mat-flat-button >REGISZTRÁCIÓ</button>
+    <div class="basis-auto w-full p-20 relative">
+      <h4 class="title-h4 mb-12">Regisztráció</h4>
+      <p>Hozz létre egy felhasználói fiókot, hogy hozzáférj a következő szolgáltatásokhoz: </p><br>
+      <ul class="list-disc my-4 pl-6">
+        <li class="">Receptfeltöltés</li>
+        <li class="">Értékelések, hozzászólások</li>
+        <li class="">Kedvenc receptek elmentése</li>
+      </ul>
+      <div class="mt-8">
+        <button
+        routerLink="/register"
+        type="button"  color="primary" mat-flat-button >REGISZTRÁCIÓ</button>
+      </div>
+      <div class="absolute bottom-0 right-12"><img src="../../../assets/img/pepper.png" alt="" class="w-52 sm:w-72 xl:w-96 filter drop-shadow-xl"></div>
+    </div>
   </div>
 </div>
-

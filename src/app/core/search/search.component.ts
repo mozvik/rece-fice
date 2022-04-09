@@ -212,15 +212,13 @@ export class SearchComponent implements OnInit {
           this.apiService.searchResults = result;
           this.dataService.searchResultsSimple = result.items;
 
-          console.log("inputChange php results",result, this.dataService.searchResultsSimple)
-        this.searchResults = result?.items,
-        result?.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
+          this.searchResults = result?.items,
+          result?.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
 
-        this.filteredOptions =  this.searchForm.controls['searchCtrl'].valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value)),
+          this.filteredOptions =  this.searchForm.controls['searchCtrl'].valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value)),
         );
-       
       }
       )
     }

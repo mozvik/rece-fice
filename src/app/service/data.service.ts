@@ -23,8 +23,7 @@ export class DataService {
   public displaySize!: number
   public searchIsOpen: boolean = false
   public sidenavOpened: boolean = false;
-  public currentScreenSize: string = ""
-  
+  public currentScreenSize: number | undefined  
   //global active Recipe
   public selectedRecipe = new BehaviorSubject<Recipe>(new Recipe());
   
@@ -42,11 +41,11 @@ export class DataService {
 
    // Create a map to display breakpoint names for demonstration purposes.
    displayNameMap = new Map([
-    [Breakpoints.XSmall, 'XSmall'],
-    [Breakpoints.Small, 'Small'],
-    [Breakpoints.Medium, 'Medium'],
-    [Breakpoints.Large, 'Large'],
-    [Breakpoints.XLarge, 'XLarge'],
+    [Breakpoints.XSmall, 0],
+    [Breakpoints.Small, 1],
+    [Breakpoints.Medium, 2],
+    [Breakpoints.Large, 3],
+    [Breakpoints.XLarge, 4],
   ]);
   
 
@@ -63,7 +62,7 @@ export class DataService {
       .subscribe(result => {
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
-            this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+            this.currentScreenSize = this.displayNameMap.get(query) ?? undefined;
           }
         }
     });

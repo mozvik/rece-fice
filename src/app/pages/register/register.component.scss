@@ -1,3 +1,5 @@
+@import "../../../colors";
+
 p, form, input, label, small, ul {
   font-family: 'Lora', sans-serif;
   font-size: 1.15rem;
@@ -8,6 +10,9 @@ button, .p-button-label{
 }
 .input-help{
   font-size: .9rem;
+}
+.wrapper{
+  border: 1px solid $orangeRedDark;
 }
 
 @media (min-width: 992px) {

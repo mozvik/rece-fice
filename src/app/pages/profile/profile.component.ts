@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     this.dataService.userRecipeList = []
     // if (this.dataService.userRecipeList.length === 0)
     // {
-    this.apiService.getRecipesByUser(this.userID, this.dataService.userRecipePageIndex).subscribe({
+    this.apiService.getRecipesByUser(this.userID, this.dataService.userRecipePageIndex, 4).subscribe({
       next: (response: any) => {
         this.createRecipes(response?.items)
       }
@@ -28,8 +28,10 @@ export class ProfileComponent implements OnInit {
   }
 
   userPageIndexChanged(index: number): void {
-    this.apiService.getRecipesByUser(this.userID, index).subscribe({
-      next: (response: any) =>  this.createRecipes(response?.items)
+    this.apiService.getRecipesByUser(this.userID, index, 4).subscribe({
+      next: (response: any) => {
+        this.createRecipes(response?.items)
+      }
     })
   }
 

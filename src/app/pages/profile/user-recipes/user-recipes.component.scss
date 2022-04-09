@@ -1,13 +1,22 @@
-.container{
-  font-size: 16px;
-}
+@import '../../../../colors.scss';
+@import '../../../../mixins.scss';
 
+.container{
+  font-size: 15px;
+  font-family: $fontOswald;
+}
+button{
+  @include oswald;
+  letter-spacing: .05rem;
+}
 .mat-icon {
   font-size: 1.75rem;
   height: 1.75rem ;
   width: 1.75rem;
 }
 .img-overlay {
+  @include lora-italic;
+  font-size: 1.1rem;
   pointer-events: none;
 }
 .card-image img{
@@ -16,9 +25,7 @@
   object-fit: cover;  
   transition: all .4s ease;
 }
-.card-footer:hover{
-  cursor: pointer;
-}
+
 .card-image{
   position: relative;
   background: var(--textColor);

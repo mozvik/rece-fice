@@ -8,8 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './login.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
-import { SharedModule } from '../../shared/shared.module';
-
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     LoginComponent
@@ -22,7 +21,8 @@ import { SharedModule } from '../../shared/shared.module';
     //SharedModule
     MatFormFieldModule,
     MatDividerModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class LoginModule { }
