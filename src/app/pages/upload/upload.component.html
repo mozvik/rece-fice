@@ -5,7 +5,7 @@
   [orientation]="dataService.displaySize > 2 ? 'horizontal' : 'vertical'">
   <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
     <div class="relative">
-      <img class="absolute hidden md:block right-20 lg:-right-8 top-28" src="../../../assets/img/vanilia.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*100:0">
+      <img class="absolute hidden md:block md:right-0 lg:-right-0 top-20" src="../../../assets/img/vanilia.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*140*0.70:0">
     </div>
     <form [formGroup]="firstFormGroup">
       <div class="flex flex-row flex-wrap md:gap-x-5 xl:gap-x-10 gap-y-20 pt-10">
@@ -107,18 +107,16 @@
   
   <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
     <div class="relative">
-      <img class="absolute hidden md:block right-20 lg:-right-8 top-32 lg:top-8" src="../../../assets/img/mak.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*110:0">
+      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/mak.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*170*0.75:0">
     </div>
     <form [formGroup]="secondFormGroup" class="mt-10">
       <div formArrayName="directions">
         <div #formRow *ngFor="let dir of directions.controls; index as i"
         [formGroupName]="i"
-        class="flex flex-col lg:flex-row"
+        class="flex flex-row flex-wrap"
         >
-      
-        
           <mat-form-field appearance="legacy"
-          class="basis-full lg:basis-4/6"
+          class="basis-3/5"
           >
             <mat-label>{{i+1}}. lépés</mat-label>
             <textarea 
@@ -133,9 +131,7 @@
             
           </mat-form-field>
          
-          <div class="basis-2/6 flex flex-row">
-            
-          
+          <div class="basis-2/5 flex flex-row">
             <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1 && secondFormGroup.controls['directions']?.valid"
             mat-icon-button disableRipple="true" class="btn-icon" 
             title="Új lépés hozzáadása"
@@ -158,16 +154,16 @@
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók" class="pt-10">
     <div class="relative">
-      <img class="absolute hidden md:block right-10 lg:-right-8 top-72 lg:top-10" src="../../../assets/img/anizs.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*110:0">
+      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/menta.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*120*0.70:0">
     </div>
     <form [formGroup]="thirdFormGroup" class="mt-10">
       <div formArrayName="ingredients">
         <div #formRow *ngFor="let dir of ingredients.controls; index as i"
         [formGroupName]="i"
-        class="flex flex-col lg:flex-row lg:gap-x-10"
+        class="flex flex-row flex-wrap lg:gap-x-10"
         >
           <mat-form-field
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/4">
+          class="basis-full md:basis-2/3 lg:basis-2/6 xl:basis-1/4">
             <mat-label>Hozzávaló neve</mat-label>
             <input
             type="text"
@@ -179,7 +175,7 @@
           <mat-form-field 
           appearance="legacy"
           hintLabel=""
-          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/5">
+          class="basis-full md:basis-2/3 lg:basis-1/6 xl:basis-1/5">
             <mat-label>Mennyiségi egysége</mat-label>
             <mat-select 
             formControlName="iUnit" 
@@ -191,7 +187,7 @@
           </mat-select>
         </mat-form-field>
           <mat-form-field
-          class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/12">
+          class="basis-full md:basis-2/3 lg:basis-1/6 xl:basis-1/12">
             <mat-label>Mennyisége</mat-label>
             <input
             type="number" min="0" step="1"
@@ -228,7 +224,7 @@
 
   <mat-step [stepControl]="fourthFormGroup" label="Egyéb jellemzők">
     <div class="relative">
-      <img class="absolute hidden md:block right-16 lg:right-0 top-0 lg:top-8" src="../../../assets/img/fahej.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*110:0">
+      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/fahej.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*150*0.70:0">
     </div>
     <form [formGroup]="fourthFormGroup" class="mt-10">
       <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 md:mb-20 ">

@@ -8,7 +8,7 @@
     [orientation]="dataService.displaySize > 2 ? 'horizontal' : 'vertical'">
     <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
       <div class="first-bg relative">
-        <img class="absolute hidden md:block right-20 lg:-right-8 top-20" src="../../../assets/img/menta.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*70:0">
+        <img class="absolute hidden md:block right-0 top-0 lg:top-24" src="../../../assets/img/anizs.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*140*0.70:0">
       </div>
       <form [formGroup]="firstFormGroup">
         <div class="flex flex-row flex-wrap md:gap-x-5 xl:gap-x-10 gap-y-20 pt-10">
@@ -103,23 +103,23 @@
           </mat-form-field>
         </div>
         <div>
-          <button mat-stroked-button color="primary" matStepperNext>Következő</button>
+          <button mat-flat-button color="primary" matStepperNext>Következő</button>
         </div>
       </form>
     </mat-step>
   
     <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
       <div class="relative">
-        <img class="absolute hidden lg:block right-20 lg:-right-8 top-32 lg:top-8" src="../../../assets/img/kardamom.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*100:0">
+        <img class="absolute hidden md:block right-0 top-0 lg:top-8" src="../../../assets/img/szegfuszeg.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*100:0">
       </div>
       <form [formGroup]="secondFormGroup">
         <div formArrayName="directions">
           <div #formRow *ngFor="let dir of directions.controls; index as i"
           [formGroupName]="i"
-          class="flex flex-col lg:flex-row"
+          class="flex flex-row flex-wrap"
           >
             <mat-form-field appearance="legacy"
-            class="basis-full lg:basis-4/6"
+            class="basis-3/5"
             >
               <mat-label>{{i+1}}. lépés</mat-label>
               <textarea
@@ -134,36 +134,40 @@
   
             </mat-form-field>
   
-            <div class="basis-2/6 flex flex-row">
-              <button *ngIf="i != 0"
-              mat-button class=""
-              (click)="removeDirection(i)"
-              type="button" >Lépés törlése</button>
-  
-              <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1"
-              mat-button class=""
+            <div class="basis-2/5 flex flex-row">
+              <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1 && secondFormGroup.controls['directions']?.valid"
+              mat-icon-button disableRipple="true" class="btn-icon" 
+              title="Új lépés hozzáadása"
               (click)="addDirection(i)"
-              type="button" [disabled]="!secondFormGroup.controls['directions']?.valid">Lépés hozzáadása</button>
+              type="button" [disabled]="!secondFormGroup.controls['directions']?.valid"><mat-icon color="accent">create</mat-icon></button>
+              <button *ngIf="i != 0"
+              mat-icon-button disableRipple="true" class="btn-icon" 
+              title="Lépés törlése"
+              (click)="removeDirection(i)"
+              type="button" ><mat-icon color="warn">delete_outline</mat-icon></button>
             </div>
           </div>
         </div>
   
         <div>
-          <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
-          <button mat-stroked-button color="primary" matStepperNext>Következő</button>
+          <button  mat-flat-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
+          <button  mat-flat-button color="primary" matStepperNext>Következő</button>
         </div>
       </form>
     </mat-step>
   
     <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók">
+      <div class="first-bg relative">
+        <img class="absolute hidden md:block -right-6 top-8" src="../../../assets/img/szerecsendio.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*130*0.70:0">
+      </div>
       <form [formGroup]="thirdFormGroup">
         <div formArrayName="ingredients">
           <div #formRow *ngFor="let dir of ingredients.controls; index as i"
           [formGroupName]="i"
-          class="flex flex-col lg:flex-row"
+          class="flex flex-row flex-wrap lg:gap-x-10"
           >
             <mat-form-field
-            class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+            class="basis-full md:basis-2/3 lg:basis-2/6 xl:basis-1/4">
               <mat-label>Hozzávaló neve</mat-label>
               <input
               type="text"
@@ -175,7 +179,7 @@
             <mat-form-field
             appearance="legacy"
             hintLabel=""
-            class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/6 p-5">
+            class="basis-full md:basis-2/3 lg:basis-1/6 xl:basis-1/5">
               <mat-label>Mennyiségi egysége</mat-label>
               <mat-select
               formControlName="iUnit"
@@ -187,7 +191,7 @@
             </mat-select>
           </mat-form-field>
             <mat-form-field
-            class="basis-full md:basis-1/2 lg:basis-1/6 xl:basis-1/6 p-5">
+            class="basis-full md:basis-2/3 lg:basis-1/6 xl:basis-1/12">
               <mat-label>Mennyisége</mat-label>
               <input
               type="number" min="0" step="1"
@@ -197,34 +201,40 @@
               >
             </mat-form-field>
   
-            <div class="basis-2/6 flex flex-row">
-              <button *ngIf="i != 0"
-              mat-button class=""
-              (click)="removeIngredient(i)"
-              type="button" >Hozzávaló törlése</button>
-  
-              <button *ngIf="i == thirdFormGroup.controls['ingredients'].value.length - 1"
-              mat-button class=""
+            <div class="basis-1/12 flex flex-row">
+              <button *ngIf="i == thirdFormGroup.controls['ingredients'].value.length - 1 && thirdFormGroup.controls['ingredients']?.valid"
+              mat-icon-button class="btn-icon" 
+              disableRipple="true"
+              title="Új hozzávaló hozzáadása"
               (click)="addIngredient(i)"
-              type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid">Új hozzávaló</button>
+              type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid"><mat-icon color="accent">create</mat-icon></button>
+              <button *ngIf="i != 0"
+              mat-icon-button class="btn-icon" 
+              disableRipple="true"
+              title="Hozzávaló törlése"
+              (click)="removeIngredient(i)"
+              type="button" ><mat-icon color="warn">delete_outline</mat-icon></button>
             </div>
           </div>
         </div>
   
         <div>
-          <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
-          <button mat-stroked-button color="primary" matStepperNext>Következő</button>
+          <button  mat-flat-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
+          <button  mat-flat-button color="primary" matStepperNext>Következő</button>
         </div>
       </form>
     </mat-step>
   
     <mat-step [stepControl]="fourthFormGroup" label="Egyéb jellemzők">
+      <div class="first-bg relative">
+        <img class="absolute hidden md:block -right-4 top-8" src="../../../assets/img/kardamom.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*170*0.70:0">
+      </div>
       <form [formGroup]="fourthFormGroup">
-        <div class="flex flex-row flex-wrap">
+        <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 md:mb-20 ">
           <mat-form-field
             appearance="legacy"
             hintLabel="Percben add meg"
-            class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+            class="basis-full md:basis-1/12">
               <mat-label>Elkészítési idő</mat-label>
               <input
               id="time" type="number" name="time"
@@ -237,7 +247,7 @@
           <mat-form-field
           appearance="legacy"
           hintLabel=""
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/12">
           <mat-label>Hány főre</mat-label>
           <input
           id="serving" type="number" name="serving"
@@ -248,11 +258,11 @@
   
           </mat-form-field>
         </div>
-        <div class="flex flex-row flex-wrap">
+        <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 my-20 md:my-0">
           <mat-form-field
           appearance="legacy"
           hintLabel="Nem kötelező"
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/12">
             <mat-label>Kalória</mat-label>
             <input
             id="calorie" type="number" name="calorie"
@@ -263,7 +273,7 @@
           <mat-form-field
           appearance="legacy"
           hintLabel="Nem kötelező"
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/12">
             <mat-label>Szénhidrát</mat-label>
             <input
             id="carbonh" type="number" name="carbonh"
@@ -274,7 +284,7 @@
           <mat-form-field
           appearance="legacy"
           hintLabel="Nem kötelező"
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/12">
             <mat-label>Fehérje</mat-label>
             <input
             id="protein" type="number" name="protein"
@@ -285,7 +295,7 @@
           <mat-form-field
           appearance="legacy"
           hintLabel="Nem kötelező"
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/12">
             <mat-label>Zsír</mat-label>
             <input
             id="fat" type="number" name="fat"
@@ -296,7 +306,7 @@
           <mat-form-field
           appearance="legacy"
           hintLabel="Nem kötelező"
-          class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
+          class="basis-full md:basis-1/12">
             <mat-label>Cukor</mat-label>
             <input
             id="sugar" type="number" name="sugar"
@@ -306,8 +316,8 @@
           </mat-form-field>
         </div>
         <div>
-          <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
-          <button mat-stroked-button color="primary" matStepperNext>Következő</button>
+          <button  mat-flat-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
+          <button  mat-flat-button color="primary" matStepperNext>Következő</button>
         </div>
       </form>
     </mat-step>
@@ -322,7 +332,7 @@
             class="inline-block uploaded-card"
             *ngFor="let img of uploadedImages">
               <img *ngIf="img != '' && img != null" class="card-image" [src]="img.name" alt="" width="360" height="">
-              <div><button (click)="openDeleteDialog(img)">Kép törlése</button></div>
+              <div class="py-3"><button mat-flat-button color="warn" (click)="openDeleteDialog(img)">Kép törlése</button></div>
             </div>
   
           </div>
@@ -364,7 +374,7 @@
   
         </div>
         <div>
-          <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
+          <button mat-flat-button color="primary" matStepperPrevious>Előző</button>
         </div>
       </form>
     </mat-step>
