@@ -87,7 +87,7 @@ export class APIService {
       .post<any[]>(this.serverUrl, filterData)
       .pipe(
         
-        // catchError(this.handleError),
+      
       );
   }
 
@@ -139,6 +139,22 @@ export class APIService {
          const ele = idList[i];
         fData.append('idList[]',ele)
       }
+    }
+
+    return this.http
+    .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
+
+  public getRecipesBy(searchMethod: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
+    let fData = new FormData();
+    if (searchMethod) {
+      fData.append('getRecipesBy','true')
+      fData.append('searchMethod', searchMethod)
+      fData.append('page', page.toString())
+      fData.append('itemsPerPage', itemsPerPage.toString())
     }
 
     return this.http

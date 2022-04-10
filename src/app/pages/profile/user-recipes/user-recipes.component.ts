@@ -14,9 +14,9 @@ import { MessageService } from 'src/app/service/message.service';
   templateUrl: './user-recipes.component.html',
   styleUrls: ['./user-recipes.component.scss'],
   animations: [
-    trigger(
-      'enterHoverAnimation', hoverImageAnimation
-    ),
+    // trigger(
+    //   'enterHoverAnimation', hoverImageAnimation
+    // ),
     trigger(
       'enterAnimation', scaleEnterAnimation   
     )

@@ -14,37 +14,37 @@ button{
   height: 1.75rem ;
   width: 1.75rem;
 }
-.img-overlay {
-  @include lora-italic;
-  font-size: 1.1rem;
-  pointer-events: none;
-}
-.card-image img{
-  width: 358px;
-  height: 220px;
-  object-fit: cover;  
-  transition: all .4s ease;
-}
+// .img-overlay {
+//   @include lora-italic;
+//   font-size: 1.1rem;
+//   pointer-events: none;
+// }
+// .card-image img{
+//   width: 358px;
+//   height: 220px;
+//   object-fit: cover;  
+//   transition: all .4s ease;
+// }
 
-.card-image{
-  position: relative;
-  background: var(--textColor);
-  color: var(--backgroundColor);
-  overflow: hidden;
-}
+// .card-image{
+//   position: relative;
+//   background: var(--textColor);
+//   color: var(--backgroundColor);
+//   overflow: hidden;
+// }
 
 
-.card-image:hover img{
-  cursor: pointer;
-  opacity: .4;
-  transform: scale(1.05);
-  transition: all .4s ease;
-}
+// .card-image:hover img{
+//   cursor: pointer;
+//   opacity: .4;
+//   transform: scale(1.05);
+//   transition: all .4s ease;
+// }
 
 .recipe-card{
-  border-bottom: 1px solid rgba(var(--textColorRGB),.2);
+  border-bottom: 1px solid rgba($textColor,.2);
   max-width: 360px;
 }
 span{
-  color: rgba(var(--textColorRGB),.2);
+  color: rgba($textColor,.2);
 }
