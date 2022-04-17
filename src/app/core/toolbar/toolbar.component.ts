@@ -3,6 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { DataService } from '../../service/data.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { chevronRotate } from '../../animations';
+import { APIService } from 'src/app/service/api.service';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class ToolbarComponent implements OnInit {
   dropdownCollapsed: boolean = true;
   toolbarDown: boolean = false;
 
-  constructor(public dataService: DataService,) { }
+  constructor(public dataService: DataService,
+  private apiService: APIService) { }
 
   ngOnInit(): void {
 
@@ -47,5 +49,18 @@ export class ToolbarComponent implements OnInit {
       this.toolbarDown = false
     }
     this.recipeDropdown.closeMenu()
+  }
+
+  showRecipes(categoryId: string) {
+    this.dataService.searchResultsPageIndex = 0
+    this.dataService.searchResultsFull = []
+    this.dataService.searchResultsShowState.state = 'category'
+    this.dataService.searchResultsShowState.value = categoryId
+
+    this.apiService.getRecipesByCategory(categoryId, 0, 4).subscribe((response: any) => {
+      this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
+      console.log('this.dataService.searchResultsFull :>> ', this.dataService.searchResultsFull);
+    })
+
   }
 }

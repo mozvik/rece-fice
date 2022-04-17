@@ -35,7 +35,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatIconModule,
     MatButtonModule,
     MatTabsModule,
-    
   ]
 })
 export class HomeModule { }

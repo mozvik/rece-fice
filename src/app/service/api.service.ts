@@ -129,7 +129,7 @@ export class APIService {
     
   }
 
-  public getRecipes(idList: string[], page: number, itemsPerPage: number = 5 ): Observable<any[]> {
+  public getRecipes(idList: string[], page: number, itemsPerPage: number = 4 ): Observable<any[]> {
     let fData = new FormData();
     if (idList) {
       fData.append('getRecipes','true')
@@ -153,6 +153,22 @@ export class APIService {
     if (searchMethod) {
       fData.append('getRecipesBy','true')
       fData.append('searchMethod', searchMethod)
+      fData.append('page', page.toString())
+      fData.append('itemsPerPage', itemsPerPage.toString())
+    }
+
+    return this.http
+    .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
+
+  public getRecipesByCategory(category: string, page: number, itemsPerPage: number = 4 ): Observable<any[]> {
+    let fData = new FormData();
+    if (category) {
+      fData.append('getRecipesByCategory','true')
+      fData.append('category', category)
       fData.append('page', page.toString())
       fData.append('itemsPerPage', itemsPerPage.toString())
     }

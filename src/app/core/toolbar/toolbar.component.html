@@ -50,12 +50,24 @@
       </li>
       <mat-menu #recipeMenu="matMenu" xPosition="after"
       >
-        <button mat-menu-item>Előételek</button>
-        <button mat-menu-item>Levesek</button>
-        <button mat-menu-item>Főételek</button>
-        <button mat-menu-item>Köretek</button>
-        <button mat-menu-item>Desszertek</button>
-        <button mat-menu-item>Italok</button>
+        <button mat-menu-item
+        routerLink="/results"
+        (click)="showRecipes('1')">Előételek</button>
+        <button mat-menu-item
+        routerLink="/results"
+        (click)="showRecipes('2')">Levesek</button>
+        <button mat-menu-item
+        routerLink="/results"
+        (click)="showRecipes('3')">Főételek</button>
+        <button mat-menu-item
+        routerLink="/results"
+        (click)="showRecipes('4')">Köretek</button>
+        <button mat-menu-item
+        routerLink="/results"
+        (click)="showRecipes('5')">Desszertek</button>
+        <button mat-menu-item
+        routerLink="/results"
+        (click)="showRecipes('6')">Italok</button>
       </mat-menu>
     
       <li class="">

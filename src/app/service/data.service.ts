@@ -28,6 +28,10 @@ export class DataService {
   public selectedRecipe = new BehaviorSubject<Recipe>(new Recipe());
   
   //searchResults module global data
+  public searchResultsShowState: any = {
+    state: '',
+    value: ''
+  }; 
   public searchResultsFull: Recipe[] = [];
   public searchResultsSimple: any[] = [];
   public searchResultsPageIndex = 0 

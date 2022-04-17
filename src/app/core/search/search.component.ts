@@ -225,7 +225,7 @@ export class SearchComponent implements OnInit {
   }
   submitForm() {
     this.closed.emit(true)
-    //this.apiService.searchResultsSubject.next(this.apiService.searchResults)
+    this.dataService.searchResultsShowState.state = ''
     this.dataService.searchResultsPageIndex = 0
     this.dataService.searchResultsFull = []
     this.apiService.getRecipes(this.dataService.searchResultsSimple.map((item: { recipeId: any; }) => item.recipeId), 0)

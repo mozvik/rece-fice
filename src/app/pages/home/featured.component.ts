@@ -11,6 +11,8 @@ import { DataService } from 'src/app/service/data.service';
 export class FeaturedComponent implements OnInit {
 
   recipesLatest: Recipe[] = [];
+  recipesFree: Recipe[] = [];
+  recipesDaily: Recipe[] = [];
 
   constructor(
     private dataService: DataService,
@@ -20,7 +22,9 @@ export class FeaturedComponent implements OnInit {
   
 
   ngOnInit(): void {
-      this.getLatest()
+    this.getLatest()
+    this.getFree()
+    this.getDaily()
   }
 
   getLatest() {
@@ -28,7 +32,25 @@ export class FeaturedComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.recipesLatest = this.dataService.createRecipes(response)
-        console.log('response :>> ', response,this.recipesLatest);}
+            
+        }
+    })
+  }
+  getFree() {
+    this.apiService.getRecipesBy('free', 1, 4)
+      .subscribe({
+        next: (response: any) => {
+          this.recipesFree = this.dataService.createRecipes(response)
+          
+        }
+    })
+  }
+  getDaily() {
+    this.apiService.getRecipesBy('daily', 1, 4)
+      .subscribe({
+        next: (response: any) => {
+          this.recipesDaily = this.dataService.createRecipes(response)
+        console.log('response :>> ', response,this.recipesDaily);}
     })
   }
 }

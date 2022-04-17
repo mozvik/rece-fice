@@ -5,6 +5,7 @@ import { ResultsRoutingModule } from './results-routing.module';
 import { ResultsComponent } from './results.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CommonModule,
     ResultsRoutingModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    SharedModule
   ]
 })
 export class ResultsModule { }
