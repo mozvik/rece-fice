@@ -2,8 +2,9 @@
 @import "../../../mixins";
 
 .container{
-  color: $backgroundColor;
-  background-color: $textColor;
+  border-top: 1px solid $textColorMuted;
+  color: $textColor;
+  background-color: $backgroundColor;
 }
 
 button{
@@ -15,4 +16,8 @@ button{
 }
 ::ng-deep .mat-checkbox-frame { 
   border-color: grey!important;
+}
+
+li:hover{
+  cursor: pointer;
 }

@@ -3,7 +3,7 @@
   <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">
     <ng-container *ngFor="let item of dataService.searchResultsFull; let i=index"
     class="border">
-    <div class="recipe-card flex flex-col justify-between">
+    <div class="recipe-card flex flex-col justify-between" [@enterAnimation]>
       <app-recipe-thumbnail [recipe]="item"></app-recipe-thumbnail>
       <div class="recipe-card" [@enterAnimation]
       [routerLink]="['/details', item.recipeId]">

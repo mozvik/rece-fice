@@ -226,7 +226,19 @@ export class APIService {
       //catchError(this.handleError)
     );
   }
+  public subscribeGuest(email: string): Observable<any[]> {
+    let fData = new FormData();
+    if (email) {
+      fData.append('subscribe','true')
+      fData.append('email', email)
+    }
 
+    return this.http
+      .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      catchError(this.handleError)
+    );
+  }
 
  /**
  * Http hibakód kezelése
@@ -234,7 +246,7 @@ export class APIService {
  */
   private handleError(error: HttpErrorResponse) {
     console.log(`The backend returned an unsuccessful response code: ${error} - ${error.status} - ${error.message}`);
-    return throwError(() => 'Something bad happened; please try again later.');
+    return throwError(() => error.error);
   };
 
   constructor(

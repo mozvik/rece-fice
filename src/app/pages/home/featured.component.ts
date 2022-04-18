@@ -41,7 +41,7 @@ export class FeaturedComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.recipesFree = this.dataService.createRecipes(response)
-          
+        
         }
     })
   }
@@ -50,7 +50,7 @@ export class FeaturedComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.recipesDaily = this.dataService.createRecipes(response)
-        console.log('response :>> ', response,this.recipesDaily);}
+        }
     })
   }
 }

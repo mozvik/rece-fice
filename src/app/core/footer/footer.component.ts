@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { throwError } from 'rxjs';
+import { APIService } from 'src/app/service/api.service';
+import { DataService } from 'src/app/service/data.service';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,11 +18,24 @@ export class FooterComponent implements OnInit {
     gdpr: ['', Validators.requiredTrue],
   })
  
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    public dataService: DataService,
+    public apiService: APIService,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
   }
-  clo(event: any): void {
-    console.log(this.newsletterFormGroup.value)
+
+  submit(): void {
+    this.apiService.subscribeGuest(this.newsletterFormGroup.value.email).subscribe({
+      next: (response: any) => {
+        this.messageService.showSnackBar(response, 'success')
+      },
+      error: (error: any) => {
+        this.messageService.showSnackBar(error, 'error')
+      }
+    })
   }
 }

@@ -36,6 +36,9 @@ export class DataService {
   public searchResultsSimple: any[] = [];
   public searchResultsPageIndex = 0 
 
+  //fridge global data
+  public fridgeIngredients: string[] = [];
+
   //profile module global data
   public activeProfileTab = 0
   public userRecipeList: Recipe[] = []

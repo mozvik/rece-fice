@@ -37,9 +37,11 @@ export class FridgeComponent implements OnInit {
   }
 
   submitForm() {
+    this.dataService.searchResultsShowState.state = 'fridge'
     this.dataService.searchResultsPageIndex = 0
     this.dataService.searchResultsFull = []
-    this.apiService.getRecipesFridge(this.ingredients, 0)
+    this.dataService.fridgeIngredients = this.ingredients
+    this.apiService.getRecipesFridge(this.dataService.fridgeIngredients, 0)
       .subscribe({
         next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
         

@@ -205,20 +205,26 @@ export class SearchComponent implements OnInit {
   }
   
   inputChange() {
-    if(typeof this.inputText != "object"){
+    // if (this.inputText.length === 0) {
+    //   this.searchResults = []
+    // }
+
+    if(typeof this.inputText != "object") {
       this.apiService.recipeSearch(this.inputText,
       this.selectedItems).subscribe(
         (result) => {
-          this.apiService.searchResults = result;
-          this.dataService.searchResultsSimple = result.items;
+          if (result) {
+            this.apiService.searchResults = result;
+            this.dataService.searchResultsSimple = result.items;
 
-          this.searchResults = result?.items,
-          result?.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
-
-          this.filteredOptions =  this.searchForm.controls['searchCtrl'].valueChanges.pipe(
-            startWith(''),
-            map(value => this._filter(value)),
-        );
+            
+            this.filteredOptions =  this.searchForm.controls['searchCtrl'].valueChanges.pipe(
+              startWith(''),
+              map(value => this._filter(value)),
+              );
+            } 
+            this.searchResults = result?.items,
+            result?.itemCount ? this.recipesFound = result.itemCount + ' találat. Mutasd!' : this.recipesFound = 'Keresés'
       }
       )
     }

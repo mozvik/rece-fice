@@ -12,9 +12,6 @@ import { hoverImageAnimation, scaleEnterAnimation } from 'src/app/animations';
   styleUrls: ['./results.component.scss'],
   animations: [
     trigger(
-      'enterHoverAnimation', hoverImageAnimation
-    ),
-    trigger(
       'enterAnimation', scaleEnterAnimation   
     )
   ]
@@ -45,6 +42,9 @@ export class ResultsComponent implements OnInit {
     else if (this.dataService.searchResultsShowState.state === 'category'){ 
       this.getRecipesFromCategory()
     }
+    else if (this.dataService.searchResultsShowState.state === 'fridge'){ 
+      this.getRecipesFromFridge()
+    }
   }
 
   getRecipesFromSearch() {
@@ -54,11 +54,14 @@ export class ResultsComponent implements OnInit {
     })
   }
   getRecipesFromCategory() {
-    if (this.dataService.searchResultsShowState.state === 'category') {
-      this.apiService.getRecipesByCategory(this.dataService.searchResultsShowState.value, this.dataService.searchResultsPageIndex).subscribe((response: any) => {
-      this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
+    this.apiService.getRecipesByCategory(this.dataService.searchResultsShowState.value, this.dataService.searchResultsPageIndex).subscribe((response: any) => {
+    this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
     })
-    }
-    
+  }
+  getRecipesFromFridge() {
+    this.apiService.getRecipesFridge(this.dataService.fridgeIngredients, this.dataService.searchResultsPageIndex)
+      .subscribe((response: any) =>
+      this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
+      )
   }
 }
