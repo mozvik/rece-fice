@@ -60,13 +60,38 @@ export class Recipe {
   }
 
   public categoryName(categoryList: OptionsData[]): string {
-    return categoryList.filter(item => item.id == this.category)[0].name
+    if (this.category) {
+      return categoryList.filter(item => item.id == this.category)[0].name
+    }
+    return ''
   }
   public difficulityName(difficulityList: OptionsData[]): string {
-    return difficulityList.filter(item => item.id == this.difficulity)[0].name
+    if (this.difficulity) {
+      return difficulityList.filter(item => item.id == this.difficulity)[0].name
+    }
+    return ''
   }
   public costName(costList: OptionsData[]): string {
-    return costList.filter(item => item.id == this.cost)[0].name
+    if (this.cost) {
+      return costList.filter(item => item.id == this.cost)[0].name
+    }
+    return ''
+  }
+  public nationalityName(nationalityList: OptionsData[]): string {
+    if (this.nationality) {
+      return nationalityList.filter(item => item.id == this.nationality)[0].name
+    }
+    return ''
+  }
+  public getLabels(labelList: OptionsData[]): any {
+    if (this.labels.length > 0) {
+      const arr: any = []
+      for (const label of this.labels) {
+        arr.push(...labelList.filter(item => item.id == label.labelId))
+      }
+      return arr;
+    }
+    return []
   }
 
 }

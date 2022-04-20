@@ -26,11 +26,12 @@ export class DetailsComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           this.recipe = this.dataService.createRecipes(response?.items)[0]
+          console.log('rec_subscribe_details :>> ', this.recipe);
         }
       })
     });
     this.dataService.selectedRecipe.subscribe(recipe => {
-        console.log('rec_subscribe_details :>> ', recipe.recipeName);
+        
       })
   }
 

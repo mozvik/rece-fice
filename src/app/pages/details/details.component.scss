@@ -1,0 +1,9 @@
+@import "../../../mixins";
+@import "../../../colors";
+
+.details-divider{
+  border-bottom: 4px solid $textColorMuted;
+}
+.details-divider-small{
+  border-bottom: 2px solid $textColorMuted;
+}

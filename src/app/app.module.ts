@@ -21,6 +21,7 @@ import { MessageService } from './service/message.service';
   imports: [
     CoreModule,
     BrowserAnimationsModule,
+
     //SharedModule.forRoot(),
   ],
   providers: [ APIService, DataService, IconService, MessageService],

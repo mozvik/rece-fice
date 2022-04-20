@@ -1,0 +1,39 @@
+<div>
+  <div class="slider">
+    <owl-carousel-o 
+    
+    [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let slide of recipe?.image; index as i">
+        <img [src]="slide">
+      </ng-template>
+      
+    </owl-carousel-o>
+  </div>
+  <div class="description flex justify-between">
+    <div>
+      <div>Elkészítési idő</div>
+      <div>{{recipe?.cookingTime}}</div>
+    </div>
+    <div>
+      <div>Nehézség</div>
+      <div>{{recipe?.difficulityName(dataService.difficulityList)}}</div>
+    </div>
+    <div>
+      <div>Költség</div>
+      <div>{{recipe?.costName(dataService.costList)}}</div>
+    </div>
+    <div>
+      <div>Konyha</div>
+      <div>{{recipe?.nationalityName(dataService.nationalityList)}}</div>
+    </div>
+  </div>
+  <mat-chip-list>
+    <ng-container *ngFor="let label of recipe?.getLabels(dataService.labelList)">
+      <mat-chip color="warn" selected>
+        {{label.name}}
+      </mat-chip>
+    </ng-container>
+  </mat-chip-list>
+  
+  <!-- <p>{{recipe?.categoryName(dataService.categoryList)}}</p> -->
+</div>
