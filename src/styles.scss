@@ -80,6 +80,13 @@ input:focus,
     font-size: 1.25rem;
   }
 
+.title-bg-info{
+  background-color: $info;
+}
+.title-bg-warn{
+  background-color: $orangeRedDark;
+  color: $backgroundColorDarker;
+}
 
 .snack-success{
   background: green;

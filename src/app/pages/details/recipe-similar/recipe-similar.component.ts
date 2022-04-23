@@ -1,25 +1,21 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Recipe } from 'src/app/classes/recipe';
 import { DataService } from 'src/app/service/data.service';
 
-import { OwlOptions } from 'ngx-owl-carousel-o';
-
 @Component({
-  selector: 'app-recipe-header',
-  templateUrl: './recipe-header.component.html',
-  styleUrls: ['./recipe-header.component.scss']
+  selector: 'app-recipe-similar',
+  templateUrl: './recipe-similar.component.html',
+  styleUrls: ['./recipe-similar.component.scss']
 })
-export class RecipeHeaderComponent implements OnInit {
-
-  //https://animate.style/
-  //animate.css osztályai a fenti linken megtalálhatóak
+export class RecipeSimilarComponent implements OnInit {
 
   @Input() recipe: Recipe | undefined
-  
   customOptions: OwlOptions = {
     loop: true,
-    autoWidth: false,
+    autoWidth: true,
+    autoHeight: false,
+
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -28,14 +24,13 @@ export class RecipeHeaderComponent implements OnInit {
     dots: true,
     navSpeed: 700,
     navText: ["", ''],
-    items: 1,
+    items: 3,
     nav: false
   }
-
+  
   constructor(public dataService: DataService,) { }
 
   ngOnInit(): void {
-  
   }
-  
+
 }

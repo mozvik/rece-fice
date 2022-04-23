@@ -94,4 +94,21 @@ export class Recipe {
     return []
   }
 
+  public getIngredients(): any[] {
+    if (this.ingredients && this.ingredients.length > 0) {
+      const returnArr: any = []
+      for (const row of this.ingredients) {
+        const arr = row.split(';') 
+        const obj = {
+          quantity: arr[0].split(' ')[0],
+          unit: arr[0].split(' ')[1],
+          name: arr[1]
+        }
+        returnArr.push(obj)
+      }
+      return returnArr;
+    }
+    return []
+  }
+
 }

@@ -1,0 +1,23 @@
+<div>
+  <div class="flex gap-5 my-5 items-center title-bg-warn px-2 py-3">
+    <mat-icon class="">checklist</mat-icon>
+    <h3 class="title-h5 inline-block">Hozzávalók</h3>
+  </div>
+
+  <table mat-table [dataSource]="recipe?.getIngredients()" class="">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element;index as i"> {{i + 1.}} </td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Qty </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}}&nbsp;{{element.unit}} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <!-- <tr mat-header-row *matHeaderRowDef="['position','name']"></tr> -->
+    <tr mat-row *matRowDef="let row; columns: ['position','quantity','name']"></tr>
+  </table>
+</div>

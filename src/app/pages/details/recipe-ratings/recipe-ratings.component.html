@@ -1,0 +1,17 @@
+<div class="my-5">
+  <div class="flex gap-5 my-5 items-center title-bg-warn px-2 py-3">
+    <mat-icon class="">rate_review</mat-icon>
+    <h3 class="title-h5 inline-block">Értékeld a receptet!</h3>
+  </div>
+
+  <div><app-recipe-rate-it></app-recipe-rate-it></div>
+
+  <div>Írj róla véleményt! (opcionális)</div>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..." rows="10"></textarea>
+  </mat-form-field>
+
+  <button mat-flat-button color="warn">Értékelés elküldése</button>
+</div>

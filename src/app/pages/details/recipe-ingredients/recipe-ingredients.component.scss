@@ -1,0 +1,29 @@
+@import "../../../../mixins";
+@import "../../../../colors";
+.mat-table{
+  width: 100%;
+}
+
+.mat-column-position {
+  width: 2rem;
+  border-right: 1px solid rgba($textColorMuted,.4);
+  padding: 0 2rem;
+  text-align: center;
+}
+.mat-column-quantity {
+  width: auto;
+  border-right: 1px solid rgba($textColorMuted,.4);
+  padding: 1rem 2rem;
+  text-align: left;
+}
+.mat-column-name {
+  width: 100%;
+  padding: 1rem 2rem;
+  text-align: left;
+}
+
+.mat-icon{
+  font-size: 3rem;
+  height: 3rem;
+  width: 3rem;
+}
