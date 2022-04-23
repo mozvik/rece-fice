@@ -15,15 +15,19 @@ export class DataService {
     hasUploadAccess: false
   };
 
+  
+
+
+
   public costList: OptionsData[] = [];
   public categoryList: OptionsData[] = [];
   public difficulityList: OptionsData[] = [];
   public nationalityList: OptionsData[] = [];
   public labelList: OptionsData[] = [];
-  public displaySize!: number
+  //public displaySize!: number
   public searchIsOpen: boolean = false
   public sidenavOpened: boolean = false;
-  public currentScreenSize: number | undefined  
+  public currentScreenSize = new BehaviorSubject<number | undefined>(undefined)  
   //global active Recipe
   public selectedRecipe = new BehaviorSubject<Recipe>(new Recipe());
   
@@ -33,7 +37,7 @@ export class DataService {
     value: ''
   }; 
   public searchResultsFull: Recipe[] = [];
-  public searchResultsSimple: any[] = [];
+  public searchResults: any;
   public searchResultsPageIndex = 0 
 
   //fridge global data
@@ -69,7 +73,8 @@ export class DataService {
       .subscribe(result => {
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
-            this.currentScreenSize = this.displayNameMap.get(query) ?? undefined;
+            // this.currentScreenSize = this.displayNameMap.get(query) ?? undefined;
+            this.currentScreenSize.next(this.displayNameMap.get(query) ?? undefined)
           }
         }
     });

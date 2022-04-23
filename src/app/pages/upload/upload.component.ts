@@ -1,13 +1,13 @@
-import { Component, ElementRef, OnInit, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
 import { Recipe } from '../../classes/recipe';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { APIService } from '../../service/api.service';
-import { filter, find, last, single, take } from 'rxjs/operators';
 import { Measurements } from 'src/app/interface/measurements';
 import { MessageService } from 'src/app/service/message.service';
+import { OptionsData } from 'src/app/interface/options-data';
 
 @Component({
   selector: 'app-upload',
@@ -22,15 +22,15 @@ import { MessageService } from 'src/app/service/message.service';
 })
 export class UploadComponent implements OnInit {
  
-  //@ViewChildren('formRow') rows?: QueryList<ElementRef>;
+  categories: OptionsData[] = [];
+  nationalities: OptionsData[] = [];
+  difficulities: OptionsData[] = [];
+  costs: OptionsData[] = [];
+  labels: OptionsData[] = [];
 
-  //public activeIndex: number = 0;
-  
   private recipe = new Recipe();
-  //public filePath: string = ''
-  // public unitArray: string[] = [
-  //   'darab', 'liter', 'deciliter', 'centiliter', 'milliliter', 'csepp', 'kilogramm', 'dekagramm', 'gramm', 'mokkáskanál', 'kávéskanál', 'teáskanál', 'evőkanál', 'pohár', 'csésze', 'bögre', 'ujjnyi', 'csomag', 'tábla', 'gerezd', 'csokor', 'csipet' 
-  // ];
+
+  public currentScreenSize: number | undefined 
   public unitArray = Measurements
   public hungary: any
 
@@ -55,7 +55,6 @@ export class UploadComponent implements OnInit {
     ),
   })
 
-
   public fourthFormGroup = this.fb.group({
     time: ['', Validators.required],
     serving: ['', Validators.required],
@@ -69,7 +68,6 @@ export class UploadComponent implements OnInit {
   public fifthFormGroup = new FormGroup({
     photos: new FormControl('', [Validators.required, Validators.maxLength(3), Validators.minLength(1)]),
   })
-
       
   public get directions() {
     return this.secondFormGroup.get('directions') as FormArray;
@@ -79,24 +77,28 @@ export class UploadComponent implements OnInit {
     return this.thirdFormGroup.get('ingredients') as FormArray;
   }
 
-  constructor(public apiService: APIService, public dataService: DataService,
-  private messageService: MessageService,
-  private fb: FormBuilder) {
+  constructor(
+    private apiService: APIService,
+    private dataService: DataService,
+    private messageService: MessageService,
+    private fb: FormBuilder) {
   }
-
-  
-
-  
+ 
 
   ngOnInit(): void {
 
-    this.apiService.nationalities.subscribe({
-      next: response => {
-        this.hungary = response.items.find((val: any) => val.id == '11')
-        this.firstFormGroup.controls['nationality'].setValue(this.hungary)
-      }
+    this.dataService.currentScreenSize.subscribe(size => {
+      this.currentScreenSize = size;
     })
-    
+    this.apiService.categories.subscribe((categories) => this.categories = categories);
+    this.apiService.costs.subscribe((costs) => (this.costs = costs));
+    this.apiService.difficulities.subscribe(
+      (difficulities) => (this.difficulities = difficulities)
+    );
+    this.apiService.nationalities.subscribe(
+      (nationalities) => (this.nationalities = nationalities)
+    );
+    this.apiService.labels.subscribe((labels) => (this.labels = labels));
 
     this.fourthFormGroup.controls['serving'].setValue('1')
     this.fourthFormGroup.controls['time'].setValue('30')
@@ -134,7 +136,6 @@ export class UploadComponent implements OnInit {
       this.ingredients.removeAt(i)
     }
   }
-
 
   submitForm() {
     this.createRecipe()

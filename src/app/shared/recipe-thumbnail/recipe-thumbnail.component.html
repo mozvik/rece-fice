@@ -6,7 +6,7 @@
     *ngIf="showImgOverlay" [@enterHoverAnimation]
     class="img-overlay absolute left-8 top-8">
     <div class="mb-2">Elkészítési ideje: {{recipe.cookingTime}} perc</div>
-    <div class="mb-2">Nehézsége: {{recipe.difficulityName(dataService.difficulityList)}}</div>
-    <div class="">Költsége: {{recipe.costName(this.dataService.costList)}}</div>
+    <div class="mb-2">Nehézsége: {{recipe.difficulityName(difficulities)}}</div>
+    <div class="">Költsége: {{recipe.costName(costs)}}</div>
   </div>
 </div>

@@ -27,62 +27,36 @@ export class AppComponent {
   }
   
   ngOnInit(): void {
-
-
-    this.apiService.categories.subscribe({
-      next: response => this.dataService.categoryList = response.items,
-      error: e => console.log(e.error.text)
-    })
-    this.apiService.difficulities.subscribe({
-      next: response => this.dataService.difficulityList = response.items,
-      error: e => console.log(e.error.text)
-    })
-   
-    this.apiService.costs.subscribe({
-      next: response => this.dataService.costList = response.items,
-      error: e => console.log(e.error.text)
-    })
-
-    this.apiService.nationalities.subscribe({
-      next: response => this.dataService.nationalityList = response.items,
-      error: e => console.log(e.error.text)
-    })
-
-    this.apiService.labels.subscribe({
-      next: response => this.dataService.labelList = response.items,
-      error: e => console.log(e.error.text)
-    })
-
-     this.onResize()
+     //this.onResize()
   }
 
-  onResize() {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  // onResize() {
+  //   let vh = window.innerHeight * 0.01;
+  //   document.documentElement.style.setProperty('--vh', `${vh}px`);
  
-    const ua = navigator.userAgent;
-    if (
-      /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
-        ua
-      )
-    ) {
-      this.dataService.displaySize = 0; //mobile
-      return;
-    }
-    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-      this.dataService.displaySize = 1; //tablet
-      return;
-    }
+  //   const ua = navigator.userAgent;
+  //   if (
+  //     /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+  //       ua
+  //     )
+  //   ) {
+  //     this.dataService.displaySize = 0; //mobile
+  //     return;
+  //   }
+  //   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+  //     this.dataService.displaySize = 1; //tablet
+  //     return;
+  //   }
 
-    if (window.innerWidth <= 640) {
-      this.dataService.displaySize = 0; //mobile
-    } else if (window.innerWidth <= 768) {
-      this.dataService.displaySize = 1; //tablet
-    } else if (window.innerWidth < 1024) {
-      this.dataService.displaySize = 2; //small screen/laptop
-    } else if (window.innerWidth <= 1280) {
-      this.dataService.displaySize = 3; //desktop
-    } else this.dataService.displaySize = 4; //large screens
-    return;
-  }
+  //   if (window.innerWidth <= 640) {
+  //     this.dataService.displaySize = 0; //mobile
+  //   } else if (window.innerWidth <= 768) {
+  //     this.dataService.displaySize = 1; //tablet
+  //   } else if (window.innerWidth < 1024) {
+  //     this.dataService.displaySize = 2; //small screen/laptop
+  //   } else if (window.innerWidth <= 1280) {
+  //     this.dataService.displaySize = 3; //desktop
+  //   } else this.dataService.displaySize = 4; //large screens
+  //   return;
+  // }
 }

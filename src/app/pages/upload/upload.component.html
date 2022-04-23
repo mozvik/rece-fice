@@ -2,10 +2,10 @@
   <h4 class="title-h4 text-center mt-48 mb-20">Receptfeltöltés</h4>
   <mat-stepper
   [linear]="false"
-  [orientation]="dataService.displaySize > 2 ? 'horizontal' : 'vertical'">
+  [orientation]="currentScreenSize && currentScreenSize > 2 ? 'horizontal' : 'vertical'">
   <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
     <div class="relative">
-      <img class="absolute hidden md:block md:right-0 lg:-right-0 top-20" src="../../../assets/img/vanilia.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*140*0.70:0">
+      <img class="absolute hidden md:block md:right-0 lg:-right-0 top-20" src="../../../assets/img/vanilia.png" alt="" [width]="currentScreenSize ? currentScreenSize*140*0.70:0">
     </div>
     <form [formGroup]="firstFormGroup">
       <div class="flex flex-row flex-wrap md:gap-x-5 xl:gap-x-10 gap-y-20 pt-10">
@@ -31,7 +31,7 @@
           [formControlName]="'category'" 
           required
           >
-            <mat-option *ngFor="let option of dataService.categoryList" [value]="option">
+            <mat-option *ngFor="let option of categories" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -46,7 +46,7 @@
           [formControlName]="'nationality'" 
           required
           >
-            <mat-option *ngFor="let option of dataService.nationalityList" [value]="option">
+            <mat-option *ngFor="let option of nationalities" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -61,7 +61,7 @@
           [formControlName]="'difficulity'" 
           required
           >
-            <mat-option *ngFor="let option of dataService.difficulityList" [value]="option" selected="">
+            <mat-option *ngFor="let option of difficulities" [value]="option" selected="">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -76,7 +76,7 @@
           [formControlName]="'cost'" 
           required
           >
-            <mat-option *ngFor="let option of dataService.costList" [value]="option">
+            <mat-option *ngFor="let option of costs" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -92,7 +92,7 @@
           required
           multiple
           >
-            <mat-option *ngFor="let option of dataService.labelList" [value]="option">
+            <mat-option *ngFor="let option of labels" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -107,7 +107,7 @@
   
   <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
     <div class="relative">
-      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/mak.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*170*0.75:0">
+      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/mak.png" alt="" [width]="currentScreenSize ? currentScreenSize*170*0.75:0">
     </div>
     <form [formGroup]="secondFormGroup" class="mt-10">
       <div formArrayName="directions">
@@ -154,7 +154,7 @@
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók" class="pt-10">
     <div class="relative">
-      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/menta.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*120*0.70:0">
+      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/menta.png" alt="" [width]="currentScreenSize ? currentScreenSize*120*0.70:0">
     </div>
     <form [formGroup]="thirdFormGroup" class="mt-10">
       <div formArrayName="ingredients">
@@ -224,7 +224,7 @@
 
   <mat-step [stepControl]="fourthFormGroup" label="Egyéb jellemzők">
     <div class="relative">
-      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/fahej.png" alt="" [width]="dataService.currentScreenSize ? dataService.currentScreenSize*150*0.70:0">
+      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/fahej.png" alt="" [width]="currentScreenSize ? currentScreenSize*150*0.70:0">
     </div>
     <form [formGroup]="fourthFormGroup" class="mt-10">
       <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 md:mb-20 ">

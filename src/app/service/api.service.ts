@@ -16,15 +16,36 @@ export class APIService {
   filterArray = new Subject()
 
   
-  public categories = new Subject<any>();
-  public costs = new Subject<any>();
-  public nationalities = new Subject<any>();
-  public difficulities = new Subject<any>();
-  public labels = new Subject<any>();
+  // public categories = new Subject<any>();
+  // public costs = new Subject<any>();
+  // public nationalities = new Subject<any>();
+  // public difficulities = new Subject<any>();
+  // public labels = new Subject<any>();
+
+  private _categories = new BehaviorSubject<any[]>([]);
+  private _costs = new BehaviorSubject<OptionsData[]>([]);
+  private _nationalities = new BehaviorSubject<OptionsData[]>([]);
+  private _difficulities = new BehaviorSubject<OptionsData[]>([]);
+  private _labels = new BehaviorSubject<OptionsData[]>([]);
   
+  get categories() {
+    return this._categories.asObservable();
+  }
+  get costs() {
+    return this._costs.asObservable();
+  }
+  get nationalities() {
+    return this._nationalities.asObservable();
+  }
+  get difficulities() {
+    return this._difficulities.asObservable();
+  }
+  get labels() {
+    return this._labels.asObservable();
+  }  
   public isReady = new Subject<any>()
 
-  searchResults: any
+  //searchResults: any
 
   private isServerReady(): Observable<any> {
     console.log('isServerReady emits :>> ');
@@ -36,39 +57,57 @@ export class APIService {
       ;
   }
 
-  private getCategories(): Observable<any>{
+  private getCategories() {
     let query: string = this.serverUrl + '?list=category&apikey=' + this.apiKey
-    console.log('getCategories emits :>> ');
-    return this.http
+    this.http
       .get<any[]>(query)
       .pipe(
         timeout(1000),
         catchError(this.handleError))
-      ;
+      .subscribe(data => {
+        this._categories.next(data)
+        console.log('getCategories emits :>> ', data.length);
+      })
   }
   
-  private getDifficulities(): Observable<any> {
+  private getDifficulities() {
     let query: string = this.serverUrl + '?list=difficulity&apikey=' + this.apiKey
-    return this.http
+    this.http
       .get<any[]>(query)
+      .pipe(
+        timeout(1000),
+        catchError(this.handleError))
+      .subscribe(data => this._difficulities.next(data))
   }
   
-  private getCosts(): Observable<any> {
+  private getCosts() {
     let query: string = this.serverUrl + '?list=cost&apikey=' + this.apiKey
-    return this.http
+    this.http
       .get<any[]>(query)
+      .pipe(
+        timeout(1000),
+        catchError(this.handleError))
+      .subscribe(data => this._costs.next(data))
   }
   
-  private getNationalities(): Observable<any> {
+  private getNationalities() {
     let query: string = this.serverUrl + '?list=nationality&apikey=' + this.apiKey
-    return this.http
+    this.http
       .get<any[]>(query)
+      .pipe(
+        timeout(1000),
+        catchError(this.handleError))
+      .subscribe(data => this._nationalities.next(data))
   }
 
-  private getLabels(): Observable<any> {
+  private getLabels() {
     let query: string = this.serverUrl + '?list=label&apikey=' + this.apiKey
-    return this.http
+    this.http
       .get<any[]>(query)
+      .pipe(
+        timeout(1000),
+        catchError(this.handleError))
+      .subscribe(data => this._labels.next(data))
   }
 
 
@@ -76,13 +115,13 @@ export class APIService {
   recipeSearch(
     text: string,
     filters: any,
-    justNumberOfResults: boolean = true, 
-    page: number = 10
+    page: number,
+    itemsPerPage: number = 4
   ): Observable<any> {
     let filterData = {...filters}
     filterData.text = text
-    filterData.justNumberOfResults = justNumberOfResults
     filterData.page = page
+    filterData.itemsPerPage = itemsPerPage
     return this.http
       .post<any[]>(this.serverUrl, filterData)
       .pipe(
@@ -252,12 +291,17 @@ export class APIService {
   constructor(
     private http: HttpClient,
   ) { 
-      this.isServerReady().subscribe(this.isReady)
-      this.getCategories().subscribe(this.categories)
-      this.getDifficulities().subscribe(this.difficulities)
-      this.getCosts().subscribe(this.costs)
-      this.getNationalities().subscribe(this.nationalities)
-      this.getLabels().subscribe(this.labels)
+    this.getCategories()
+    this.getDifficulities()
+    this.getCosts()
+    this.getNationalities()
+    this.getLabels()
+      // this.isServerReady().subscribe(this.isReady)
+      // this.getCategories().subscribe(this.categories)
+      // this.getDifficulities().subscribe(this.difficulities)
+      // this.getCosts().subscribe(this.costs)
+      // this.getNationalities().subscribe(this.nationalities)
+      // this.getLabels().subscribe(this.labels)
     }
 }
   

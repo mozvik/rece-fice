@@ -8,6 +8,7 @@ import { DataService } from 'src/app/service/data.service';
 import { Measurements } from 'src/app/interface/measurements';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'src/app/service/message.service';
+import { OptionsData } from 'src/app/interface/options-data';
 
 @Component({
   selector: 'app-edit',
@@ -22,6 +23,13 @@ import { MessageService } from 'src/app/service/message.service';
 })
 export class EditComponent implements OnInit {
 
+  categories: OptionsData[] = [];
+  nationalities: OptionsData[] = [];
+  difficulities: OptionsData[] = [];
+  costs: OptionsData[] = [];
+  labels: OptionsData[] = [];
+
+  currentScreenSize: number | undefined 
   selectedId: any
   recipe: Recipe = new Recipe();
   uploadedImages: File[] = []
@@ -86,6 +94,21 @@ export class EditComponent implements OnInit {
   
 
   ngOnInit(): void {
+
+    this.dataService.currentScreenSize.subscribe(size => {
+      this.currentScreenSize = size;
+    })
+    this.apiService.categories.subscribe((categories) => this.categories = categories);
+    this.apiService.costs.subscribe((costs) => (this.costs = costs));
+    this.apiService.difficulities.subscribe(
+      (difficulities) => (this.difficulities = difficulities)
+    );
+    this.apiService.nationalities.subscribe(
+      (nationalities) => (this.nationalities = nationalities)
+    );
+    this.apiService.labels.subscribe((labels) => (this.labels = labels));
+
+
     this.route.params.subscribe(routeParams => {
       this.selectedId = routeParams['id'];
       this.apiService.getRecipes([this.selectedId], 0)
@@ -140,13 +163,13 @@ export class EditComponent implements OnInit {
   private fillUpFirstForm() { 
     const labels: any[] = []
     this.firstFormGroup.controls['name'].setValue(this.recipe.recipeName)
-    this.firstFormGroup.controls['category'].setValue(this.dataService.categoryList.find(item => item.id == this.recipe.category))
-    this.firstFormGroup.controls['nationality'].setValue(this.dataService.nationalityList.find(item => item.id == this.recipe.nationality))
-    this.firstFormGroup.controls['difficulity'].setValue(this.dataService.difficulityList.find(item => item.id == this.recipe.difficulity))
-    this.firstFormGroup.controls['cost'].setValue(this.dataService.costList.find(item => item.id == this.recipe.cost))
+    this.firstFormGroup.controls['category'].setValue(this.categories.find(item => item.id == this.recipe.category))
+    this.firstFormGroup.controls['nationality'].setValue(this.nationalities.find(item => item.id == this.recipe.nationality))
+    this.firstFormGroup.controls['difficulity'].setValue(this.difficulities.find(item => item.id == this.recipe.difficulity))
+    this.firstFormGroup.controls['cost'].setValue(this.costs.find(item => item.id == this.recipe.cost))
     
     for (const item of this.recipe.labels.map((m: { labelId: any; }) => m.labelId)) {
-      labels.push(this.dataService.labelList.filter(i => i.id == item)[0])
+      labels.push(this.labels.filter(i => i.id == item)[0])
     }
     this.firstFormGroup.controls['label'].setValue(labels)
 

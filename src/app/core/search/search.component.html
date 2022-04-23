@@ -37,7 +37,7 @@
           [displayWith]="getOptionText"
           (optionSelected)="onSelect($event)"
           >
-            <mat-option *ngFor="let option of apiService.searchResults?.items" [value]="option"
+            <mat-option *ngFor="let option of searchResults" [value]="option"
             >
               {{option.recipeName}}
             </mat-option>
@@ -52,7 +52,7 @@
           [formControlName]="'categoryCtrl'" 
           [multiple]="true" #multiSelect
           >
-            <mat-option>
+            <!-- <mat-option>
               <ngx-mat-select-search 
                 [showToggleAllCheckbox]="true"
                 [toggleAllCheckboxIndeterminate]="isIndeterminate"
@@ -66,8 +66,8 @@
                 noEntriesFoundLabel="nincs találat"
                 toggleAllCheckboxTooltipMessage="Összes kijelölése"
                 ></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let option of filteredCategory | async" [value]="option">
+            </mat-option> -->
+            <mat-option *ngFor="let option of categories" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -80,7 +80,7 @@
           [formControlName]="'nationalityCtrl'" 
           [multiple]="true" #multiSelect
           >
-            <mat-option>
+            <!-- <mat-option>
               <ngx-mat-select-search 
                 [showToggleAllCheckbox]="true"
                 [toggleAllCheckboxIndeterminate]="isIndeterminate"
@@ -94,8 +94,8 @@
                 noEntriesFoundLabel="nincs találat"
                 toggleAllCheckboxTooltipMessage="Összes kijelölése"
                 ></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let option of filteredNationality | async" [value]="option">
+            </mat-option> -->
+            <mat-option *ngFor="let option of nationalities" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -108,7 +108,7 @@
           [formControlName]="'labelCtrl'" 
           [multiple]="true" #multiSelect
           >
-            <mat-option>
+            <!-- <mat-option>
               <ngx-mat-select-search 
                 [showToggleAllCheckbox]="true"
                 [toggleAllCheckboxIndeterminate]="isIndeterminate"
@@ -122,8 +122,8 @@
                 noEntriesFoundLabel="nincs találat"
                 toggleAllCheckboxTooltipMessage="Összes kijelölése"
                 ></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let option of filteredLabel | async" [value]="option">
+            </mat-option> -->
+            <mat-option *ngFor="let option of labels" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -136,7 +136,7 @@
           [formControlName]="'difficulityCtrl'" 
           [multiple]="true" #multiSelect
           >
-            <mat-option>
+            <!-- <mat-option>
               <ngx-mat-select-search 
                 [showToggleAllCheckbox]="true"
                 [toggleAllCheckboxIndeterminate]="isIndeterminate"
@@ -150,8 +150,8 @@
                 noEntriesFoundLabel="nincs találat"
                 toggleAllCheckboxTooltipMessage="Összes kijelölése"
                 ></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let option of filteredDifficulity | async" [value]="option">
+            </mat-option> -->
+            <mat-option *ngFor="let option of difficulities" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>
@@ -164,7 +164,7 @@
           [formControlName]="'costCtrl'" 
           [multiple]="true" #multiSelect
           >
-            <mat-option>
+            <!-- <mat-option>
               <ngx-mat-select-search 
                 [showToggleAllCheckbox]="true"
                 [toggleAllCheckboxIndeterminate]="isIndeterminate"
@@ -178,8 +178,8 @@
                 noEntriesFoundLabel="nincs találat"
                 toggleAllCheckboxTooltipMessage="Összes kijelölése"
                 ></ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let option of filteredCost | async" [value]="option">
+            </mat-option> -->
+            <mat-option *ngFor="let option of costs" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>

@@ -16,7 +16,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -40,7 +39,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxMatSelectSearchModule,
     MatSnackBarModule,
     MatDividerModule,
     MatIconModule,

@@ -1,12 +1,13 @@
-import { animate, AnimationMetadata, style, transition, trigger } from '@angular/animations';
+import { trigger } from '@angular/animations';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Recipe } from 'src/app/classes/recipe';
 import { DataService } from '../../../service/data.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { hoverImageAnimation, scaleEnterAnimation } from 'src/app/animations';
+import { scaleEnterAnimation } from 'src/app/animations';
 import { APIService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/service/message.service';
+import { OptionsData } from 'src/app/interface/options-data';
 
 
 @Component({
@@ -14,9 +15,6 @@ import { MessageService } from 'src/app/service/message.service';
   templateUrl: './user-recipes.component.html',
   styleUrls: ['./user-recipes.component.scss'],
   animations: [
-    // trigger(
-    //   'enterHoverAnimation', hoverImageAnimation
-    // ),
     trigger(
       'enterAnimation', scaleEnterAnimation   
     )
@@ -30,18 +28,21 @@ export class UserRecipesComponent implements OnInit {
   @Input() userPageIndex: number = 0
   @Output() userPageIndexChange: EventEmitter<number> = new EventEmitter();
 
+  categories: OptionsData[] = [];
+
   showImgOverlay: boolean[] = [];
   dialogDeleteRef: any
   xxx: Recipe[] = []
 
   constructor(
-    public dataService: DataService,
+    private dataService: DataService,
     private apiService: APIService,
     private messageService: MessageService,
     public dialogDelete: MatDialog,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.apiService.categories.subscribe((categories) => this.categories = categories);    
   }
   incrementIndex(): void {
     this.dataService.userRecipePageIndex++

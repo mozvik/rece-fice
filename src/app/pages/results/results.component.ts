@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { Recipe } from 'src/app/classes/recipe';
 import { trigger } from '@angular/animations';
 import { hoverImageAnimation, scaleEnterAnimation } from 'src/app/animations';
+import { OptionsData } from 'src/app/interface/options-data';
 
 @Component({
   selector: 'app-results',
@@ -18,13 +19,28 @@ import { hoverImageAnimation, scaleEnterAnimation } from 'src/app/animations';
 })
 export class ResultsComponent implements OnInit {
 
+  categories: OptionsData[] = [];
+  // nationalities: OptionsData[] = [];
+  // difficulities: OptionsData[] = [];
+  // costs: OptionsData[] = [];
+  // labels: OptionsData[] = [];
+
   showImgOverlay: boolean[] = [];
   
   constructor( public dataService: DataService,
     public apiService: APIService,) { }
 
   ngOnInit(): void {
-    
+    this.apiService.categories.subscribe((categories) => this.categories = categories);
+    // this.apiService.costs.subscribe((costs) => (this.costs = costs));
+    // this.apiService.difficulities.subscribe(
+    //   (difficulities) => (this.difficulities = difficulities)
+    // );
+    // this.apiService.nationalities.subscribe(
+    //   (nationalities) => (this.nationalities = nationalities)
+    // );
+    // this.apiService.labels.subscribe((labels) => (this.labels = labels));
+
   }
 
   showImgText(index: number): void {
@@ -48,7 +64,7 @@ export class ResultsComponent implements OnInit {
   }
 
   getRecipesFromSearch() {
-    this.apiService.getRecipes(this.dataService.searchResultsSimple.map((item: { recipeId: any; }) => item.recipeId), this.dataService.searchResultsPageIndex)
+    this.apiService.getRecipes(this.dataService.searchResults.map((item: { recipeId: any; }) => item.recipeId), this.dataService.searchResultsPageIndex)
       .subscribe({
       next: (response: any) => this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
     })
