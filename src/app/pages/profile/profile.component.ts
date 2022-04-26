@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
         const recipe = new Recipe(
           item.recipeId, item.recipeName, item.ingredients, item.directions,
           item.created, item.updated, item.userId, item.cookingTime,
-          item.difficulityId, item.costId, item.categoryId, item.nationalityId,
+          item.difficultyId, item.costId, item.categoryId, item.nationalityId,
           item.image1,item.image2,item.image3, item.calorie, item.protein, item.carbonhydrate,
           item.fat, item.sugar, item.servings,
           item.ratings, item.reviews, item.labels

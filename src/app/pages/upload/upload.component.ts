@@ -24,7 +24,7 @@ export class UploadComponent implements OnInit {
  
   categories: OptionsData[] = [];
   nationalities: OptionsData[] = [];
-  difficulities: OptionsData[] = [];
+  difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
 
@@ -38,7 +38,7 @@ export class UploadComponent implements OnInit {
     name: ['', [Validators.minLength(4), Validators.required]],
     category: ['', Validators.required],
     nationality: ['', Validators.required],
-    difficulity: [this.dataService.difficulityList[0], Validators.required],
+    difficulty: [this.dataService.difficultyList[0], Validators.required],
     cost: ['', Validators.required],
     label: [''],
    
@@ -92,8 +92,8 @@ export class UploadComponent implements OnInit {
     })
     this.apiService.categories.subscribe((categories) => this.categories = categories);
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
-    this.apiService.difficulities.subscribe(
-      (difficulities) => (this.difficulities = difficulities)
+    this.apiService.difficulties.subscribe(
+      (difficulties) => (this.difficulties = difficulties)
     );
     this.apiService.nationalities.subscribe(
       (nationalities) => (this.nationalities = nationalities)
@@ -140,17 +140,25 @@ export class UploadComponent implements OnInit {
   submitForm() {
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
-    // for (const image of this.recipe.image) {
-    //   this.apiService.postRecipeImages(image).subscribe({
-    //   next: (response: any) => console.log(response)
+    
+    // this.apiService.postRecipe(this.recipe).subscribe({
+    //   next: (response: any) => {
+    //     this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
+    //     console.log(response)
+    //   }
     // })
-     
-    // }
     this.apiService.postRecipe(this.recipe).subscribe({
       next: (response: any) => {
-        this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
+        if (response != null) {
+          this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
+        } else {
+          this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')
+        }
         console.log(response)
-      }
+      },
+      error: (error: any) => {
+        this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')
+       }
     })
   }
 
@@ -160,7 +168,7 @@ export class UploadComponent implements OnInit {
     this.recipe.recipeName = this.firstFormGroup.get('name')?.value
     this.recipe.category = this.firstFormGroup.get('category')?.value
     this.recipe.nationality = this.firstFormGroup.get('nationality')?.value
-    this.recipe.difficulity = this.firstFormGroup.get('difficulity')?.value
+    this.recipe.difficulty = this.firstFormGroup.get('difficulty')?.value
     this.recipe.cost = this.firstFormGroup.get('cost')?.value
     this.recipe.labels = this.firstFormGroup.get('label')?.value
 

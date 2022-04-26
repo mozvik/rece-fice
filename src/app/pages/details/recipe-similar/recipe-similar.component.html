@@ -4,7 +4,15 @@
     
     [options]="customOptions">
       <ng-template carouselSlide *ngFor="let slide of recipe?.image; index as i">
-        <img [src]="slide">
+        <div class="h-52 border flex flex-col justify-start">
+          <div>
+            <img [src]="slide">
+          </div>
+          <div>
+            NUMBER {{i}} RECI
+          </div>
+
+        </div>
       </ng-template>
       
     </owl-carousel-o>
@@ -16,24 +24,18 @@
     </div>
     <div>
       <div>Nehézség</div>
-      <div>{{recipe?.difficulityName(dataService.difficulityList)}}</div>
+      <!-- <div>{{recipe?.difficultyName(dataService.difficultyList)}}</div> -->
     </div>
     <div>
       <div>Költség</div>
-      <div>{{recipe?.costName(dataService.costList)}}</div>
+      <!-- <div>{{recipe?.costName(dataService.costList)}}</div> -->
     </div>
     <div>
       <div>Konyha</div>
-      <div>{{recipe?.nationalityName(dataService.nationalityList)}}</div>
+      <!-- <div>{{recipe?.nationalityName(dataService.nationalityList)}}</div> -->
     </div>
   </div>
-  <mat-chip-list>
-    <ng-container *ngFor="let label of recipe?.getLabels(dataService.labelList)">
-      <mat-chip color="warn" selected>
-        {{label.name}}
-      </mat-chip>
-    </ng-container>
-  </mat-chip-list>
+ 
   
   <!-- <p>{{recipe?.categoryName(dataService.categoryList)}}</p> -->
 </div>

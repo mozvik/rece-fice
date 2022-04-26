@@ -21,7 +21,7 @@ export class DataService {
 
   public costList: OptionsData[] = [];
   public categoryList: OptionsData[] = [];
-  public difficulityList: OptionsData[] = [];
+  public difficultyList: OptionsData[] = [];
   public nationalityList: OptionsData[] = [];
   public labelList: OptionsData[] = [];
   //public displaySize!: number
@@ -39,6 +39,10 @@ export class DataService {
   public searchResultsFull: Recipe[] = [];
   public searchResults: any;
   public searchResultsPageIndex = 0 
+  public searchFilters: any = {
+    text: '',
+    filters: []
+  };
 
   //fridge global data
   public fridgeIngredients: string[] = [];
@@ -97,7 +101,7 @@ export class DataService {
         const recipe = new Recipe(
           item.recipeId, item.recipeName, item.ingredients, item.directions,
           item.created, item.updated, item.userId, item.cookingTime,
-          item.difficulityId, item.costId, item.categoryId, item.nationalityId,
+          item.difficulty, item.cost, item.category, item.nationality,
           item.image1, item.image2, item.image3, item.calorie, item.protein, item.carbonhydrate,
           item.fat, item.sugar, item.servings,
           item.ratings, item.reviews, item.labels

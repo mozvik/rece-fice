@@ -11,6 +11,7 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class FeaturedComponent implements OnInit {
 
+  
   recipesLatest: Recipe[] = [];
   recipesFree: Recipe[] = [];
   recipesDaily: Recipe[] = [];
@@ -32,28 +33,29 @@ export class FeaturedComponent implements OnInit {
   }
 
   getLatest() {
-    this.apiService.getRecipesBy('latest', 1, 4)
+    this.apiService.list(this.apiService.listType.latest, 0, 4)
       .subscribe({
         next: (response: any) => {
-          this.recipesLatest = this.dataService.createRecipes(response)
+          this.recipesLatest = this.dataService.createRecipes(response.items)
             
         }
     })
   }
   getFree() {
-    this.apiService.getRecipesBy('free', 1, 4)
+    this.apiService.list(this.apiService.listType.free, 0, 4)
       .subscribe({
         next: (response: any) => {
-          this.recipesFree = this.dataService.createRecipes(response)
+
+          this.recipesFree = this.dataService.createRecipes(response.items)
         
         }
     })
   }
   getDaily() {
-    this.apiService.getRecipesBy('daily', 1, 4)
+    this.apiService.list(this.apiService.listType.daily, 0, 4)
       .subscribe({
         next: (response: any) => {
-          this.recipesDaily = this.dataService.createRecipes(response)
+          this.recipesDaily = this.dataService.createRecipes(response.items)
         }
     })
   }

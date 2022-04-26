@@ -41,8 +41,8 @@ export class SearchComponent implements OnInit {
     searchCtrl: new FormControl(''),
     categoryCtrl: new FormControl(''),
     categoryFilterCtrl: new FormControl(''),
-    difficulityCtrl: new FormControl(''),
-    difficulityFilterCtrl: new FormControl(''),
+    difficultyCtrl: new FormControl(''),
+    difficultyFilterCtrl: new FormControl(''),
     labelCtrl: new FormControl(''),
     labelFilterCtrl: new FormControl(''),
     nationalityCtrl: new FormControl(''),
@@ -53,7 +53,7 @@ export class SearchComponent implements OnInit {
 
   categories: OptionsData[] = [];
   nationalities: OptionsData[] = [];
-  difficulities: OptionsData[] = [];
+  difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
 
@@ -61,7 +61,7 @@ export class SearchComponent implements OnInit {
   recipesFound: string = 'Keresés';
   selectedItems: any = {
     category: undefined,
-    difficulity: undefined,
+    difficulty: undefined,
     cost: undefined,
     nationality: undefined,
     label: undefined,
@@ -78,8 +78,8 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.categories.subscribe((categories) =>       this.categories = categories);
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
-    this.apiService.difficulities.subscribe(
-      (difficulities) => (this.difficulities = difficulities)
+    this.apiService.difficulties.subscribe(
+      (difficulties) => (this.difficulties = difficulties)
     );
     this.apiService.nationalities.subscribe(
       (nationalities) => (this.nationalities = nationalities)
@@ -95,7 +95,7 @@ export class SearchComponent implements OnInit {
 
     this.subsValueChange('categoryCtrl', 'category');
     this.subsValueChange('nationalityCtrl', 'nationality');
-    this.subsValueChange('difficulityCtrl', 'difficulity');
+    this.subsValueChange('difficultyCtrl', 'difficulty');
     this.subsValueChange('labelCtrl', 'label');
     this.subsValueChange('costCtrl', 'cost');
   }
@@ -126,7 +126,7 @@ export class SearchComponent implements OnInit {
   inputChange() {
     if (typeof this.inputText != 'object') {
       this.apiService
-        .recipeSearch(this.inputText, this.selectedItems, 0)
+        .search(this.inputText, this.selectedItems, 0)
         .subscribe((result) => {
           console.log('results :>> ', this.selectedItems, result);
           if (result) {
@@ -146,8 +146,9 @@ export class SearchComponent implements OnInit {
 
   submitForm() {
     this.closed.emit(true);
-    this.dataService.searchResultsShowState.state = '';
-    this.dataService.searchResultsPageIndex = 1;
+    this.dataService.searchResultsShowState.state = 'search';
+    this.dataService.searchResultsPageIndex = 0;
+    this.dataService.searchFilters = {text: this.inputText, filters: this.selectedItems };
     this.dataService.searchResultsFull = this.dataService.createRecipes(
       this.searchResults
     );

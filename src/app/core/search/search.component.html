@@ -133,7 +133,7 @@
         <mat-form-field color="accent">
           <mat-select 
           placeholder="Nehézség"
-          [formControlName]="'difficulityCtrl'" 
+          [formControlName]="'difficultyCtrl'" 
           [multiple]="true" #multiSelect
           >
             <!-- <mat-option>
@@ -143,15 +143,15 @@
                 [toggleAllCheckboxChecked]="isChecked"
                 (toggleAll)="ngxToggleSelectAll(
                   $event,
-                  'difficulityCtrl',
-                  filteredDifficulity)"
-                [formControlName]="'difficulityFilterCtrl'"
+                  'difficultyCtrl',
+                  filteredDifficulty)"
+                [formControlName]="'difficultyFilterCtrl'"
                 placeholderLabel="keresés..."
                 noEntriesFoundLabel="nincs találat"
                 toggleAllCheckboxTooltipMessage="Összes kijelölése"
                 ></ngx-mat-select-search>
             </mat-option> -->
-            <mat-option *ngFor="let option of difficulities" [value]="option">
+            <mat-option *ngFor="let option of difficulties" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-select>

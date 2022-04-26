@@ -4,6 +4,8 @@ import { Recipe } from 'src/app/classes/recipe';
 import { DataService } from 'src/app/service/data.service';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { OptionsData } from 'src/app/interface/options-data';
+import { APIService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-recipe-header',
@@ -31,11 +33,23 @@ export class RecipeHeaderComponent implements OnInit {
     items: 1,
     nav: false
   }
+  nationalities: OptionsData[] = [];
+  difficulties: OptionsData[] = [];
+  costs: OptionsData[] = [];
+  labels: OptionsData[] = [];
 
-  constructor(public dataService: DataService,) { }
+  constructor(
+  private apiService: APIService) { }
 
   ngOnInit(): void {
-  
+    this.apiService.costs.subscribe((costs) => (this.costs = costs));
+    this.apiService.difficulties.subscribe(
+      (difficulties) => (this.difficulties = difficulties)
+    );
+    this.apiService.nationalities.subscribe(
+      (nationalities) => (this.nationalities = nationalities)
+    );
+    this.apiService.labels.subscribe((labels) => (this.labels = labels));
   }
   
 }

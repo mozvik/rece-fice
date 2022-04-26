@@ -16,19 +16,19 @@
     </div>
     <div>
       <div>Nehézség</div>
-      <div>{{recipe?.difficulityName(dataService.difficulityList)}}</div>
+      <div>{{recipe?.difficulty.name}}</div>
     </div>
     <div>
       <div>Költség</div>
-      <div>{{recipe?.costName(dataService.costList)}}</div>
+      <div>{{recipe?.cost.name}}</div>
     </div>
     <div>
       <div>Konyha</div>
-      <div>{{recipe?.nationalityName(dataService.nationalityList)}}</div>
+      <div>{{recipe?.nationality.name}}</div>
     </div>
   </div>
   <mat-chip-list>
-    <ng-container *ngFor="let label of recipe?.getLabels(dataService.labelList)">
+    <ng-container *ngFor="let label of recipe?.labels">
       <mat-chip color="warn" selected>
         {{label.name}}
       </mat-chip>

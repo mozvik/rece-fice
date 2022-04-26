@@ -14,7 +14,7 @@
           *ngIf="showImgOverlay[i]" [@enterHoverAnimation]
           class="img-overlay absolute left-8 top-8 lora-i">
             <div class="mb-2">Elkészítési ideje: {{item.cookingTime}} perc</div>
-            <div class="mb-2">Nehézsége: {{item.difficulityName(this.dataService.difficulityList)}}</div>
+            <div class="mb-2">Nehézsége: {{item.difficultyName(this.dataService.difficultyList)}}</div>
             <div class="">Költsége: {{item.costName(this.dataService.costList)}}</div>
           </div>
         </div> -->
@@ -35,7 +35,7 @@
             <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon>
               <div>&nbsp;Gipsz Jakab</div>
             </div>
-            <div class="flex flex-row items-center"><div>{{item.categoryName(categories)}}</div>
+            <div class="flex flex-row items-center"><div>{{item.category.name}}</div>
             </div>
           </div>
         </div>

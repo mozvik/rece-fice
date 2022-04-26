@@ -62,10 +62,10 @@
           class="basis-full md:basis-1/2 lg:basis-2/6 xl:basis-1/5 p-5">
             <mat-label>Elkészítés nehézsége</mat-label>
             <mat-select
-            [formControlName]="'difficulity'"
+            [formControlName]="'difficulty'"
             required
             >
-              <mat-option *ngFor="let option of difficulities" [value]="option" selected="">
+              <mat-option *ngFor="let option of difficulties" [value]="option" selected="">
                 {{option.name}}
               </mat-option>
             </mat-select>

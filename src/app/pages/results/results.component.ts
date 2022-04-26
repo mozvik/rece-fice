@@ -21,7 +21,7 @@ export class ResultsComponent implements OnInit {
 
   categories: OptionsData[] = [];
   // nationalities: OptionsData[] = [];
-  // difficulities: OptionsData[] = [];
+  // difficulties: OptionsData[] = [];
   // costs: OptionsData[] = [];
   // labels: OptionsData[] = [];
 
@@ -33,8 +33,8 @@ export class ResultsComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.categories.subscribe((categories) => this.categories = categories);
     // this.apiService.costs.subscribe((costs) => (this.costs = costs));
-    // this.apiService.difficulities.subscribe(
-    //   (difficulities) => (this.difficulities = difficulities)
+    // this.apiService.difficulties.subscribe(
+    //   (difficulties) => (this.difficulties = difficulties)
     // );
     // this.apiService.nationalities.subscribe(
     //   (nationalities) => (this.nationalities = nationalities)
@@ -52,7 +52,7 @@ export class ResultsComponent implements OnInit {
 
   incrementIndex(): void {
     this.dataService.searchResultsPageIndex++
-    if (this.dataService.searchResultsShowState.state === '') {
+    if (this.dataService.searchResultsShowState.state === 'search') {
       this.getRecipesFromSearch()
     }
     else if (this.dataService.searchResultsShowState.state === 'category'){ 
@@ -64,10 +64,14 @@ export class ResultsComponent implements OnInit {
   }
 
   getRecipesFromSearch() {
-    this.apiService.getRecipes(this.dataService.searchResults.map((item: { recipeId: any; }) => item.recipeId), this.dataService.searchResultsPageIndex)
-      .subscribe({
-      next: (response: any) => this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
-    })
+    // this.apiService.getRecipes(this.dataService.searchResults.map((item: { recipeId: any; }) => item.recipeId), this.dataService.searchResultsPageIndex)
+    //   .subscribe({
+    //   next: (response: any) => this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
+    // })
+    this.apiService.search(this.dataService.searchFilters.text, this.dataService.searchFilters.filters,this.dataService.searchResultsPageIndex)
+    .subscribe({
+    next: (response: any) => this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
+  })
   }
   getRecipesFromCategory() {
     this.apiService.getRecipesByCategory(this.dataService.searchResultsShowState.value, this.dataService.searchResultsPageIndex).subscribe((response: any) => {

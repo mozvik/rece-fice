@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
 
   categories: OptionsData[] = [];
   nationalities: OptionsData[] = [];
-  difficulities: OptionsData[] = [];
+  difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
 
@@ -42,7 +42,7 @@ export class EditComponent implements OnInit {
     name: [{value: '', disabled: true}, [Validators.minLength(4), Validators.required]],
     category: ['', Validators.required],
     nationality: ['', Validators.required],
-    difficulity: ['', Validators.required],
+    difficulty: ['', Validators.required],
     cost: ['', Validators.required],
     label: [''],
    
@@ -100,8 +100,8 @@ export class EditComponent implements OnInit {
     })
     this.apiService.categories.subscribe((categories) => this.categories = categories);
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
-    this.apiService.difficulities.subscribe(
-      (difficulities) => (this.difficulities = difficulities)
+    this.apiService.difficulties.subscribe(
+      (difficulties) => (this.difficulties = difficulties)
     );
     this.apiService.nationalities.subscribe(
       (nationalities) => (this.nationalities = nationalities)
@@ -111,14 +111,23 @@ export class EditComponent implements OnInit {
 
     this.route.params.subscribe(routeParams => {
       this.selectedId = routeParams['id'];
-      this.apiService.getRecipes([this.selectedId], 0)
+      // this.apiService.getRecipes([this.selectedId], 0)
+      // .subscribe({
+      //   next: (response: any) => {
+      //     this.recipe = this.dataService.createRecipes(response?.items)[0]
+      //     this.maxLength = 3 - this.recipe.image!.length
+      //     this.fillUpFirstForm()
+      //     this.fillUpSecondForm()
+      //     this.fillUpThirdForm()
+      //     this.fillUpFourthForm()
+      //     this.fillUpFifthForm()
+      //   }
+      // })
+      this.apiService.getRecipe(this.selectedId)
       .subscribe({
         next: (response: any) => {
-          this.recipe = this.dataService.createRecipes(response?.items)[0]
+          this.recipe = this.dataService.createRecipes(response)[0]
           this.maxLength = 3 - this.recipe.image!.length
-          // this.minLength = 1 - this.recipe.image!.length
-          // console.log('this.minmax :>> ', this.minLength,this.maxLength);
-                    
           this.fillUpFirstForm()
           this.fillUpSecondForm()
           this.fillUpThirdForm()
@@ -126,7 +135,6 @@ export class EditComponent implements OnInit {
           this.fillUpFifthForm()
         }
       })
-
     });
   }
   private createDirectionsFormGroup(): FormGroup {
@@ -163,12 +171,12 @@ export class EditComponent implements OnInit {
   private fillUpFirstForm() { 
     const labels: any[] = []
     this.firstFormGroup.controls['name'].setValue(this.recipe.recipeName)
-    this.firstFormGroup.controls['category'].setValue(this.categories.find(item => item.id == this.recipe.category))
-    this.firstFormGroup.controls['nationality'].setValue(this.nationalities.find(item => item.id == this.recipe.nationality))
-    this.firstFormGroup.controls['difficulity'].setValue(this.difficulities.find(item => item.id == this.recipe.difficulity))
-    this.firstFormGroup.controls['cost'].setValue(this.costs.find(item => item.id == this.recipe.cost))
+    this.firstFormGroup.controls['category'].setValue(this.categories.find(item => item.id == this.recipe.category.id))
+    this.firstFormGroup.controls['nationality'].setValue(this.nationalities.find(item => item.id == this.recipe.nationality.id))
+    this.firstFormGroup.controls['difficulty'].setValue(this.difficulties.find(item => item.id == this.recipe.difficulty.id))
+    this.firstFormGroup.controls['cost'].setValue(this.costs.find(item => item.id == this.recipe.cost.id))
     
-    for (const item of this.recipe.labels.map((m: { labelId: any; }) => m.labelId)) {
+    for (const item of this.recipe.labels!.map((m: { id: any; }) => m.id)) {
       labels.push(this.labels.filter(i => i.id == item)[0])
     }
     this.firstFormGroup.controls['label'].setValue(labels)
@@ -222,7 +230,7 @@ export class EditComponent implements OnInit {
     for (let i = 0; i < this.recipe.image!.length; i++) {
       const ele = this.recipe.image![i];
       if (ele && ele !== '' && ele !== null) {
-        this.apiService.getImgBlob(ele).subscribe({
+        this.apiService.imageblob(ele).subscribe({
           next: (response: any) => {
             this.uploadedImages.push(new File([response], ele))
           }
@@ -257,7 +265,19 @@ export class EditComponent implements OnInit {
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
    
-    this.apiService.postRecipe(this.recipe,'updateRecipe').subscribe({
+    // this.apiService.postRecipe(this.recipe,'updateRecipe').subscribe({
+    //   next: (response: any) => {
+    //     this.msgService.showSnackBar(`${this.recipe.recipeName} recept sikeresen módosítva.`, 'success')
+    //     if (this.dataService.userRecipeList.length > 0) {
+    //       const idx = this.dataService.userRecipeList.findIndex(f => f.id == response.recipeId)
+    //       const updatedRecipe = this.dataService.createRecipes([response])
+    //       this.dataService.userRecipeList[idx] = updatedRecipe[0]
+    //     }
+
+    //   },
+    //   error: (error: any) => this.msgService.showSnackBar(error,'error')
+    // })
+    this.apiService.putRecipe(this.recipe).subscribe({
       next: (response: any) => {
         this.msgService.showSnackBar(`${this.recipe.recipeName} recept sikeresen módosítva.`, 'success')
         if (this.dataService.userRecipeList.length > 0) {
@@ -277,7 +297,7 @@ export class EditComponent implements OnInit {
     this.recipe.recipeName = this.firstFormGroup.get('name')?.value
     this.recipe.category = this.firstFormGroup.get('category')?.value
     this.recipe.nationality = this.firstFormGroup.get('nationality')?.value
-    this.recipe.difficulity = this.firstFormGroup.get('difficulity')?.value
+    this.recipe.difficulty = this.firstFormGroup.get('difficulty')?.value
     this.recipe.cost = this.firstFormGroup.get('cost')?.value
     this.recipe.labels = this.firstFormGroup.get('label')?.value
 

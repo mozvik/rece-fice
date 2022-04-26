@@ -19,7 +19,7 @@ export class RecipeThumbnailComponent implements OnInit {
 
   @Input() recipe: Recipe | undefined;
   
-  difficulities: OptionsData[] = [];
+  difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   showImgOverlay: boolean = false;
 
@@ -28,8 +28,8 @@ export class RecipeThumbnailComponent implements OnInit {
 
   ngOnInit(): void {   
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
-    this.apiService.difficulities.subscribe(
-      (difficulities) => (this.difficulities = difficulities)
+    this.apiService.difficulties.subscribe(
+      (difficulties) => (this.difficulties = difficulties)
     );
   }
   showImgText(): void {

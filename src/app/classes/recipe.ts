@@ -9,10 +9,10 @@ export class Recipe {
   updated?: string;
   userId?: string;
   cookingTime?: number;
-  difficulity?: string;
-  cost?: string;
-  category?: string;
-  nationality?: string;
+  difficulty?: any;
+  cost?: any;
+  category?: any;
+  nationality?: any;
   image?: any[];
   calorie?: number;
   protein?: number;
@@ -22,13 +22,13 @@ export class Recipe {
   servings?: number;
   ratings?: number;
   reviews?: string;
-  labels?: any;
+  labels?: any[];
 
   get id() {
     return this.recipeId 
   } 
 
-  constructor( recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulity: string = '', cost: string = '', category: string = '', nationality: string = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: string = '', labels: any = {} ) {
+  constructor(recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: string = '', labels: any[] = [] ) {
     this.recipeId = recipeId;
     this.recipeName = recipeName;
     this.ingredients = ingredients.split('||');
@@ -37,7 +37,7 @@ export class Recipe {
     this.updated = updated;
     this.userId = userId;
     this.cookingTime = cookingTime;
-    this.difficulity =  difficulity;
+    this.difficulty = difficulty;
     this.cost = cost;
     this.category = category;
     this.nationality = nationality;
@@ -65,9 +65,9 @@ export class Recipe {
     }
     return ''
   }
-  public difficulityName(difficulityList: OptionsData[]): string {
-    if (this.difficulity) {
-      return difficulityList.filter(item => item.id == this.difficulity)[0].name
+  public difficultyName(difficultyList: OptionsData[]): string {
+    if (this.difficulty) {
+      return difficultyList.filter(item => item.id == this.difficulty)[0].name
     }
     return ''
   }
@@ -84,9 +84,9 @@ export class Recipe {
     return ''
   }
   public getLabels(labelList: OptionsData[]): any {
-    if (this.labels.length > 0) {
+    if (this.labels!.length > 0) {
       const arr: any = []
-      for (const label of this.labels) {
+      for (const label of this.labels!) {
         arr.push(...labelList.filter(item => item.id == label.labelId))
       }
       return arr;
