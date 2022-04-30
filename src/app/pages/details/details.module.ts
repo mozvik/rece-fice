@@ -19,6 +19,9 @@ import { RecipeRateItComponent } from './recipe-rate-it/recipe-rate-it.component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { RecipeReviewsComponent } from './recipe-reviews/recipe-reviews.component';
+import {MatCardModule} from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,11 +32,13 @@ import { MatButtonModule } from '@angular/material/button';
     RecipeNutritionComponent,
     RecipeSimilarComponent,
     RecipeRatingsComponent,
-    RecipeRateItComponent
+    RecipeRateItComponent,
+    RecipeReviewsComponent
   ],
   imports: [
     CommonModule,
     DetailsRoutingModule,
+    FormsModule,
     SharedModule,
     CarouselModule,
     MatIconModule,
@@ -41,7 +46,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   
 })

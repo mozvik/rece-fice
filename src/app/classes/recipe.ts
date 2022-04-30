@@ -21,14 +21,14 @@ export class Recipe {
   sugar?: number;
   servings?: number;
   ratings?: number;
-  reviews?: string;
+  reviews?: any[];
   labels?: any[];
 
   get id() {
     return this.recipeId 
   } 
 
-  constructor(recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: string = '', labels: any[] = [] ) {
+  constructor(recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: any[] = [], labels: any[] = [] ) {
     this.recipeId = recipeId;
     this.recipeName = recipeName;
     this.ingredients = ingredients.split('||');
@@ -59,40 +59,40 @@ export class Recipe {
     this.labels = labels;
   }
 
-  public categoryName(categoryList: OptionsData[]): string {
-    if (this.category) {
-      return categoryList.filter(item => item.id == this.category)[0].name
-    }
-    return ''
-  }
-  public difficultyName(difficultyList: OptionsData[]): string {
-    if (this.difficulty) {
-      return difficultyList.filter(item => item.id == this.difficulty)[0].name
-    }
-    return ''
-  }
-  public costName(costList: OptionsData[]): string {
-    if (this.cost) {
-      return costList.filter(item => item.id == this.cost)[0].name
-    }
-    return ''
-  }
-  public nationalityName(nationalityList: OptionsData[]): string {
-    if (this.nationality) {
-      return nationalityList.filter(item => item.id == this.nationality)[0].name
-    }
-    return ''
-  }
-  public getLabels(labelList: OptionsData[]): any {
-    if (this.labels!.length > 0) {
-      const arr: any = []
-      for (const label of this.labels!) {
-        arr.push(...labelList.filter(item => item.id == label.labelId))
-      }
-      return arr;
-    }
-    return []
-  }
+  // public categoryName(categoryList: OptionsData[]): string {
+  //   if (this.category) {
+  //     return categoryList.filter(item => item.id == this.category)[0].name
+  //   }
+  //   return ''
+  // }
+  // public difficultyName(difficultyList: OptionsData[]): string {
+  //   if (this.difficulty) {
+  //     return difficultyList.filter(item => item.id == this.difficulty)[0].name
+  //   }
+  //   return ''
+  // }
+  // public costName(costList: OptionsData[]): string {
+  //   if (this.cost) {
+  //     return costList.filter(item => item.id == this.cost)[0].name
+  //   }
+  //   return ''
+  // }
+  // public nationalityName(nationalityList: OptionsData[]): string {
+  //   if (this.nationality) {
+  //     return nationalityList.filter(item => item.id == this.nationality)[0].name
+  //   }
+  //   return ''
+  // }
+  // public getLabels(labelList: OptionsData[]): any {
+  //   if (this.labels!.length > 0) {
+  //     const arr: any = []
+  //     for (const label of this.labels!) {
+  //       arr.push(...labelList.filter(item => item.id == label.labelId))
+  //     }
+  //     return arr;
+  //   }
+  //   return []
+  // }
 
   public getIngredients(): any[] {
     if (this.ingredients && this.ingredients.length > 0) {

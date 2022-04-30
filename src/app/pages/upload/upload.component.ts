@@ -140,13 +140,7 @@ export class UploadComponent implements OnInit {
   submitForm() {
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
-    
-    // this.apiService.postRecipe(this.recipe).subscribe({
-    //   next: (response: any) => {
-    //     this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
-    //     console.log(response)
-    //   }
-    // })
+        
     this.apiService.postRecipe(this.recipe).subscribe({
       next: (response: any) => {
         if (response != null) {

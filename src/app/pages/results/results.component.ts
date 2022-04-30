@@ -74,12 +74,13 @@ export class ResultsComponent implements OnInit {
   })
   }
   getRecipesFromCategory() {
-    this.apiService.getRecipesByCategory(this.dataService.searchResultsShowState.value, this.dataService.searchResultsPageIndex).subscribe((response: any) => {
+
+    this.apiService.list(this.dataService.searchResultsShowState.value, this.dataService.searchResultsPageIndex).subscribe((response: any) => {
     this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
     })
   }
   getRecipesFromFridge() {
-    this.apiService.getRecipesFridge(this.dataService.fridgeIngredients, this.dataService.searchResultsPageIndex)
+    this.apiService.fridge(this.dataService.fridgeIngredients, this.dataService.searchResultsPageIndex)
       .subscribe((response: any) =>
       this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
       )

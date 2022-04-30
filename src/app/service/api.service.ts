@@ -217,9 +217,29 @@ export class APIService {
   );
 }
  
-  
+ 
+  public review(recipeId: number, userId: number, rating: number, comment: string=''): Observable<any> {
+    let fData = new FormData();
 
+    fData.append('recipeId', recipeId.toString())
+    fData.append('userId', userId.toString())
+    fData.append('comment', comment)
+    fData.append('rating', rating.toString())
 
+    return this.http
+      .post<any[]>(this.serverUrl+ '?review', fData)
+      .pipe(
+        //catchError(this.handleError),
+      );
+   } 
+
+   public fridge(ingredients: string[], page: number, itemsPerPage: number = 4): Observable<any[]> {
+    return this.http
+    .get<any[]>(this.serverUrl + '?fridge&q=' + ingredients.join(',') + '&page=' + page.toString() + '&itemsPerPage=' + itemsPerPage.toString())
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
 
   //nem a REST API része
   public imageblob(url: string): Observable<any> {
@@ -233,37 +253,37 @@ export class APIService {
   
 
 
-  public getRecipesBy(searchMethod: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
-    let fData = new FormData();
-    if (searchMethod) {
-      fData.append('getRecipesBy','true')
-      fData.append('searchMethod', searchMethod)
-      fData.append('page', page.toString())
-      fData.append('itemsPerPage', itemsPerPage.toString())
-    }
+  // public getRecipesBy(searchMethod: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
+  //   let fData = new FormData();
+  //   if (searchMethod) {
+  //     fData.append('getRecipesBy','true')
+  //     fData.append('searchMethod', searchMethod)
+  //     fData.append('page', page.toString())
+  //     fData.append('itemsPerPage', itemsPerPage.toString())
+  //   }
 
-    return this.http
-    .post<any[]>(this.serverUrl, fData)
-      .pipe(
-      //catchError(this.handleError)
-    );
-  }
+  //   return this.http
+  //   .post<any[]>(this.serverUrl, fData)
+  //     .pipe(
+      
+  //   );
+  // }
 
-  public getRecipesByCategory(category: string, page: number, itemsPerPage: number = 4 ): Observable<any[]> {
-    let fData = new FormData();
-    if (category) {
-      fData.append('getRecipesByCategory','true')
-      fData.append('category', category)
-      fData.append('page', page.toString())
-      fData.append('itemsPerPage', itemsPerPage.toString())
-    }
+  // public getRecipesByCategory(category: string, page: number, itemsPerPage: number = 4 ): Observable<any[]> {
+  //   let fData = new FormData();
+  //   if (category) {
+  //     fData.append('getRecipesByCategory','true')
+  //     fData.append('category', category)
+  //     fData.append('page', page.toString())
+  //     fData.append('itemsPerPage', itemsPerPage.toString())
+  //   }
 
-    return this.http
-    .post<any[]>(this.serverUrl, fData)
-      .pipe(
-      //catchError(this.handleError)
-    );
-  }
+  //   return this.http
+  //   .post<any[]>(this.serverUrl, fData)
+  //     .pipe(
+  //     //catchError(this.handleError)
+  //   );
+  // }
 
   public getRecipesFridge(ingredientList: string[], page: number, itemsPerPage: number = 8 ): Observable<any[]> {
     let fData = new FormData();

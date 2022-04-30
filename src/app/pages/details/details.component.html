@@ -12,26 +12,28 @@
   <div class="grid-container">
     <div>
       <app-recipe-header [recipe]="recipe" class="border p-5"></app-recipe-header>
+      
+      <app-recipe-directions [recipe]="recipe" class="border p-5"></app-recipe-directions>
+      
+      <app-recipe-ingredients [recipe]="recipe" class="border p-5"></app-recipe-ingredients>
+
     </div>
     <div>
       <app-recipe-nutrition [recipe]="recipe" class="border p-5"></app-recipe-nutrition>
-    </div>
-    <div>
-      <app-recipe-ingredients [recipe]="recipe" class="border p-5"></app-recipe-ingredients>
-    </div>
-    <div>
-      <app-recipe-directions [recipe]="recipe" class="border p-5"></app-recipe-directions>
-    </div>
-    <div>
+    
       <app-recipe-similar [recipe]="recipe" class="border p-5"></app-recipe-similar>
+      
     </div>
     
-    <div>
-      <app-recipe-ratings [recipe]="recipe" class="border p-5"></app-recipe-ratings>
-    </div>
 
+
+      <app-recipe-ratings [recipe]="recipe" class="border p-5"></app-recipe-ratings>
+      <app-recipe-reviews [recipe]="recipe"></app-recipe-reviews>
+  
+    
   </div>
   <!-- <p>details works! ID: {{selectedId}}</p>
-  <p></p> -->
-</div>
-
+    <p></p> -->
+  </div>
+  
+  

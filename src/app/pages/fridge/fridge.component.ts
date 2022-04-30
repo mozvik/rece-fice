@@ -41,7 +41,14 @@ export class FridgeComponent implements OnInit {
     this.dataService.searchResultsPageIndex = 0
     this.dataService.searchResultsFull = []
     this.dataService.fridgeIngredients = this.ingredients
-    this.apiService.getRecipesFridge(this.dataService.fridgeIngredients, 0)
+   
+    // this.apiService.getRecipesFridge(this.dataService.fridgeIngredients, 0)
+    //   .subscribe({
+    //     next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
+        
+    // })
+
+    this.apiService.fridge(this.dataService.fridgeIngredients, 0, 4)
       .subscribe({
         next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
         

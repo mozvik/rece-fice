@@ -32,12 +32,13 @@ export class ToolbarComponent implements OnInit {
 
   dropdownCollapsed: boolean = true;
   toolbarDown: boolean = false;
+  listType: any
 
   constructor(public dataService: DataService,
   private apiService: APIService) { }
 
   ngOnInit(): void {
-
+    this.listType = this.apiService.listType
   }
   
 
@@ -51,13 +52,14 @@ export class ToolbarComponent implements OnInit {
     this.recipeDropdown.closeMenu()
   }
 
-  showRecipes(categoryId: string) {
+  showRecipes(categoryId: any) {
     this.dataService.searchResultsPageIndex = 0
     this.dataService.searchResultsFull = []
     this.dataService.searchResultsShowState.state = 'category'
     this.dataService.searchResultsShowState.value = categoryId
 
-    this.apiService.getRecipesByCategory(categoryId, 0, 4).subscribe((response: any) => {
+    console.log('object :>> ', categoryId);
+    this.apiService.list(categoryId, 0, 4).subscribe((response: any) => {
       this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
       console.log('this.dataService.searchResultsFull :>> ', this.dataService.searchResultsFull);
     })

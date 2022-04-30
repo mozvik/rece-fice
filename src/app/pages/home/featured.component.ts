@@ -15,6 +15,7 @@ export class FeaturedComponent implements OnInit {
   recipesLatest: Recipe[] = [];
   recipesFree: Recipe[] = [];
   recipesDaily: Recipe[] = [];
+  recipesPopular: Recipe[] = [];
 
   categories: OptionsData[] = []
 
@@ -26,10 +27,11 @@ export class FeaturedComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.apiService.categories.subscribe(categories => this.categories = categories)
     this.getLatest()
     this.getFree()
     this.getDaily()
-    this.apiService.categories.subscribe(categories => this.categories = categories)
+    this.getPopular()
   }
 
   getLatest() {
@@ -59,4 +61,13 @@ export class FeaturedComponent implements OnInit {
         }
     })
   }
+  getPopular() {
+    this.apiService.list(this.apiService.listType.popular, 0, 4)
+      .subscribe({
+        next: (response: any) => {
+          this.recipesPopular = this.dataService.createRecipes(response.items)
+        }
+    })
+  }
+  
 }

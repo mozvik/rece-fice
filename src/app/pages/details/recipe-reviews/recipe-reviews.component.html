@@ -1,0 +1,21 @@
+<div class="my-5">
+  <ng-container *ngIf="recipe">
+    <mat-card class="example-card my-5" *ngFor="let review of recipe.reviews">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"><img mat-card-image src="https://picsum.photos/50/50" alt=""></div>
+        <mat-card-title><div>{{review.userName}}</div> <div>{{review.created}}</div></mat-card-title>
+        <mat-card-subtitle>{{review.rating}}</mat-card-subtitle>
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content>
+        <p>
+          {{review.comment}}
+        </p>
+      </mat-card-content>
+      <!-- <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions> -->
+    </mat-card>
+  </ng-container>
+</div>

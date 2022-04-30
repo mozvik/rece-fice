@@ -52,22 +52,22 @@
       >
         <button mat-menu-item
         routerLink="/results"
-        (click)="showRecipes('1')">Előételek</button>
+        (click)="showRecipes(listType.categoryAppetiser)">Előételek</button>
         <button mat-menu-item
         routerLink="/results"
-        (click)="showRecipes('2')">Levesek</button>
+        (click)="showRecipes(listType.categorySoup)">Levesek</button>
         <button mat-menu-item
         routerLink="/results"
-        (click)="showRecipes('3')">Főételek</button>
+        (click)="showRecipes(listType.categoryMainCourse)">Főételek</button>
         <button mat-menu-item
         routerLink="/results"
-        (click)="showRecipes('4')">Köretek</button>
+        (click)="showRecipes(listType.categorySideDish)">Köretek</button>
         <button mat-menu-item
         routerLink="/results"
-        (click)="showRecipes('5')">Desszertek</button>
+        (click)="showRecipes(listType.categoryDessert)">Desszertek</button>
         <button mat-menu-item
         routerLink="/results"
-        (click)="showRecipes('6')">Italok</button>
+        (click)="showRecipes(listType.categoryDrink)">Italok</button>
       </mat-menu>
     
       <li class="">
