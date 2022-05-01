@@ -1,7 +1,14 @@
 @import "../../../../mixins";
 @import "../../../../colors";
 .mat-table{
-  width: 100%;
+  font-family: $fontLora;
+  background-color: $backgroundColor;
+  border-bottom: none;
+  tr:last-child{
+    .mat-cell{
+      border-bottom: none;
+    }
+  }
 }
 
 .mat-column-position {

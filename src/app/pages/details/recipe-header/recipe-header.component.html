@@ -9,27 +9,27 @@
       
     </owl-carousel-o>
   </div>
-  <div class="description flex justify-between">
+  <div class="description flex justify-between px-1 py-6">
     <div>
-      <div>Elkészítési idő</div>
-      <div>{{recipe?.cookingTime}}</div>
+      <div class="h-img-th text-base uppercase">Elkészítési idő</div>
+      <div class="h-img-td italic">{{recipe?.cookingTime}} perc</div>
     </div>
     <div>
-      <div>Nehézség</div>
-      <div>{{recipe?.difficulty.name}}</div>
+      <div class="h-img-th text-base uppercase">Nehézség</div>
+      <div class="h-img-td italic">{{recipe?.difficulty.name}}</div>
     </div>
     <div>
-      <div>Költség</div>
-      <div>{{recipe?.cost.name}}</div>
+      <div class="h-img-th text-base uppercase">Költség</div>
+      <div class="h-img-td italic">{{recipe?.cost.name}}</div>
     </div>
     <div>
-      <div>Konyha</div>
-      <div>{{recipe?.nationality.name}}</div>
+      <div class="h-img-th text-base uppercase">Konyha</div>
+      <div class="h-img-td italic">{{recipe?.nationality.name}}</div>
     </div>
   </div>
   <mat-chip-list>
     <ng-container *ngFor="let label of recipe?.labels">
-      <mat-chip color="warn" selected>
+      <mat-chip color="warn" selected class="chips">
         {{label.name}}
       </mat-chip>
     </ng-container>

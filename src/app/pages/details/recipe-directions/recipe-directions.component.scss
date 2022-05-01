@@ -18,3 +18,15 @@
   height: 3rem;
   width: 3rem;
 }
+
+.mat-table{
+  font-family: $fontLora;
+  background-color: $backgroundColor;
+  border-bottom: none;
+  tr:last-child{
+    .mat-cell{
+      border-bottom: none;
+    }
+  }
+}
+

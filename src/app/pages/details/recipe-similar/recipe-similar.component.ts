@@ -21,11 +21,11 @@ export class RecipeSimilarComponent implements OnInit {
     pullDrag: true,
     animateIn: 'animate__zoomIn',
     animateOut: 'animate__flipOutY',
-    dots: true,
+    dots: false,
     navSpeed: 700,
-    navText: ["", ''],
-    items: 3,
-    nav: false
+    navText: ["<", '>'],
+    items: 2,
+    nav: true
   }
   
   constructor(public dataService: DataService,) { }

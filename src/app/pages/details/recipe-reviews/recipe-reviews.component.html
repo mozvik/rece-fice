@@ -1,21 +1,28 @@
-<div class="my-5">
+<div class="m-5">
   <ng-container *ngIf="recipe">
+    {{stars}}
     <mat-card class="example-card my-5" *ngFor="let review of recipe.reviews">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"><img mat-card-image src="https://picsum.photos/50/50" alt=""></div>
-        <mat-card-title><div>{{review.userName}}</div> <div>{{review.created}}</div></mat-card-title>
-        <mat-card-subtitle>{{review.rating}}</mat-card-subtitle>
-      </mat-card-header>
-      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-      <mat-card-content>
+      <div class="flex flex-row justify-start ">
+        <div class="m-2 basis-1/8">
+          <img class="rounded-full mr-5" src="https://picsum.photos/50/50" alt="">
+        </div>
+        <div class="uppercase title basis-1/2 ml-5">
+          <div>{{review.userName}}</div> 
+          <span *ngFor="let rv of [].constructor(5); let i = index">
+            <mat-icon *ngIf="i < review.rating">star</mat-icon>
+           
+          </span>
+        </div>
+        <div class="basis-full text-right">
+          <div class="created">{{review.created}}</div>
+        </div>
+      </div>
+      <mat-card-content class="mx-10 my-5">
         <p>
           {{review.comment}}
         </p>
       </mat-card-content>
-      <!-- <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions> -->
+      
     </mat-card>
   </ng-container>
 </div>

@@ -250,7 +250,19 @@ export class APIService {
     );
   }
 
-  
+  public subscribeGuest(email: string): Observable<any[]> {
+    let fData = new FormData();
+    if (email) {
+      fData.append('subscribe','true')
+      fData.append('email', email)
+    }
+
+    return this.http
+      .post<any[]>(this.serverUrl, fData)
+      .pipe(
+      catchError(this.handleError)
+    );
+  }
 
 
   // public getRecipesBy(searchMethod: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
@@ -285,25 +297,25 @@ export class APIService {
   //   );
   // }
 
-  public getRecipesFridge(ingredientList: string[], page: number, itemsPerPage: number = 8 ): Observable<any[]> {
-    let fData = new FormData();
-    if (ingredientList &&
-      ingredientList.length > 0) {
-      fData.append('getRecipesFridge','true')
-      fData.append('page', page.toString())
-      fData.append('itemsPerPage', itemsPerPage.toString())
-      for (let i = 0; i < ingredientList.length; i++) {
-         const ele = ingredientList[i];
-        fData.append('ingredientList[]',ele)
-      }
-    }
+  // public getRecipesFridge(ingredientList: string[], page: number, itemsPerPage: number = 8 ): Observable<any[]> {
+  //   let fData = new FormData();
+  //   if (ingredientList &&
+  //     ingredientList.length > 0) {
+  //     fData.append('getRecipesFridge','true')
+  //     fData.append('page', page.toString())
+  //     fData.append('itemsPerPage', itemsPerPage.toString())
+  //     for (let i = 0; i < ingredientList.length; i++) {
+  //        const ele = ingredientList[i];
+  //       fData.append('ingredientList[]',ele)
+  //     }
+  //   }
 
-    return this.http
-    .post<any[]>(this.serverUrl, fData)
-      .pipe(
-      //catchError(this.handleError)
-    );
-  }
+  //   return this.http
+  //   .post<any[]>(this.serverUrl, fData)
+  //     .pipe(
+  //     //catchError(this.handleError)
+  //   );
+  // }
 
   public getRecipesByUser(userID: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
     let fData = new FormData();
@@ -320,30 +332,14 @@ export class APIService {
     );
   }
 
-  public deleteRecipe(recipeId: string | undefined): Observable<any[]> {
-    let fData = new FormData();
-    if (recipeId) {
-      fData.append('deleteRecipe',recipeId)
-    }
+  public deleteRecipe(recipeId: string | undefined) {
     return this.http
-    .post<any[]>(this.serverUrl, fData)
+      .delete(this.serverUrl + '?recipe&id=' + recipeId)
       .pipe(
       //catchError(this.handleError)
     );
   }
-  public subscribeGuest(email: string): Observable<any[]> {
-    let fData = new FormData();
-    if (email) {
-      fData.append('subscribe','true')
-      fData.append('email', email)
-    }
-
-    return this.http
-      .post<any[]>(this.serverUrl, fData)
-      .pipe(
-      catchError(this.handleError)
-    );
-  }
+  
 
  /**
  * Http hibakód kezelése

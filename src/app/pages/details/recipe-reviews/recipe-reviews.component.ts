@@ -9,7 +9,7 @@ import { Recipe } from 'src/app/classes/recipe';
 export class RecipeReviewsComponent implements OnInit {
 
   @Input() recipe: Recipe | undefined;
-
+  
   constructor() { }
 
   ngOnInit(): void {

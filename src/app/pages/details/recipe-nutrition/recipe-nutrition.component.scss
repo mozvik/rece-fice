@@ -2,22 +2,23 @@
 @import "../../../../colors";
 .mat-table{
   width: 100%;
+  font-family: $fontLora;
+  background-color: $backgroundColor;
+  border-bottom: none;
+  tr:last-child{
+    .mat-cell{
+      border-bottom: none;
+    }
+  }
 }
 
-.mat-column-position {
-  width: 2rem;
-  border-right: 1px solid rgba($textColorMuted,.4);
-  padding: 0 2rem;
-  text-align: center;
-}
 .mat-column-quantity {
   width: auto;
-  border-right: 1px solid rgba($textColorMuted,.4);
   padding: 1rem 2rem;
-  text-align: left;
+  text-align: right;
 }
 .mat-column-name {
-  width: 100%;
+  width: auto;
   padding: 1rem 2rem;
   text-align: left;
 }

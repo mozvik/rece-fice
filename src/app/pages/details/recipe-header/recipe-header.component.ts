@@ -21,7 +21,8 @@ export class RecipeHeaderComponent implements OnInit {
   
   customOptions: OwlOptions = {
     loop: true,
-    autoWidth: false,
+    autoWidth: true,
+    autoHeight: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -29,9 +30,9 @@ export class RecipeHeaderComponent implements OnInit {
     animateOut: 'animate__flipOutY',
     dots: true,
     navSpeed: 700,
-    navText: ["", ''],
+    navText: ["Előző", 'Következő'],
     items: 1,
-    nav: false
+    nav: true
   }
   nationalities: OptionsData[] = [];
   difficulties: OptionsData[] = [];

@@ -1,42 +1,22 @@
 <div class="my-5">
-  <div class="slider">
+  <div class="flex gap-5 my-5 items-center title-bg-warn px-2 py-3">
+    <mat-icon class="">list</mat-icon>
+    <h3 class="title-h5 inline-block">Hasonló receptek</h3>
+  </div>
+  <div class="slider pt-5">
     <owl-carousel-o 
     
     [options]="customOptions">
       <ng-template carouselSlide *ngFor="let slide of recipe?.image; index as i">
-        <div class="h-52 border flex flex-col justify-start">
+        <div class="border flex flex-col justify-start">
           <div>
             <img [src]="slide">
           </div>
-          <div>
-            NUMBER {{i}} RECI
-          </div>
-
         </div>
       </ng-template>
       
     </owl-carousel-o>
   </div>
-  <div class="description flex justify-between">
-    <div>
-      <div>Elkészítési idő</div>
-      <div>{{recipe?.cookingTime}}</div>
-    </div>
-    <div>
-      <div>Nehézség</div>
-      <!-- <div>{{recipe?.difficultyName(dataService.difficultyList)}}</div> -->
-    </div>
-    <div>
-      <div>Költség</div>
-      <!-- <div>{{recipe?.costName(dataService.costList)}}</div> -->
-    </div>
-    <div>
-      <div>Konyha</div>
-      <!-- <div>{{recipe?.nationalityName(dataService.nationalityList)}}</div> -->
-    </div>
-  </div>
  
-  
-  <!-- <p>{{recipe?.categoryName(dataService.categoryList)}}</p> -->
 </div>
 

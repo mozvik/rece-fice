@@ -111,4 +111,29 @@ export class Recipe {
     return []
   }
 
+  public getNutrition(): any[] {
+    return [
+      {
+        name: 'Kalória',
+        quantity: this.calorie
+      },
+      {
+        name: 'Szénhidrát',
+        quantity: this.carbonhydrate
+      },
+      {
+        name: 'Fehérje',
+        quantity: this.protein
+      },
+      {
+        name: 'Zsír',
+        quantity: this.fat
+      },
+      {
+        name: 'Cukor',
+        quantity: this.sugar
+      }
+    ]
+  }
+
 }

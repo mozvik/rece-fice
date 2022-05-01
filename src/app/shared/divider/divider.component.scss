@@ -1,20 +1,28 @@
 @import "../../../mixins";
 @import "../../../colors";
 
+.wrapper{
+  width:fit-content;
+  margin: 0 auto;
+}
+
 .diviLeft{
   @include dancing;
-  transform: translate(-60%,21%);
+  transform: translate(-.5rem,.5rem);
+  margin-left: 1rem;
   >div{
-    font-size: 2.0rem;
+    font-size: 1.75rem;
     opacity: .4;
     color: $textColor;
   }
 }
 .diviRight{
   @include poppins;
-  transform: translate(20%,-21%);
+  margin-left: 3rem;
+  margin-right: 1rem;
+  transform: translate(.5rem,-.5rem);
   >div{
-    font-size: 2rem;
+    font-size: 1.4rem;
     color: $textColor;
    }
 }
@@ -22,17 +30,24 @@
 img{
   height: 100%;
   opacity: .5;
+  display: inline-block;
 }
 
-@media screen and ( min-width: 768px ){
+@media screen and ( min-width: 960px ){
   .diviLeft{
+    margin-left: 4rem;
+    transform: translate(-4rem,.7rem);
     >div{
       font-size: 3.5rem;
     }
   }
   .diviRight{
+    margin-left: 4rem;
+    margin-right: 4rem;
+    transform: translate(4rem,-.7rem);
     >div{
       font-size: 3rem;
+      line-height: 3rem;
     }
   }
 }

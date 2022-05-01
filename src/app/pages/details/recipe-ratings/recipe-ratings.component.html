@@ -1,4 +1,4 @@
-<div class="my-5" *ngIf="!reviewed">
+<div class="m-5" *ngIf="!reviewed">
   <div>
     <div class="flex gap-5 my-5 items-center title-bg-warn px-2 py-3">
       <mat-icon class="">rate_review</mat-icon>
@@ -6,7 +6,7 @@
     </div>
     <div><app-recipe-rate-it (rating)="rating=$event"></app-recipe-rate-it></div>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field appearance="fill" class="mt-5">
       <mat-label>Írj róla véleményt! (opcionális)</mat-label>
       <textarea matInput placeholder="" rows="10" [(ngModel)]="comment"></textarea>
     </mat-form-field>

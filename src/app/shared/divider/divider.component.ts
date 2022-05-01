@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-divider',
@@ -9,10 +10,14 @@ export class DividerComponent implements OnInit {
   @Input() title: string | undefined;
   @Input() subtitle: string | undefined;
   @Input() small: boolean = false;
+  currentScreenSize: number | undefined;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.dataService.currentScreenSize.subscribe(size => {
+      this.currentScreenSize = size;
+    })
   }
 
 }
