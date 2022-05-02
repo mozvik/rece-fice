@@ -130,7 +130,6 @@ export class SearchComponent implements OnInit {
         .subscribe((result) => {
           console.log('results :>> ', this.selectedItems, result);
           if (result) {
-            // this.searchResults = result.items;
 
             (this.searchResults = result.items),
               result.itemCount
@@ -146,11 +145,13 @@ export class SearchComponent implements OnInit {
 
   submitForm() {
     this.closed.emit(true);
-    this.dataService.searchResultsShowState.state = 'search';
-    this.dataService.searchResultsPageIndex = 0;
-    this.dataService.searchFilters = {text: this.inputText, filters: this.selectedItems };
-    this.dataService.searchResultsFull = this.dataService.createRecipes(
-      this.searchResults
-    );
+    
+    this.dataService.searchFilters = { text: this.inputText, filters: this.selectedItems };
+    this.dataService.resultsPageIndex = 0;
+
+    this.router.navigateByUrl('/results/', {skipLocationChange: true}).then(() => {
+        this.router.navigate(['/results', 'search']);
+    });
+    
   }
 }

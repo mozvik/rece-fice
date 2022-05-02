@@ -2,11 +2,6 @@
   (closed)="$event ? dataService.searchIsOpen=false:''" [isSearchOpen]="dataService.searchIsOpen">
 </app-search>
 
-
-
-<!-- <div id="navPlaceholder" [style.height]="dataService.displaySize > 2 ? '128px':'56px'">
-</div> -->
-
 <div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full z-10" 
 
 (window:scroll)="onScroll($event)"
@@ -51,23 +46,17 @@
       <mat-menu #recipeMenu="matMenu" xPosition="after"
       >
         <button mat-menu-item
-        routerLink="/results"
-        (click)="showRecipes(listType.categoryAppetiser)">Előételek</button>
+        [routerLink]="['/results', 'appetiser']">Előételek</button>
         <button mat-menu-item
-        routerLink="/results"
-        (click)="showRecipes(listType.categorySoup)">Levesek</button>
+        [routerLink]="['/results', 'soup']">Levesek</button>
         <button mat-menu-item
-        routerLink="/results"
-        (click)="showRecipes(listType.categoryMainCourse)">Főételek</button>
+        [routerLink]="['/results', 'maincourse']">Főételek</button>
         <button mat-menu-item
-        routerLink="/results"
-        (click)="showRecipes(listType.categorySideDish)">Köretek</button>
+        [routerLink]="['/results', 'sidedish']">Köretek</button>
         <button mat-menu-item
-        routerLink="/results"
-        (click)="showRecipes(listType.categoryDessert)">Desszertek</button>
+        [routerLink]="['/results', 'dessert']">Desszertek</button>
         <button mat-menu-item
-        routerLink="/results"
-        (click)="showRecipes(listType.categoryDrink)">Italok</button>
+        [routerLink]="['/results', 'drink']">Italok</button>
       </mat-menu>
     
       <li class="">

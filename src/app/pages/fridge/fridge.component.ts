@@ -1,6 +1,7 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Router } from '@angular/router';
 import { APIService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
 
@@ -15,8 +16,10 @@ export class FridgeComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   ingredients: string[] = [];
   
-  constructor(private dataService: DataService,
-  private apiService: APIService) { }
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private apiService: APIService) { }
 
   ngOnInit(): void {
   }
@@ -37,9 +40,9 @@ export class FridgeComponent implements OnInit {
   }
 
   submitForm() {
-    this.dataService.searchResultsShowState.state = 'fridge'
-    this.dataService.searchResultsPageIndex = 0
-    this.dataService.searchResultsFull = []
+    // this.dataService.searchResultsShowState.state = 'fridge'
+    this.dataService.resultsPageIndex = 0
+    // this.dataService.searchResultsFull = []
     this.dataService.fridgeIngredients = this.ingredients
    
     // this.apiService.getRecipesFridge(this.dataService.fridgeIngredients, 0)
@@ -47,11 +50,11 @@ export class FridgeComponent implements OnInit {
     //     next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
         
     // })
-
-    this.apiService.fridge(this.dataService.fridgeIngredients, 0, 4)
-      .subscribe({
-        next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
+    this.router.navigate(['/results', 'fridge']);
+    // this.apiService.fridge(this.dataService.fridgeIngredients, 0, 4)
+    //   .subscribe({
+    //     next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
         
-    })
+    // })
   }
 }

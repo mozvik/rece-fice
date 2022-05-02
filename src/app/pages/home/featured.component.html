@@ -3,7 +3,7 @@
     <app-divider title="Receptek" subtitle="Kiemelt"></app-divider>
   </div>
   
-  <mat-tab-group mat-align-tabs="center" class="title-h4">
+  <mat-tab-group mat-align-tabs="center" class="title-h4" [dynamicHeight]="false">
     <mat-tab label="Népszerű receptek"> <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-items-center my-5">
       <ng-container *ngFor="let recipe of recipesPopular">
         <app-recipe-card 
@@ -11,14 +11,20 @@
         (urlClicked)="navigateToDetails($event)"
         (categoryClicked)="navigateToCategory($event)"
         (userClicked)="navigateToUserProfile($event)">
-        ></app-recipe-card>
+        </app-recipe-card>
         
       </ng-container>
     </div></mat-tab>
     <mat-tab label="Legújabb receptek">
       <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-items-center my-5">
         <ng-container *ngFor="let recipe of recipesLatest">
-          <div class="recipe-card flex flex-col justify-between">
+          <app-recipe-card 
+          [recipe]="recipe"
+          (urlClicked)="navigateToDetails($event)"
+          (categoryClicked)="navigateToCategory($event)"
+          (userClicked)="navigateToUserProfile($event)">
+          </app-recipe-card>
+          <!-- <div class="recipe-card flex flex-col justify-between">
             <app-recipe-thumbnail [recipe]="recipe"></app-recipe-thumbnail>
             <div class="flex flex-col justify-between grow ">
               <div>
@@ -41,14 +47,20 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </ng-container>
       </div>
     </mat-tab>
     <mat-tab label="Mentes receptek">
       <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-items-center my-5">
         <ng-container *ngFor="let recipe of recipesFree">
-          <div class="recipe-card flex flex-col justify-between">
+          <app-recipe-card 
+          [recipe]="recipe"
+          (urlClicked)="navigateToDetails($event)"
+          (categoryClicked)="navigateToCategory($event)"
+          (userClicked)="navigateToUserProfile($event)">
+          </app-recipe-card>
+          <!-- <div class="recipe-card flex flex-col justify-between">
             <app-recipe-thumbnail [recipe]="recipe"></app-recipe-thumbnail>
             <div class="flex flex-col justify-between grow ">
               <div>
@@ -71,14 +83,20 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </ng-container>
       </div>
     </mat-tab>
     <mat-tab label="Napi ajánlat">
       <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-items-center my-5">
         <ng-container *ngFor="let recipe of recipesDaily">
-          <div class="recipe-card flex flex-col justify-between">
+          <app-recipe-card 
+          [recipe]="recipe"
+          (urlClicked)="navigateToDetails($event)"
+          (categoryClicked)="navigateToCategory($event)"
+          (userClicked)="navigateToUserProfile($event)">
+          </app-recipe-card>
+          <!-- <div class="recipe-card flex flex-col justify-between">
             <app-recipe-thumbnail [recipe]="recipe"></app-recipe-thumbnail>
             <div class="flex flex-col justify-between grow ">
               <div>
@@ -101,7 +119,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </ng-container>
       </div>
     </mat-tab>

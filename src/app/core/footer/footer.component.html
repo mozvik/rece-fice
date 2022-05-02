@@ -23,7 +23,7 @@
           mat-flat-button 
           color="warn" 
           (click)="submit()" 
-          [disabled]="newsletterFormGroup.invalid">
+          [disabled]="newsletterFormGroup.invalid || isLoading">
             Feliratkozom
           </button></div>
       </form>

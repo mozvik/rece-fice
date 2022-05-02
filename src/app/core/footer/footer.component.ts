@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { throwError } from 'rxjs';
+import { finalize } from 'rxjs';
 import { APIService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
 import { MessageService } from 'src/app/service/message.service';
@@ -17,6 +17,7 @@ export class FooterComponent implements OnInit {
     email: ['', [Validators.email, Validators.required]],
     gdpr: ['', Validators.requiredTrue],
   })
+  isLoading: boolean = false;
  
   constructor(
     private fb: FormBuilder,
@@ -29,8 +30,12 @@ export class FooterComponent implements OnInit {
   }
 
   submit(): void {
-    this.apiService.subscribeGuest(this.newsletterFormGroup.value.email).subscribe({
+    this.isLoading = true;
+    this.apiService.subscribeGuest(this.newsletterFormGroup.value.email)
+      .pipe(finalize(() => this.isLoading = false))
+    .subscribe({
       next: (response: any) => {
+        this.newsletterFormGroup.reset();
         this.messageService.showSnackBar(response, 'success')
       },
       error: (error: any) => {

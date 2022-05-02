@@ -11,8 +11,8 @@ enum ListRequestName{
   popular = 'popular',
   categoryAppetiser = 'appetiser',
   categorySoup = 'soup',
-  categoryMainCourse = 'mainCourse',
-  categorySideDish = 'sideDish',
+  categorymaincourse = 'maincourse',
+  categorysidedish = 'sidedish',
   categoryDessert = 'dessert',
   categoryDrink = 'drink',
 }
@@ -213,7 +213,7 @@ export class APIService {
       '&page=' + page.toString() +
       '&itemsPerPage=' + itemsPerPage.toString())
     .pipe(
-    //catchError(this.handleError)
+    catchError(this.handleError)
   );
 }
  
@@ -227,7 +227,7 @@ export class APIService {
     fData.append('rating', rating.toString())
 
     return this.http
-      .post<any[]>(this.serverUrl+ '?review', fData)
+      .post<any[]>(this.serverUrl + '?review', fData)
       .pipe(
         //catchError(this.handleError),
       );
@@ -258,7 +258,7 @@ export class APIService {
     }
 
     return this.http
-      .post<any[]>(this.serverUrl, fData)
+      .post<any[]>(this.serverUrl + '?subscribe', fData)
       .pipe(
       catchError(this.handleError)
     );

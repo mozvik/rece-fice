@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { APIService } from '../../service/api.service';
-import { Subject } from 'rxjs';
+import { Subject, switchMap } from 'rxjs';
 import { Recipe } from 'src/app/classes/recipe';
 import { trigger } from '@angular/animations';
 import { hoverImageAnimation, listAnimation, scaleEnterAnimation } from 'src/app/animations';
 import { OptionsData } from 'src/app/interface/options-data';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-results',
@@ -21,69 +22,83 @@ import { OptionsData } from 'src/app/interface/options-data';
 export class ResultsComponent implements OnInit {
 
   categories: OptionsData[] = [];
-  // nationalities: OptionsData[] = [];
-  // difficulties: OptionsData[] = [];
-  // costs: OptionsData[] = [];
-  // labels: OptionsData[] = [];
-
-  showImgOverlay: boolean[] = [];
+  results: Recipe[] = [];
+  state: string = '';
+  searchFilters: any = {
+    text: '',
+    filters: []
+  };
+  //showImgOverlay: boolean[] = [];
   
-  constructor( public dataService: DataService,
-    public apiService: APIService,) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    public dataService: DataService,
+    public apiService: APIService,) {
+    
+    this.apiService.categories.subscribe((categories) => this.categories = categories);
+    
+    this.activatedRoute.params
+      .pipe(
+        switchMap((params) => {
+          this.state = params['id']
+          console.log('objethis.activatedRoute.paramsct :>> ', this.activatedRoute.params);
+          return this.activatedRoute.data;
+        })
+    ).subscribe({
+      next: data => {
+        this.results = this.dataService.createRecipes(data['recipes'].items)
+        console.log('data :>> ', data);
+      },
+      error: err => {
+        this.router.navigate(['/home']);
+       }
+    })}
 
   ngOnInit(): void {
-    this.apiService.categories.subscribe((categories) => this.categories = categories);
-    // this.apiService.costs.subscribe((costs) => (this.costs = costs));
-    // this.apiService.difficulties.subscribe(
-    //   (difficulties) => (this.difficulties = difficulties)
-    // );
-    // this.apiService.nationalities.subscribe(
-    //   (nationalities) => (this.nationalities = nationalities)
-    // );
-    // this.apiService.labels.subscribe((labels) => (this.labels = labels));
+    
+    
 
   }
 
-  showImgText(index: number): void {
-    this.showImgOverlay[index] = true;
-  }
-  hideImgText(index: number): void {
-    this.showImgOverlay[index] = false;
-  }
+  // showImgText(index: number): void {
+  //   this.showImgOverlay[index] = true;
+  // }
+  // hideImgText(index: number): void {
+  //   this.showImgOverlay[index] = false;
+  // }
 
   incrementIndex(): void {
-    this.dataService.searchResultsPageIndex++
-    if (this.dataService.searchResultsShowState.state === 'search') {
+    this.dataService.resultsPageIndex++
+
+    if (this.state === 'search') {
       this.getRecipesFromSearch()
     }
-    else if (this.dataService.searchResultsShowState.state === 'category'){ 
+    else if (Object.values(this.apiService.listType).includes(this.state as any)){ 
       this.getRecipesFromCategory()
     }
-    else if (this.dataService.searchResultsShowState.state === 'fridge'){ 
+    else if (this.state === 'fridge'){ 
       this.getRecipesFromFridge()
     }
   }
 
   getRecipesFromSearch() {
-    // this.apiService.getRecipes(this.dataService.searchResults.map((item: { recipeId: any; }) => item.recipeId), this.dataService.searchResultsPageIndex)
-    //   .subscribe({
-    //   next: (response: any) => this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
-    // })
-    this.apiService.search(this.dataService.searchFilters.text, this.dataService.searchFilters.filters,this.dataService.searchResultsPageIndex)
+    
+    this.apiService.search(this.dataService.searchFilters.text, this.dataService.searchFilters.filters,this.dataService.resultsPageIndex)
     .subscribe({
-    next: (response: any) => this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
+    next: (response: any) => this.results = this.results.concat(this.dataService.createRecipes(response.items))
   })
   }
   getRecipesFromCategory() {
 
-    this.apiService.list(this.dataService.searchResultsShowState.value, this.dataService.searchResultsPageIndex).subscribe((response: any) => {
-    this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
+    this.apiService.list(this.state as any, this.dataService.resultsPageIndex).subscribe((response: any) => {
+    this.results = this.results.concat(this.dataService.createRecipes(response.items))
     })
   }
   getRecipesFromFridge() {
-    this.apiService.fridge(this.dataService.fridgeIngredients, this.dataService.searchResultsPageIndex)
+    this.apiService.fridge(this.dataService.fridgeIngredients, this.dataService.resultsPageIndex)
       .subscribe((response: any) =>
-      this.dataService.searchResultsFull = this.dataService.searchResultsFull.concat(this.dataService.createRecipes(response?.items))
+      this.results = this.results.concat(this.dataService.createRecipes(response.items))
       )
   }
 }

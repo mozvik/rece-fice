@@ -32,6 +32,7 @@ export class DataService {
   public selectedRecipe = new BehaviorSubject<Recipe>(new Recipe());
   
   //searchResults module global data
+  
   public searchResultsShowState: any = {
     state: '',
     value: ''
@@ -39,10 +40,13 @@ export class DataService {
   public searchResultsFull: Recipe[] = [];
   public searchResults: any;
   public searchResultsPageIndex = 0 
+  
+  
   public searchFilters: any = {
     text: '',
     filters: []
   };
+  public resultsPageIndex: number = 0
 
   //fridge global data
   public fridgeIngredients: string[] = [];
