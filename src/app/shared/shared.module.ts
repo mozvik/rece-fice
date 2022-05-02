@@ -7,18 +7,22 @@ import { IconService } from '../service/icon.service';
 import { MessageService } from '../service/message.service';
 import { DividerComponent } from './divider/divider.component';
 import { RecipeThumbnailComponent } from './recipe-thumbnail/recipe-thumbnail.component';
+import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 
 
 @NgModule({
   declarations: [
     DividerComponent,
-    RecipeThumbnailComponent
+    RecipeThumbnailComponent,
+    RecipeCardComponent,
+    RecipeCardComponent
   ],
   imports: [ CommonModule ],
   exports: [
     CommonModule,
     DividerComponent,
-    RecipeThumbnailComponent
+    RecipeThumbnailComponent,
+    RecipeCardComponent
   ]
 })
 export class SharedModule {

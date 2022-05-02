@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Recipe } from 'src/app/classes/recipe';
 import { OptionsData } from 'src/app/interface/options-data';
 import { APIService } from 'src/app/service/api.service';
@@ -11,7 +12,8 @@ import { DataService } from 'src/app/service/data.service';
 })
 export class FeaturedComponent implements OnInit {
 
-  
+  urlClicked: string | undefined;
+  categoryClicked: string | undefined;
   recipesLatest: Recipe[] = [];
   recipesFree: Recipe[] = [];
   recipesDaily: Recipe[] = [];
@@ -20,6 +22,7 @@ export class FeaturedComponent implements OnInit {
   categories: OptionsData[] = []
 
   constructor(
+    private router: Router,
     private dataService: DataService,
     private apiService: APIService
   ) { }
@@ -69,5 +72,16 @@ export class FeaturedComponent implements OnInit {
         }
     })
   }
+
+  navigateToDetails(id: string) { 
+    this.router.navigateByUrl(`/details/${id}`)
+  }
+  navigateToUserProfile(id: string) { 
+
+  }
+  navigateToCategory(id: string) { 
+
+  }
+
   
 }

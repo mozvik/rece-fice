@@ -6,30 +6,13 @@
   <mat-tab-group mat-align-tabs="center" class="title-h4">
     <mat-tab label="Népszerű receptek"> <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-items-center my-5">
       <ng-container *ngFor="let recipe of recipesPopular">
-        <div class="recipe-card flex flex-col justify-between">
-          <app-recipe-thumbnail [recipe]="recipe"></app-recipe-thumbnail>
-          <div class="flex flex-col justify-between grow ">
-            <div>
-              <div class="flex flex-row justify-between">
-                <div class="rating title-h4">*****</div>
-                <div class="flex flex-row justify-between items-center">
-                </div>
-              
-              </div>
-              <div class="title-h6" [routerLink]="['/details', recipe.recipeId]">{{recipe.recipeName}}
-    
-              </div>
-            </div>
-            
-            <div class="card-subtitle flex flex-row justify-between my-3">
-              <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon>
-                <div>&nbsp;Gipsz Jakab</div>
-              </div>
-              <div class="flex flex-row items-center"><div>{{recipe.category.name}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-recipe-card 
+        [recipe]="recipe"
+        (urlClicked)="navigateToDetails($event)"
+        (categoryClicked)="navigateToCategory($event)"
+        (userClicked)="navigateToUserProfile($event)">
+        ></app-recipe-card>
+        
       </ng-container>
     </div></mat-tab>
     <mat-tab label="Legújabb receptek">

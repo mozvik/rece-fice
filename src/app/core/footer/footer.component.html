@@ -15,10 +15,17 @@
             <input matInput placeholder="valami@mail.com" value="" formControlName="email">
           </mat-form-field>
         </div>
-        <mat-checkbox class="my-3"  color="accent"
+        <mat-checkbox class="my-3"  color="warn"
          name="gdpr" formControlName="gdpr">Check me
         </mat-checkbox>
-        <div class="mt-3"><button mat-flat-button color="accent" (click)="submit()" [disabled]="newsletterFormGroup.invalid">Feliratkozom</button></div>
+        <div class="mt-3">
+          <button 
+          mat-flat-button 
+          color="warn" 
+          (click)="submit()" 
+          [disabled]="newsletterFormGroup.invalid">
+            Feliratkozom
+          </button></div>
       </form>
 
     </div>

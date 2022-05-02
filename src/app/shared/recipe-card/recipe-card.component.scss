@@ -1,0 +1,19 @@
+@import '../../../colors.scss';
+@import '../../../mixins.scss';
+.recipe-card{
+  border-bottom: 1px solid rgba($textColor,.2);
+  max-width: 360px;
+}
+
+.card-subtitle{
+  font-size: 15px;
+  font-family: $fontOswald;
+}
+.title-h6, .user, .category{
+  transition: color .4s ease;
+}
+
+.title-h6:hover, .user:hover, .category:hover{
+  color: $orangeRedDark;
+  transition: color .4s ease;
+}

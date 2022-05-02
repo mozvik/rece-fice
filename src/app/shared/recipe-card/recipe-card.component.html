@@ -1,0 +1,31 @@
+<div *ngIf="recipe" class="recipe-card flex flex-col justify-between h-full">
+  <app-recipe-thumbnail 
+  class=" hover:cursor-pointer"
+  [recipe]="recipe"
+  (click)="urlEmit(recipe.recipeId)">
+  ></app-recipe-thumbnail>
+  <div class="flex flex-col justify-between grow">
+    <div>
+      <div class="flex flex-row justify-between">
+        <div class="rating title-h4">*****</div>
+        <div class="flex flex-row justify-between items-center">
+        </div>
+      
+      </div>
+      <div 
+      class="title-h6 hover:cursor-pointer" 
+      (click)="urlEmit(recipe.recipeId)">{{recipe.recipeName}}
+      </div>
+    </div>
+    
+    <div class="card-subtitle flex flex-row justify-between my-3">
+      <div class="flex flex-row items-center hover:cursor-pointer user"
+      (click)="userEmit('userId')">
+        <div>&nbsp;Gipsz Jakab</div>
+      </div>
+      <div class="flex flex-row items-center hover:cursor-pointer category"
+      (click)="categoryEmit(recipe.category.name)"><div>{{recipe.category.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>

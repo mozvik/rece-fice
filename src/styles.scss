@@ -49,7 +49,10 @@ input:focus,
   box-shadow: none;
   outline: none;
 }
-
+button, .mat-button-wrapper, .mat-tab-label-content {
+  @include source;
+  // letter-spacing: .05rem;
+}
 .title{
   text-transform: uppercase;
   font-style: normal;

@@ -7,10 +7,6 @@
   background-color: $backgroundColor;
 }
 
-button{
-  @include oswald;
-  letter-spacing: .05rem;
-}
 ::ng-deep  .mat-form-field-label, .mat-input-element::placeholder, .mat-focused {
   color: $textColorMuted!important;
 }
