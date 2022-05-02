@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/classes/recipe';
 import { OptionsData } from 'src/app/interface/options-data';
 import { APIService } from 'src/app/service/api.service';
@@ -17,25 +17,27 @@ export class DetailsComponent implements OnInit {
   selectedId: any
   recipe: Recipe = new Recipe();
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     public dataService: DataService,
-    private apiService: APIService) { }
+    private apiService: APIService) {}
 
   ngOnInit(): void {
 
-    this.route.params.subscribe(routeParams => {
+    this.activatedRoute.params.subscribe(routeParams => {
       this.selectedId = routeParams['id'];
-      // this.apiService.getRecipes([this.selectedId], 0)
-      // .subscribe({
-      //   next: (response: any) => {
-      //     this.recipe = this.dataService.createRecipes(response?.items)[0]
-      //     console.log('rec_subscribe_details :>> ', this.recipe);
-      //   }
-      // })
+
       this.apiService.getRecipe(this.selectedId)
       .subscribe({
         next: (response: any) => {
           this.recipe = this.dataService.createRecipes(response)[0]
+
+          if (!this.recipe) { 
+            this.router.navigateByUrl('/home');
+          }
+            
+          // }
           console.log('rec_subscribe_details :>> ', this.recipe);
         }
       })

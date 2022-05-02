@@ -1,4 +1,4 @@
-import { animation, style, animate, trigger, transition, useAnimation, state, keyframes, AnimationMetadata } from '@angular/animations';
+import { animation, style, animate, trigger, transition, useAnimation, state, keyframes, AnimationMetadata, query, stagger } from '@angular/animations';
 
 export const chevronRotate = trigger('chevronRotate' ,[
   state(
@@ -29,3 +29,16 @@ export const hoverImageAnimation: AnimationMetadata[] = [
     animate('500ms ease', style({ opacity: 0}))
   ])
 ]
+
+export const listAnimation =  trigger('listAnimation', [
+  transition('* <=> *', [
+    query(':enter', [
+      style({opacity: 0, transform: 'scale(0)'}),
+      stagger(50, [
+        animate('300ms ease',
+        style({ opacity: 1, transform: 'none' }))
+      ])
+    ],
+    {optional: true})
+  ])
+])

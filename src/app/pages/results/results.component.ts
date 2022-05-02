@@ -4,7 +4,7 @@ import { APIService } from '../../service/api.service';
 import { Subject } from 'rxjs';
 import { Recipe } from 'src/app/classes/recipe';
 import { trigger } from '@angular/animations';
-import { hoverImageAnimation, scaleEnterAnimation } from 'src/app/animations';
+import { hoverImageAnimation, listAnimation, scaleEnterAnimation } from 'src/app/animations';
 import { OptionsData } from 'src/app/interface/options-data';
 
 @Component({
@@ -12,9 +12,10 @@ import { OptionsData } from 'src/app/interface/options-data';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss'],
   animations: [
-    trigger(
-      'enterAnimation', scaleEnterAnimation   
-    )
+    // trigger(
+    //   'enterAnimation', scaleEnterAnimation
+    // )
+    listAnimation
   ]
 })
 export class ResultsComponent implements OnInit {

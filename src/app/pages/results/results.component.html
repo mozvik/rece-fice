@@ -1,23 +1,15 @@
-<!-- <p>results works! {{dataService.searchResultsFull | json}}</p> -->
 <div class="container flex flex-row justify-center mt-64 mx-auto">
-  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">
+  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center" [@listAnimation]="dataService.searchResultsFull.length">
     <ng-container *ngFor="let item of dataService.searchResultsFull; let i=index"
     class="border">
-    <div class="recipe-card flex flex-col justify-between" [@enterAnimation]>
-      <app-recipe-thumbnail [recipe]="item"></app-recipe-thumbnail>
-      <div class="recipe-card" [@enterAnimation]
+    <div class="recipe-card flex flex-col justify-between" 
+    >
+    <!-- [@enterAnimation] -->
+      <app-recipe-thumbnail [recipe]="item" class=""></app-recipe-thumbnail>
+      <div class="recipe-card" 
       [routerLink]="['/details', item.recipeId]">
-        <!-- <div class="card-image relative"
-        (mouseover)="showImgText(i)" (mouseout)="hideImgText(i)">
-          <img [src]="item.image[0]" alt="" width="358" height="220" alt="image not found">
-          <div
-          *ngIf="showImgOverlay[i]" [@enterHoverAnimation]
-          class="img-overlay absolute left-8 top-8 lora-i">
-            <div class="mb-2">Elkészítési ideje: {{item.cookingTime}} perc</div>
-            <div class="mb-2">Nehézsége: {{item.difficultyName(this.dataService.difficultyList)}}</div>
-            <div class="">Költsége: {{item.costName(this.dataService.costList)}}</div>
-          </div>
-        </div> -->
+      <!-- [@enterAnimation] -->
+        
         <div class="flex flex-col justify-between grow ">
           <div>
             <div class="flex flex-row justify-between">
@@ -40,22 +32,6 @@
           </div>
         </div>
     
-        <!-- <div class="card-footer my-3 title-h4">
-          <div class="flex flex-row justify-between">
-            <div class="rating">*****</div>
-            <div class="flex flex-row justify-between items-center">
-              <mat-icon
-              matTooltip="Kedvenc"
-              [matTooltipPosition]="'left'">favorite</mat-icon>
-            </div>
-          </div>
-          <div>{{item.recipeName}}</div>
-        </div> -->
-        <!-- <div class="card-subtitle flex flex-row justify-between lora-i mb-3">
-    
-          <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon><div>{{item.userId}}&nbsp;Gipsz Jakab</div></div>
-          <div class="flex flex-row items-center"><div>{{item.categoryName(this.dataService.categoryList)}}</div></div>
-        </div> -->
       </div>
     </div>
     </ng-container>
