@@ -61,12 +61,16 @@ export class ResultsComponent implements OnInit {
 
   }
 
-  // showImgText(index: number): void {
-  //   this.showImgOverlay[index] = true;
-  // }
-  // hideImgText(index: number): void {
-  //   this.showImgOverlay[index] = false;
-  // }
+  navigateToDetails(id: string) { 
+    this.router.navigateByUrl(`/details/${id}`)
+  }
+
+  navigateToUserProfile(id: string) { 
+
+  }
+  navigateToCategory(id: string) { 
+
+  }
 
   incrementIndex(): void {
     this.dataService.resultsPageIndex++

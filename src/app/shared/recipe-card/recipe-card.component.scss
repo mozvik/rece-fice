@@ -6,14 +6,26 @@
 }
 
 .card-subtitle{
-  font-size: 15px;
+  font-size: 1rem;
   font-family: $fontOswald;
 }
 .title-h6, .user, .category{
   transition: color .4s ease;
+ 
 }
 
 .title-h6:hover, .user:hover, .category:hover{
   color: $orangeRedDark;
   transition: color .4s ease;
+}
+
+.rating{
+  
+  font-size: 1.4rem;
+  color: #ffd740;
+}
+
+.rating-text{
+  font-size: 1.1rem;
+  font-family: $fontSource;
 }

@@ -8,10 +8,13 @@
         </div>
         <div class="uppercase title basis-1/2 ml-5">
           <div>{{review.userName}}</div> 
-          <span *ngFor="let rv of [].constructor(5); let i = index">
-            <mat-icon *ngIf="i < review.rating">star</mat-icon>
+          <span class="normal-case rating-lead">Értékelése:
+              <ng-container *ngFor="let rv of [].constructor(5); let i = index">
+               <span class="rating" *ngIf="i < review.rating">&#9733;</span>
            
-          </span>
+              </ng-container>
+            </span> 
+           
         </div>
         <div class="basis-full text-right">
           <div class="created">{{review.created}}</div>

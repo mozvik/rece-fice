@@ -44,7 +44,11 @@ export class DataService {
   
   public searchFilters: any = {
     text: '',
-    filters: []
+    filters: [{ category: [] },
+      { nationality: [] },
+      { difficulty: [] },
+      { cost: [] },
+      { label: [] },]
   };
   public resultsPageIndex: number = 0
 

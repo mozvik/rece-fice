@@ -146,7 +146,7 @@ export class SearchComponent implements OnInit {
   submitForm() {
     this.closed.emit(true);
     
-    this.dataService.searchFilters = { text: this.inputText, filters: this.selectedItems };
+    this.dataService.searchFilters = {advanced: true, text: this.inputText, filters: this.selectedItems };
     this.dataService.resultsPageIndex = 0;
 
     this.router.navigateByUrl('/results/', {skipLocationChange: true}).then(() => {

@@ -18,3 +18,14 @@
 .mat-card-content{
   @include lora;
 }
+
+.rating{
+  font-style: normal;
+  font-size: 1.4rem;
+  color: #ffd740;
+}
+
+.rating-lead{
+  @include lora-italic;
+  font-size: 1rem;
+}

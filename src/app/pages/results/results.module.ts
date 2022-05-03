@@ -6,6 +6,7 @@ import { ResultsComponent } from './results.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ResultsRoutingModule,
     MatIconModule,
     MatTooltipModule,
+    MatButtonModule,
     SharedModule
   ]
 })

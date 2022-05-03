@@ -6,6 +6,7 @@ import { DataService } from 'src/app/service/data.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { OptionsData } from 'src/app/interface/options-data';
 import { APIService } from 'src/app/service/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-header',
@@ -40,7 +41,9 @@ export class RecipeHeaderComponent implements OnInit {
   labels: OptionsData[] = [];
 
   constructor(
-  private apiService: APIService) { }
+    private router: Router,
+    private dataService: DataService,
+    private apiService: APIService) { }
 
   ngOnInit(): void {
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
@@ -53,4 +56,11 @@ export class RecipeHeaderComponent implements OnInit {
     this.apiService.labels.subscribe((labels) => (this.labels = labels));
   }
   
+  clickOnLabel(id: number) {
+    this.dataService.searchFilters = {advanced: true, text: '', filters: { label: [id]}};
+    this.dataService.resultsPageIndex = 0;
+    console.log('this.dataService.searchFilters :>> ', this.dataService.searchFilters);
+    this.router.navigate(['/results', 'search']);
+    
+  }
 }

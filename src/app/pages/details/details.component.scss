@@ -18,6 +18,16 @@
   
   // @include lora-italic;
 }
+.rating{
+  font-style: normal;
+  font-size: 1.4rem;
+  color: #ffd740;
+}
+
+.rating-lead{
+  @include lora-italic;
+  font-size: 1rem;
+}
 
 @media screen and (min-width: 1024px){
   .grid-container {

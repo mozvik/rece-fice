@@ -59,40 +59,7 @@ export class Recipe {
     this.labels = labels;
   }
 
-  // public categoryName(categoryList: OptionsData[]): string {
-  //   if (this.category) {
-  //     return categoryList.filter(item => item.id == this.category)[0].name
-  //   }
-  //   return ''
-  // }
-  // public difficultyName(difficultyList: OptionsData[]): string {
-  //   if (this.difficulty) {
-  //     return difficultyList.filter(item => item.id == this.difficulty)[0].name
-  //   }
-  //   return ''
-  // }
-  // public costName(costList: OptionsData[]): string {
-  //   if (this.cost) {
-  //     return costList.filter(item => item.id == this.cost)[0].name
-  //   }
-  //   return ''
-  // }
-  // public nationalityName(nationalityList: OptionsData[]): string {
-  //   if (this.nationality) {
-  //     return nationalityList.filter(item => item.id == this.nationality)[0].name
-  //   }
-  //   return ''
-  // }
-  // public getLabels(labelList: OptionsData[]): any {
-  //   if (this.labels!.length > 0) {
-  //     const arr: any = []
-  //     for (const label of this.labels!) {
-  //       arr.push(...labelList.filter(item => item.id == label.labelId))
-  //     }
-  //     return arr;
-  //   }
-  //   return []
-  // }
+
 
   public getIngredients(): any[] {
     if (this.ingredients && this.ingredients.length > 0) {
@@ -136,4 +103,20 @@ export class Recipe {
     ]
   }
 
+  averageRating(): number {
+    if (this.reviews) {
+      if (this.reviews.length > 0) {
+        return this.reviews.reduce((acc, curr) => Number(acc) + Number(curr.rating), 0) / this.reviews.length
+      }
+    }
+    return 0;
+  }
+
+  totalRatings(): number {
+    if (this.reviews) {
+        return this.reviews.length
+    }
+    return 0;
+  }
+  
 }

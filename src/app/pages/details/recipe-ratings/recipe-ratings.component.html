@@ -11,7 +11,7 @@
       <textarea matInput placeholder="" rows="10" [(ngModel)]="comment"></textarea>
     </mat-form-field>
     <button mat-flat-button color="warn" 
-    [disabled]="rating===0"
+    [disabled]="rating===0 || isLoading"
     (click)="submit()"
     >Értékelés elküldése</button>
   </div>

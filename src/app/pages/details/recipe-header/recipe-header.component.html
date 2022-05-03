@@ -29,7 +29,7 @@
   </div>
   <mat-chip-list>
     <ng-container *ngFor="let label of recipe?.labels">
-      <mat-chip color="warn" selected class="chips">
+      <mat-chip color="warn" selected class="chips hover:cursor-pointer" (click)="clickOnLabel(label.id)">
         {{label.name}}
       </mat-chip>
     </ng-container>
