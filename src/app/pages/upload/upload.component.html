@@ -3,7 +3,7 @@
   <mat-stepper
   [linear]="false"
   [orientation]="currentScreenSize && currentScreenSize > 2 ? 'horizontal' : 'vertical'">
-  <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
+  <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák" >
     <div class="relative">
       <img class="absolute hidden md:block md:right-0 lg:-right-0 top-20" src="../../../assets/img/vanilia.png" alt="" [width]="currentScreenSize ? currentScreenSize*140*0.70:0">
     </div>
@@ -99,8 +99,7 @@
         </mat-form-field>
       </div>
       <div class="mt-5">
-        {{firstFormGroup.invalid}}
-        <button mat-flat-button color="primary" matStepperNext>Következő</button>
+        <button mat-flat-button color="warn" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -133,22 +132,27 @@
          
           <div class="basis-2/5 flex flex-row">
             <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1 && secondFormGroup.controls['directions']?.valid"
-            mat-icon-button disableRipple="true" class="btn-icon" 
+            mat-icon-button disableRipple="true" class="text-sm" 
             title="Új lépés hozzáadása"
             (click)="addDirection(i)" 
-            type="button" [disabled]="!secondFormGroup.controls['directions']?.valid"><mat-icon color="accent">create</mat-icon></button>
+            type="button" 
+            [disabled]="!secondFormGroup.controls['directions']?.valid" color="warn"
+            >
+
+              <mat-icon>create</mat-icon>
+</button>
             <button *ngIf="i != 0"
             mat-icon-button disableRipple="true" class="btn-icon" 
-            title="Lépés törlése"
+            title="Lépés törlése"  color="warn"
             (click)="removeDirection(i)" 
-            type="button"><mat-icon color="warn">delete_outline</mat-icon></button>
+            type="button"><mat-icon>delete_outline</mat-icon></button>
           </div>
         </div>
       </div>
       
       <div class="mt-5">
-        <button  mat-flat-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
-        <button  mat-flat-button color="primary" matStepperNext>Következő</button>
+        <button  mat-flat-button color="warn" matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button  mat-flat-button color="warn" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -203,21 +207,21 @@
             disableRipple="true"
             title="Új hozzávaló hozzáadása"
             (click)="addIngredient(i)" 
-            type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid"><mat-icon color="accent">create</mat-icon></button>
+            type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid" color="warn"><mat-icon>create</mat-icon></button>
             <button *ngIf="i != 0"
             mat-icon-button class="btn-icon" 
             disableRipple="true"
             title="Hozzávaló törlése"
             (click)="removeIngredient(i)" 
-            type="button" ><mat-icon color="warn">delete_outline</mat-icon></button>
+            type="button"  color="warn"><mat-icon>delete_outline</mat-icon></button>
           
           </div>
         </div>
       </div>
       
       <div class="mt-5">
-        <button  mat-flat-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
-        <button  mat-flat-button color="primary" matStepperNext>Következő</button>
+        <button  mat-flat-button color="warn" matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button  mat-flat-button color="warn" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -315,8 +319,8 @@
         </mat-form-field>
       </div>
       <div class="mt-10">
-        <button mat-flat-button color="primary"  matStepperPrevious>Előző</button><span class="mr-3"></span>
-        <button mat-flat-button color="primary"  matStepperNext>Következő</button>
+        <button mat-flat-button color="warn"  matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button mat-flat-button color="warn"  matStepperNext>Következő</button>
       </div>
     </form> 
   </mat-step>
@@ -347,20 +351,9 @@
           {{item.name}}
         </div>
          
-        <div>
-          <!-- status: {{fifthFormGroup.controls['photos'].status}} | 
-          requiredError: {{fifthFormGroup.controls['photos']?.errors}} | 
-          minError: {{fifthFormGroup.controls['photos'].errors}}
-          | 
-          touched: {{fifthFormGroup.controls['photos'].touched}} -->
-        </div>
-        <div>
-         
-        </div>
-        
         </div>
       <div>
-        <button mat-flat-button color="primary" matStepperPrevious>Előző</button>
+        <button mat-flat-button color="warn" matStepperPrevious>Előző</button>
       </div>
     </form> 
   </mat-step>
@@ -374,7 +367,7 @@
       [disabled]="firstFormGroup.invalid 
       || secondFormGroup.invalid || 
       thirdFormGroup.invalid || 
-      fourthFormGroup.invalid"
+      fourthFormGroup.invalid || isLoading"
       >Recept feltöltése</button>
     </div>
   </div>

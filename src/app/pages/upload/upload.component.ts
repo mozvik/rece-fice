@@ -8,6 +8,7 @@ import { APIService } from '../../service/api.service';
 import { Measurements } from 'src/app/interface/measurements';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -27,7 +28,7 @@ export class UploadComponent implements OnInit {
   difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
-
+  isLoading: boolean = false;
   private recipe = new Recipe();
 
   public currentScreenSize: number | undefined 
@@ -138,10 +139,13 @@ export class UploadComponent implements OnInit {
   }
 
   submitForm() {
+    this.isLoading = true;
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
         
-    this.apiService.postRecipe(this.recipe).subscribe({
+    this.apiService.postRecipe(this.recipe)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
       next: (response: any) => {
         if (response != null) {
           this.messageService.showSnackBar('Sikeres feltöltés!', 'success')

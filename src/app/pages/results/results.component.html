@@ -1,4 +1,5 @@
-<div class="container flex flex-col items-center mt-64 mx-auto">
+<div class="container flex flex-col items-center mt-52 mx-auto">
+  <h3 class="mb-32 title-h4">{{title}}</h3>
   <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center" [@listAnimation]="results.length">
     <ng-container *ngFor="let recipe of results; let i=index"
     class="border">

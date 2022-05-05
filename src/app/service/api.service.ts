@@ -22,7 +22,18 @@ enum ListRequestName{
 })
 export class APIService {
 
-  listType = ListRequestName;
+  listType = [
+    { id: 'latest', name: 'Legújabbak' },
+    { id: 'free', name: 'Mentes receptek' },
+    { id: 'daily', name: 'Napi ajánlat' },
+    { id: 'popular', name: 'Népszerű receptek' },
+    { id: 'appetiser', name: 'Élőételek' },
+    { id: 'soup', name: 'Levesek' },
+    { id: 'maincourse', name: 'Főételek' },
+    { id: 'sidedish', name: 'Köretek' },
+    { id: 'dessert', name: 'Desszertek' },
+    { id: 'drink', name: 'Italok' }
+  ];
 
   //serverUrl: string = 'https://https:/teszt.esoguides.hu/api/';
   // serverUrl: string = 'http://localhost/angular/rece-fice/api/';
@@ -205,7 +216,7 @@ export class APIService {
    * @param itemsPerPage 
    * @returns 
    */
-  public list(listBy: ListRequestName, page: number, itemsPerPage: number = 4): Observable<any[]> {
+  public list(listBy: string, page: number, itemsPerPage: number = 4): Observable<any[]> {
    
   return this.http
     .get<any[]>(this.serverUrl +

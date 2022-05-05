@@ -5,6 +5,7 @@ import { APIService } from '../../service/api.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { OptionsData } from '../../interface/options-data';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -51,6 +52,7 @@ export class SearchComponent implements OnInit {
     costFilterCtrl: new FormControl(''),
   });
 
+  isLoading: boolean = false;
   categories: OptionsData[] = [];
   nationalities: OptionsData[] = [];
   difficulties: OptionsData[] = [];
@@ -125,8 +127,10 @@ export class SearchComponent implements OnInit {
 
   inputChange() {
     if (typeof this.inputText != 'object') {
+      this.isLoading = true;
       this.apiService
         .search(this.inputText, this.selectedItems, 0)
+        .pipe(finalize(() => this.isLoading = false))
         .subscribe((result) => {
           console.log('results :>> ', this.selectedItems, result);
           if (result) {

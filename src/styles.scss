@@ -113,7 +113,7 @@ button, .mat-button-wrapper, .mat-tab-label-content {
   text-transform: uppercase;
   border-bottom: 3px solid $textColor;
 }
-.mat-tooltip{
+.mat-tooltip {
   font-family: $fontOswald;
   font-size: 1.1rem;
 }
@@ -124,6 +124,9 @@ button, .mat-button-wrapper, .mat-tab-label-content {
   @include source;
 }
 
-
+.mat-imput-element::placeholder, .mat-form-field{
+  @include source;
+  font-size: 1.2rem;
+}
 
 

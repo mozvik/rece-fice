@@ -32,13 +32,13 @@ export class ToolbarComponent implements OnInit {
 
   dropdownCollapsed: boolean = true;
   toolbarDown: boolean = false;
-  listType: any
+  //listType: any
 
   constructor(public dataService: DataService,
   private apiService: APIService) { }
 
   ngOnInit(): void {
-    this.listType = this.apiService.listType
+    //this.listType = this.apiService.listType
   }
   
 

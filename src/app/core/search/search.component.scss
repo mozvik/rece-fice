@@ -20,7 +20,7 @@
 #s-modal {
   top:60px;
   left: 50%;
-  padding-top: 1rem;
+  padding-top: 0rem;
   position: fixed;
   transform-origin: center;
   width: 100%; 
@@ -28,7 +28,7 @@
   overflow: auto; 
   background-color: rgb(0, 0, 0); 
   background-color: rgba(10, 10, 10, .4);
-  z-index: 5;
+  z-index: 18;
   transform: translate(-50%,0);
 }
 #s-content {

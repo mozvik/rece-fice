@@ -25,7 +25,7 @@ export class RecipeCardComponent implements OnInit {
   userEmit(id: string) {
     this.userClicked.emit(id);
   }
-  categoryEmit(name: string) {
-    this.categoryClicked.emit(name);
+  categoryEmit(id: string) {
+    this.categoryClicked.emit(id);
   }
 }

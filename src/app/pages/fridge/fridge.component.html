@@ -1,25 +1,43 @@
-<div class="container mx-auto h-screen">
-  <h4 class="title-h4 text-center mt-48 mb-10">Mi van itthon?</h4>
-  <p class="text-center mb-10">Sorold fel az otthonodban megtalálható alapanyagokat és megmutatjuk mit készíthetsz belőlük!</p>
+<div class="container flex flex-col md:mt-52 mx-auto">
+  <div class="flex flex-col mx-10 lg:mx-0">
+    
+    <div class="content flex flex-col md:flex-row items-center md:items-start md:justify-between w-full md:mt-16 md:mb-20">
+      <div class="md:order-2 md:w-1/2">
+        <h4 class="title-h4 text-center mt-40 md:mt-0 mb-10">Mi van itthon?</h4>
+        <p class="text-center mb-10">Sorold fel az otthonodban megtalálható alapanyagokat és megmutatjuk mit készíthetsz belőlük!</p>
+         <mat-form-field class="my-10 w-full" appearance="fill">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let item of ingredients" (removed)="remove(item)">
+          {{item}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input placeholder="Új alapanyag..."
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-hint>Sorold fel az alapanyagaidat vesszővel, vagy enterrel elválasztva!</mat-hint>
+    </mat-form-field>
+    <div class="mb-10 mt-4">
+      <button mat-flat-button color="warn"
+      
+      (click)="submitForm()"
+      routerLink="/results"
+      >Mutasd, mit főzzek!</button>
+    </div>
+      </div>
+      
+      <div class="pantry md:order-1">
+        <img src="../../../assets/img/pantry.png" alt="">
+      </div>
+    </div>
+
+   
+    
+  </div>
   
-  <mat-form-field class="example-chip-list" appearance="fill">
-    <mat-chip-list #chipList>
-      <mat-chip *ngFor="let item of ingredients" (removed)="remove(item)">
-        {{item}}
-        <button matChipRemove>
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip>
-      <input placeholder="Új alapanyag..."
-             [matChipInputFor]="chipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="add($event)">
-    </mat-chip-list>
-    <mat-hint>Sorold fel vesszővel az alapanyagaidat, majd nyomj entert, vagy akár írd be egyenként!</mat-hint>
-  </mat-form-field>
-  <button mat-stroked-button color="primary"
-  (click)="submitForm()"
-  routerLink="/results"
-  >Mutasd, mit főzzek!</button>
+  
 </div>

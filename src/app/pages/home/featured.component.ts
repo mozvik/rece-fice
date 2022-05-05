@@ -38,7 +38,7 @@ export class FeaturedComponent implements OnInit {
   }
 
   getLatest() {
-    this.apiService.list(this.apiService.listType.latest, 0, 4)
+    this.apiService.list('latest', 0, 4)
       .subscribe({
         next: (response: any) => {
           this.recipesLatest = this.dataService.createRecipes(response.items)
@@ -47,7 +47,7 @@ export class FeaturedComponent implements OnInit {
     })
   }
   getFree() {
-    this.apiService.list(this.apiService.listType.free, 0, 4)
+    this.apiService.list('free', 0, 4)
       .subscribe({
         next: (response: any) => {
 
@@ -57,7 +57,7 @@ export class FeaturedComponent implements OnInit {
     })
   }
   getDaily() {
-    this.apiService.list(this.apiService.listType.daily, 0, 4)
+    this.apiService.list('daily', 0, 4)
       .subscribe({
         next: (response: any) => {
           this.recipesDaily = this.dataService.createRecipes(response.items)
@@ -65,7 +65,7 @@ export class FeaturedComponent implements OnInit {
     })
   }
   getPopular() {
-    this.apiService.list(this.apiService.listType.popular, 0, 4)
+    this.apiService.list('popular', 0, 4)
       .subscribe({
         next: (response: any) => {
           this.recipesPopular = this.dataService.createRecipes(response.items)

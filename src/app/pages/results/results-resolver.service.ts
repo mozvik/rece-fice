@@ -13,13 +13,14 @@ export class ResultsResolverService implements Resolve<Recipe[]> {
   constructor(private apiService: APIService,private dataService: DataService) { }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe[] | Observable<Recipe[]> | Promise<Recipe[]> {
     const paramsId = route.params['id']
-    console.log('paramsId :>> ', paramsId,this.dataService.searchFilters.advanced);
+    console.log('paramsId :>> ', paramsId,route);
     if (paramsId) {
-      if (Object.values(this.apiService.listType).includes(paramsId)) {
+      if (this.apiService.listType.filter((type) => type.id === paramsId).length > 0) {
         return this.apiService.list(paramsId, 0, 4)
       }
 
       if (paramsId === 'search' && (this.dataService.searchFilters.text !== '' || this.dataService.searchFilters.advanced)) {
+
           return this.apiService.search(this.dataService.searchFilters.text,this.dataService.searchFilters.filters, 0, 4)
         }
       
