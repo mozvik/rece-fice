@@ -1,5 +1,3 @@
-import { OptionsData } from "../interface/options-data";
-
 export class Recipe {
   private recipeId?: string;
   recipeName?: string;

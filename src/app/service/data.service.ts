@@ -9,11 +9,11 @@ import { Recipe } from '../classes/recipe';
 })
 export class DataService {
 
-  public user: any = {
-    id: '1',
-    name: '', 
-    hasUploadAccess: false
-  };
+  // public user: any = {
+  //   id: '1',
+  //   name: '', 
+  //   hasUploadAccess: false
+  // };
 
   
 

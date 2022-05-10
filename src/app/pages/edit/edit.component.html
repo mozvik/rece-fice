@@ -1,6 +1,6 @@
 <div class="container mx-auto">
   <h4 class="title-h4 text-center mt-48 mb-10">Recept szerkesztése</h4>
-  <div *ngIf="dataService.user.id == '1'; else elseBlock">
+  <div *ngIf="isLoggedIn; else elseBlock">
     <h5 class="title-h5 mb-10 text-center"> {{recipe.recipeName}}</h5>
   
     <mat-stepper

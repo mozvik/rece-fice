@@ -9,6 +9,7 @@ import { Measurements } from 'src/app/interface/measurements';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-edit',
@@ -37,6 +38,10 @@ export class EditComponent implements OnInit {
   isImageRequired: boolean = false
   maxLength: number | undefined = 3
   minLength: number | undefined = 1
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+   }
 
   public firstFormGroup = this.fb.group({
     name: [{value: '', disabled: true}, [Validators.minLength(4), Validators.required]],
@@ -86,6 +91,7 @@ export class EditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     public dataService: DataService,
     private apiService: APIService,
+    private authService: AuthService,
     private msgService: MessageService,
     private fb: FormBuilder,
     public dialogDelete: MatDialog) { }
@@ -292,7 +298,7 @@ export class EditComponent implements OnInit {
   }
 
   createRecipe() {
-    this.recipe.userId = this.dataService.user.id; //ideiglenes, amíg nincs auth
+    this.recipe.userId = this.authService.user?.userId; //ideiglenes, amíg nincs auth
 
     this.recipe.recipeName = this.firstFormGroup.get('name')?.value
     this.recipe.category = this.firstFormGroup.get('category')?.value

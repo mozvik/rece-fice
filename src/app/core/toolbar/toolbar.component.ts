@@ -4,6 +4,7 @@ import { DataService } from '../../service/data.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { chevronRotate } from '../../animations';
 import { APIService } from 'src/app/service/api.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -32,10 +33,15 @@ export class ToolbarComponent implements OnInit {
 
   dropdownCollapsed: boolean = true;
   toolbarDown: boolean = false;
-  //listType: any
+  
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
 
-  constructor(public dataService: DataService,
-  private apiService: APIService) { }
+  constructor(
+    public dataService: DataService,
+    private apiService: APIService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     //this.listType = this.apiService.listType

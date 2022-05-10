@@ -1,0 +1,6 @@
+export class User {
+  userId?: string;
+  name?: string;
+
+  constructor(userId: string = '', name: string = '') { }
+}

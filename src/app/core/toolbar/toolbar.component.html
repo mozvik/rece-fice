@@ -78,18 +78,18 @@
       </li>
     
     </ul>
-    <ul class="flex flex-row ml-auto">
-      <li *ngIf="dataService.user.id!=''" class="">
+    <ul class="flex flex-row ml-auto">{{isLoggedIn}}
+      <li *ngIf="isLoggedIn" class="">
         <button mat-icon-button><mat-icon>notifications_none</mat-icon></button>
       </li>
-      <li *ngIf="dataService.user.id==''"><button mat-icon-button
+      <li *ngIf="!isLoggedIn"><button mat-icon-button
       routerLink="/login"
       (click)="'isOpen=false'"
         ><mat-icon>login</mat-icon>
       </button>
     
       </li>
-      <li *ngIf="dataService.user.id!=''">
+      <li *ngIf="isLoggedIn">
         <button mat-icon-button
         routerLink="/login"
         (click)="'isOpen=false'"
