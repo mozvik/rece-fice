@@ -1,6 +1,6 @@
 <!-- <p>profile works! index: {{userPageIndex}}</p> -->
-<div class="container mx-auto mt-48 min-h-screen">
-  <mat-tab-group mat-align-tabs="center"
+<div class="container mx-auto mt-48">
+  <mat-tab-group dynamicHeight mat-align-tabs="center"
   class="title-h4"
   [(selectedIndex)]="dataService.activeProfileTab"
   animationDuration="600ms">
@@ -10,8 +10,7 @@
     <mat-tab label="Saját receptek">
       <app-user-recipes
       [user]="userID"
-      [userRecipes]="dataService.userRecipeList"
-      [userPageIndex]="dataService.userRecipePageIndex"
+      [userRecipes]="userRecipes"
       (userPageIndexChange)="userPageIndexChanged($event)"
       ></app-user-recipes>
     </mat-tab>

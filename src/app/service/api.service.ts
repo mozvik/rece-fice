@@ -216,13 +216,14 @@ export class APIService {
    * @param itemsPerPage 
    * @returns 
    */
-  public list(listBy: string, page: number, itemsPerPage: number = 4): Observable<any[]> {
+  public list(listBy: string, page: number, itemsPerPage: number = 4, userId: number=0): Observable<any[]> {
    
   return this.http
     .get<any[]>(this.serverUrl +
       '?list&category=' + listBy + 
       '&page=' + page.toString() +
-      '&itemsPerPage=' + itemsPerPage.toString())
+      '&itemsPerPage=' + itemsPerPage.toString() + 
+      '&user=' + userId.toString())
     .pipe(
     catchError(this.handleError)
   );

@@ -1,10 +1,15 @@
+<div class="container flex flex-row justify-center mt-8 mb-40 mx-auto">
+  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center"  [@listAnimation]="results.length">
+  <ng-container *ngFor="let recipe of userRecipes; let i=index">
 
-
-<div class="container flex flex-row justify-center mt-8 mx-auto">
-  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center">
-  <ng-container *ngFor="let item of userRecipes; let i=index">
+    <app-recipe-card 
+    [recipe]="recipe"
+    (urlClicked)="navigateToDetails($event)"
+    (categoryClicked)="navigateToCategory($event)"
+    (userClicked)="navigateToUserProfile($event)">
+    </app-recipe-card>
     
-    <div class="recipe-card flex flex-col justify-between" [@enterAnimation]>
+    <!-- <div class="recipe-card flex flex-col justify-between" [@enterAnimation]>
       <app-recipe-thumbnail [recipe]="item" [routerLink]="['/details', item.recipeId]"></app-recipe-thumbnail>
           
       
@@ -36,7 +41,7 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
   </ng-container>
   </div>
 </div>

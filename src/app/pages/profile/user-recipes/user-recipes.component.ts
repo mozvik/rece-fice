@@ -3,7 +3,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { Recipe } from 'src/app/classes/recipe';
 import { DataService } from '../../../service/data.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { scaleEnterAnimation } from 'src/app/animations';
+import { listAnimation } from 'src/app/animations';
 import { APIService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/service/message.service';
@@ -15,9 +15,7 @@ import { OptionsData } from 'src/app/interface/options-data';
   templateUrl: './user-recipes.component.html',
   styleUrls: ['./user-recipes.component.scss'],
   animations: [
-    trigger(
-      'enterAnimation', scaleEnterAnimation   
-    )
+      listAnimation 
   ],
   
 })
@@ -27,6 +25,9 @@ export class UserRecipesComponent implements OnInit {
   @Input() userRecipes: Recipe[] | undefined
   @Input() userPageIndex: number = 0
   @Output() userPageIndexChange: EventEmitter<number> = new EventEmitter();
+
+  results: Recipe[] = [];
+
 
   categories: OptionsData[] = [];
 
@@ -44,9 +45,59 @@ export class UserRecipesComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.categories.subscribe((categories) => this.categories = categories);    
   }
+
+  navigateToDetails(id: string) { 
+    this.router.navigateByUrl(`/details/${id}`)
+  }
+
+  navigateToUserProfile(id: string) { 
+
+  }
+  navigateToCategory(id: string) {
+    let cat = ''
+    switch (id) {
+      case '1':
+        cat = 'appetiser'
+        break;
+      case '2':
+          cat = 'soup'
+        break;
+      case '3':
+          cat = 'maincourse'
+        break;
+       case '4':
+          cat = 'sidedish'
+        break;
+      case '5':
+          cat = 'dessert'
+        break;
+      case '6':
+          cat = 'drink'
+        break;
+      default:
+        cat = ''
+        break;
+    }
+    this.router.navigate(['/results', cat]);
+  }
+
+
+
+
   incrementIndex(): void {
     this.dataService.userRecipePageIndex++
     this.userPageIndexChange.emit(this.dataService.userRecipePageIndex)
+    this.moreRecipes()
+  }
+
+  moreRecipes() {
+    this.apiService.list('userrecipes', this.dataService.userRecipePageIndex, 4, 1).subscribe({
+      next: (response: any) => {
+        this.userRecipes = this.userRecipes!.concat(this.dataService.createRecipes(response.items))
+        console.log('this.resul :>> ', response);
+      }
+    })
+   
   }
 
   showImgText(index: number): void {

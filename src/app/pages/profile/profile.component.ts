@@ -1,4 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Recipe } from 'src/app/classes/recipe';
 import { APIService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
@@ -11,19 +12,35 @@ import { DataService } from 'src/app/service/data.service';
 export class ProfileComponent implements OnInit {
   userID = "1"
 
-  constructor(private apiService: APIService,
-    public dataService: DataService) { }
+  userRecipes: Recipe[] = []
+  userFavorites: Recipe[] = []
+  userRecipePageIndex: number = 0
+  userRecipeFavoritesPageIndex: number = 0
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private apiService: APIService,
+    public dataService: DataService) {
+    this.activatedRoute.data.subscribe(data => { 
+        this.userRecipes = this.dataService.createRecipes(data['userRecipes'].items)
+        this.userFavorites = this.dataService.createRecipes(data['userFavorites'].items)
+        console.log('data :>> ', this.userRecipes,this.userFavorites);
+      })
+    
+     }
 
   ngOnInit(): void {
-    this.dataService.userRecipePageIndex = 0
-    this.dataService.userRecipeList = []
+    // this.dataService.userRecipePageIndex = 0
+    // this.dataService.userRecipeList = []
     // if (this.dataService.userRecipeList.length === 0)
     // {
-    this.apiService.getRecipesByUser(this.userID, this.dataService.userRecipePageIndex, 4).subscribe({
-      next: (response: any) => {
-        this.createRecipes(response?.items)
-      }
-    })
+    
+    
+    // this.apiService.getRecipesByUser(this.userID, this.dataService.userRecipePageIndex, 4).subscribe({
+    //   next: (response: any) => {
+    //     this.createRecipes(response?.items)
+    //   }
+    // })
     // }
   }
 
