@@ -6,33 +6,13 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { OptionsData } from '../../interface/options-data';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
+import { openClose } from 'src/app/animations';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  animations: [
-    trigger('openClose', [
-      state(
-        'open',
-        style({
-          transform: 'scaleY(1) translateX(0)',
-          opacity: '1',
-        })
-      ),
-      state(
-        'closed',
-        style({
-          left: '-100%',
-          transform: 'scaleY(1) translateX(-300px)',
-          opacity: '0',
-        })
-      ),
-      transition('closed <=> open', [
-        animate('0.6s cubic-bezier(0.35, 0, 0.25, 1)'),
-      ]),
-    ]),
-  ],
+  animations: [ openClose ],    
 })
 export class SearchComponent implements OnInit {
   @Input() isSearchOpen = false;

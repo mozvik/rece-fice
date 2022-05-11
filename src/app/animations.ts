@@ -42,3 +42,24 @@ export const listAnimation =  trigger('listAnimation', [
     {optional: true})
   ])
 ])
+
+export const openClose = trigger('openClose', [
+  state(
+    'open',
+    style({
+      transform: 'scaleY(1) translateX(0)',
+      opacity: '1',
+    })
+  ),
+  state(
+    'closed',
+    style({
+      left: '-100%',
+      transform: 'scaleY(1) translateX(-300px)',
+      opacity: '0',
+    })
+  ),
+  transition('closed <=> open', [
+    animate('0.6s cubic-bezier(0.35, 0, 0.25, 1)'),
+  ]),
+]);

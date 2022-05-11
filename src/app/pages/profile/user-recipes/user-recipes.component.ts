@@ -1,4 +1,3 @@
-import { trigger } from '@angular/animations';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Recipe } from 'src/app/classes/recipe';
 import { DataService } from '../../../service/data.service';

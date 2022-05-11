@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../../shared/shared.module';
+import { EditProfileComponent } from './user-profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SharedModule } from '../../shared/shared.module';
     UserProfileComponent,
     UserRecipesComponent,
     UserFavoritesComponent,
-    DialogDelete
+    DialogDelete,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,
