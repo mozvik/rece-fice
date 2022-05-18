@@ -4,29 +4,33 @@
       <h4 class="title-h4 mb-12">Belépés</h4>
       <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p><br>
       <form action="" class="flex flex-col"
-      [formGroup]="loginFormGroup">
-        <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col">
-            <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email" />
-            <small *ngIf="email?.errors?.['required'] && email?.dirty"
-            class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
-            <small *ngIf="!email?.errors?.['required'] && email?.errors && email?.dirty && email?.touched,"
-            class="input-help text-danger">&nbsp;Rossz email formátum</small>
+      [formGroup]="loginFormGroup"
+      (ngSubmit)="login()">
+        <mat-form-field hideRequiredMarker color="primary" class="flex flex-col mb-10">
+            <input id="email" type="email" name="email" placeholder="Email cím"  aria-describedby="input-help" matInput formControlName="email" />
+            <mat-error *ngIf="hasAPIErrors && email?.errors?.['emailApi']">{{email?.errors?.['emailApi']}}</mat-error>
+            
+            <mat-error *ngIf="email?.errors?.['required'] && email?.dirty"
+            class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+            <mat-error *ngIf="!email?.errors?.['required'] && !email?.errors?.['emailApi'] && email?.errors && email?.dirty && email?.touched"
+            >&nbsp;Rossz email formátum</mat-error>
           </mat-form-field>
-        <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col">
+        <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-10">
           <input id="password" type="password" name="password" placeholder="Jelszó" aria-describedby="input-help" matInput formControlName="password" />
           <small *ngIf="password?.errors?.['required'] && password?.dirty"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</small>
-            <small *ngIf="password?.errors?.['minlength'] && password?.dirty && password?.touched"
-            class="input-help text-danger">&nbsp;Min. 8 karakter hosszú legyen</small>
+            <!-- <small *ngIf="password?.errors?.['minlength'] && password?.dirty && password?.touched"
+            class="input-help text-danger">&nbsp;Min. 8 karakter hosszú legyen</small> -->
         </mat-form-field>
         
         <div class="my-8 forgotten">
           <a href="">Elfelejtetted a jelszavad?</a>
         </div>
         <div class="">
-          <button color="primary" mat-flat-button type="submit" 
-          routerLink="/profile"
-          (click)="login()">BELÉPÉS</button>
+          <button color="primary" mat-flat-button type="submit"
+          [disabled]="!loginFormGroup.valid || isLoading">
+          BELÉPÉS</button>
+          
         </div>
       </form>
       

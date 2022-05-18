@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -13,6 +13,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../../shared/shared.module';
 import { EditProfileComponent } from './user-profile/edit-profile/edit-profile.component';
+import { EditAvatarComponent } from './user-profile/edit-avatar/edit-avatar.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -21,17 +24,21 @@ import { EditProfileComponent } from './user-profile/edit-profile/edit-profile.c
     UserRecipesComponent,
     UserFavoritesComponent,
     DialogDelete,
-    EditProfileComponent
+    EditProfileComponent,
+    EditAvatarComponent
   ],
   imports: [
     CommonModule,
     ProfileRoutingModule,
+    ReactiveFormsModule,
     SharedModule,
     MatTabsModule,
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule
   ]
 })
 export class ProfileModule {

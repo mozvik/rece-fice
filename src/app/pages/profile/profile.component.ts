@@ -1,7 +1,9 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from 'src/app/classes/recipe';
+import { User } from 'src/app/classes/user';
 import { APIService } from 'src/app/service/api.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
@@ -12,6 +14,7 @@ import { DataService } from 'src/app/service/data.service';
 export class ProfileComponent implements OnInit {
   userID = "1"
 
+  user: User | undefined
   userRecipes: Recipe[] = []
   userFavorites: Recipe[] = []
   userRecipePageIndex: number = 0
@@ -20,16 +23,19 @@ export class ProfileComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiService: APIService,
-    public dataService: DataService) {
+    public dataService: DataService,
+    private authService: AuthService) {
     this.activatedRoute.data.subscribe(data => { 
         this.userRecipes = this.dataService.createRecipes(data['userRecipes'].items)
         this.userFavorites = this.dataService.createRecipes(data['userFavorites'].items)
         console.log('data :>> ', this.userRecipes,this.userFavorites);
-      })
-    
+    })
+    this.user = this.authService.user
+    console.log('PROFILE TS this.user :>> ', this.user, this.authService.user);
      }
 
   ngOnInit(): void {
+    //console.log('this.user :>> ', this.user);
     // this.dataService.userRecipePageIndex = 0
     // this.dataService.userRecipeList = []
     // if (this.dataService.userRecipeList.length === 0)

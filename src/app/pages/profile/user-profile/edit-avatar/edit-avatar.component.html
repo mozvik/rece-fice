@@ -1,0 +1,11 @@
+<h1 mat-dialog-title class="mat-typography title-h4"><span>{{data}}</span> törlése.</h1>
+<div mat-dialog-content>
+  <div>
+   Avatar
+  </div>
+  <div>Valóban törölni akarod?</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false" >Mégsem</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Törlés jóváhagyása</button>
+</div>

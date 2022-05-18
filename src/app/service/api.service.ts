@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { AsyncSubject, BehaviorSubject, catchError, debounceTime, delay, distinctUntilChanged, first, map, Observable, of, ReplaySubject, share, shareReplay, Subject, take, throwError, timeout } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, catchError, Observable, Subject,  throwError, timeout } from 'rxjs';
 import { OptionsData } from '../interface/options-data';
-import { Recipe } from '../classes/recipe';
 
-enum ListRequestName{
-  latest = 'latest',
-  free = 'free',
-  daily = 'daily',
-  popular = 'popular',
-  categoryAppetiser = 'appetiser',
-  categorySoup = 'soup',
-  categorymaincourse = 'maincourse',
-  categorysidedish = 'sidedish',
-  categoryDessert = 'dessert',
-  categoryDrink = 'drink',
-}
+// enum ListRequestName{
+//   latest = 'latest',
+//   free = 'free',
+//   daily = 'daily',
+//   popular = 'popular',
+//   categoryAppetiser = 'appetiser',
+//   categorySoup = 'soup',
+//   categorymaincourse = 'maincourse',
+//   categorysidedish = 'sidedish',
+//   categoryDessert = 'dessert',
+//   categoryDrink = 'drink',
+// }
 
 @Injectable({
   providedIn: 'root',

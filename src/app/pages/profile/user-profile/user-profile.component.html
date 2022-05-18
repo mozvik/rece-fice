@@ -11,19 +11,19 @@
             <div class="relative w-max">
               <img src="https://picsum.photos/150/150" alt="" class="rounded-full border-4 avatar">
               <div class="absolute bottom-0 right-0">
-                <button mat-mini-fab color="warn">
+                <button mat-mini-fab color="warn"(click)="openEditAvatarDialog()">
                   <mat-icon>edit</mat-icon>
                 </button>
               </div>
             </div>
           </div>
           <div class="mx-10 grow">
-            <h3 class="username">Gipsz Jakab</h3>
-            <p class="date mt-5">Tagság kezdete: 2012. január 20.</p>
+            <h3 class="username">{{user?.name}}</h3>
+            <p class="date mt-5">Tagság kezdete: {{user?.created}}</p>
           </div>
           <div>
             <button mat-mini-fab color="warn"
-            (click)="openProfileDialog()">
+            (click)="openEditProfileDialog()">
             
               <mat-icon>edit</mat-icon>
             </button>
