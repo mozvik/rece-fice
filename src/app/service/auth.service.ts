@@ -38,4 +38,34 @@ export class AuthService {
         catchError(err => of([])),
       );
   }
+
+  public userUpdate(formData: any): Observable<any> { 
+    let fData = new FormData();
+    // console.log('formData :>> ', formData);
+    fData.append('id',formData.id);
+    fData.append('name',formData.name);
+    fData.append('email',formData.email);
+    fData.append('description',formData.description);
+    fData.append('passwordCurrent',formData.passwordCurrent);
+    fData.append('passwordNew',formData.passwordNew);
+    fData.append('passwordNewCheck',formData.passwordNewCheck);
+
+    return this.http
+      .post<any[]>(this.serverUrl+ '?user', fData, { withCredentials: true })
+      .pipe(
+        catchError(err => of([])),
+      );
+  }
+  public avatarUpload(formData: any): Observable<any> { 
+    let fData = new FormData();
+    
+    fData.append('id',formData.id);
+    fData.append('avatar',formData.avatar);
+
+    return this.http
+      .post<any[]>(this.serverUrl+ '?user', fData, { withCredentials: true })
+      .pipe(
+        catchError(err => of([])),
+      );
+  }
 }

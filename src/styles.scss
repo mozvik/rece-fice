@@ -91,6 +91,20 @@ button, .mat-button-wrapper, .mat-tab-label-content {
   color: $backgroundColorDarker;
 }
 
+.underline-bold, .underline-normal, .underline-thin{
+  width: 100%;
+  background-color: $orangeRedDark;
+}
+.underline-bold{
+  height: 6px;
+}
+.underline-normal{
+  height: 3px;
+}
+.underline-thin{
+  height: 1px;
+}
+
 .snack-success{
   background: green;
   color: $backgroundColor;

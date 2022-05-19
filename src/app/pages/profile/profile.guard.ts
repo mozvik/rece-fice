@@ -19,9 +19,9 @@ export class ProfileGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      if (this.authService.user) {
-        return true;
-      }
+      // if (this.authService.user) {
+      //   return true;
+      // }
       
       
       return this.authService.credentials()

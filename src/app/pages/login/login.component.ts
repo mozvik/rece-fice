@@ -47,20 +47,18 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     
     this.authService.login(this.loginFormGroup.value)
-      .pipe(
-        finalize(() => this.isLoading = false)
-    ).subscribe({
+      .subscribe({
       next: response => {
         if (response.hasOwnProperty('errors')) {
+          this.isLoading = false
           this.errorAPI = response.errors;
           console.log('object :>> ',response.errors);
-          //this.loginFormGroup.get('email')?.setErrors( response.errors );
-          //this.loginFormGroup.setErrors(response);
+          
           this.loginFormGroup.controls['email'].setErrors({ emailApi: response.errors.email});
           this.hasAPIErrors = true
         } else {
           console.log('LOGIN response :>> ', response);
-          this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description);
+          this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created);
           this.router.navigateByUrl('/profile');
         }
       },

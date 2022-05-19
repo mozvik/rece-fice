@@ -1,11 +1,21 @@
-<h1 mat-dialog-title class="mat-typography title-h4"><span>{{data}}</span> törlése.</h1>
-<div mat-dialog-content>
-  <div>
-   Avatar
+<h4 mat-dialog-title class="mat-typography text-2xl normal-case">Profilkép feltöltése</h4>
+<div class="underline-bold"></div>
+<div  class="content">
+  <div action="" class="flex flex-col lg:flex-row lg:flex-wrap lg:gap-5 lg:justify-between">
+    <input
+    #avatar_file_input
+    type="file"
+    [accept]="accept"
+    hidden
+    (change)="handleFile($event.target.files)"
+    />
+    
   </div>
-  <div>Valóban törölni akarod?</div>
 </div>
-<div mat-dialog-actions>
+<div class="underline-normal my-6"></div>
+<div>{{selected | json}}</div>
+<div mat-dialog-actions class="flex flex-row justify-between">
+  
   <button mat-button [mat-dialog-close]="false" >Mégsem</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Törlés jóváhagyása</button>
+  <button color="primary" mat-button (click)="openInput()" [disabled]="isLoading || !selected">Feltöltés</button>
 </div>
