@@ -10,9 +10,13 @@ import { Recipe } from 'src/app/classes/recipe';
 export class RecipeCardComponent implements OnInit {
 
   @Input() recipe: Recipe | undefined;
+  @Input() canEdit: boolean = false;
+  @Input() canDelete: boolean = false;
   @Output() urlClicked = new EventEmitter<string>();
   @Output() userClicked = new EventEmitter<string>();
   @Output() categoryClicked = new EventEmitter<string>();
+  @Output() editClicked = new EventEmitter<boolean>();
+  @Output() deleteClicked = new EventEmitter<boolean>();
 
   constructor() {}
 
@@ -27,5 +31,11 @@ export class RecipeCardComponent implements OnInit {
   }
   categoryEmit(id: string) {
     this.categoryClicked.emit(id);
+  }
+  editEmit() {
+    this.editClicked.emit(true);
+  }
+  deleteEmit() {
+    this.deleteClicked.emit(true);
   }
 }

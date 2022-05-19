@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
+import { APIService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { MessageService } from 'src/app/service/message.service';
 
@@ -27,10 +28,19 @@ export class EditAvatarComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public user: User,
     private dialogRef: MatDialogRef<EditAvatarComponent>,
     private authService: AuthService,
+    private apiService: APIService,
     private messageService: MessageService,
     private router: Router
 
   ) {
+    // if (user.avatar) {
+    //   this.apiService.imageblob(user.avatar).subscribe({
+    //     next: (response: any) => {
+    //       console.log('response :>> ', new File([response], user.avatar));
+    //       //this.uploadedImages.push(new File([response], ele))
+    //     }
+    //   })
+    // }
     
   }
 

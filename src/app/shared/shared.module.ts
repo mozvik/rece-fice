@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { APIService } from '../service/api.service';
-import { DataService } from '../service/data.service';
-import { IconService } from '../service/icon.service';
-import { MessageService } from '../service/message.service';
 import { DividerComponent } from './divider/divider.component';
 import { RecipeThumbnailComponent } from './recipe-thumbnail/recipe-thumbnail.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,7 +14,8 @@ import { RecipeCardComponent } from './recipe-card/recipe-card.component';
     RecipeCardComponent,
     RecipeCardComponent
   ],
-  imports: [ CommonModule ],
+  imports: [CommonModule,MatIconModule,MatButtonModule
+  ],
   exports: [
     CommonModule,
     DividerComponent,

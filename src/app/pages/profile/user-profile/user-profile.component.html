@@ -9,7 +9,7 @@
         <div class="flex my-20 justify-between">
           <div class="">
             <div class="relative w-max">
-              <img src="https://picsum.photos/150/150" alt="" class="rounded-full border-4 avatar">
+              <img [src]="user?.avatar" width="150" alt="" class="rounded-full border-4 avatar">
               <div class="absolute bottom-0 right-0">
                 <button mat-mini-fab color="warn"(click)="openEditAvatarDialog()">
                   <mat-icon>edit</mat-icon>

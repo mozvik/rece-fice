@@ -3,10 +3,14 @@
   <ng-container *ngFor="let recipe of userRecipes; let i=index">
 
     <app-recipe-card 
+    [canEdit]="true"
+    [canDelete]="true"
     [recipe]="recipe"
     (urlClicked)="navigateToDetails($event)"
     (categoryClicked)="navigateToCategory($event)"
-    (userClicked)="navigateToUserProfile($event)">
+    (userClicked)="navigateToUserProfile($event)"
+    (editClicked)="navigateToEditRecipe(recipe.recipeId)"
+    (deleteClicked)="openDeleteDialog(recipe)">
     </app-recipe-card>
     
     <!-- <div class="recipe-card flex flex-col justify-between" [@enterAnimation]>

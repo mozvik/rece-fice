@@ -80,7 +80,9 @@ export class UserRecipesComponent implements OnInit {
     this.router.navigate(['/results', cat]);
   }
 
-
+  navigateToEditRecipe(id: string) {
+    this.router.navigate(['/edit', id])
+  }
 
 
   incrementIndex(): void {

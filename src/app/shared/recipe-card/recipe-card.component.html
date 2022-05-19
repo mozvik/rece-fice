@@ -32,5 +32,24 @@
       (click)="categoryEmit(recipe.category.id)"><div>{{recipe.category.name}}</div>
       </div>
     </div>
+    <div class="card-subtitle flex flex-row justify-end mb-2 uppercase">
+      <div *ngIf="canEdit">
+        <button mat-stroked-button disableRipple="false" class="text-sm"
+        title="Recept szerkesztése"
+        type="button"
+        (click)="editEmit()"
+        ><mat-icon>edit_outline</mat-icon>
+        </button>
+      </div>
+      <div class="ml-2" *ngIf="canDelete">
+        <button mat-stroked-button disableRipple="false" class="text-sm"
+        title="Recept törlése"
+        type="button"
+        (click)="deleteEmit()"
+        ><mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+      
+    </div>
   </div>
 </div>

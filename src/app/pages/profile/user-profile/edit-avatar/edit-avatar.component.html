@@ -1,7 +1,10 @@
 <h4 mat-dialog-title class="mat-typography text-2xl normal-case">Profilkép feltöltése</h4>
 <div class="underline-bold"></div>
-<div  class="content">
-  <div action="" class="flex flex-col lg:flex-row lg:flex-wrap lg:gap-5 lg:justify-between">
+<div class="content">
+  <div class="image">
+    <img [src]="user.avatar" alt="">
+  </div>
+  <div class="flex flex-col lg:flex-row lg:flex-wrap lg:gap-5 lg:justify-between">
     <input
     #avatar_file_input
     type="file"
