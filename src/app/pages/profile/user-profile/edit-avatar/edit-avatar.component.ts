@@ -2,6 +2,7 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { User } from 'src/app/classes/user';
 import { APIService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -15,6 +16,9 @@ import { MessageService } from 'src/app/service/message.service';
 export class EditAvatarComponent implements OnInit {
   @ViewChild('avatar_file_input', { static: true }) avatar_file_input?: ElementRef;
   isLoading: boolean = false;
+  original: string | undefined;
+  preview: any = undefined;
+  reader: FileReader;
   selected: File | undefined;
   accept:string = "image/png, image/jpeg, image/jpg";
 
@@ -33,6 +37,11 @@ export class EditAvatarComponent implements OnInit {
     private router: Router
 
   ) {
+    this.original = this.user.avatar;
+    this.reader = new FileReader();
+    this.reader.onload = (e: any) => { 
+      this.preview = e.target.result;
+    }
     // if (user.avatar) {
     //   this.apiService.imageblob(user.avatar).subscribe({
     //     next: (response: any) => {
@@ -54,41 +63,70 @@ export class EditAvatarComponent implements OnInit {
 
   handleFile(files:File[]) {
     this.selected = files[0];
+    this.reader.readAsDataURL(files[0])
   }
 
   upload() {
     this.isLoading = true;
-    this.authService.userUpdate(this.avatarFormGroup.value).subscribe({
-
-      next: (res) => {
-        this.isLoading = false;
+    this.authService.avatarUpload({
+      id: this.user.userId,
+      avatar: this.selected
+    })
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
+      .subscribe({
+        next: (res) => {
+          console.log('res :>> ', res);
         if (res === null) {
           this.dialogRef.close();
           this.messageService.showSnackBar('Nincs hozzáférésed, jelentkezz be úrjra', 'error');
           this.router.navigateByUrl('/login');
-        }
-
-        if (res.hasOwnProperty('errors')) {
-          
-          for (const key in res.errors) {
-            const err: any = {}
-            err[key] = res.errors[key]
-            
-            this.avatarFormGroup.controls[key].setErrors(err);
-            this.avatarFormGroup.controls[key].markAsTouched();
-          }
+        }else if (res === false) {
+          this.messageService.showSnackBar('Sikertelen képfeltöltés', 'error');
+          this.dialogRef.close(false);
         }
         else {
-          this.authService.user!.name = res.name
-          this.authService.user!.email = res.email
-          this.authService.user!.description = res.description
-          this.messageService.showSnackBar('Sikeres profil módosítás', 'success');
+          this.user.avatar = res;
+          this.messageService.showSnackBar('Sikeres profilkép módosítás', 'success');
           this.dialogRef.close(true);
         }
 
       },
       error: (err) => {
-        this.isLoading = false;
+        this.messageService.showSnackBar('Sikertelen képfeltöltés', 'error');
+          this.dialogRef.close(false)
+      }
+    }
+      );
+  }
+  delete() {
+    this.isLoading = true;
+    this.authService.avatarDelete(this.user.userId)
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
+      .subscribe({
+        next: (res) => {
+          console.log('res :>> ', res);
+        if (res === null) {
+          this.dialogRef.close();
+          this.messageService.showSnackBar('Nincs hozzáférésed, jelentkezz be úrjra.', 'error');
+          this.router.navigateByUrl('/login');
+        } else if (res === false) {
+          this.messageService.showSnackBar('Sikertelen kép törlés.', 'error');
+          this.dialogRef.close(false);
+        }
+        else {
+          this.user.avatar = '';
+          this.messageService.showSnackBar('Sikeres profilkép törlés.', 'success');
+          this.dialogRef.close(true);
+        }
+
+      },
+      error: (err) => {
+        this.messageService.showSnackBar('Sikertelen képfeltöltés', 'error');
+          this.dialogRef.close(false)
       }
     }
       );

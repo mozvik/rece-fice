@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { User } from '../classes/user';
@@ -10,7 +10,6 @@ export class AuthService {
   
   public user: User | undefined;
   private serverUrl: string = 'http://localhost/angular/rece-fice/src/api/';
-  private imageUrl: string = 'http://localhost/angular/rece-fice/src/assets/'
 
   get isLoggedIn(): boolean {
     return !!this.user;
@@ -63,9 +62,33 @@ export class AuthService {
     fData.append('avatar',formData.avatar);
 
     return this.http
-      .post<any[]>(this.serverUrl+ '?user', fData, { withCredentials: true })
+      .post<any[]>(this.serverUrl+ '?avatar', fData, { withCredentials: true })
       .pipe(
         catchError(err => of([])),
       );
   }
+  public avatarDelete(userId: string): Observable<any> { 
+    let fData = new FormData();
+    
+    fData.append('id',userId);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?avatar/delete', fData, { withCredentials: true })
+      .pipe(
+        catchError(err => of([])),
+      );
+  }
+
+  private getPHPessionId(){
+    let ele: any = document.cookie.match(/PHPSESSID=[^;]+/);
+    let phpSession = undefined
+    if(ele != null) {
+      if (ele instanceof Array) {
+        phpSession = ele[0].substring(11);
+        }
+      else {
+        phpSession = ele.substring(11);
+        }
+    }
+    return phpSession
+}
 }

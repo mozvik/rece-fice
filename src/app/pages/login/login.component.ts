@@ -18,13 +18,6 @@ export class LoginComponent implements OnInit {
   errorAPI: any
   hasAPIErrors: boolean = false
  
-  // public emailError: string = 'errorPlaceholder'
-  // public passwordError: string = 'errorPlaceholder'
-  // public checkedGDPR: boolean = false
-  // public checkedNewsletter: boolean = false
-  // public checkedTerms: boolean = false
-
-
   public loginFormGroup = new FormGroup({
     email: new FormControl('', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -35,12 +28,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    //private fb: FormBuilder
   ) { }
 
 
   ngOnInit(): void {
-    console.log('login init :>> ');
   }
 
   login() {

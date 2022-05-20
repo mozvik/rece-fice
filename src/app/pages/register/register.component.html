@@ -1,56 +1,83 @@
 <div class="container mx-auto relative px-3 lg:px-0">
-  <div class="flex flex-col items-center justify-center wrapper w-full lg:w-1/2 lg:ml-auto mt-64 mb-32 p-20" >
+  <div class="flex flex-col items-center justify-center wrapper w-full lg:w-1/2 lg:ml-auto mt-48 mb-30 p-14" >
     <div class="absolute -top-24 lg:top-28 left-0"><img src="../../../assets/img/cinnamon.png" alt="" class="w-1/2 lg:w-3/4 2xl:w-full filter drop-shadow-xl"></div>
-    <h4 class="title-h4 mb-12 text-center">Felhasználói fiók létrehozása</h4><br>
+    <h4 class="title-h4 mb-8 text-center">Felhasználói fiók létrehozása</h4><br>
     
     <form action="" 
     [formGroup]="registerFormGroup"
     class="flex flex-col">
-      <mat-form-field class="flex flex-col"
-      hintLabel="Max 10 characters"
+      <mat-form-field class="flex flex-col mb-8"
+      
         appearance="legacy">
-        <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email" #inputEmail/>
-        <mat-icon matSuffix>phone</mat-icon>
-        <mat-icon matPrefix>phone</mat-icon>
-        <mat-hint align="end">{{inputEmail.value?.length || 0}}/10</mat-hint>
-        <mat-error *ngIf="registerFormGroup.get('email')?.invalid">Hiba</mat-error>
+        <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email"/>
+        
+        <mat-error *ngIf="hasAPIErrors && email?.errors?.['emailApi']">{{email?.errors?.['emailApi']}}</mat-error>
+        <mat-error *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
+            class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+        <mat-error *ngIf="!email?.errors?.['required'] && !email?.errors?.['emailApi'] && email?.errors && email?.dirty && email?.touched"
+            >&nbsp;Rossz email formátum</mat-error>
       </mat-form-field>
       <div class="flex flex-col">
-        <mat-form-field class="flex flex-col"
+        <mat-form-field class="flex flex-col mb-8"
         appearance="legacy">
-        <label for="username">Felhasználói név<sup>*</sup></label>
-          <input id="username" type="username" name="username" aria-describedby="input-help" matInput  formControlName="username" />
+          <input id="name" type="name" name="name" placeholder="Hogyan szólíthatunk" aria-describedby="input-help" matInput  formControlName="name" />
+          <mat-hint align="end">{{name?.value?.length || 0}}/4</mat-hint>
+          <mat-error *ngIf="name?.errors?.['nameApi']">{{name?.errors?.['nameApi']}}</mat-error>
+      
+          <mat-error *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)"
+          class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+          <mat-error *ngIf="name?.errors?.['minlength'] && (name?.dirty || name?.touched)"
+          >&nbsp;Minimum 4 karakter legyen</mat-error>
+
         </mat-form-field>  
-          <!-- <small class="input-help">{{usernameError}}&nbsp;</small> -->
+          
       </div>
       <div class="flex flex-col">
-        <mat-form-field class="flex flex-col"
+        <mat-form-field class="flex flex-col mb-8"
         appearance="legacy">
 
-        <label for="password">Jelszó<sup>*</sup></label>
-        <input id="password" type="password" name="password" aria-describedby="input-help" matInput formControlName="password" />
+        <input id="password" type="password" placeholder="Jelszó" name="password" aria-describedby="input-help" matInput formControlName="password" />
+        <mat-hint align="end">{{password?.value?.length || 0}}/8</mat-hint>
+        <mat-error *ngIf="password?.errors?.['required'] && (password?.dirty || password?.touched)"
+        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+        <mat-error *ngIf="password?.errors?.['minlength'] && (password?.dirty || password?.touched)"
+        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen</mat-error>
+        <mat-error *ngIf="password?.errors?.['notSame'] && (password?.dirty || password?.touched )"
+        class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
       </mat-form-field> 
       </div>
       <div class="flex flex-col">
-        <mat-form-field class="flex flex-col"
+        <mat-form-field class="flex flex-col mb-8"
         appearance="legacy">
-        <label for="password2">Jelszó újra<sup>*</sup></label>
-        <input id="password2" type="password2" name="password2" aria-describedby="input-help" matInput formControlName="password2" />
-        </mat-form-field>
+
+        <input id="passwordCheck" type="passwordCheck" placeholder="Jelszó újra" name="passwordCheck" aria-describedby="input-help" matInput formControlName="passwordCheck" />
+        <mat-hint align="end">{{passwordCheck?.value?.length || 0}}/8</mat-hint>
+        <mat-error *ngIf="passwordCheck?.errors?.['required'] && (passwordCheck?.dirty || passwordCheck?.touched)"
+        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+        <mat-error *ngIf="passwordCheck?.errors?.['minlength'] && (passwordCheck?.dirty || passwordCheck?.touched)"
+        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen</mat-error>
+        <mat-error *ngIf="passwordCheck?.errors?.['notSame'] && (passwordCheck?.dirty || passwordCheck?.touched )"
+        class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
+      </mat-form-field> 
       </div>
       <div class="">
 
-        <mat-checkbox [disableRipple]="true" formControlName="newsletter" name="newsletter" inputId="newsletter">A hírlevelére feliratkozom</mat-checkbox>
+        <mat-checkbox [disableRipple]="false" 
+        color="warn" formControlName="subscribe" name="subscribe" inputId="subscribe">A hírlevelére feliratkozom</mat-checkbox>
 
       </div>
       <div class="">
 
-        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" inputId="gdpr">Elfogadom a felhasználási feltételeket Lorem, ipsum.</mat-checkbox>
+        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a felhasználási feltételeket.</mat-checkbox>
+       
+        <mat-error *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
+        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+
 
       </div>
       
       <div class="flex flex-col mt-10">
-        <button color="primary" mat-flat-button type="submit" label=""
+        <button color="warn" mat-stroked-button type="submit" label=""
         (click)="register()">FIÓK LÉTREHOZÁSA</button>
       </div>
     </form>
