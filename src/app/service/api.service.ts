@@ -47,6 +47,7 @@ export class APIService {
   private _difficulties = new BehaviorSubject<OptionsData[]>([]);
   private _labels = new BehaviorSubject<OptionsData[]>([]);
   
+  
   get categories() {
     return this._categories.asObservable();
   }
@@ -69,7 +70,7 @@ export class APIService {
   private isServerReady(): Observable<any> {
     console.log('isServerReady emits :>> ');
     return this.http
-      .get<any[]>(this.serverUrl + '?ready=' + this.apiKey)
+      .get<any[]>(this.serverUrl + '?ready=' + this.apiKey ,{ withCredentials: true })
       .pipe(
         timeout(1000),
         catchError(this.handleError))
@@ -79,7 +80,7 @@ export class APIService {
   private getCategories() {
     let query: string = this.serverUrl + '?categories'
     this.http
-      .get<any[]>(query)
+      .get<any[]>(query,{ withCredentials: true })
       .pipe(
         timeout(1000),
         catchError(this.handleError))
@@ -92,7 +93,7 @@ export class APIService {
   private getdifficulties() {
     let query: string = this.serverUrl + '?difficulties'
     this.http
-      .get<any[]>(query)
+      .get<any[]>(query,{ withCredentials: true })
       .pipe(
         timeout(1000),
         catchError(this.handleError))
@@ -102,7 +103,7 @@ export class APIService {
   private getCosts() {
     let query: string = this.serverUrl + '?costs'
     this.http
-      .get<any[]>(query)
+      .get<any[]>(query,{ withCredentials: true })
       .pipe(
         timeout(1000),
         catchError(this.handleError))
@@ -112,7 +113,7 @@ export class APIService {
   private getNationalities() {
     let query: string = this.serverUrl + '?nationalities'
     this.http
-      .get<any[]>(query)
+      .get<any[]>(query,{ withCredentials: true })
       .pipe(
         timeout(1000),
         catchError(this.handleError))
@@ -122,7 +123,7 @@ export class APIService {
   private getLabels() {
     let query: string = this.serverUrl + '?labels'
     this.http
-      .get<any[]>(query)
+      .get<any[]>(query,{ withCredentials: true })
       .pipe(
         timeout(1000),
         catchError(this.handleError))
@@ -140,16 +141,17 @@ export class APIService {
     filterData.page = page
     filterData.itemsPerPage = itemsPerPage
     return this.http
-      .post<any[]>(this.serverUrl + '?search', filterData)
+      .post<any[]>(this.serverUrl + '?search', filterData, { withCredentials: true })
       .pipe(
         
       
       );
   }
+
   
   public getRecipe(id: string): Observable<any[]> {
     return this.http
-    .get<any[]>(this.serverUrl + '?recipe&id=' + id)
+    .get<any[]>(this.serverUrl + '?recipe&id=' + id,{ withCredentials: true })
       .pipe(
       //catchError(this.handleError)
     );
@@ -172,7 +174,7 @@ export class APIService {
     }
 
     return this.http
-      .post<any[]>(this.serverUrl+ '?recipe', fData)
+      .post<any[]>(this.serverUrl+ '?recipe', fData, { withCredentials: true })
       .pipe(
         //catchError(this.handleError),
       );
@@ -202,7 +204,7 @@ export class APIService {
     }
 
     return this.http
-      .post<any[]>(this.serverUrl+ '?recipe&id=' + formData.recipeId, fData)
+      .post<any[]>(this.serverUrl+ '?recipe&id=' + formData.recipeId, fData, { withCredentials: true })
       .pipe(
         //catchError(this.handleError),
       );
@@ -222,7 +224,7 @@ export class APIService {
       '?list&category=' + listBy + 
       '&page=' + page.toString() +
       '&itemsPerPage=' + itemsPerPage.toString() + 
-      '&user=' + userId.toString())
+      '&user=' + userId.toString(),{ withCredentials: true })
     .pipe(
     catchError(this.handleError)
   );
@@ -238,7 +240,7 @@ export class APIService {
     fData.append('rating', rating.toString())
 
     return this.http
-      .post<any[]>(this.serverUrl + '?review', fData)
+      .post<any[]>(this.serverUrl + '?review', fData, { withCredentials: true })
       .pipe(
         //catchError(this.handleError),
       );
@@ -246,7 +248,7 @@ export class APIService {
 
    public fridge(ingredients: string[], page: number, itemsPerPage: number = 4): Observable<any[]> {
     return this.http
-    .get<any[]>(this.serverUrl + '?fridge&q=' + ingredients.join(',') + '&page=' + page.toString() + '&itemsPerPage=' + itemsPerPage.toString())
+    .get<any[]>(this.serverUrl + '?fridge&q=' + ingredients.join(',') + '&page=' + page.toString() + '&itemsPerPage=' + itemsPerPage.toString(),{ withCredentials: true })
       .pipe(
       //catchError(this.handleError)
     );
@@ -255,7 +257,7 @@ export class APIService {
   //nem a REST API része
   public imageblob(url: string): Observable<any> {
     return this.http
-      .get(url, {responseType: 'blob'})
+      .get(url, {responseType: 'blob', withCredentials: true })
       .pipe(
       //catchError(this.handleError)
     );
@@ -269,64 +271,13 @@ export class APIService {
     }
 
     return this.http
-      .post<any[]>(this.serverUrl + '?subscribe', fData)
+      .post<any[]>(this.serverUrl + '?subscribe', fData, { withCredentials: true })
       .pipe(
       catchError(this.handleError)
     );
   }
 
 
-  // public getRecipesBy(searchMethod: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
-  //   let fData = new FormData();
-  //   if (searchMethod) {
-  //     fData.append('getRecipesBy','true')
-  //     fData.append('searchMethod', searchMethod)
-  //     fData.append('page', page.toString())
-  //     fData.append('itemsPerPage', itemsPerPage.toString())
-  //   }
-
-  //   return this.http
-  //   .post<any[]>(this.serverUrl, fData)
-  //     .pipe(
-      
-  //   );
-  // }
-
-  // public getRecipesByCategory(category: string, page: number, itemsPerPage: number = 4 ): Observable<any[]> {
-  //   let fData = new FormData();
-  //   if (category) {
-  //     fData.append('getRecipesByCategory','true')
-  //     fData.append('category', category)
-  //     fData.append('page', page.toString())
-  //     fData.append('itemsPerPage', itemsPerPage.toString())
-  //   }
-
-  //   return this.http
-  //   .post<any[]>(this.serverUrl, fData)
-  //     .pipe(
-  //     //catchError(this.handleError)
-  //   );
-  // }
-
-  // public getRecipesFridge(ingredientList: string[], page: number, itemsPerPage: number = 8 ): Observable<any[]> {
-  //   let fData = new FormData();
-  //   if (ingredientList &&
-  //     ingredientList.length > 0) {
-  //     fData.append('getRecipesFridge','true')
-  //     fData.append('page', page.toString())
-  //     fData.append('itemsPerPage', itemsPerPage.toString())
-  //     for (let i = 0; i < ingredientList.length; i++) {
-  //        const ele = ingredientList[i];
-  //       fData.append('ingredientList[]',ele)
-  //     }
-  //   }
-
-  //   return this.http
-  //   .post<any[]>(this.serverUrl, fData)
-  //     .pipe(
-  //     //catchError(this.handleError)
-  //   );
-  // }
 
   public getRecipesByUser(userID: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
     let fData = new FormData();
@@ -337,7 +288,7 @@ export class APIService {
     }
 
     return this.http
-    .post<any[]>(this.serverUrl, fData)
+    .post<any[]>(this.serverUrl, fData, { withCredentials: true })
       .pipe(
       //catchError(this.handleError)
     );

@@ -5,6 +5,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { chevronRotate } from '../../animations';
 import { APIService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
+import { User } from 'src/app/classes/user';
 
 
 @Component({
@@ -36,6 +37,10 @@ export class ToolbarComponent implements OnInit {
   
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
+  }
+
+  get user(): User | undefined { 
+    return this.authService.user;
   }
 
   constructor(

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs';
+import { User } from './classes/user';
 import { APIService } from './service/api.service';
+import { AuthService } from './service/auth.service';
 import { DataService } from './service/data.service';
 import { IconService } from './service/icon.service';
 
@@ -22,13 +25,27 @@ export class AppComponent {
     public dataService: DataService, 
     private iconService: IconService,
     private apiService: APIService,
-  ) {
+    private authService: AuthService) 
+   {
     this.iconService.registerIcons();
+    this.authService.credentials()
+    .pipe(
+      map(response => {
+        if (!response || response.length === 0) {
+          this.authService.user = undefined;
+        } else if (!this.authService.user) {
+          
+          this.authService.user = new User(response.id, response.name, response.email, '', response.avatar, '', true, response.description, response.created)
+        }
+      })
+    ).subscribe()
+
   }
   
   ngOnInit(): void {
      //this.onResize()
   }
+
 
   // onResize() {
   //   let vh = window.innerHeight * 0.01;

@@ -9,7 +9,7 @@
         <div class="flex my-20 justify-between">
           <div class="">
             <div class="relative w-max image">
-              <img [src]="user?.avatar ==='' ? 'assets/img/empty-profile.png':user?.avatar " width="150" alt="" class="rounded-full border-4 avatar">
+              <img [src]="user?.avatar === '' || user?.avatar === null ? 'assets/img/empty-profile.png':user?.avatar " width="150" alt="" class="rounded-full border-4 avatar">
               <div class="absolute bottom-0 right-0">
                 <button mat-mini-fab color="warn"(click)="openEditAvatarDialog()">
                   <mat-icon>edit</mat-icon>

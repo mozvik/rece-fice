@@ -9,7 +9,7 @@
     class="flex flex-col mt-5 lg:w-5/12">
       <input id="name" type="name" name="name" placeholder="Név"  aria-describedby="input-help" matInput formControlName="name" />
       <mat-hint align="end">{{editFormGroup.get('name')?.value?.length || 0}}/4</mat-hint>
-      <mat-error *ngIf="name?.errors?.['nameApi']">{{name?.errors?.['nameApi']}}</mat-error>
+      <mat-error *ngIf="name?.errors?.['name']">{{name?.errors?.['name']}}</mat-error>
       
       <mat-error *ngIf="name?.errors?.['required'] && name?.dirty"
       class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>

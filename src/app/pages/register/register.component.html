@@ -11,18 +11,21 @@
         appearance="legacy">
         <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email"/>
         
-        <mat-error *ngIf="hasAPIErrors && email?.errors?.['emailApi']">{{email?.errors?.['emailApi']}}</mat-error>
-        <mat-error *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
-            class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="!email?.errors?.['required'] && !email?.errors?.['emailApi'] && email?.errors && email?.dirty && email?.touched"
-            >&nbsp;Rossz email formátum</mat-error>
+        <mat-error *ngIf="email?.errors?.['email']"
+      class="input-help text-danger">&nbsp;{{email.errors['email']}}
+      </mat-error>
+      <mat-error *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
+        class="input-help text-danger">&nbsp;Kötelező kitölteni
+      </mat-error>
+      <mat-error *ngIf="email?.errors?.['pattern'] && (email?.dirty || email?.touched)"
+      >&nbsp;Nem megfelelő email formátum</mat-error>
       </mat-form-field>
       <div class="flex flex-col">
         <mat-form-field class="flex flex-col mb-8"
         appearance="legacy">
           <input id="name" type="name" name="name" placeholder="Hogyan szólíthatunk" aria-describedby="input-help" matInput  formControlName="name" />
           <mat-hint align="end">{{name?.value?.length || 0}}/4</mat-hint>
-          <mat-error *ngIf="name?.errors?.['nameApi']">{{name?.errors?.['nameApi']}}</mat-error>
+          <mat-error *ngIf="name?.errors?.['name']">{{name?.errors?.['name']}}</mat-error>
       
           <mat-error *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)"
           class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
@@ -35,29 +38,32 @@
       <div class="flex flex-col">
         <mat-form-field class="flex flex-col mb-8"
         appearance="legacy">
-
-        <input id="password" type="password" placeholder="Jelszó" name="password" aria-describedby="input-help" matInput formControlName="password" />
-        <mat-hint align="end">{{password?.value?.length || 0}}/8</mat-hint>
-        <mat-error *ngIf="password?.errors?.['required'] && (password?.dirty || password?.touched)"
-        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="password?.errors?.['minlength'] && (password?.dirty || password?.touched)"
+        <input id="password" type="password" placeholder="Jelszó" name="password" aria-describedby="input-help" matInput formControlName="passwordNew"/>
+        <mat-hint align="end">{{passwordNew?.value?.length || 0}}/8</mat-hint>
+        <mat-error *ngIf="passwordNew?.errors?.['required'] && (passwordNew?.dirty || passwordNew?.touched)"
+            class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+        <mat-error *ngIf="passwordNew?.errors?.['minlength'] && (passwordNew?.dirty || passwordNew?.touched)"
         class="input-help text-danger">&nbsp;Minimum 8 karakter legyen</mat-error>
-        <mat-error *ngIf="password?.errors?.['notSame'] && (password?.dirty || password?.touched )"
+        <mat-error *ngIf="passwordNew?.errors?.['notSame'] && (passwordNew?.dirty || passwordNew?.touched )"
         class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
+        <mat-error *ngIf="passwordNew?.errors?.['passwordNew']"
+        class="input-help text-danger">&nbsp;{{passwordNew.errors['passwordNew']}}</mat-error>
       </mat-form-field> 
       </div>
       <div class="flex flex-col">
         <mat-form-field class="flex flex-col mb-8"
         appearance="legacy">
 
-        <input id="passwordCheck" type="passwordCheck" placeholder="Jelszó újra" name="passwordCheck" aria-describedby="input-help" matInput formControlName="passwordCheck" />
-        <mat-hint align="end">{{passwordCheck?.value?.length || 0}}/8</mat-hint>
-        <mat-error *ngIf="passwordCheck?.errors?.['required'] && (passwordCheck?.dirty || passwordCheck?.touched)"
+        <input id="passwordConfirm" type="password" placeholder="Jelszó újra" name="passwordConfirm" aria-describedby="input-help" matInput formControlName="passwordConfirm" />
+        <mat-hint align="end">{{passwordConfirm?.value?.length || 0}}/8</mat-hint>
+        <mat-error *ngIf="passwordConfirm?.errors?.['required'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
         class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="passwordCheck?.errors?.['minlength'] && (passwordCheck?.dirty || passwordCheck?.touched)"
+        <mat-error *ngIf="passwordConfirm?.errors?.['minlength'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
         class="input-help text-danger">&nbsp;Minimum 8 karakter legyen</mat-error>
-        <mat-error *ngIf="passwordCheck?.errors?.['notSame'] && (passwordCheck?.dirty || passwordCheck?.touched )"
+        <mat-error *ngIf="passwordConfirm?.errors?.['notSame'] && (passwordConfirm?.dirty || passwordConfirm?.touched )"
         class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
+        <mat-error *ngIf="passwordConfirm?.errors?.['passwordConfirm']"
+        class="input-help text-danger">&nbsp;{{passwordConfirm.errors['passwordConfirm']}}</mat-error>
       </mat-form-field> 
       </div>
       <div class="">
@@ -68,11 +74,12 @@
       </div>
       <div class="">
 
-        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a felhasználási feltételeket.</mat-checkbox>
+        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a felhasználási feltételeket.<sup>*</sup></mat-checkbox>
        
         <mat-error *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
         class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-
+        <mat-error *ngIf="gdpr?.errors?.['gdpr']"
+        class="input-help text-danger">&nbsp;{{gdpr.errors['gdpr']}}</mat-error>
 
       </div>
       

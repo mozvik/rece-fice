@@ -2,12 +2,12 @@
 <div class="underline-bold"></div>
 <div class="content">
   <div class="image mt-6 relative">
-    <div *ngIf="user.avatar !== '' && !preview" class=" absolute  bottom-0 left-0">
+    <div *ngIf="user.avatar !== '' && user.avatar !== null && !preview" class=" absolute  bottom-0 left-0">
       <button mat-mini-fab color="warn" (click)="delete()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-    <img *ngIf="!preview && user.avatar === ''; else elseBlock" src="assets/img/empty-profile.png" alt="">
+    <img *ngIf="!preview && (user.avatar === '' || user.avatar === null); else elseBlock" src="assets/img/empty-profile.png" alt="">
     <ng-template #elseBlock>
       <img [src]="preview ? preview:user.avatar" alt="">
     </ng-template>

@@ -1,18 +1,20 @@
-<div class="container mx-auto mt-48 mb-12 px-5 md:px-0">
+<div class="container mx-auto mt-32 mb-12 px-5 md:px-0">
   <ng-container *ngIf="found; elseBlock">
     <app-divider [title]="recipe.recipeName" [subtitle]="recipe.category.name" ></app-divider>
     <div class="details-divider mt-5"></div>
     <!-- <h4 class="title-h3 text-center pb-3 details-divider">{{recipe.recipeName}}</h4> -->
     <div class="flex flex-row justify-between py-5 details-divider-small header-info italic text-base">
-        <div class="m-2 basis-1/8">
-          <img class="rounded-full mr-5" src="https://picsum.photos/75/75" alt="">
+        <div class="mx-2 basis-1/8">
+          <img class="rounded-full border mr-5" [src]="creatorInfo?.avatar === '' ? 'assets/img/empty-profile.png':creatorInfo?.avatar" alt="" width="120">
         </div>
         <div class="basis-1/2 ml-5">
-          <div>Beküldője: UserName</div>
+          <div>Beküldője: {{creatorInfo?.name}}</div>
           <div class="rating-lead">Értékelése:
-            <ng-container *ngFor="let rv of [].constructor(5); let i = index"><span class="normal-case non-italic">&#9733;</span>
+            <ng-container *ngFor="let rv of [].constructor(5); let i = index">
+              <!-- <span class="normal-case non-italic">&#9733;</span> -->
              <!-- <span class="rating" *ngIf="i < review.rating">&#9733;</span> -->
-    
+              <span class="normal-case non-italic" *ngIf="i < recipe.averageRating()">&#9733;</span>
+              <span class="normal-case non-italic" *ngIf="i >= recipe.averageRating()">&#9734;</span>
             </ng-container>
           </div>
           <div>Dátum: {{recipe.created}}</div>
@@ -38,9 +40,14 @@
               <mat-icon>print</mat-icon>
             </button>
           </div>
-          <div>
-            <button mat-stroked-button color="warn">
+          {{creatorInfo | json}}
+          <div>u: {{user | json}}</div>
+          <div *ngIf="user && creatorInfo?.id != user?.userId">
+            <button  *ngIf="!isFav" mat-stroked-button color="warn" (click)="setFav()">
               <mat-icon>favorite_outline</mat-icon>
+            </button>
+            <button  *ngIf="isFav" mat-stroked-button color="warn" (click)="unsetFav()">
+              <mat-icon>heart_broken</mat-icon>
             </button>
           </div>
         </div>
@@ -67,11 +74,11 @@
     
     </div>
   </ng-container>
-  <ng-container #elseBlock>
+  <ng-template #elseBlock>
     <div class="h-screen">
       <h2 class="title-h4">A recept nem található</h2>
     </div>
-  </ng-container>
+  </ng-template>
   </div>
   
   
