@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DetailsResolverService } from './pages/details/details-resolver.service';
 // import { HomeComponent } from './home/home.component';
 // import { LoginComponent } from './login/login.component';
 // import { RegisterComponent } from './register/register.component';
@@ -17,7 +18,12 @@ const routes: Routes = [
   { path: 'fridge', loadChildren: () => import('./pages/fridge/fridge.module').then(m => m.FridgeModule) },
   { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
   { path: 'results', loadChildren: () => import('./pages/results/results.module').then(m => m.ResultsModule) },
-  { path: 'details/:id', loadChildren: () => import('./pages/details/details.module').then(m => m.DetailsModule) },
+  {
+    path: 'details/:id',
+    loadChildren: () => import('./pages/details/details.module').then(m => m.DetailsModule),
+    resolve: {recipe: DetailsResolverService },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+  },
   { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
   { path: 'edit/:id', loadChildren: () => import('./pages/edit/edit.module').then(m => m.EditModule) },
   

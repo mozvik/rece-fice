@@ -78,6 +78,14 @@ export class AuthService {
       );
   }
 
+  public userInfo(id: string): Observable<any> {
+    return this.http
+    .get<any>(this.serverUrl + '?info&id=' + id)
+      .pipe(
+      //catchError(this.handleError)
+    );
+  }
+
   private getPHPessionId(){
     let ele: any = document.cookie.match(/PHPSESSID=[^;]+/);
     let phpSession = undefined

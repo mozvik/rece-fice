@@ -1,76 +1,77 @@
 <div class="container mx-auto mt-48 mb-12 px-5 md:px-0">
-  <app-divider [title]="recipe.recipeName" [subtitle]="recipe.category.name" ></app-divider>
-  <div class="details-divider mt-5"></div>
-  <!-- <h4 class="title-h3 text-center pb-3 details-divider">{{recipe.recipeName}}</h4> -->
-  <div class="flex flex-row justify-between py-5 details-divider-small header-info italic text-base">
-      <div class="m-2 basis-1/8">
-        <img class="rounded-full mr-5" src="https://picsum.photos/75/75" alt="">
-      </div>
-      <div class="basis-1/2 ml-5">
-        <div>Beküldője: UserName</div> 
-        <div class="rating-lead">Értékelése:
-          <ng-container *ngFor="let rv of [].constructor(5); let i = index"><span class="normal-case ">&#9733;</span>
-           <!-- <span class="rating" *ngIf="i < review.rating">&#9733;</span> -->
-       
-          </ng-container>
-        </div> 
-        <div>Dátum: {{recipe.created}}</div>
-      </div>
-      <div class="basis-full text-right social">
-        <div>
-          <button mat-stroked-button color="warn">
-            <mat-icon>share</mat-icon>
-          </button>
-          <button mat-stroked-button color="warn">
-            <mat-icon svgIcon="facebook"></mat-icon>
-          </button>
-          <button mat-stroked-button color="warn">
-            <mat-icon svgIcon="instagram"></mat-icon>
-          </button>
-          <button mat-stroked-button color="warn">
-            <mat-icon svgIcon="twitter"></mat-icon>
-          </button>
-          <button mat-stroked-button color="warn">
-            <mat-icon>mail_outline</mat-icon>
-          </button>
-          <button mat-stroked-button color="warn">
-            <mat-icon>print</mat-icon>
-          </button>
+  <ng-container *ngIf="found; elseBlock">
+    <app-divider [title]="recipe.recipeName" [subtitle]="recipe.category.name" ></app-divider>
+    <div class="details-divider mt-5"></div>
+    <!-- <h4 class="title-h3 text-center pb-3 details-divider">{{recipe.recipeName}}</h4> -->
+    <div class="flex flex-row justify-between py-5 details-divider-small header-info italic text-base">
+        <div class="m-2 basis-1/8">
+          <img class="rounded-full mr-5" src="https://picsum.photos/75/75" alt="">
         </div>
-        <div>
-          <button mat-stroked-button color="warn">
-            <mat-icon>favorite_outline</mat-icon>
-          </button>
+        <div class="basis-1/2 ml-5">
+          <div>Beküldője: UserName</div>
+          <div class="rating-lead">Értékelése:
+            <ng-container *ngFor="let rv of [].constructor(5); let i = index"><span class="normal-case non-italic">&#9733;</span>
+             <!-- <span class="rating" *ngIf="i < review.rating">&#9733;</span> -->
+    
+            </ng-container>
+          </div>
+          <div>Dátum: {{recipe.created}}</div>
         </div>
+        <div class="basis-full text-right social">
+          <div>
+            <button mat-stroked-button color="warn">
+              <mat-icon>share</mat-icon>
+            </button>
+            <button mat-stroked-button color="warn">
+              <mat-icon svgIcon="facebook"></mat-icon>
+            </button>
+            <button mat-stroked-button color="warn">
+              <mat-icon svgIcon="instagram"></mat-icon>
+            </button>
+            <button mat-stroked-button color="warn">
+              <mat-icon svgIcon="twitter"></mat-icon>
+            </button>
+            <button mat-stroked-button color="warn">
+              <mat-icon>mail_outline</mat-icon>
+            </button>
+            <button mat-stroked-button color="warn">
+              <mat-icon>print</mat-icon>
+            </button>
+          </div>
+          <div>
+            <button mat-stroked-button color="warn">
+              <mat-icon>favorite_outline</mat-icon>
+            </button>
+          </div>
+        </div>
+    </div>
+    
+    <div class="grid-container">
+      <div>
+        <app-recipe-header [recipe]="recipe" class="border p-5"></app-recipe-header>
+    
+    
+        <app-recipe-ingredients [recipe]="recipe" class="border p-5"></app-recipe-ingredients>
+    
+        <app-recipe-nutrition [recipe]="recipe" class="border p-5"></app-recipe-nutrition>
       </div>
-    </div>
+      <div>
+        <app-recipe-directions [recipe]="recipe" class="border p-5"></app-recipe-directions>
+        <app-recipe-similar [recipe]="recipe" class="border p-5"></app-recipe-similar>
     
-
-  <!-- <div class="grid grid-rows-6 lg:grid-rows-3 lg:grid-cols-2 grid-container"> -->
-  <div class="grid-container">
-    <div>
-      <app-recipe-header [recipe]="recipe" class="border p-5"></app-recipe-header>
-      
-      
-      <app-recipe-ingredients [recipe]="recipe" class="border p-5"></app-recipe-ingredients>
-      
-      <app-recipe-nutrition [recipe]="recipe" class="border p-5"></app-recipe-nutrition>
-    </div>
-    <div>
-      <app-recipe-directions [recipe]="recipe" class="border p-5"></app-recipe-directions>
-      <app-recipe-similar [recipe]="recipe" class="border p-5"></app-recipe-similar>
-      
-    </div>
+      </div>
     
-
-
-      <app-recipe-ratings [recipe]="recipe" class="border p-5"></app-recipe-ratings>
-      <app-recipe-reviews [recipe]="recipe"></app-recipe-reviews>
-  
+        <app-recipe-ratings [recipe]="recipe" class="border p-5"></app-recipe-ratings>
+        <app-recipe-reviews [recipe]="recipe"></app-recipe-reviews>
     
-  </div>
-  <!-- <p>details works! ID: {{selectedId}}</p>
-    <p></p> -->
+    
+    </div>
+  </ng-container>
+  <ng-container #elseBlock>
+    <div class="h-screen">
+      <h2 class="title-h4">A recept nem található</h2>
+    </div>
+  </ng-container>
   </div>
   
   

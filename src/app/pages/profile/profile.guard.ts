@@ -28,7 +28,8 @@ export class ProfileGuard implements CanActivate {
         .pipe(
           map(response => {
           console.log('credentials response :>> ', response);
-          if (!response || response.length === 0) {
+            if (!response || response.length === 0) {
+            this.authService.user = undefined;
             this.router.navigateByUrl('/login');
             return false
           }
