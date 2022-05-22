@@ -25,8 +25,13 @@ export class RecipeRatingsComponent implements OnInit {
   isLoading: boolean = false;
 
   public get reviewed(): boolean {
-    return this.recipe?.reviews?.find(rv => rv.userId == 1)
+    return this.recipe?.reviews?.find(rv => rv.userId == this.authService.user?.userId)
   }
+
+  public get isLoggedIn() {
+    return !!this.authService.isLoggedIn
+  }
+   
 
   ngOnInit(): void { 
     console.log('recipe :>> ', this.recipe);

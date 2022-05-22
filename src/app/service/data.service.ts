@@ -112,7 +112,7 @@ export class DataService {
           item.difficulty, item.cost, item.category, item.nationality,
           item.image1, item.image2, item.image3, item.calorie, item.protein, item.carbonhydrate,
           item.fat, item.sugar, item.servings,
-          item.ratings, item.reviews, item.labels
+          item.ratings, item.reviews, item.labels, item.creator
         )
         array.push(recipe)
       }

@@ -26,7 +26,7 @@ export class APIService {
     { id: 'free', name: 'Mentes receptek' },
     { id: 'daily', name: 'Napi ajánlat' },
     { id: 'popular', name: 'Népszerű receptek' },
-    { id: 'appetiser', name: 'Élőételek' },
+    { id: 'appetiser', name: 'Előételek' },
     { id: 'soup', name: 'Levesek' },
     { id: 'maincourse', name: 'Főételek' },
     { id: 'sidedish', name: 'Köretek' },

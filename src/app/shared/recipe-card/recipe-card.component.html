@@ -28,11 +28,11 @@
     
     <div *ngIf="!small" class="card-subtitle flex flex-row justify-between my-3 uppercase">
       <div class="flex flex-row items-center hover:cursor-pointer user"
-      (click)="userEmit('userId')">
-        <div>&nbsp;Gipsz Jakab</div>
+      (click)="userEmit(recipe.creator.id)">
+        <div>&nbsp;{{recipe.creator.name}}</div>
       </div>
       <div class="flex flex-row items-center hover:cursor-pointer category"
-      (click)="categoryEmit(recipe.category.id)"><div>{{recipe.category.name}}</div>
+      (click)="categoryEmit(recipe.category.name)"><div>{{recipe.category.name}}</div>
       </div>
     </div>
     <div *ngIf="!small" class="card-subtitle flex flex-row justify-end mb-2 uppercase">

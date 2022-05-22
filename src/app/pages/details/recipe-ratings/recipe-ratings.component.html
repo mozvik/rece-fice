@@ -7,7 +7,7 @@
     <div><app-recipe-rate-it (rating)="rating=$event"></app-recipe-rate-it></div>
 
     <mat-form-field appearance="fill" class="mt-5">
-      <mat-label>Írj róla véleményt! (opcionális)</mat-label>
+      <mat-label>{{isLoggedIn ? 'Írj róla véleményt! (opcionális)':'Lépj be, vagy regisztrálj az értékeléshez!'}}</mat-label>
       <textarea matInput placeholder="" rows="10" [(ngModel)]="comment"></textarea>
     </mat-form-field>
     <button mat-flat-button color="warn" 

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Recipe } from 'src/app/classes/recipe';
+import { APIService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -19,7 +21,10 @@ export class RecipeCardComponent implements OnInit {
   @Output() editClicked = new EventEmitter<boolean>();
   @Output() deleteClicked = new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(
+     private apiService: APIService,
+     private router: Router
+  ) {}
 
   ngOnInit(): void {
   }
@@ -32,6 +37,14 @@ export class RecipeCardComponent implements OnInit {
   }
   categoryEmit(id: string) {
     this.categoryClicked.emit(id);
+
+    const catType = this.apiService.listType.find(type => type.name.toLowerCase() === id)
+
+    if (catType) {
+      this.router.navigateByUrl(`/results/${catType.id.toLowerCase()}`);  
+    }
+    
+
   }
   editEmit() {
     this.editClicked.emit(true);
