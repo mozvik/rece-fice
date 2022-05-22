@@ -217,21 +217,22 @@ export class APIService {
    * @param itemsPerPage 
    * @returns 
    */
-  public list(listBy: string, page: number, itemsPerPage: number = 4, userId: number=0): Observable<any[]> {
+  public list(listBy: string, page: number, itemsPerPage: number = 4, userId: string='0', recipeId: string = ''): Observable<any[]> {
    
   return this.http
     .get<any[]>(this.serverUrl +
       '?list&category=' + listBy + 
       '&page=' + page.toString() +
       '&itemsPerPage=' + itemsPerPage.toString() + 
-      '&user=' + userId.toString(),{ withCredentials: true })
+      '&user=' + userId.toString() +
+      '&recipe=' + recipeId, { withCredentials: true })
     .pipe(
     catchError(this.handleError)
   );
 }
  
  
-  public review(recipeId: number, userId: number, rating: number, comment: string=''): Observable<any> {
+  public review(recipeId: number, userId: string, rating: number, comment: string=''): Observable<any> {
     let fData = new FormData();
 
     fData.append('recipeId', recipeId.toString())

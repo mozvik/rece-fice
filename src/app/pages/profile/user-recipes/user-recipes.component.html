@@ -12,40 +12,6 @@
     (editClicked)="navigateToEditRecipe(recipe.recipeId)"
     (deleteClicked)="openDeleteDialog(recipe)">
     </app-recipe-card>
-    
-    <!-- <div class="recipe-card flex flex-col justify-between" [@enterAnimation]>
-      <app-recipe-thumbnail [recipe]="item" [routerLink]="['/details', item.recipeId]"></app-recipe-thumbnail>
-          
-      
-      <div class="flex flex-col justify-between grow ">
-        <div>
-          <div class="flex flex-row justify-between">
-            <div class="rating title-h4">*****</div>
-            <div class="flex flex-row justify-between items-center">
-              <mat-icon
-              (click)="openDeleteDialog(item)"
-              matTooltip="Recept törlése"
-              [matTooltipPosition]="'left'">delete_outline</mat-icon>&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;<mat-icon [routerLink]="['/edit', item.recipeId]"
-              matTooltip="Recept szerkesztése"
-              [matTooltipPosition]="'right'">edit_note</mat-icon>
-            </div>
-          
-          </div>
-          <div class="title-h6" [routerLink]="['/details', item.recipeId]">{{item.recipeName}}
-
-          </div>
-        </div>
-        
-        <div class="card-subtitle flex flex-row justify-between mb-3">
-          <div class="flex flex-row items-center"><mat-icon>person_outline</mat-icon>
-            <div>{{item.userId}}&nbsp;Gipsz Jakab</div>
-          </div>
-          <div class="flex flex-row items-center"><div>{{item.categoryName(categories)}}</div>
-          </div>
-        </div>
-      </div>
-
-    </div> -->
   </ng-container>
   </div>
 </div>

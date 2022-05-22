@@ -7,6 +7,7 @@ import { APIService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class UserRecipesComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private apiService: APIService,
+    private authService: AuthService,
     private messageService: MessageService,
     public dialogDelete: MatDialog,
     private router: Router) { }
@@ -92,7 +94,7 @@ export class UserRecipesComponent implements OnInit {
   }
 
   moreRecipes() {
-    this.apiService.list('userrecipes', this.dataService.userRecipePageIndex, 4, 1).subscribe({
+    this.apiService.list('userrecipes', this.dataService.userRecipePageIndex, 4, this.authService.user?.userId).subscribe({
       next: (response: any) => {
         this.userRecipes = this.userRecipes!.concat(this.dataService.createRecipes(response.items))
         console.log('this.resul :>> ', response);

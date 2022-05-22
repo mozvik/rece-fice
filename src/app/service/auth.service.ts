@@ -105,9 +105,13 @@ export class AuthService {
     );
   }
 
-  getFavorites(userId: string): Observable<any[]> {
+  getFavorites(userId: string, page: number, itemsPerPage: number = 4): Observable<any[]> {
     return this.http
-    .get<any[]>(this.serverUrl + '?favorites&user=' + userId,{ withCredentials: true })
+    .get<any[]>(this.serverUrl + '?favorites&user=' + userId + '&page=' + page.toString() + '&itemsPerPage=' + itemsPerPage.toString(),{ withCredentials: true })
+  }
+  getFavoritesSimple(userId: string): Observable<any[]> {
+    return this.http
+    .get<any[]>(this.serverUrl + '?favorites/simple&user=' + userId,{ withCredentials: true })
   }
 
   setFavorite(userId: string, recipeId: string, flag: boolean): Observable<any> {

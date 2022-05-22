@@ -7,10 +7,15 @@
     <owl-carousel-o 
     
     [options]="customOptions">
-      <ng-template carouselSlide *ngFor="let slide of recipe?.image; index as i">
-        <div class="border flex flex-col justify-start">
+      <ng-template carouselSlide *ngFor="let slide of similarRecipes; index as i">
+        <div class="border flex flex-col lg:flex-row justify-start items-center">
           <div>
-            <img [src]="slide">
+            <app-recipe-card 
+            [small]="true"
+            [recipe]="slide"
+            (urlClicked)="navigateToDetails($event)">
+            </app-recipe-card>
+            <!-- <img [src]="slide"> -->
           </div>
         </div>
       </ng-template>

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Recipe } from 'src/app/classes/recipe';
+import { APIService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
@@ -11,26 +13,44 @@ import { DataService } from 'src/app/service/data.service';
 export class RecipeSimilarComponent implements OnInit {
 
   @Input() recipe: Recipe | undefined
+  @Input() similarRecipes: Recipe[] | undefined
+
   customOptions: OwlOptions = {
     loop: true,
     autoWidth: true,
     autoHeight: false,
 
-    mouseDrag: true,
+    mouseDrag: false,
     touchDrag: true,
     pullDrag: true,
-    animateIn: 'animate__zoomIn',
-    animateOut: 'animate__flipOutY',
     dots: false,
     navSpeed: 700,
-    navText: ["<", '>'],
-    items: 2,
+    navText: ["Előző", 'Következő'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 2
+      },
+      
+    },
     nav: true
   }
   
-  constructor(public dataService: DataService,) { }
+  constructor(
+    private apiService: APIService,
+    private router: Router,
+  ) { 
+    // this.apiService.list('similar', 0, 4, '', this.recipe?.id).subscribe(recipes => {
+    //   this.similarRecipes = recipes
+    //   console.log('this.similarRecipes :>> ', this.similarRecipes);
+    // })
+  }
 
   ngOnInit(): void {
   }
-
+  navigateToDetails(id: string) { 
+    this.router.navigateByUrl(`/details/${id}`)
+  }
 }

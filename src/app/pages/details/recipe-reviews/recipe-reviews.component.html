@@ -1,10 +1,12 @@
-<div class="m-5">
+<div>
   <ng-container *ngIf="recipe">
     {{stars}}
-    <mat-card class="example-card my-5" *ngFor="let review of recipe.reviews">
+    <mat-card [style.background]="review.userId == userId ? 'gainsboro':''" class="example-card my-5" *ngFor="let review of recipe.reviews">
       <div class="flex flex-row justify-start ">
-        <div class="m-2 basis-1/8">
-          <img class="rounded-full mr-5" src="https://picsum.photos/50/50" alt="">
+        <div class="mx-2 basis-1/8">
+          <img class="rounded-full mr-5" 
+          [src]="review.avatar === '' ? 'assets/img/empty-profile.png':review.avatar" alt="" width="75"
+          >
         </div>
         <div class="uppercase title basis-1/2 ml-5">
           <div>{{review.userName}}</div> 
@@ -17,7 +19,7 @@
            
         </div>
         <div class="basis-full text-right">
-          <div class="created">{{review.created}}</div>
+          <div class="created">{{review.created | date:'yyy. MM. d. H:ss'}}</div>
         </div>
       </div>
       <mat-card-content class="mx-10 my-5">

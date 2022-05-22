@@ -11,13 +11,12 @@
           <div>Beküldője: {{creatorInfo?.name}}</div>
           <div class="rating-lead">Értékelése:
             <ng-container *ngFor="let rv of [].constructor(5); let i = index">
-              <!-- <span class="normal-case non-italic">&#9733;</span> -->
-             <!-- <span class="rating" *ngIf="i < review.rating">&#9733;</span> -->
+            
               <span class="normal-case non-italic" *ngIf="i < recipe.averageRating()">&#9733;</span>
               <span class="normal-case non-italic" *ngIf="i >= recipe.averageRating()">&#9734;</span>
             </ng-container>
           </div>
-          <div>Dátum: {{recipe.created}}</div>
+          <div>Beküldve: {{recipe.created | date:'yyy. MM. d. H:ss'}}</div>
         </div>
         <div class="basis-full text-right social">
           <div>
@@ -40,8 +39,7 @@
               <mat-icon>print</mat-icon>
             </button>
           </div>
-          {{creatorInfo | json}}
-          <div>u: {{user | json}}</div>
+          <!-- <div>u: {{user | json}}</div> -->
           <div *ngIf="user && creatorInfo?.id != user?.userId">
             <button  *ngIf="!isFav" mat-stroked-button color="warn" (click)="setFav()">
               <mat-icon>favorite_outline</mat-icon>
@@ -53,23 +51,24 @@
         </div>
     </div>
     
-    <div class="grid-container">
-      <div>
-        <app-recipe-header [recipe]="recipe" class="border p-5"></app-recipe-header>
+    <div class="grid-container grid grid-cols-1 lg:grid-cols-2 gap-20">
+      <div class="basis-1/3 flex flex-col">
+        <app-recipe-header [recipe]="recipe"></app-recipe-header>
     
     
-        <app-recipe-ingredients [recipe]="recipe" class="border p-5"></app-recipe-ingredients>
+        <app-recipe-ingredients [recipe]="recipe"></app-recipe-ingredients>
     
-        <app-recipe-nutrition [recipe]="recipe" class="border p-5"></app-recipe-nutrition>
+        <app-recipe-nutrition [recipe]="recipe"></app-recipe-nutrition>
       </div>
-      <div>
-        <app-recipe-directions [recipe]="recipe" class="border p-5"></app-recipe-directions>
-        <app-recipe-similar [recipe]="recipe" class="border p-5"></app-recipe-similar>
+      <div class="basis-1/3 flex flex-col">
+        <app-recipe-directions [recipe]="recipe"></app-recipe-directions>
+        <app-recipe-similar [recipe]="recipe"
+        [similarRecipes]="similarRecipes"></app-recipe-similar>
     
-      </div>
-    
-        <app-recipe-ratings [recipe]="recipe" class="border p-5"></app-recipe-ratings>
+        <app-recipe-ratings [recipe]="recipe"></app-recipe-ratings>
         <app-recipe-reviews [recipe]="recipe"></app-recipe-reviews>
+      </div>
+    
     
     
     </div>

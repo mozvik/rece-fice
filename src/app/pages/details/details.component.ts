@@ -22,6 +22,7 @@ export class DetailsComponent implements OnInit {
   creatorInfo: any | undefined;
   selectedId: any
   recipe: Recipe = new Recipe();
+  similarRecipes: Recipe[] = []
   isLoggedIn: boolean = this.authService.isLoggedIn;
 
 
@@ -49,6 +50,10 @@ export class DetailsComponent implements OnInit {
           this.found = false;
         }
         this.recipe = this.dataService.createRecipes(data['recipe'])[0]
+        return this.apiService.list('similar', 0, 4, '', this.recipe.id);
+      }),
+      switchMap((data: any) => { 
+        this.similarRecipes = this.dataService.createRecipes(data.items);
         return this.authService.userInfo(this.recipe.userId!.toString());
       })
     ).subscribe(userInfo => { 
@@ -59,7 +64,7 @@ export class DetailsComponent implements OnInit {
     this.apiService.categories.subscribe((categories) => this.categories = categories);
     
     if (this.isLoggedIn && this.user) {
-      this.authService.getFavorites(this.user.userId).subscribe((favorites) => this.favs = favorites);
+      this.authService.getFavoritesSimple(this.user.userId).subscribe((favorites) => this.favs = favorites);
 
     }
     }

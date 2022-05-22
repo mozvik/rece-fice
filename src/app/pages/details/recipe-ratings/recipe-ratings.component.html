@@ -1,4 +1,4 @@
-<div class="m-5" *ngIf="!reviewed">
+<div *ngIf="!reviewed">
   <div>
     <div class="flex gap-5 my-5 items-center title-bg-warn px-2 py-3">
       <mat-icon class="">rate_review</mat-icon>
@@ -11,7 +11,7 @@
       <textarea matInput placeholder="" rows="10" [(ngModel)]="comment"></textarea>
     </mat-form-field>
     <button mat-flat-button color="warn" 
-    [disabled]="rating===0 || isLoading"
+    [disabled]="rated || isLoading || rating==0"
     (click)="submit()"
     >Értékelés elküldése</button>
   </div>

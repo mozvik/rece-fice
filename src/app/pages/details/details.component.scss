@@ -7,11 +7,6 @@
 .details-divider-small{
   border-bottom: 2px solid $textColorMuted;
 }
-.grid-container {
-  column-count: 1;
-  column-gap: 0;
-  row-gap: 0;
-}
 
 .social button{
   margin: 0 0 .25rem .25rem ;
@@ -19,8 +14,6 @@
 
 .header-info{
   font-family: $fontLora;
-  
-  // @include lora-italic;
 }
 .rating{
   font-style: normal;
@@ -33,18 +26,5 @@
   font-size: 1rem;
 }
 
-@media screen and (min-width: 1024px){
-  .grid-container {
-  // column-count: 2;
-  columns: 2;
-  // column-gap: 10px;
-}
-.grid-container>div{
-  display: flex;
-  flex-direction: column;
-  // grid-template-rows: 1fr auto;
-  break-inside: avoid;
-}
-}
 
 

@@ -1,12 +1,14 @@
-<div *ngIf="recipe" class="recipe-card flex flex-col justify-between h-full">
+<div *ngIf="recipe" class="recipe-card flex flex-col justify-between h-full"
+[ngClass]="small ? 'border-b-0':'border-b-2'"
+>
   <app-recipe-thumbnail 
-  class=" hover:cursor-pointer"
+  class="hover:cursor-pointer"
   [recipe]="recipe"
   (click)="urlEmit(recipe.recipeId)">
   ></app-recipe-thumbnail>
   <div class="flex flex-col justify-between grow">
     <div>
-      <div class="flex flex-row">
+      <div *ngIf="!small" class="flex flex-row">
         <div class="rating" *ngFor="let rv of [].constructor(5); let i = index">
           <ng-container *ngIf="i < recipe.averageRating()">&#9733;</ng-container>
           <ng-container *ngIf="i >= recipe.averageRating()">&#9734;</ng-container>
@@ -18,12 +20,13 @@
       
       </div>
       <div 
-      class="title-h6 hover:cursor-pointer" 
+      [ngClass]="small ? 'py-5':''" 
+      class="title-h6 hover:cursor-pointer"
       (click)="urlEmit(recipe.recipeId)">{{recipe.recipeName}}
       </div>
     </div>
     
-    <div class="card-subtitle flex flex-row justify-between my-3 uppercase">
+    <div *ngIf="!small" class="card-subtitle flex flex-row justify-between my-3 uppercase">
       <div class="flex flex-row items-center hover:cursor-pointer user"
       (click)="userEmit('userId')">
         <div>&nbsp;Gipsz Jakab</div>
@@ -32,7 +35,7 @@
       (click)="categoryEmit(recipe.category.id)"><div>{{recipe.category.name}}</div>
       </div>
     </div>
-    <div class="card-subtitle flex flex-row justify-end mb-2 uppercase">
+    <div *ngIf="!small" class="card-subtitle flex flex-row justify-end mb-2 uppercase">
       <div *ngIf="canEdit">
         <button mat-stroked-button disableRipple="false" class="text-sm"
         title="Recept szerkesztése"

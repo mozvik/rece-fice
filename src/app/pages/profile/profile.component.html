@@ -15,7 +15,11 @@
       ></app-user-recipes>
     </mat-tab>
     <mat-tab label="Kedvenceim">
-      <app-user-favorites [user]="userID"></app-user-favorites>
+      <app-user-favorites 
+      [user]="userID"
+      [userFavorites]="userFavorites"
+      (userPageIndexChange)="userPageIndexChanged($event)"
+      ></app-user-favorites>
     </mat-tab>
   </mat-tab-group>
 </div>

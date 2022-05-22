@@ -12,6 +12,7 @@ export class RecipeCardComponent implements OnInit {
   @Input() recipe: Recipe | undefined;
   @Input() canEdit: boolean = false;
   @Input() canDelete: boolean = false;
+  @Input() small: boolean = false;
   @Output() urlClicked = new EventEmitter<string>();
   @Output() userClicked = new EventEmitter<string>();
   @Output() categoryClicked = new EventEmitter<string>();
