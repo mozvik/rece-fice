@@ -6,6 +6,7 @@ export enum Icons {
   Twitter = 'twitter',
   Instagram = 'instagram',
   Facebook = 'facebook',
+  Messenger = 'messenger',
 }
 
 @Injectable({

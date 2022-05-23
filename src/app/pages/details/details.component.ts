@@ -24,7 +24,7 @@ export class DetailsComponent implements OnInit {
   recipe: Recipe = new Recipe();
   similarRecipes: Recipe[] = []
   isLoggedIn: boolean = this.authService.isLoggedIn;
-
+  url:string | undefined
 
   get isFav() {
     if (this.recipe.id) {
@@ -41,7 +41,7 @@ export class DetailsComponent implements OnInit {
     private authService: AuthService,
     private apiService: APIService) {
     this.user = this.authService.user;
-    
+    this.url = this.router.url;
 
     this.activatedRoute.data
     .pipe(
@@ -84,5 +84,20 @@ export class DetailsComponent implements OnInit {
       this.messageService.showSnackBar(res, 'success');
       this.favs = this.favs.filter(id => id !== this.recipe.id);
     })
-   }
+  }
+  
+  shareFacebook() {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank');
+  }
+  shareTwitter() {
+    window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank');
+  }
+
+  shareMail() {
+    window.open('mailto:', '_blank');
+  }
+  print() {
+    window.print()
+  
+  }
 }

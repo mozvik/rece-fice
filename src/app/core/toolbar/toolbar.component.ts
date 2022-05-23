@@ -6,6 +6,7 @@ import { chevronRotate } from '../../animations';
 import { APIService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { User } from 'src/app/classes/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public dataService: DataService,
     private apiService: APIService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     //this.listType = this.apiService.listType
@@ -75,5 +77,10 @@ export class ToolbarComponent implements OnInit {
       console.log('this.dataService.searchResultsFull :>> ', this.dataService.searchResultsFull);
     })
 
+  }
+  logout() {
+    this.authService.logout().subscribe()
+    this.authService.user = undefined
+    this.router.navigateByUrl('/login')
   }
 }

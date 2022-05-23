@@ -141,7 +141,7 @@ export class APIService {
     filterData.page = page
     filterData.itemsPerPage = itemsPerPage
     return this.http
-      .post<any[]>(this.serverUrl + '?search', filterData, { withCredentials: true })
+      .post<any[]>(this.serverUrl + '?search', filterData)
       .pipe(
         
       
@@ -169,7 +169,6 @@ export class APIService {
 
     for (let i = 0; i < formData.image.length; i++) {
       const ele = formData.image[i];
-      console.log('object :>> ', formData.image);
       fData.append(i.toString(), ele, ele.name)
     }
 

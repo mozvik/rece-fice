@@ -31,6 +31,15 @@ export class AuthService {
         catchError(err => of([])),
       );
   }
+  public logout(): Observable<any> {
+    let fData = new FormData();
+    fData.append('logout','logout');
+    return this.http
+      .post<any[]>(this.serverUrl+ '?logout', fData, { withCredentials: true })
+      .pipe(
+        catchError(err => of([])),
+      );
+  }
   
   public credentials(): Observable<any> {
     return this.http

@@ -1,6 +1,7 @@
 <div class="container mx-auto">
   <h4 class="title-h4 text-center mt-48 mb-20">Receptfeltöltés</h4>
-  <mat-stepper
+  {{authService.user?.userId}}
+  <mat-stepper #stepper
   [linear]="false"
   [orientation]="currentScreenSize && currentScreenSize > 2 ? 'horizontal' : 'vertical'">
   <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák" >
@@ -348,7 +349,6 @@
           </ngx-mat-file>
           </mat-form-field>
         <div *ngFor="let item of fifthFormGroup.controls['photos'].value">
-          {{item.name}}
         </div>
          
         </div>
@@ -363,12 +363,14 @@
   <div class="flex flex-row justify-center mb-28" >
     <div class="">
       <button mat-flat-button color="primary" type="submit" class=""
-      (click)="submitForm()"
+      (click)="submitForm(stepper)"
       [disabled]="firstFormGroup.invalid 
       || secondFormGroup.invalid || 
       thirdFormGroup.invalid || 
-      fourthFormGroup.invalid || isLoading"
+      fourthFormGroup.invalid || 
+      fifthFormGroup.invalid ||isLoading"
       >Recept feltöltése</button>
+
     </div>
   </div>
 

@@ -9,6 +9,8 @@ import { Measurements } from 'src/app/interface/measurements';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
 import { finalize } from 'rxjs';
+import { AuthService } from 'src/app/service/auth.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-upload',
@@ -82,6 +84,7 @@ export class UploadComponent implements OnInit {
     private apiService: APIService,
     private dataService: DataService,
     private messageService: MessageService,
+    public authService: AuthService,
     private fb: FormBuilder) {
   }
  
@@ -138,7 +141,7 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  submitForm() {
+  submitForm(stepper: MatStepper) {
     this.isLoading = true;
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
@@ -147,10 +150,17 @@ export class UploadComponent implements OnInit {
       .pipe(finalize(() => this.isLoading = false))
       .subscribe({
       next: (response: any) => {
-        if (response != null) {
-          this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
+          if (response != null) {
+            this.firstFormGroup.reset();
+            this.secondFormGroup.reset();
+            this.thirdFormGroup.reset();
+            this.fourthFormGroup.reset();
+            this.fifthFormGroup.reset();
+            this.fifthFormGroup.controls['photos'].reset();
+            stepper.reset();
+            this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
         } else {
-          this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')
+            this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')
         }
         console.log(response)
       },
@@ -161,7 +171,7 @@ export class UploadComponent implements OnInit {
   }
 
   createRecipe() {
-    this.recipe.userId = '1' //ideiglenes, amíg nincs auth
+    this.recipe.userId = this.authService.user?.userId
 
     this.recipe.recipeName = this.firstFormGroup.get('name')?.value
     this.recipe.category = this.firstFormGroup.get('category')?.value

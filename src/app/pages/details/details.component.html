@@ -20,22 +20,19 @@
         </div>
         <div class="basis-full text-right social">
           <div>
-            <button mat-stroked-button color="warn">
-              <mat-icon>share</mat-icon>
-            </button>
-            <button mat-stroked-button color="warn">
+            <button (click)="shareFacebook()" mat-stroked-button color="warn">
               <mat-icon svgIcon="facebook"></mat-icon>
             </button>
-            <button mat-stroked-button color="warn">
+            <!-- <button mat-stroked-button color="warn">
               <mat-icon svgIcon="instagram"></mat-icon>
-            </button>
-            <button mat-stroked-button color="warn">
+            </button> -->
+            <button (click)="shareTwitter()" mat-stroked-button color="warn">
               <mat-icon svgIcon="twitter"></mat-icon>
             </button>
-            <button mat-stroked-button color="warn">
+            <button (click)="shareMail()" mat-stroked-button color="warn">
               <mat-icon>mail_outline</mat-icon>
             </button>
-            <button mat-stroked-button color="warn">
+            <button (click)="print()" mat-stroked-button color="warn">
               <mat-icon>print</mat-icon>
             </button>
           </div>
