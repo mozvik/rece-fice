@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/auth/auth.guard';
 import { UploadComponent } from './upload.component';
-import { UploadGuard } from './upload.guard';
 
 const routes: Routes = [{
   path: '',
-  canActivate: [UploadGuard],
+  canActivate: [AuthGuard],
   component: UploadComponent
 }];
 

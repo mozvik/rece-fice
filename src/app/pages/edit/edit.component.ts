@@ -10,6 +10,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
 import { AuthService } from 'src/app/service/auth.service';
+import { forkJoin, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -30,6 +31,7 @@ export class EditComponent implements OnInit {
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
 
+  found: boolean = true;
   currentScreenSize: number | undefined 
   selectedId: any
   recipe: Recipe = new Recipe();
@@ -88,61 +90,58 @@ export class EditComponent implements OnInit {
     return this.thirdFormGroup.get('ingredients') as FormArray;
   }
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
     public dataService: DataService,
     private apiService: APIService,
     private authService: AuthService,
     private msgService: MessageService,
     private fb: FormBuilder,
-    public dialogDelete: MatDialog) { }
-  
-  
-  
+    public dialogDelete: MatDialog) {
+    
+    const stream = forkJoin([
+      of(this.apiService.categories.subscribe((categories) => this.categories = categories )),
+      of(this.apiService.costs.subscribe((costs) => this.costs = costs
+       )),
+      of(this.apiService.difficulties.subscribe(
+        (difficulties) => this.difficulties = difficulties
+      )),
+      of(this.apiService.nationalities.subscribe(
+        (nationalities) => this.nationalities = nationalities
+         )),
+      of(this.apiService.labels.subscribe((labels) => this.labels = labels)),
+      of(this.activatedRoute.data
+        .subscribe(
+          data => { 
+            if (data['recipe'].length === 0) {
+              this.found = false;
+            }
+            this.recipe = this.dataService.createRecipes(data['recipe'])[0]
 
-  ngOnInit(): void {
+            this.maxLength = 3 - this.recipe.image!.length
+            this.fillUpFirstForm()
+            this.fillUpSecondForm()
+            this.fillUpThirdForm()
+            this.fillUpFourthForm()
+            this.fillUpFifthForm()
+          }))
+        ]
+    );
+
+    stream.subscribe(data => console.log('data :>> ', data, this.categories))
+    
 
     this.dataService.currentScreenSize.subscribe(size => {
-      this.currentScreenSize = size;
-    })
-    this.apiService.categories.subscribe((categories) => this.categories = categories);
-    this.apiService.costs.subscribe((costs) => (this.costs = costs));
-    this.apiService.difficulties.subscribe(
-      (difficulties) => (this.difficulties = difficulties)
-    );
-    this.apiService.nationalities.subscribe(
-      (nationalities) => (this.nationalities = nationalities)
-    );
-    this.apiService.labels.subscribe((labels) => (this.labels = labels));
-
-
-    this.route.params.subscribe(routeParams => {
-      this.selectedId = routeParams['id'];
-      // this.apiService.getRecipes([this.selectedId], 0)
-      // .subscribe({
-      //   next: (response: any) => {
-      //     this.recipe = this.dataService.createRecipes(response?.items)[0]
-      //     this.maxLength = 3 - this.recipe.image!.length
-      //     this.fillUpFirstForm()
-      //     this.fillUpSecondForm()
-      //     this.fillUpThirdForm()
-      //     this.fillUpFourthForm()
-      //     this.fillUpFifthForm()
-      //   }
-      // })
-      this.apiService.getRecipe(this.selectedId)
-      .subscribe({
-        next: (response: any) => {
-          this.recipe = this.dataService.createRecipes(response)[0]
-          this.maxLength = 3 - this.recipe.image!.length
-          this.fillUpFirstForm()
-          this.fillUpSecondForm()
-          this.fillUpThirdForm()
-          this.fillUpFourthForm()
-          this.fillUpFifthForm()
-        }
-      })
-    });
+          this.currentScreenSize = size;
+        })
+  
   }
+  
+  
+  
+
+  ngOnInit(): void { }
+  
   private createDirectionsFormGroup(): FormGroup {
     return this.fb.group({
       dField: ['', [Validators.required]],
@@ -271,18 +270,7 @@ export class EditComponent implements OnInit {
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
    
-    // this.apiService.postRecipe(this.recipe,'updateRecipe').subscribe({
-    //   next: (response: any) => {
-    //     this.msgService.showSnackBar(`${this.recipe.recipeName} recept sikeresen módosítva.`, 'success')
-    //     if (this.dataService.userRecipeList.length > 0) {
-    //       const idx = this.dataService.userRecipeList.findIndex(f => f.id == response.recipeId)
-    //       const updatedRecipe = this.dataService.createRecipes([response])
-    //       this.dataService.userRecipeList[idx] = updatedRecipe[0]
-    //     }
-
-    //   },
-    //   error: (error: any) => this.msgService.showSnackBar(error,'error')
-    // })
+    
     this.apiService.putRecipe(this.recipe).subscribe({
       next: (response: any) => {
         this.msgService.showSnackBar(`${this.recipe.recipeName} recept sikeresen módosítva.`, 'success')
@@ -298,7 +286,7 @@ export class EditComponent implements OnInit {
   }
 
   createRecipe() {
-    this.recipe.userId = this.authService.user?.userId; //ideiglenes, amíg nincs auth
+    this.recipe.userId = this.authService.user?.userId;
 
     this.recipe.recipeName = this.firstFormGroup.get('name')?.value
     this.recipe.category = this.firstFormGroup.get('category')?.value

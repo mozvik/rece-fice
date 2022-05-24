@@ -10,13 +10,15 @@
 }
 
 
-button{
-  @include oswald;
-  letter-spacing: .05rem;
+button.spec{
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1.25rem;
+  margin-left: .25rem;
 }
-.btn-icon .mat-icon{
-  font-size: 2.5rem;
-}
+// .btn-icon .mat-icon{
+//   font-size: 2.5rem;
+// }
 
 .uploaded-card{
   border-bottom: 1px solid rgba($textColor,.2);

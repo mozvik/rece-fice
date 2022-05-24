@@ -31,7 +31,9 @@ export class RecipeRatingsComponent implements OnInit {
   public get isLoggedIn() {
     return !!this.authService.isLoggedIn
   }
-   
+  public get currentUserId() {
+    return this.authService.user?.userId
+  }
 
   ngOnInit(): void { 
     console.log('recipe :>> ', this.recipe);

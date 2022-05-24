@@ -7,7 +7,7 @@
   (click)="urlEmit(recipe.recipeId)">
   ></app-recipe-thumbnail>
   <div class="flex flex-col justify-between grow">
-    <div>
+    <div class=" grow">
       <div *ngIf="!small" class="flex flex-row">
         <div class="rating" *ngFor="let rv of [].constructor(5); let i = index">
           <ng-container *ngIf="i < recipe.averageRating()">&#9733;</ng-container>
@@ -39,15 +39,15 @@
       <div *ngIf="canEdit">
         <button mat-stroked-button disableRipple="false" class="text-sm"
         title="Recept szerkesztése"
-        type="button"
+        color="primary"
         (click)="editEmit()"
         ><mat-icon>edit_outline</mat-icon>
         </button>
       </div>
       <div class="ml-2" *ngIf="canDelete">
         <button mat-stroked-button disableRipple="false" class="text-sm"
+        color="warn"
         title="Recept törlése"
-        type="button"
         (click)="deleteEmit()"
         ><mat-icon>delete_outline</mat-icon>
         </button>

@@ -1,6 +1,5 @@
 <div class="container mx-auto">
   <h4 class="title-h4 text-center mt-48 mb-20">Receptfeltöltés</h4>
-  {{authService.user?.userId}}
   <mat-stepper #stepper
   [linear]="false"
   [orientation]="currentScreenSize && currentScreenSize > 2 ? 'horizontal' : 'vertical'">
@@ -8,7 +7,7 @@
     <div class="relative">
       <img class="absolute hidden md:block md:right-0 lg:-right-0 top-20" src="../../../assets/img/vanilia.png" alt="" [width]="currentScreenSize ? currentScreenSize*140*0.70:0">
     </div>
-    <form [formGroup]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" #first>
       <div class="flex flex-row flex-wrap md:gap-x-5 xl:gap-x-10 gap-y-20 pt-10">
         <mat-form-field
         appearance="legacy"
@@ -100,20 +99,20 @@
         </mat-form-field>
       </div>
       <div class="mt-5">
-        <button mat-flat-button color="warn" matStepperNext>Következő</button>
+        <button mat-stroked-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
   
   <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
     <div class="relative">
-      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/mak.png" alt="" [width]="currentScreenSize ? currentScreenSize*170*0.75:0">
+      <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/mak.png" alt="" [width]="currentScreenSize ? currentScreenSize*170*0.70:0">
     </div>
-    <form [formGroup]="secondFormGroup" class="mt-10">
+    <form [formGroup]="secondFormGroup" class="mt-10" #second>
       <div formArrayName="directions">
         <div #formRow *ngFor="let dir of directions.controls; index as i"
         [formGroupName]="i"
-        class="flex flex-row flex-wrap"
+        class="flex flex-row flex-wrap items-end"
         >
           <mat-form-field appearance="legacy"
           class="basis-3/5"
@@ -131,29 +130,25 @@
             
           </mat-form-field>
          
-          <div class="basis-2/5 flex flex-row">
             <button *ngIf="i == secondFormGroup.controls['directions'].value.length - 1 && secondFormGroup.controls['directions']?.valid"
-            mat-icon-button disableRipple="true" class="text-sm" 
+            mat-stroked-button disableRipple="true" class="spec" 
             title="Új lépés hozzáadása"
             (click)="addDirection(i)" 
             type="button" 
-            [disabled]="!secondFormGroup.controls['directions']?.valid" color="warn"
-            >
-
-              <mat-icon>create</mat-icon>
-</button>
+            [disabled]="!secondFormGroup.controls['directions']?.valid" color="primary"
+            ><mat-icon>create</mat-icon>
+            </button>
             <button *ngIf="i != 0"
-            mat-icon-button disableRipple="true" class="btn-icon" 
+            mat-stroked-button disableRipple="true" class="spec" 
             title="Lépés törlése"  color="warn"
             (click)="removeDirection(i)" 
             type="button"><mat-icon>delete_outline</mat-icon></button>
-          </div>
         </div>
       </div>
       
       <div class="mt-5">
-        <button  mat-flat-button color="warn" matStepperPrevious>Előző</button><span class="mr-3"></span>
-        <button  mat-flat-button color="warn" matStepperNext>Következő</button>
+        <button  mat-stroked-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button  mat-stroked-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -161,11 +156,11 @@
     <div class="relative">
       <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/menta.png" alt="" [width]="currentScreenSize ? currentScreenSize*120*0.70:0">
     </div>
-    <form [formGroup]="thirdFormGroup" class="mt-10">
+    <form [formGroup]="thirdFormGroup" class="mt-10" #third>
       <div formArrayName="ingredients">
         <div #formRow *ngFor="let dir of ingredients.controls; index as i"
         [formGroupName]="i"
-        class="flex flex-row flex-wrap lg:gap-x-10"
+        class="flex flex-row flex-wrap lg:gap-x-10 items-end"
         >
           <mat-form-field
           class="basis-full md:basis-2/3 lg:basis-2/6 xl:basis-1/4">
@@ -204,14 +199,16 @@
                  
           <div class="basis-1/12 flex flex-row">
             <button *ngIf="i == thirdFormGroup.controls['ingredients'].value.length - 1 && thirdFormGroup.controls['ingredients']?.valid"
-            mat-icon-button class="btn-icon" 
+            mat-stroked-button class="btn-icon" 
             disableRipple="true"
+            class="spec"
             title="Új hozzávaló hozzáadása"
             (click)="addIngredient(i)" 
-            type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid" color="warn"><mat-icon>create</mat-icon></button>
+            type="button" [disabled]="!thirdFormGroup.controls['ingredients']?.valid" color="primary"><mat-icon>create</mat-icon></button>
             <button *ngIf="i != 0"
-            mat-icon-button class="btn-icon" 
+            mat-stroked-button class="btn-icon" 
             disableRipple="true"
+            class="spec"
             title="Hozzávaló törlése"
             (click)="removeIngredient(i)" 
             type="button"  color="warn"><mat-icon>delete_outline</mat-icon></button>
@@ -221,8 +218,8 @@
       </div>
       
       <div class="mt-5">
-        <button  mat-flat-button color="warn" matStepperPrevious>Előző</button><span class="mr-3"></span>
-        <button  mat-flat-button color="warn" matStepperNext>Következő</button>
+        <button  mat-stroked-button color="primary" matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button  mat-stroked-button color="primary" matStepperNext>Következő</button>
       </div>
     </form>
   </mat-step>
@@ -231,7 +228,7 @@
     <div class="relative">
       <img class="absolute hidden md:block right-0 top-0" src="../../../assets/img/fahej.png" alt="" [width]="currentScreenSize ? currentScreenSize*150*0.70:0">
     </div>
-    <form [formGroup]="fourthFormGroup" class="mt-10">
+    <form [formGroup]="fourthFormGroup" class="mt-10" #fourth>
       <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 md:mb-20 ">
         <mat-form-field
           appearance="legacy"
@@ -244,7 +241,6 @@
             formControlName="time"
             required
             >
-            <!-- <mat-icon matSuffix>schedule</mat-icon> -->
         
         </mat-form-field>
         <mat-form-field
@@ -257,9 +253,7 @@
         matInput
         formControlName="serving"
         required
-        >
-        <!-- <mat-icon matSuffix>people_outline</mat-icon> -->
-        
+        >        
         </mat-form-field>
       </div>
       <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 my-20 md:my-0">
@@ -320,14 +314,14 @@
         </mat-form-field>
       </div>
       <div class="mt-10">
-        <button mat-flat-button color="warn"  matStepperPrevious>Előző</button><span class="mr-3"></span>
-        <button mat-flat-button color="warn"  matStepperNext>Következő</button>
+        <button mat-stroked-button color="primary"  matStepperPrevious>Előző</button><span class="mr-3"></span>
+        <button mat-stroked-button color="primary"  matStepperNext>Következő</button>
       </div>
     </form> 
   </mat-step>
   <mat-step [stepControl]="fifthFormGroup">
     <ng-template matStepLabel>Kép feltöltése</ng-template>
-    <form [formGroup]="fifthFormGroup" class="mt-10">
+    <form [formGroup]="fifthFormGroup" class="mt-10" #fifth>
       <div class="flex flex-col">
        
         <mat-label>A jól sikerült fotók népszerűbbé tehetik receptjeidet. Maximum 3 képet tölthetsz fel.</mat-label>
@@ -339,6 +333,7 @@
           accept=".png,.jpg"
           multiple
           dragAndDropText="Húzz ide egy képet"
+          [buttonVariant]="'mat-stroked-button'"
           [minlength]=1 
           [maxlength]=3
           [hiddenUpload]="true"
@@ -353,7 +348,7 @@
          
         </div>
       <div>
-        <button mat-flat-button color="warn" matStepperPrevious>Előző</button>
+        <button mat-stroked-button color="primary" matStepperPrevious>Előző</button>
       </div>
     </form> 
   </mat-step>
@@ -362,15 +357,15 @@
 
   <div class="flex flex-row justify-center mb-28" >
     <div class="">
-      <button mat-flat-button color="primary" type="submit" class=""
-      (click)="submitForm(stepper)"
+      <button mat-stroked-button color="primary" type="submit" class=""
+      (click)="submitForm(stepper, first, second, third, fourth, fifth)"
       [disabled]="firstFormGroup.invalid 
       || secondFormGroup.invalid || 
       thirdFormGroup.invalid || 
       fourthFormGroup.invalid || 
       fifthFormGroup.invalid ||isLoading"
       >Recept feltöltése</button>
-
+      <!-- <button type="submit" (click)="rese(stepper, first, second, third, fourth, fifth)">rese</button> -->
     </div>
   </div>
 

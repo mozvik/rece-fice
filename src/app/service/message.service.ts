@@ -13,12 +13,12 @@ export class MessageService {
    * @param text üzenet szövege
    * @param state üzenet státusza (success, error, -warning-, info)
    */
-  public showSnackBar(text: string, state: string = 'info'): void {
+  public showSnackBar(text: string, state: string = 'info', duration: number = 7000): void {
     this.snackBar.open(text, '', {
       verticalPosition: 'bottom',
       horizontalPosition: 'end',
       panelClass: 'snack-'+state,
-      duration: 5000,
+      duration: duration,
     });
   }
 }

@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
     EditRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     NgxMatFileModule,
     MatStepperModule,
     MatFormFieldModule,

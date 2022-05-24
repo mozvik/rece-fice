@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../service/data.service';
-import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray, NgForm } from '@angular/forms';
 
 import { Recipe } from '../../classes/recipe';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
@@ -30,6 +30,7 @@ export class UploadComponent implements OnInit {
   difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
+
   isLoading: boolean = false;
   private recipe = new Recipe();
 
@@ -140,8 +141,16 @@ export class UploadComponent implements OnInit {
       this.ingredients.removeAt(i)
     }
   }
-
-  submitForm(stepper: MatStepper) {
+  rese(stepper: MatStepper, first: NgForm, second: NgForm, third: NgForm, fourth: NgForm, fifth: NgForm) {
+    this.fifthFormGroup.controls['photos'].reset();
+    first.reset();
+    second.reset();
+    third.reset();
+    fourth.reset();
+    fifth.reset();
+    stepper.reset();
+  }
+  submitForm(stepper: MatStepper, first: NgForm, second: NgForm, third: NgForm, fourth: NgForm, fifth: NgForm) {
     this.isLoading = true;
     this.createRecipe()
     console.log('recipeFormGroup :>> ', this.recipe);
@@ -151,13 +160,14 @@ export class UploadComponent implements OnInit {
       .subscribe({
       next: (response: any) => {
           if (response != null) {
-            this.firstFormGroup.reset();
-            this.secondFormGroup.reset();
-            this.thirdFormGroup.reset();
-            this.fourthFormGroup.reset();
-            this.fifthFormGroup.reset();
-            this.fifthFormGroup.controls['photos'].reset();
+            
+            first.reset();
+            second.reset();
+            third.reset();
+            fourth.reset();
+            fifth.reset();
             stepper.reset();
+            
             this.messageService.showSnackBar('Sikeres feltöltés!', 'success')
         } else {
             this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')

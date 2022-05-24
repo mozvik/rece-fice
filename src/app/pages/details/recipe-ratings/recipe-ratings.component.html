@@ -1,19 +1,20 @@
-<div *ngIf="!reviewed">
+<div>
   <div>
     <div class="flex gap-5 my-5 items-center title-bg-warn px-2 py-3">
       <mat-icon class="">rate_review</mat-icon>
-      <h3 class="title-h5 inline-block">Értékeld a receptet!</h3>
+      <h3 class="title-h5 inline-block">{{recipe?.userId != currentUserId && !reviewed ? 'Értékeld a receptet!':'Értékelések'}}</h3>
     </div>
-    <div><app-recipe-rate-it (rating)="rating=$event"></app-recipe-rate-it></div>
-
-    <mat-form-field appearance="fill" class="mt-5">
-      <mat-label>{{isLoggedIn ? 'Írj róla véleményt! (opcionális)':'Lépj be, vagy regisztrálj az értékeléshez!'}}</mat-label>
-      <textarea matInput placeholder="" rows="10" [(ngModel)]="comment"></textarea>
-    </mat-form-field>
-    <button mat-flat-button color="warn" 
-    [disabled]="rated || isLoading || rating==0"
-    (click)="submit()"
-    >Értékelés elküldése</button>
+    <div *ngIf="recipe?.userId != currentUserId && !reviewed">
+      <div><app-recipe-rate-it (rating)="rating=$event"></app-recipe-rate-it></div>
+      <mat-form-field appearance="fill" class="mt-5">
+        <mat-label>{{isLoggedIn ? 'Írj róla véleményt! (opcionális)':'Lépj be, vagy regisztrálj az értékeléshez!'}}</mat-label>
+        <textarea matInput placeholder="" rows="10" [(ngModel)]="comment"></textarea>
+      </mat-form-field>
+      <button mat-stroked-button color="primary"
+      [disabled]="rated || isLoading || rating==0"
+      (click)="submit()"
+      >Értékelés elküldése</button>
+    </div>
   </div>
 
   

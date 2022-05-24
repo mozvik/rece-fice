@@ -13,7 +13,12 @@
 ::ng-deep .mat-checkbox-frame { 
   border-color: grey!important;
 }
+li{
+  transition: color .3s ease-in-out;
+}
 
 li:hover{
+  transition: color .3s ease-in-out;
+  color: $orangeRedDark;
   cursor: pointer;
 }

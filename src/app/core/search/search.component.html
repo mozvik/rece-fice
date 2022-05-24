@@ -46,7 +46,7 @@
       </div>
        
       <div class="filter-item flex flex-col justify-end mb-10">
-        <mat-form-field color="warn">
+        <mat-form-field color="primary">
           <mat-select 
           placeholder="Kategória"
           [formControlName]="'categoryCtrl'" 
@@ -60,7 +60,7 @@
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
-        <mat-form-field color="warn">
+        <mat-form-field color="primary">
           <mat-select 
           placeholder="Nemzetközi konyha"
           [formControlName]="'nationalityCtrl'" 
@@ -74,7 +74,7 @@
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
-        <mat-form-field color="warn">
+        <mat-form-field color="primary">
           <mat-select 
           placeholder="Címkék"
           [formControlName]="'labelCtrl'" 
@@ -88,7 +88,7 @@
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
-        <mat-form-field color="warn">
+        <mat-form-field color="primary">
           <mat-select 
           placeholder="Nehézség"
           [formControlName]="'difficultyCtrl'" 
@@ -102,7 +102,7 @@
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
-        <mat-form-field color="warn">
+        <mat-form-field color="primary">
           <mat-select 
           placeholder="Ár"
           [formControlName]="'costCtrl'" 
@@ -117,7 +117,7 @@
       </div>
        
       <div class="col-auto lg:col-span-3 mb-5 mt-12">
-        <button mat-flat-button color="warn" id="searchSubmit"
+        <button mat-stroked-button color="primary" id="searchSubmit"
         type="submit"
         (click)="submitForm()"
         (ngSubmit)="submitForm()"

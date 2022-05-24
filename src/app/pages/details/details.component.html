@@ -2,7 +2,7 @@
   <ng-container *ngIf="found; elseBlock">
     <app-divider [title]="recipe.recipeName" [subtitle]="recipe.category.name" ></app-divider>
     <div class="details-divider mt-5"></div>
-    <!-- <h4 class="title-h3 text-center pb-3 details-divider">{{recipe.recipeName}}</h4> -->
+
     <div class="flex flex-row justify-between py-5 details-divider-small header-info italic text-base">
         <div class="mx-2 basis-1/8">
           <img class="rounded-full border mr-5" [src]="creatorInfo?.avatar === '' ? 'assets/img/empty-profile.png':creatorInfo?.avatar" alt="" width="120">
@@ -20,19 +20,19 @@
         </div>
         <div class="basis-full text-right social">
           <div>
-            <button (click)="shareFacebook()" mat-stroked-button color="warn">
+            <button (click)="shareFacebook()" mat-stroked-button color="">
               <mat-icon svgIcon="facebook"></mat-icon>
             </button>
             <!-- <button mat-stroked-button color="warn">
               <mat-icon svgIcon="instagram"></mat-icon>
             </button> -->
-            <button (click)="shareTwitter()" mat-stroked-button color="warn">
+            <button (click)="shareTwitter()" mat-stroked-button color="">
               <mat-icon svgIcon="twitter"></mat-icon>
             </button>
-            <button (click)="shareMail()" mat-stroked-button color="warn">
+            <button (click)="shareMail()" mat-stroked-button color="">
               <mat-icon>mail_outline</mat-icon>
             </button>
-            <button (click)="print()" mat-stroked-button color="warn">
+            <button (click)="print()" mat-stroked-button color="">
               <mat-icon>print</mat-icon>
             </button>
           </div>
