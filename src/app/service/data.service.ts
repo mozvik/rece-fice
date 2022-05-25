@@ -9,22 +9,12 @@ import { Recipe } from '../classes/recipe';
 })
 export class DataService {
 
-  // public user: any = {
-  //   id: '1',
-  //   name: '', 
-  //   hasUploadAccess: false
-  // };
-
-  
-
-
-
   public costList: OptionsData[] = [];
   public categoryList: OptionsData[] = [];
   public difficultyList: OptionsData[] = [];
   public nationalityList: OptionsData[] = [];
   public labelList: OptionsData[] = [];
-  //public displaySize!: number
+
   public searchIsOpen: boolean = false
   public sidenavOpened: boolean = false;
   public currentScreenSize = new BehaviorSubject<number | undefined>(undefined)  
@@ -62,7 +52,6 @@ export class DataService {
   public userFavsRecipePageIndex = 0 
   ///
 
-   // Create a map to display breakpoint names for demonstration purposes.
    displayNameMap = new Map([
     [Breakpoints.XSmall, 0],
     [Breakpoints.Small, 1],
@@ -70,7 +59,6 @@ export class DataService {
     [Breakpoints.Large, 3],
     [Breakpoints.XLarge, 4],
   ]);
-  
 
   constructor(
     breakpointObserver: BreakpointObserver
@@ -85,7 +73,6 @@ export class DataService {
       .subscribe(result => {
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
-            // this.currentScreenSize = this.displayNameMap.get(query) ?? undefined;
             this.currentScreenSize.next(this.displayNameMap.get(query) ?? undefined)
           }
         }

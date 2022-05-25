@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { APIService } from '../../service/api.service';
-import { Subject, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { Recipe } from 'src/app/classes/recipe';
-import { trigger } from '@angular/animations';
-import { hoverImageAnimation, listAnimation, scaleEnterAnimation } from 'src/app/animations';
+import { listAnimation } from 'src/app/animations';
 import { OptionsData } from 'src/app/interface/options-data';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,9 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss'],
   animations: [
-    // trigger(
-    //   'enterAnimation', scaleEnterAnimation
-    // )
+   
     listAnimation
   ]
 })
@@ -30,7 +27,6 @@ export class ResultsComponent implements OnInit {
     text: '',
     filters: []
   };
-  //showImgOverlay: boolean[] = [];
   
   constructor(
     private router: Router,
@@ -44,13 +40,13 @@ export class ResultsComponent implements OnInit {
       .pipe(
         switchMap((params) => {
           this.state = params['id'];
-          console.log('inner state :>> ', this.state, this.activatedRoute.data);
+
           return this.activatedRoute.data;
         })
     ).subscribe({
       next: data => {
         this.results = this.dataService.createRecipes(data['recipes'].items)
-        console.log('outer state :>> ', this.state);
+
         if (this.state === 'search' || this.state === 'fridge') { 
           this.title = 'A keresés eredménye:';
         } else {
@@ -106,16 +102,17 @@ export class ResultsComponent implements OnInit {
 
   incrementIndex(): void {
     this.dataService.resultsPageIndex++
-
+    console.log('state :>> ', this.state);
     if (this.state === 'search') {
       this.getRecipesFromSearch()
+    }
+    else if (this.state === 'fridge') { 
+      this.getRecipesFromFridge()
     }
     else if (this.apiService.listType.filter((d) => d.id === this.state)){ 
       this.getRecipesFromCategory()
     }
-    else if (this.state === 'fridge'){ 
-      this.getRecipesFromFridge()
-    }
+   
   }
 
   getRecipesFromSearch() {
@@ -132,7 +129,7 @@ export class ResultsComponent implements OnInit {
     })
   }
   getRecipesFromFridge() {
-    this.apiService.fridge(this.dataService.fridgeIngredients, this.dataService.resultsPageIndex)
+    this.apiService.fridge(this.dataService.fridgeIngredients, this.dataService.resultsPageIndex, 8)
       .subscribe((response: any) =>
       this.results = this.results.concat(this.dataService.createRecipes(response.items))
       )

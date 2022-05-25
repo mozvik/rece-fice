@@ -15,6 +15,8 @@ export class ResultsResolverService implements Resolve<Recipe[]> {
     const paramsId = route.params['id']
     console.log('paramsId :>> ', paramsId,route);
     if (paramsId) {
+      this.dataService.resultsPageIndex = 0
+
       if (this.apiService.listType.filter((type) => type.id === paramsId).length > 0) {
         return this.apiService.list(paramsId, 0, 4)
       }
@@ -25,7 +27,7 @@ export class ResultsResolverService implements Resolve<Recipe[]> {
         }
       
       if (paramsId === 'fridge' && this.dataService.fridgeIngredients.length > 0) {
-        return this.apiService.fridge(this.dataService.fridgeIngredients, 0)
+        return this.apiService.fridge(this.dataService.fridgeIngredients, 0, 8)
       }
     }
     return []

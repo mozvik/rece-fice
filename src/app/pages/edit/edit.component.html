@@ -359,11 +359,16 @@
             dragAndDropText="Húzz ide egy képet"
             [minlength]="minLength"
             [maxlength]="maxLength"
+            [maxFileSize]=5
             [hiddenUpload]="true"
             [buttonVariant]="'mat-stroked-button'"
             [buttonBrowseText]="'Tallózás'"
             [buttonUploadText]="'Feltöltés'"
             [buttonRemoveAllText]="'Összes törlése'"
+            [invalidMinFileCountMessage]="'Minimum {1} kép szükséges.'"
+            [invalidMaxFileCountMessage]="'Maximum {3} kép engedélyezett.'"
+            [invalidFileTypeMessage]="'Csak .png és .jpg képek engedélyezettek.'"
+            [invalidFileSizeMessage]="'A kép mérete maximum {5} MB lehet.'"
             >
             </ngx-mat-file>
             </mat-form-field>

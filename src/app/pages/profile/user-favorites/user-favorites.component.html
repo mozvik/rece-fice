@@ -15,4 +15,6 @@
   </ng-container>
   </div>
 </div>
-<div class="text-center m-5"><button mat-stroked-button color="primary" (click)="incrementIndex()">Mutass többet</button></div>
+<div class="text-center m-5"><button mat-stroked-button color="primary" 
+  (click)="incrementIndex()"
+  [disabled]="!results.length">Mutass többet</button></div>

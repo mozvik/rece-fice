@@ -19,7 +19,9 @@ export class RecipeSimilarComponent implements OnInit {
     loop: true,
     autoWidth: true,
     autoHeight: false,
-
+    autoplayTimeout: 7000,
+    autoplaySpeed: 1500,
+    autoplay: true,
     mouseDrag: false,
     touchDrag: true,
     pullDrag: true,
