@@ -1,5 +1,5 @@
 <div class="container mx-auto mt-36 mb-20">
-  <ng-container *ngIf="found; notFoundBlock">
+  <ng-container *ngIf="found; else notFoundBlock">
     <app-divider [title]="recipe.recipeName" [subtitle]="recipe.category.name" ></app-divider>
   
     <h5 class="title-h5 my-10 text-center">Recept szerkesztése</h5>
@@ -396,24 +396,10 @@
       </div>
     </div>
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  <!-- <ng-template #elseBlock>
-    <div>Hozzáférés megtagadva! {{dataService.user.id}}</div>
-  </ng-template> -->
   </ng-container>
+  <ng-template #notFoundBlock>
+    <h3 class="title-h5 pt-20">Ilyen recept nem található!</h3>
+  </ng-template>
 </div>
 
 

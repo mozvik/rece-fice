@@ -20,34 +20,27 @@ export class ProfileComponent implements OnInit {
   userRecipePageIndex: number = 0
   userRecipeFavoritesPageIndex: number = 0
 
+  get activeProfileTab() {
+    return this.dataService.activeProfileTab
+  }
+  set activeProfileTab(value: number) {
+    this.dataService.activeProfileTab = value
+  }
+   
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiService: APIService,
-    public dataService: DataService,
+    private dataService: DataService,
     private authService: AuthService) {
     this.activatedRoute.data.subscribe(data => { 
         this.userRecipes = this.dataService.createRecipes(data['userRecipes'].items)
         this.userFavorites = this.dataService.createRecipes(data['userFavorites'].items)
-        console.log('data :>> ', this.userRecipes,this.userFavorites);
     })
     this.user = this.authService.user
-    console.log('PROFILE TS this.user :>> ', this.user, this.authService.user);
      }
 
   ngOnInit(): void {
-    //console.log('this.user :>> ', this.user);
-    // this.dataService.userRecipePageIndex = 0
-    // this.dataService.userRecipeList = []
-    // if (this.dataService.userRecipeList.length === 0)
-    // {
-    
-    
-    // this.apiService.getRecipesByUser(this.userID, this.dataService.userRecipePageIndex, 4).subscribe({
-    //   next: (response: any) => {
-    //     this.createRecipes(response?.items)
-    //   }
-    // })
-    // }
   }
 
   userPageIndexChanged(index: number): void {
@@ -74,6 +67,6 @@ export class ProfileComponent implements OnInit {
       }
     }
     this.dataService.userRecipeList = this.dataService.userRecipeList.concat(array)
-    // this.dataService.userRecipes.next(this.dataService.userRecipeList)
+  
   }
 }

@@ -7,7 +7,7 @@ import { OptionsData } from 'src/app/interface/options-data';
 import { APIService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { DataService } from 'src/app/service/data.service';
-import { MessageService } from 'src/app/service/message.service';
+
 
 @Component({
   selector: 'app-user-favorites',
@@ -31,7 +31,6 @@ export class UserFavoritesComponent implements OnInit {
     private dataService: DataService,
     private apiService: APIService,
     private authService: AuthService,
-    private messageService: MessageService,
     public dialogDelete: MatDialog,
     private router: Router) { }
 
@@ -42,9 +41,6 @@ export class UserFavoritesComponent implements OnInit {
     this.router.navigateByUrl(`/details/${id}`)
   }
 
-  navigateToUserProfile(id: string) { 
-
-  }
 
   navigateToCategory(id: string) {
     let cat = ''
@@ -84,7 +80,6 @@ export class UserFavoritesComponent implements OnInit {
     this.apiService.list('userrecipes', this.dataService.userRecipePageIndex, 4, this.authService.user?.userId).subscribe({
       next: (response: any) => {
         this.userFavorites = this.userFavorites!.concat(this.dataService.createRecipes(response.items))
-        console.log('userfavs :>> ', response);
       }
     })
    

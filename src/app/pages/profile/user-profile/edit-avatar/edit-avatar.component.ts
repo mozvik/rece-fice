@@ -32,7 +32,6 @@ export class EditAvatarComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public user: User,
     private dialogRef: MatDialogRef<EditAvatarComponent>,
     private authService: AuthService,
-    private apiService: APIService,
     private messageService: MessageService,
     private router: Router
 
@@ -42,15 +41,6 @@ export class EditAvatarComponent implements OnInit {
     this.reader.onload = (e: any) => { 
       this.preview = e.target.result;
     }
-    // if (user.avatar) {
-    //   this.apiService.imageblob(user.avatar).subscribe({
-    //     next: (response: any) => {
-    //       console.log('response :>> ', new File([response], user.avatar));
-    //       //this.uploadedImages.push(new File([response], ele))
-    //     }
-    //   })
-    // }
-    
   }
 
   ngOnInit(): void {

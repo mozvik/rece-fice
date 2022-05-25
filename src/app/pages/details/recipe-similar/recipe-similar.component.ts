@@ -41,14 +41,8 @@ export class RecipeSimilarComponent implements OnInit {
   }
   
   constructor(
-    private apiService: APIService,
     private router: Router,
-  ) { 
-    // this.apiService.list('similar', 0, 4, '', this.recipe?.id).subscribe(recipes => {
-    //   this.similarRecipes = recipes
-    //   console.log('this.similarRecipes :>> ', this.similarRecipes);
-    // })
-  }
+  ) {  }
 
   ngOnInit(): void {
   }

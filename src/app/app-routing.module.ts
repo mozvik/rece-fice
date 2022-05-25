@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailsResolverService } from './pages/details/details-resolver.service';
-// import { HomeComponent } from './home/home.component';
-// import { LoginComponent } from './login/login.component';
-// import { RegisterComponent } from './register/register.component';
-// import { UploadComponent } from './upload/upload.component';
+
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-  // { path: 'login', component: LoginComponent},
-  // { path: 'register', component: RegisterComponent},
-  // { path: 'upload', component: UploadComponent },
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule) },

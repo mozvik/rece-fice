@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { MessageService } from 'src/app/service/message.service';
-import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +20,6 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     passwordNew: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    // password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(8)]),
     gdpr: new FormControl('', [Validators.required]),
     subscribe: new FormControl(''),
@@ -57,12 +55,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.authService.register(this.registerFormGroup.value)
-      .pipe(
-        catchError(err => {
-          throw new Error(err);
-        }),
-      )
-      .subscribe(
+    .subscribe(
       {
           next: res => {
             if (res.hasOwnProperty('errors')) {
@@ -74,7 +67,6 @@ export class RegisterComponent implements OnInit {
               this.registerFormGroup.controls[key].markAsTouched();
             }
             }  else {
-              console.log('object ok :>> ', res);
               this.messageService.showSnackBar('Sikeres regisztráció. Lépj be a fiókodba.', 'success');
               this.router.navigateByUrl('/login');
             }

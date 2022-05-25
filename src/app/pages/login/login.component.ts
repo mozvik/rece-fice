@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
+
 import { User } from 'src/app/classes/user';
 import { AuthService } from 'src/app/service/auth.service';
 
@@ -43,19 +43,14 @@ export class LoginComponent implements OnInit {
         if (response.hasOwnProperty('errors')) {
           this.isLoading = false
           this.errorAPI = response.errors;
-          console.log('object :>> ',response.errors);
           
           this.loginFormGroup.controls['email'].setErrors({ emailApi: response.errors.email});
           this.hasAPIErrors = true
         } else {
-          console.log('LOGIN response :>> ', response);
           this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created);
           this.router.navigateByUrl('/profile');
         }
-      },
-      error: error => {
-        console.log('login error :>> ', error);
-       }
+      }
     })
   }
 }

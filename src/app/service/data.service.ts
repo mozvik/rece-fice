@@ -15,7 +15,7 @@ export class DataService {
   public nationalityList: OptionsData[] = [];
   public labelList: OptionsData[] = [];
 
-  public searchIsOpen: boolean = false
+  public isSearchOpen: boolean = false
   public sidenavOpened: boolean = false;
   public currentScreenSize = new BehaviorSubject<number | undefined>(undefined)  
   //global active Recipe
@@ -80,9 +80,8 @@ export class DataService {
    }
 
   public toggleSearch(): boolean{
-    this.searchIsOpen = !this.searchIsOpen
-    
-    return this.searchIsOpen
+    this.isSearchOpen = !this.isSearchOpen
+    return this.isSearchOpen
   }
   public toggleSidenav(): boolean{
     this.sidenavOpened = !this.sidenavOpened

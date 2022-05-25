@@ -52,8 +52,6 @@ export class ResultsComponent implements OnInit {
         } else {
           this.title = this.apiService.listType.filter((d) => d.id === this.state)[0]?.name
         }
-
-        console.log('data :>> ', data);
       },
       error: err => {
         this.router.navigate(['/home']);
@@ -69,9 +67,6 @@ export class ResultsComponent implements OnInit {
     this.router.navigateByUrl(`/details/${id}`)
   }
 
-  navigateToUserProfile(id: string) { 
-
-  }
   navigateToCategory(id: string) {
     let cat = ''
     switch (id) {
@@ -102,7 +97,6 @@ export class ResultsComponent implements OnInit {
 
   incrementIndex(): void {
     this.dataService.resultsPageIndex++
-    console.log('state :>> ', this.state);
     if (this.state === 'search') {
       this.getRecipesFromSearch()
     }

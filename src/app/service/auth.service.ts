@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../classes/user';
 
 @Injectable({
@@ -9,14 +10,13 @@ import { User } from '../classes/user';
 export class AuthService {
   
   public user: User | undefined;
-  private serverUrl: string = 'http://localhost/angular/rece-fice/src/api/';
+  private serverUrl: string = `${environment.apiUrl}/`;
     
   get isLoggedIn(): boolean {
     return !!this.user;
   }
 
   constructor(private http: HttpClient) { 
-    
   }
 
   public login(formData: any): Observable<any> {
@@ -31,22 +31,17 @@ export class AuthService {
         catchError(err => of([])),
       );
   }
+
   public logout(): Observable<any> {
     let fData = new FormData();
     fData.append('logout','logout');
     return this.http
       .post<any[]>(this.serverUrl+ '?logout', fData, { withCredentials: true })
-      .pipe(
-        catchError(err => of([])),
-      );
   }
   
   public credentials(): Observable<any> {
     return this.http
       .get<any[]>(this.serverUrl+ '?credentials', { withCredentials: true })
-      .pipe(
-        catchError(err => of([])),
-      );
   }
 
   public register(formData: any): Observable<any> { 
@@ -61,14 +56,11 @@ export class AuthService {
 
     return this.http
       .post<any[]>(this.serverUrl+ '?register', fData, { withCredentials: true })
-      .pipe(
-        
-      );
   }
 
   public userUpdate(formData: any): Observable<any> { 
     let fData = new FormData();
-    // console.log('formData :>> ', formData);
+
     fData.append('id',formData.id);
     fData.append('name',formData.name);
     fData.append('email',formData.email);
@@ -79,9 +71,6 @@ export class AuthService {
 
     return this.http
       .post<any[]>(this.serverUrl+ '?user', fData, { withCredentials: true })
-      .pipe(
-        catchError(err => of([])),
-      );
   }
   public avatarUpload(formData: any): Observable<any> { 
     let fData = new FormData();
@@ -91,9 +80,6 @@ export class AuthService {
 
     return this.http
       .post<any[]>(this.serverUrl+ '?avatar', fData, { withCredentials: true })
-      .pipe(
-        catchError(err => of([])),
-      );
   }
   public avatarDelete(userId: string): Observable<any> { 
     let fData = new FormData();
@@ -101,29 +87,24 @@ export class AuthService {
     fData.append('id',userId);
     return this.http
       .post<any[]>(this.serverUrl+ '?avatar/delete', fData, { withCredentials: true })
-      .pipe(
-        catchError(err => of([])),
-      );
   }
 
   public userInfo(id: string): Observable<any> {
     return this.http
     .get<any>(this.serverUrl + '?info&id=' + id)
-      .pipe(
-      //catchError(this.handleError)
-    );
   }
 
-  getFavorites(userId: string, page: number, itemsPerPage: number = 4): Observable<any[]> {
+  public getFavorites(userId: string, page: number, itemsPerPage: number = 4): Observable<any[]> {
     return this.http
     .get<any[]>(this.serverUrl + '?favorites&user=' + userId + '&page=' + page.toString() + '&itemsPerPage=' + itemsPerPage.toString(),{ withCredentials: true })
   }
-  getFavoritesSimple(userId: string): Observable<any[]> {
+
+  public getFavoritesSimple(userId: string): Observable<any[]> {
     return this.http
     .get<any[]>(this.serverUrl + '?favorites/simple&user=' + userId,{ withCredentials: true })
   }
 
-  setFavorite(userId: string, recipeId: string, flag: boolean): Observable<any> {
+  public setFavorite(userId: string, recipeId: string, flag: boolean): Observable<any> {
     let fData = new FormData();
     fData.append('userId', userId);
     fData.append('recipeId', recipeId);
@@ -131,7 +112,6 @@ export class AuthService {
     return this.http
       .post<any[]>(this.serverUrl+ '?favorites', fData, { withCredentials: true })
   }
-
 
   private getPHPessionId(){
     let ele: any = document.cookie.match(/PHPSESSID=[^;]+/);

@@ -35,7 +35,7 @@ export class ToolbarComponent implements OnInit {
 
   dropdownCollapsed: boolean = true;
   toolbarDown: boolean = false;
-  
+
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
   }
@@ -44,16 +44,20 @@ export class ToolbarComponent implements OnInit {
     return this.authService.user;
   }
 
+  get isSearchOpen(): boolean {
+    return !!this.dataService.isSearchOpen
+  }
+  set isSearchOpen(value: boolean) {
+    this.dataService.isSearchOpen = value
+  } 
+
   constructor(
-    public dataService: DataService,
-    private apiService: APIService,
+    private dataService: DataService,
     private authService: AuthService,
     private router: Router) { }
 
   ngOnInit(): void {
-    //this.listType = this.apiService.listType
-  }
-  
+  } 
 
   onScroll(event: any) {
     if (window.pageYOffset >= 128) {
@@ -65,19 +69,14 @@ export class ToolbarComponent implements OnInit {
     this.recipeDropdown.closeMenu()
   }
 
-  showRecipes(categoryId: any) {
-    this.dataService.searchResultsPageIndex = 0
-    this.dataService.searchResultsFull = []
-    this.dataService.searchResultsShowState.state = 'category'
-    this.dataService.searchResultsShowState.value = categoryId
-
-    console.log('object :>> ', categoryId);
-    this.apiService.list(categoryId, 0, 4).subscribe((response: any) => {
-      this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
-      console.log('this.dataService.searchResultsFull :>> ', this.dataService.searchResultsFull);
-    })
-
+  toggleSearch() { 
+    this.dataService.toggleSearch()
   }
+
+  toggleSidenav() {
+    this.dataService.toggleSidenav()
+  }
+  
   logout() {
     this.authService.logout().subscribe()
     this.authService.user = undefined

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { UploadRoutingModule } from './upload-routing.module';
 import { UploadComponent } from './upload.component';
 import { NgxMatFileModule } from 'ngx-mat-file';
-import { SharedModule } from '../../shared/shared.module';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

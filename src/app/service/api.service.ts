@@ -1,20 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, catchError, Observable, Subject,  throwError, timeout } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { OptionsData } from '../interface/options-data';
-
-// enum ListRequestName{
-//   latest = 'latest',
-//   free = 'free',
-//   daily = 'daily',
-//   popular = 'popular',
-//   categoryAppetiser = 'appetiser',
-//   categorySoup = 'soup',
-//   categorymaincourse = 'maincourse',
-//   categorysidedish = 'sidedish',
-//   categoryDessert = 'dessert',
-//   categoryDrink = 'drink',
-// }
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -34,10 +22,8 @@ export class APIService {
     { id: 'drink', name: 'Italok' }
   ];
 
-  //serverUrl: string = 'https://https:/teszt.esoguides.hu/api/';
-  // serverUrl: string = 'http://localhost/angular/rece-fice/api/';
-  serverUrl: string = 'http://localhost/angular/rece-fice/src/api/';
-  imageUrl: string = 'http://localhost/angular/rece-fice/src/assets/'
+  private serverUrl: string = `${environment.apiUrl}/`;
+  private imageUrl: string = `${environment.imageUrl}/`;
   apiKey: string = '';
   filterArray = new Subject()
 
@@ -65,38 +51,34 @@ export class APIService {
   }  
   public isReady = new Subject<any>()
 
-  //searchResults: any
+  constructor(
+    private http: HttpClient,
+   
+  ) { 
+    this.getCategories()
+    this.getdifficulties()
+    this.getCosts()
+    this.getNationalities()
+    this.getLabels()
+    
+  }
 
   private isServerReady(): Observable<any> {
-    console.log('isServerReady emits :>> ');
     return this.http
       .get<any[]>(this.serverUrl + '?ready=' + this.apiKey ,{ withCredentials: true })
-      .pipe(
-        timeout(1000),
-        catchError(this.handleError))
-      ;
   }
 
   private getCategories() {
     let query: string = this.serverUrl + '?categories'
     this.http
       .get<any[]>(query,{ withCredentials: true })
-      .pipe(
-        timeout(1000),
-        catchError(this.handleError))
-      .subscribe(data => {
-        this._categories.next(data)
-        console.log('getCategories emits :>> ', data.length);
-      })
+      .subscribe(data => this._categories.next(data))
   }
   
   private getdifficulties() {
     let query: string = this.serverUrl + '?difficulties'
     this.http
       .get<any[]>(query,{ withCredentials: true })
-      .pipe(
-        timeout(1000),
-        catchError(this.handleError))
       .subscribe(data => this._difficulties.next(data))
   }
   
@@ -104,9 +86,6 @@ export class APIService {
     let query: string = this.serverUrl + '?costs'
     this.http
       .get<any[]>(query,{ withCredentials: true })
-      .pipe(
-        timeout(1000),
-        catchError(this.handleError))
       .subscribe(data => this._costs.next(data))
   }
   
@@ -114,9 +93,6 @@ export class APIService {
     let query: string = this.serverUrl + '?nationalities'
     this.http
       .get<any[]>(query,{ withCredentials: true })
-      .pipe(
-        timeout(1000),
-        catchError(this.handleError))
       .subscribe(data => this._nationalities.next(data))
   }
 
@@ -124,9 +100,6 @@ export class APIService {
     let query: string = this.serverUrl + '?labels'
     this.http
       .get<any[]>(query,{ withCredentials: true })
-      .pipe(
-        timeout(1000),
-        catchError(this.handleError))
       .subscribe(data => this._labels.next(data))
   }
 
@@ -142,19 +115,12 @@ export class APIService {
     filterData.itemsPerPage = itemsPerPage
     return this.http
       .post<any[]>(this.serverUrl + '?search', filterData)
-      .pipe(
-        
-      
-      );
   }
 
   
   public getRecipe(id: string): Observable<any[]> {
     return this.http
     .get<any[]>(this.serverUrl + '?recipe&id=' + id,{ withCredentials: true })
-      .pipe(
-      //catchError(this.handleError)
-    );
   }
 
   /**
@@ -174,23 +140,9 @@ export class APIService {
 
     return this.http
       .post<any[]>(this.serverUrl+ '?recipe', fData, { withCredentials: true })
-      .pipe(
-        //catchError(this.handleError),
-      );
    }
-   /**
-   * 
-   * @param formData 
-   * @returns Observable<any>
-   */
-    
-  
-  /**
-   * 
-   * @param formData 
-   * @returns Observable<any>
-   */
-   public putRecipe(formData: any): Observable<any> {
+
+  public putRecipe(formData: any): Observable<any> {
     let fData = new FormData();
     console.log('formData :>> ', formData);
     fData.append('recipe',JSON.stringify(formData))
@@ -204,9 +156,6 @@ export class APIService {
 
     return this.http
       .post<any[]>(this.serverUrl+ '?recipe&id=' + formData.recipeId, fData, { withCredentials: true })
-      .pipe(
-        //catchError(this.handleError),
-      );
   }
 
 /**
@@ -225,9 +174,6 @@ export class APIService {
       '&itemsPerPage=' + itemsPerPage.toString() + 
       '&user=' + userId.toString() +
       '&recipe=' + recipeId, { withCredentials: true })
-    .pipe(
-    catchError(this.handleError)
-  );
 }
  
  
@@ -241,26 +187,17 @@ export class APIService {
 
     return this.http
       .post<any[]>(this.serverUrl + '?review', fData, { withCredentials: true })
-      .pipe(
-        //catchError(this.handleError),
-      );
    } 
 
    public fridge(ingredients: string[], page: number, itemsPerPage: number = 4): Observable<any[]> {
     return this.http
     .get<any[]>(this.serverUrl + '?fridge&q=' + ingredients.join(',') + '&page=' + page.toString() + '&itemsPerPage=' + itemsPerPage.toString(),{ withCredentials: true })
-      .pipe(
-      //catchError(this.handleError)
-    );
   }
 
   //nem a REST API része
   public imageblob(url: string): Observable<any> {
     return this.http
       .get(url, {responseType: 'blob', withCredentials: true })
-      .pipe(
-      //catchError(this.handleError)
-    );
   }
 
   public subscribeGuest(email: string): Observable<any[]> {
@@ -272,12 +209,7 @@ export class APIService {
 
     return this.http
       .post<any[]>(this.serverUrl + '?subscribe', fData, { withCredentials: true })
-      .pipe(
-      catchError(this.handleError)
-    );
   }
-
-
 
   public getRecipesByUser(userID: string, page: number, itemsPerPage: number = 5 ): Observable<any[]> {
     let fData = new FormData();
@@ -289,43 +221,12 @@ export class APIService {
 
     return this.http
     .post<any[]>(this.serverUrl, fData, { withCredentials: true })
-      .pipe(
-      //catchError(this.handleError)
-    );
   }
 
   public deleteRecipe(recipeId: string | undefined) {
     return this.http
       .delete(this.serverUrl + '?recipe&id=' + recipeId)
-      .pipe(
-      //catchError(this.handleError)
-    );
   }
-  
-
- /**
- * Http hibakód kezelése
- * @param operation - hiba
- */
-  private handleError(error: HttpErrorResponse) {
-    console.log(`The backend returned an unsuccessful response code: ${error} - ${error.status} - ${error.message}`);
-    return throwError(() => error.error);
-  };
-
-  constructor(
-    private http: HttpClient,
-  ) { 
-    this.getCategories()
-    this.getdifficulties()
-    this.getCosts()
-    this.getNationalities()
-    this.getLabels()
-      // this.isServerReady().subscribe(this.isReady)
-      // this.getCategories().subscribe(this.categories)
-      // this.getdifficulties().subscribe(this.difficulties)
-      // this.getCosts().subscribe(this.costs)
-      // this.getNationalities().subscribe(this.nationalities)
-      // this.getLabels().subscribe(this.labels)
-    }
+ 
 }
   

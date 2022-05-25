@@ -1,5 +1,5 @@
 <app-search 
-  (closed)="$event ? dataService.searchIsOpen=false:''" [isSearchOpen]="dataService.searchIsOpen">
+  (closed)="$event ? isSearchOpen=false:''" [isSearchOpen]="isSearchOpen">
 </app-search>
 
 <div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full z-10" 
@@ -97,7 +97,7 @@
       </li>
       <li  class="transform -translate-y-1">
         <button mat-icon-button
-        (click)="dataService.toggleSearch()"
+        (click)="toggleSearch()"
         ><mat-icon>search</mat-icon></button>
       </li>
     </ul>
@@ -109,7 +109,7 @@
  
   <mat-toolbar>
    <div class="container flex flex-row justify-between  min-w-full">
-    <button mat-icon-button (click)="dataService.toggleSidenav()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">menu</mat-icon></button>
+    <button mat-icon-button (click)="toggleSidenav()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">menu</mat-icon></button>
     <div class="relative" id="mobileImgWrapper" style="width: 50px; height: 50px" (click)="'isOpen = !isOpen'">
       <img src="./assets/img/pot.png"
           alt=""
@@ -120,7 +120,7 @@
           width="30" id="flameMobile"
           class=""/>
     </div>
-    <button mat-icon-button (click)="dataService.toggleSearch()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">search</mat-icon></button>
+    <button mat-icon-button (click)="toggleSearch()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">search</mat-icon></button>
    </div>
    
     

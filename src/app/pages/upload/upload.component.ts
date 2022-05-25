@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray, NgForm } from '@angular/forms';
 
@@ -85,7 +85,7 @@ export class UploadComponent implements OnInit {
     private apiService: APIService,
     private dataService: DataService,
     private messageService: MessageService,
-    public authService: AuthService,
+    private authService: AuthService,
     private fb: FormBuilder) {
   }
  
@@ -153,8 +153,7 @@ export class UploadComponent implements OnInit {
   submitForm(stepper: MatStepper, first: NgForm, second: NgForm, third: NgForm, fourth: NgForm, fifth: NgForm) {
     this.isLoading = true;
     this.createRecipe()
-    console.log('recipeFormGroup :>> ', this.recipe);
-        
+
     this.apiService.postRecipe(this.recipe)
       .pipe(finalize(() => this.isLoading = false))
       .subscribe({
@@ -172,7 +171,6 @@ export class UploadComponent implements OnInit {
         } else {
             this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')
         }
-        console.log(response)
       },
       error: (error: any) => {
         this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')

@@ -18,8 +18,7 @@ export class FridgeComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private dataService: DataService,
-    private apiService: APIService) { }
+    private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -40,21 +39,10 @@ export class FridgeComponent implements OnInit {
   }
 
   submitForm() {
-    // this.dataService.searchResultsShowState.state = 'fridge'
+
     this.dataService.resultsPageIndex = 0
-    // this.dataService.searchResultsFull = []
     this.dataService.fridgeIngredients = this.ingredients
-   
-    // this.apiService.getRecipesFridge(this.dataService.fridgeIngredients, 0)
-    //   .subscribe({
-    //     next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
-        
-    // })
     this.router.navigate(['/results', 'fridge']);
-    // this.apiService.fridge(this.dataService.fridgeIngredients, 0, 4)
-    //   .subscribe({
-    //     next: (response: any) => this.dataService.searchResultsFull = this.dataService.createRecipes(response?.items)
-        
-    // })
+    
   }
 }

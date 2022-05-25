@@ -92,7 +92,7 @@ export class EditComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public dataService: DataService,
+    private dataService: DataService,
     private apiService: APIService,
     private authService: AuthService,
     private msgService: MessageService,
@@ -115,31 +115,28 @@ export class EditComponent implements OnInit {
           data => { 
             if (data['recipe'].length === 0) {
               this.found = false;
+            } else {
+              this.recipe = this.dataService.createRecipes(data['recipe'])[0]
+  
+              this.maxLength = 3 - this.recipe.image!.length
+              this.fillUpFirstForm()
+              this.fillUpSecondForm()
+              this.fillUpThirdForm()
+              this.fillUpFourthForm()
+              this.fillUpFifthForm()
             }
-            this.recipe = this.dataService.createRecipes(data['recipe'])[0]
-
-            this.maxLength = 3 - this.recipe.image!.length
-            this.fillUpFirstForm()
-            this.fillUpSecondForm()
-            this.fillUpThirdForm()
-            this.fillUpFourthForm()
-            this.fillUpFifthForm()
           }))
         ]
     );
 
-    stream.subscribe(data => console.log('data :>> ', data, this.categories))
-    
+    stream.subscribe()
 
     this.dataService.currentScreenSize.subscribe(size => {
           this.currentScreenSize = size;
         })
   
   }
-  
-  
-  
-
+ 
   ngOnInit(): void { }
   
   private createDirectionsFormGroup(): FormGroup {
@@ -230,8 +227,7 @@ export class EditComponent implements OnInit {
     this.fourthFormGroup.controls['sugar'].setValue(this.recipe.sugar)
   }
   private fillUpFifthForm() {
-    console.log('this.recipe.image>> ', this.recipe.image);
-       
+
     for (let i = 0; i < this.recipe.image!.length; i++) {
       const ele = this.recipe.image![i];
       if (ele && ele !== '' && ele !== null) {
@@ -244,7 +240,6 @@ export class EditComponent implements OnInit {
       
     }  
 
-    console.log('this.fifthFormGroup.controls[photos] :>> ', this.fifthFormGroup.controls['photos'].value);
   }
   
   openDeleteDialog(item: File): void {
@@ -260,16 +255,11 @@ export class EditComponent implements OnInit {
             this.isImageRequired = true
           }
         }
-      console.log(`deleting :>> ${item}`,this.uploadedImages);
-    } else {
-      console.log(`canceled :>> ${item}`);
-    }
+      }
     });
   }
   submitForm() {
     this.createRecipe()
-    console.log('recipeFormGroup :>> ', this.recipe);
-   
     
     this.apiService.putRecipe(this.recipe).subscribe({
       next: (response: any) => {

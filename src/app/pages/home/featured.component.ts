@@ -76,12 +76,5 @@ export class FeaturedComponent implements OnInit {
   navigateToDetails(id: string) { 
     this.router.navigateByUrl(`/details/${id}`)
   }
-  navigateToUserProfile(id: string) { 
-
-  }
-  navigateToCategory(id: string) { 
-
-  }
-
-  
+ 
 }

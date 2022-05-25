@@ -13,7 +13,6 @@ export class ResultsResolverService implements Resolve<Recipe[]> {
   constructor(private apiService: APIService,private dataService: DataService) { }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe[] | Observable<Recipe[]> | Promise<Recipe[]> {
     const paramsId = route.params['id']
-    console.log('paramsId :>> ', paramsId,route);
     if (paramsId) {
       this.dataService.resultsPageIndex = 0
 

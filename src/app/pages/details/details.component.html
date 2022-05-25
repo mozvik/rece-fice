@@ -23,9 +23,7 @@
             <button (click)="shareFacebook()" mat-stroked-button color="">
               <mat-icon svgIcon="facebook"></mat-icon>
             </button>
-            <!-- <button mat-stroked-button color="warn">
-              <mat-icon svgIcon="instagram"></mat-icon>
-            </button> -->
+
             <button (click)="shareTwitter()" mat-stroked-button color="">
               <mat-icon svgIcon="twitter"></mat-icon>
             </button>
@@ -36,7 +34,7 @@
               <mat-icon>print</mat-icon>
             </button>
           </div>
-          <!-- <div>u: {{user | json}}</div> -->
+
           <div *ngIf="user && creatorInfo?.id != user?.userId">
             <button  *ngIf="!isFav" mat-stroked-button color="warn" (click)="setFav()">
               <mat-icon>favorite_outline</mat-icon>

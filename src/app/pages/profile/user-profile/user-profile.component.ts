@@ -24,27 +24,14 @@ export class UserProfileComponent implements OnInit {
       { data: this.user }
     );
 
-    this.profileDialogRef.afterClosed().subscribe((result: any) => { 
-      console.log('result :>> ', result);
-    })
+    this.profileDialogRef.afterClosed().subscribe()
   }
 
   openEditAvatarDialog() {
-    console.log('this.user :>> ', this.user);
     this.avatarDialogRef = this.profileDialog.open(EditAvatarComponent, 
       { data: this.user }
     );
 
-    this.avatarDialogRef.afterClosed().subscribe((result: any) => { 
-      console.log('result :>> ', result);
-    })
+    this.avatarDialogRef.afterClosed().subscribe()
   }
 }
-
-// @Component({
-//   selector: 'edit-profile-dialog',
-//   templateUrl: 'edit-profile-dialog.html',
-// })
-// export class EditProfileDialog {
-//   constructor(@Inject(MAT_DIALOG_DATA) public data:  string) { }
-// }

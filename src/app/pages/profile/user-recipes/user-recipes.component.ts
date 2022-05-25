@@ -51,9 +51,6 @@ export class UserRecipesComponent implements OnInit {
     this.router.navigateByUrl(`/details/${id}`)
   }
 
-  navigateToUserProfile(id: string) { 
-
-  }
   navigateToCategory(id: string) {
     let cat = ''
     switch (id) {
@@ -97,7 +94,6 @@ export class UserRecipesComponent implements OnInit {
     this.apiService.list('userrecipes', this.dataService.userRecipePageIndex, 4, this.authService.user?.userId).subscribe({
       next: (response: any) => {
         this.userRecipes = this.userRecipes!.concat(this.dataService.createRecipes(response.items))
-        console.log('this.resul :>> ', response);
       }
     })
    

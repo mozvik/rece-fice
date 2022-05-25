@@ -59,7 +59,6 @@ export class RecipeHeaderComponent implements OnInit {
   clickOnLabel(id: number) {
     this.dataService.searchFilters = {advanced: true, text: '', filters: { label: [id]}};
     this.dataService.resultsPageIndex = 0;
-    console.log('this.dataService.searchFilters :>> ', this.dataService.searchFilters);
     this.router.navigate(['/results', 'search']);
     
   }

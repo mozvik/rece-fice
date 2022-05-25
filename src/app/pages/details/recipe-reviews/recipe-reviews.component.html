@@ -1,7 +1,6 @@
 <div>
   <ng-container *ngIf="recipe">
     <p *ngIf="recipe.reviews.length == 0" class="my-5 created">Nem érkezett még értékelés</p>
-    <!-- {{stars}} -->
     <mat-card [style.background]="review.userId == userId ? 'gainsboro':''" class="example-card my-5" *ngFor="let review of recipe.reviews">
       <div class="flex flex-row justify-start ">
         <div class="mx-2 basis-1/8">

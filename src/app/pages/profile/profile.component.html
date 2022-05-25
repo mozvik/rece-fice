@@ -2,7 +2,7 @@
 <div class="container mx-auto mt-48">
   <mat-tab-group dynamicHeight mat-align-tabs="center"
   class="title-h4"
-  [(selectedIndex)]="dataService.activeProfileTab"
+  [(selectedIndex)]="activeProfileTab"
   animationDuration="600ms">
     <mat-tab label="Profilom">
       <app-user-profile [user]="user"></app-user-profile>

@@ -19,8 +19,7 @@
           <input id="password" type="password" name="password" placeholder="Jelszó" aria-describedby="input-help" matInput formControlName="password" />
           <mat-error *ngIf="password?.errors?.['required'] && (password?.dirty || password?.touched)"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-            <!-- <small *ngIf="password?.errors?.['minlength'] && password?.dirty && password?.touched"
-            class="input-help text-danger">&nbsp;Min. 8 karakter hosszú legyen</small> -->
+            
         </mat-form-field>
         
         <div class="my-8 forgotten">
