@@ -57,7 +57,8 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.registerFormGroup.value)
     .subscribe(
       {
-          next: res => {
+        next: res => {
+          console.log('regi :>> ', res);
             if (res.hasOwnProperty('errors')) {
             for (const key in res.errors) {
               const err: any = {}

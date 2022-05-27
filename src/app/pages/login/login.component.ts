@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
           this.hasAPIErrors = true
         } else {
           this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created);
+          console.log('user :>> ', this.authService.user);
           this.router.navigateByUrl('/profile');
         }
       }
