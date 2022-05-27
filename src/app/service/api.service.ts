@@ -23,7 +23,7 @@ export class APIService {
   ];
 
   private serverUrl: string = `${environment.apiUrl}/`;
-  private imageUrl: string = `${environment.imageUrl}/`;
+
   apiKey: string = '';
   filterArray = new Subject()
 
