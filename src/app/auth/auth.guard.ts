@@ -23,6 +23,7 @@ export class AuthGuard implements CanActivate {
       return this.authService.credentials()
       .pipe(
         map(response => {
+          console.log('credentials :>> ', response);
           if (!response || response.length === 0) {
           this.authService.user = undefined;
           this.messageService.showSnackBar('Hozzáférés megtagadva. A szolgáltatás igénybevételéhez bejelentkezés szükséges', 'error');  
