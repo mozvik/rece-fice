@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost/angular/rece-fice/src/api',
   //apiUrl: 'https://teszt.esoguides.hu/api',
-  imageUrl: 'http://localhost/angular/rece-fice/src/assets'
+  //imageUrl: 'http://localhost/angular/rece-fice/src/assets'
 };
 
 /*
