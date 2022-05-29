@@ -7,8 +7,8 @@
 (window:scroll)="onScroll($event)"
 [@toolbarSlideDown]="toolbarDown"
 [class.toolbarScroll]="toolbarDown">
-  <mat-toolbar id="userBar"
-  class="flex flex-row justify-between w-100">
+   <mat-toolbar id="userBar"
+  class="flex flex-row justify-between"> 
       <!-- <img src="./assets/img/pot.png"
           alt=""
           width="80" id="pot"
@@ -17,14 +17,23 @@
           alt=""
           width="50" id="flame"
           class=""/> -->
-          <img src="./assets/img/logo.png"
-          alt=""
-          width="175" id="flame"
-          class=""/>
+      <div>
+        <img src="./assets/img/logo.png"
+              alt=""
+              width="141"
+              routerLink="/"
+              class="hover:cursor-pointer"/>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <button mat-button
+        routerLink="/profile"> {{user?.name}} <mat-icon>person_outline</mat-icon></button>
+      </div>
   </mat-toolbar>
   <mat-toolbar id="mainBar" class="flex flex-row justify-between w-100">
-
-    <ul class="flex flex-row justify-between">
+    <div class="basis-1/8">
+      
+    </div>
+    <ul class="flex flex-row justify-between basis-auto text-center">
       <li class="">
         <button mat-button
           class=""
@@ -82,11 +91,8 @@
       </li>
     
     </ul>
-    <ul class="flex flex-row ml-auto">
-      <li *ngIf="isLoggedIn" class="">
-        <button mat-button
-        routerLink="/profile"><mat-icon>person_outline</mat-icon> {{user?.name}}</button>
-      </li>
+    <ul class="flex flex-row basis-1/8 ">
+     
       <li *ngIf="!isLoggedIn" class="transform -translate-y-1">
         <button mat-icon-button
           routerLink="/login"

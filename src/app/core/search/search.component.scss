@@ -18,7 +18,7 @@
 }
 
 #s-modal {
-  top:60px;
+  top:55px;
   left: 50%;
   padding-top: 0rem;
   position: fixed;
@@ -33,6 +33,9 @@
 }
 #s-content {
   background: $backgroundColor;
+  margin: 2rem;
+  max-height: 70vh;
+  overflow-y: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 

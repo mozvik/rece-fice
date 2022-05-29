@@ -15,18 +15,17 @@ li button{
 }
 #userBar, #mobileImgWrapper{
   img{
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    padding-top: 55px;
+    //position: absolute;
+    //top: 50px;
+    // left: 50%;
   }
 }
-#potMobile{
-  transform: translate(-50%,-60%)
-}
-#flameMobile{
-  transform: translate(35%, -76%)
-}
 
+.mat-toolbar{
+  color: $backgroundColorDarker;
+  background: $orangeRedDark;
+}
 
 #desktopBar.toolbarScroll{
   position: fixed;
@@ -44,7 +43,7 @@ li button{
     top: 0;
     left: 0;
     width: 100%;
-
+    pointer-events: none;
     height: 126px;
     border-bottom: 1px solid $textColor;
     

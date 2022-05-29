@@ -9,7 +9,7 @@
     [orientation]="currentScreenSize && currentScreenSize > 2 ? 'horizontal' : 'vertical'">
     <mat-step [stepControl]="firstFormGroup" label="Név, kategóriák">
       <div class="relative">
-        <img class="absolute hidden md:block right-0 top-0 lg:top-24" src="../../../assets/img/anizs.png" alt="" [width]="currentScreenSize ? currentScreenSize*140*0.70:0">
+        <img class="absolute right-0 top-0 opacity-10" src="../../../assets/img/pepper-drawn.png" alt="" [width]="currentScreenSize ? 330:330">
       </div>
       <form [formGroup]="firstFormGroup">
         <div class="flex flex-row flex-wrap md:gap-x-5 xl:gap-x-10 gap-y-20 pt-10">
@@ -110,7 +110,7 @@
   
     <mat-step [stepControl]="secondFormGroup" label="Elkészítés lépései">
       <div class="relative">
-        <img class="absolute hidden md:block right-0 top-0 lg:top-8" src="../../../assets/img/szegfuszeg.png" alt="" [width]="currentScreenSize ? currentScreenSize*100:0">
+        <img class="absolute right-0 top-0 opacity-20" src="../../../assets/img/chilli.png" alt="" [width]="currentScreenSize ? 400:330">
       </div>
       <form [formGroup]="secondFormGroup" class="mt-10">
         <div formArrayName="directions">
@@ -158,7 +158,7 @@
   
     <mat-step [stepControl]="thirdFormGroup" label="Hozzávalók">
       <div class="first-bg relative">
-        <img class="absolute hidden md:block -right-6 top-8" src="../../../assets/img/szerecsendio.png" alt="" [width]="currentScreenSize ? currentScreenSize*130*0.70:0">
+        <img class="absolute right-0 top-0 opacity-20" src="../../../assets/img/szerecsendio.png" alt="" [width]="currentScreenSize ? 330:330">
       </div>
       <form [formGroup]="thirdFormGroup" class="mt-10">
         <div formArrayName="ingredients">
@@ -229,7 +229,7 @@
   
     <mat-step [stepControl]="fourthFormGroup" label="Egyéb jellemzők">
       <div class="first-bg relative">
-        <img class="absolute hidden md:block -right-4 top-8" src="../../../assets/img/kardamom.png" alt="" [width]="currentScreenSize ? currentScreenSize*170*0.70:0">
+        <img class="absolute right-0 top-0 opacity-10" src="../../../assets/img/anizs.png" alt="" [width]="currentScreenSize ? 330:330">
       </div>
       <form [formGroup]="fourthFormGroup" class="mt-10">
         <div class="flex flex-row flex-wrap md:gap-x-10 gap-y-20 md:mb-20 ">
