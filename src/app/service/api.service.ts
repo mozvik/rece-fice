@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { OptionsData } from '../interface/options-data';
 import { environment } from 'src/environments/environment';
@@ -227,6 +227,19 @@ export class APIService {
     return this.http
       .delete(this.serverUrl + '?recipe&id=' + recipeId)
   }
- 
+
+  /****Form Spree api */
+  postContactData(body: any): Observable<any> {
+    const url: string = 'https://formspree.io/f/mdoyqwew'
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      })
+    };
+    let data = `name=${body.messageFrom}&email=${body.emailFrom}&message=${body.messageFrom}`;
+    
+     return this.http.post<any>(url, data, httpOptions)
+  }
 }
   

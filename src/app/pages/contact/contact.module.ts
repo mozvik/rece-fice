@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
-    TextFieldModule
+    TextFieldModule,
+    MatCheckboxModule
   ]
 })
 export class ContactModule { }

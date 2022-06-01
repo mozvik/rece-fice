@@ -1,5 +1,5 @@
 
-<div class="container mt-52 mx-auto">
+<div class="container mt-64 mx-auto">
   <div class="flex flex-col lg:flex-row mt-58 mb-32 h-full wrapper">
     <div class="basis-auto w-full flex flex-col justify-between p-20">
       <div>
@@ -27,8 +27,9 @@
     <div class="basis-auto w-full p-20 relative">
 
       <form action="" class="flex flex-col"
+      #contact
       [formGroup]="contactFormGroup"
-      (ngSubmit)="sendMessage()">
+      (ngSubmit)="sendMessage(contact)">
       <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-8">
         <input id="messageFrom" type="text" name="messageFrom" placeholder="Név" aria-describedby="input-help" matInput formControlName="messageFrom" />
         <mat-error *ngIf="messageFrom?.errors?.['required'] && (messageFrom?.dirty || messageFrom?.touched)"
@@ -42,11 +43,6 @@
         <mat-error *ngIf="!emailFrom?.errors?.['required'] && emailFrom?.errors && emailFrom?.dirty && emailFrom?.touched"
         >&nbsp;Rossz email formátum</mat-error>
       </mat-form-field>
-      <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-8">
-        <input id="subject" type="text" name="subject" placeholder="Üzenet tárgya" aria-describedby="input-help" matInput formControlName="subject" />
-        <mat-error *ngIf="subject?.errors?.['required'] && (subject?.dirty || subject?.touched)"
-          class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-      </mat-form-field>
       <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-12">
         <textarea matInput formControlName="message"
             placeholder="Üzenet szövege"
@@ -57,6 +53,17 @@
         <mat-error *ngIf="message?.errors?.['required'] && (message?.dirty || message?.touched)"
           class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
       </mat-form-field>
+      <div class=" mb-12">
+        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a felhasználási feltételeket.<sup>*</sup></mat-checkbox>
+       
+        <mat-error *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
+        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+        <mat-error *ngIf="gdpr?.errors?.['gdpr']"
+        class="input-help text-danger">&nbsp;{{gdpr.errors['gdpr']}}</mat-error>
+
+      </div>
+     
+      
 
       <div class="">
         <button color="primary" mat-stroked-button type="submit"

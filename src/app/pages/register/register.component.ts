@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
     .subscribe(
       {
         next: res => {
-          console.log('regi :>> ', res);
             if (res.hasOwnProperty('errors')) {
             for (const key in res.errors) {
               const err: any = {}
