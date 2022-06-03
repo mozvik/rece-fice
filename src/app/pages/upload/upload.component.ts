@@ -5,12 +5,13 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormArray, NgForm } fr
 import { Recipe } from '../../classes/recipe';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { APIService } from '../../service/api.service';
-import { Measurements } from 'src/app/interface/measurements';
+//import { Measurements } from 'src/app/interface/measurements';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
 import { finalize } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatStepper } from '@angular/material/stepper';
+import { Measurement } from 'src/app/classes/measurement';
 
 @Component({
   selector: 'app-upload',
@@ -30,12 +31,13 @@ export class UploadComponent implements OnInit {
   difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
+  measurements: Measurement[] = []
 
   isLoading: boolean = false;
   private recipe = new Recipe();
 
   public currentScreenSize: number | undefined 
-  public unitArray = Measurements
+  //public unitArray = Measurements
   public hungary: any
 
   public firstFormGroup = this.fb.group({
@@ -104,6 +106,7 @@ export class UploadComponent implements OnInit {
       (nationalities) => (this.nationalities = nationalities)
     );
     this.apiService.labels.subscribe((labels) => (this.labels = labels));
+    this.apiService.measurements.subscribe((measurements) => this.measurements = measurements)
 
     this.fourthFormGroup.controls['serving'].setValue('1')
     this.fourthFormGroup.controls['time'].setValue('30')
@@ -117,9 +120,9 @@ export class UploadComponent implements OnInit {
   }
   private createIngredientsFormGroup(): FormGroup {
     return this.fb.group({
-      iName: ['', [Validators.required]],
-      iUnit: ['', [Validators.required]],
-      iQuantity: [1, [Validators.min(0.1), Validators.required]],
+      name: ['', [Validators.required]],
+      measurementId: ['', [Validators.required]],
+      quantity: [1, [Validators.min(0.1), Validators.required]],
     })
   }
   
@@ -190,7 +193,8 @@ export class UploadComponent implements OnInit {
 
     this.recipe.directions = this.secondFormGroup.get('directions')?.value.map((direction: { dField: any; }) => direction.dField)
 
-    this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value.map((ingredient: { iQuantity: string; iUnit: string; iName: string; }) => ingredient.iQuantity + ' ' + ingredient.iUnit + ';' + ingredient.iName)
+    this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value
+    //this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value.map((ingredient: { iQuantity: string; iUnit: string; iName: string; }) => ingredient.iQuantity + ' ' + ingredient.iUnit + ';' + ingredient.iName)
 
     this.recipe.cookingTime = this.fourthFormGroup.get('time')?.value
     this.recipe.servings = this.fourthFormGroup.get('serving')?.value

@@ -1,7 +1,7 @@
 export class Recipe {
   private recipeId?: string;
   recipeName?: string;
-  ingredients?: string[];
+  ingredients?: any[];
   directions?: string[];
   created?: string;
   updated?: string;
@@ -27,11 +27,11 @@ export class Recipe {
     return this.recipeId 
   } 
 
-  constructor(recipeId: string = '', recipeName: string = '', ingredients: string = '', directions: string = '', created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: any[] = [], labels: any[] = [], creator: any = '') {
+  constructor(recipeId: string = '', recipeName: string = '', ingredients: any[] = [], directions: string[] = [], created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: any[] = [], labels: any[] = [], creator: any = '') {
     this.recipeId = recipeId;
     this.recipeName = recipeName;
-    this.ingredients = ingredients.split('||');
-    this.directions = directions.split('||');
+    this.ingredients = ingredients;
+    this.directions = directions;
     this.created = created;
     this.updated = updated;
     this.userId = userId;
@@ -61,22 +61,22 @@ export class Recipe {
 
 
 
-  public getIngredients(): any[] {
-    if (this.ingredients && this.ingredients.length > 0) {
-      const returnArr: any = []
-      for (const row of this.ingredients) {
-        const arr = row.split(';') 
-        const obj = {
-          quantity: arr[0].split(' ')[0],
-          unit: arr[0].split(' ')[1],
-          name: arr[1]
-        }
-        returnArr.push(obj)
-      }
-      return returnArr;
-    }
-    return []
-  }
+  // public getIngredients(): any[] {
+  //   if (this.ingredients && this.ingredients.length > 0) {
+  //     const returnArr: any = []
+  //     for (const row of this.ingredients) {
+  //       const arr = row.split(';') 
+  //       const obj = {
+  //         quantity: arr[0].split(' ')[0],
+  //         unit: arr[0].split(' ')[1],
+  //         name: arr[1]
+  //       }
+  //       returnArr.push(obj)
+  //     }
+  //     return returnArr;
+  //   }
+  //   return []
+  // }
 
   public getNutrition(): any[] {
     return [

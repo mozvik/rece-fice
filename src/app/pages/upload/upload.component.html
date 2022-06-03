@@ -169,8 +169,8 @@
             <input
             type="text"
             matInput
-            id="iName-{{i}}" name="iName-{{i}}" 
-            formControlName="iName" required
+            id="name-{{i}}" name="name-{{i}}" 
+            formControlName="name" required
             >
           </mat-form-field>
           <mat-form-field 
@@ -179,11 +179,11 @@
           class="basis-full md:basis-2/3 lg:basis-1/6 xl:basis-1/5">
             <mat-label>Mennyiségi egysége</mat-label>
             <mat-select 
-            formControlName="iUnit" 
+            formControlName="measurementId" 
             required
             >
-            <mat-option *ngFor="let unit of unitArray" [value]="unit">
-                {{unit}}
+            <mat-option *ngFor="let unit of measurements" [value]="unit.id">
+                {{unit.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -193,8 +193,8 @@
             <input
             type="number" min="0" step="1"
             matInput
-            id="iQuantity-{{i}}" name="iQuantity-{{i}}" 
-            formControlName="iQuantity" required
+            id="quantity-{{i}}" name="quantity-{{i}}" 
+            formControlName="quantity" required
             >
           </mat-form-field>
                  

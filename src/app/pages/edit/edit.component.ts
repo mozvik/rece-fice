@@ -5,12 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Recipe } from 'src/app/classes/recipe';
 import { APIService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
-import { Measurements } from 'src/app/interface/measurements';
+//import { Measurements } from 'src/app/interface/measurements';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
 import { AuthService } from 'src/app/service/auth.service';
-import { forkJoin, of, switchMap } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { Measurement } from 'src/app/classes/measurement';
 
 @Component({
   selector: 'app-edit',
@@ -30,6 +31,7 @@ export class EditComponent implements OnInit {
   difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   labels: OptionsData[] = [];
+  measurements: Measurement[] = []
 
   found: boolean = true;
   currentScreenSize: number | undefined 
@@ -80,7 +82,7 @@ export class EditComponent implements OnInit {
   public fifthFormGroup = new FormGroup({
     photos: new FormControl('', [ Validators.maxLength(3), Validators.minLength(1)]),
   })
-  public unitArray = Measurements
+  //public unitArray = Measurements
 
   public get directions() {
     return this.secondFormGroup.get('directions') as FormArray;
@@ -110,6 +112,7 @@ export class EditComponent implements OnInit {
         (nationalities) => this.nationalities = nationalities
          )),
       of(this.apiService.labels.subscribe((labels) => this.labels = labels)),
+      of(this.apiService.measurements.subscribe((measurements) => this.measurements = measurements)),
       of(this.activatedRoute.data
         .subscribe(
           data => { 
@@ -146,9 +149,9 @@ export class EditComponent implements OnInit {
   }
   private createIngredientsFormGroup(): FormGroup {
     return this.fb.group({
-      iName: ['', [Validators.required]],
-      iUnit: ['', [Validators.required]],
-      iQuantity: [1, [Validators.min(0.1), Validators.required]],
+      name: ['', [Validators.required]],
+      measurementId: ['', [Validators.required]],
+      quantity: [1, [Validators.min(0.1), Validators.required]],
     })
   }
   addDirection() {
@@ -206,11 +209,14 @@ export class EditComponent implements OnInit {
     
     for (let i = 0; i < this.recipe.ingredients!.length; i++) {
       const ele = this.recipe.ingredients![i];
-      const splitArray = ele.split(';')
-      const splitUnit = splitArray[0].split(' ')
-      fArray.value[i].iName = splitArray[1]
-      fArray.value[i].iUnit = splitUnit[1]
-      fArray.value[i].iQuantity = Number(splitUnit[0])
+      //const splitArray = ele.split(';')
+      //const splitUnit = splitArray[0].split(' ')
+      // fArray.value[i].iName = splitArray[1]
+      // fArray.value[i].iUnit = splitUnit[1]
+      // fArray.value[i].iQuantity = Number(splitUnit[0])
+      fArray.value[i].name = ele.name
+      fArray.value[i].measurementId = ele.measurementId
+      fArray.value[i].quantity = Number(ele.quantity)
     }
 
     this.thirdFormGroup.controls['ingredients'].setValue(fArray.value)
@@ -287,7 +293,9 @@ export class EditComponent implements OnInit {
 
     this.recipe.directions = this.secondFormGroup.get('directions')?.value.map((direction: { dField: any; }) => direction.dField)
 
-    this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value.map((ingredient: { iQuantity: string; iUnit: string; iName: string; }) => ingredient.iQuantity + ' ' + ingredient.iUnit + ';' + ingredient.iName)
+    this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value
+    // this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value.map((ingredient: { iQuantity: string; iUnit: string; name: string; }) => ingredient.iQuantity + ' ' + ingredient.iUnit + ';' + ingredient.name)
+
 
     this.recipe.cookingTime = this.fourthFormGroup.get('time')?.value
     this.recipe.servings = this.fourthFormGroup.get('serving')?.value

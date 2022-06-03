@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { OptionsData } from '../interface/options-data';
 import { environment } from 'src/environments/environment';
+import { Measurement } from '../classes/measurement';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,7 @@ export class APIService {
   private _nationalities = new BehaviorSubject<OptionsData[]>([]);
   private _difficulties = new BehaviorSubject<OptionsData[]>([]);
   private _labels = new BehaviorSubject<OptionsData[]>([]);
+  private _measurements = new BehaviorSubject<Measurement[]>([]);
   
   
   get categories() {
@@ -49,6 +51,10 @@ export class APIService {
   get labels() {
     return this._labels.asObservable();
   }  
+  get measurements() {
+    return this._measurements.asObservable();
+  }
+
   public isReady = new Subject<any>()
 
   constructor(
@@ -60,7 +66,7 @@ export class APIService {
     this.getCosts()
     this.getNationalities()
     this.getLabels()
-    
+    this.getMeasurements()
   }
 
   private isServerReady(): Observable<any> {
@@ -101,6 +107,13 @@ export class APIService {
     this.http
       .get<any[]>(query,{ withCredentials: true })
       .subscribe(data => this._labels.next(data))
+  }
+
+  private getMeasurements() { 
+    let query: string = this.serverUrl + '?measurements'
+    this.http
+      .get<any[]>(query,{ withCredentials: true })
+      .subscribe(data => this._measurements.next(data))
   }
 
   public search(
