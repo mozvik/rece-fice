@@ -11,11 +11,12 @@ button{
 .input-help{
   font-size: .9rem;
 }
-.forgotten a{
+.forgotten span{
   transition: all .4s ease-in-out;
 }
-.forgotten a:hover{
+.forgotten span:hover{
   transition: all .4s ease-in-out;
+  cursor: pointer;
   color: $orangeRedDark;
 }
 .wrapper{

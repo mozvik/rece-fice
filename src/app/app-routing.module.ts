@@ -20,6 +20,7 @@ const routes: Routes = [
   },
   { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
   { path: 'edit/:id', loadChildren: () => import('./pages/edit/edit.module').then(m => m.EditModule) },
+  { path: 'recovery/:token', loadChildren: () => import('./pages/recovery/recovery.module').then(m => m.RecoveryModule) },
   
   { path: '**', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
 ];

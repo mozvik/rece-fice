@@ -113,6 +113,26 @@ export class AuthService {
       .post<any[]>(this.serverUrl+ '?favorites', fData, { withCredentials: true })
   }
 
+  public resetPassword(token: string, password1: string, password2: string): Observable<any> { 
+    let fData = new FormData();
+    fData.append('token', token);
+    fData.append('password1', password1);
+    fData.append('password2', password2);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?reset', fData, { withCredentials: true })
+  }
+
+  public passwordRecovery(email: string): Observable<any> {
+    let fData = new FormData();
+    fData.append('email', email);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?recovery', fData, { withCredentials: true })
+  }
+
+  public validateRecoveryToken(token: string): Observable<any> { 
+    return this.http
+      .get<any[]>(this.serverUrl+ '?recovery&token=' + token, { withCredentials: true })
+  }
   private getPHPessionId(){
     let ele: any = document.cookie.match(/PHPSESSID=[^;]+/);
     let phpSession = undefined

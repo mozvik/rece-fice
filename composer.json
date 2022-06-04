@@ -2,7 +2,7 @@
     "name": "ati/rece-fice",
     "autoload": {
         "psr-4": {
-            "Auth\\": "src/api/auth"
+            "Ati\\ReceFice\\": "src/"
         }
     },
     "authors": [
@@ -11,10 +11,10 @@
             "email": "mozvik@yahoo.com"
         }
     ],
-    "require": {
-        "adhocore/jwt": "^1.1"
-    },
     "config": {
         "vendor-dir": "src/api/vendor"
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.6"
     }
 }
