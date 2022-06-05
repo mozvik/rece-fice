@@ -7,7 +7,15 @@
 .nav-link button{
   @include source;
 }
+.nav-item{
+  margin: 1rem 1rem;
+}
+.nav-link{
+  padding: .5rem 1rem;
+}
+
 
 .mat-sidenav-content{ 
   background: $backgroundColor;
+  overflow: hidden;
 }

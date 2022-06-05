@@ -17,6 +17,7 @@ export class DataService {
 
   public isSearchOpen: boolean = false
   public sidenavOpened: boolean = false;
+  public pageTransitionInProgress: boolean = false;
   public currentScreenSize = new BehaviorSubject<number | undefined>(undefined)  
   //global active Recipe
   public selectedRecipe = new BehaviorSubject<Recipe>(new Recipe());

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/classes/recipe';
 import { APIService } from 'src/app/service/api.service';
 import { DataService } from 'src/app/service/data.service';
@@ -99,7 +99,8 @@ export class EditComponent implements OnInit {
     private authService: AuthService,
     private msgService: MessageService,
     private fb: FormBuilder,
-    public dialogDelete: MatDialog) {
+    public dialogDelete: MatDialog,
+    private router: Router) {
     
     const stream = forkJoin([
       of(this.apiService.categories.subscribe((categories) => this.categories = categories )),
@@ -275,7 +276,7 @@ export class EditComponent implements OnInit {
           const updatedRecipe = this.dataService.createRecipes([response])
           this.dataService.userRecipeList[idx] = updatedRecipe[0]
         }
-
+        this.router.navigateByUrl('/profile')
       },
       error: (error: any) => this.msgService.showSnackBar(error,'error')
     })
