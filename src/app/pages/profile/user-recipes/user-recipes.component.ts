@@ -114,7 +114,6 @@ export class UserRecipesComponent implements OnInit {
       if (result) {
         this.apiService.deleteRecipe(item.id).subscribe({
           next: (response: any) => {
-            console.log('response :>> ', response)
             this.userPageIndexChange.emit(0)
             this.dataService.userRecipePageIndex = 0
             this.dataService.userRecipeList = []

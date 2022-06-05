@@ -63,11 +63,6 @@ export class LoginComponent implements OnInit {
   openForgottenPasswordDialog(): void {
     this.forgottenPasswordRef = this.dialogForgottenPassword.open(DialogForgottenPassword);
 
-    this.forgottenPasswordRef.afterClosed().subscribe((result: string) => {
-      if (result) {
-        console.log(result);
-      }
-    });
   }
 }
 

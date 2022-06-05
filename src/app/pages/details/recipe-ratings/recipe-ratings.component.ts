@@ -36,7 +36,6 @@ export class RecipeRatingsComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    console.log('recipe :>> ', this.recipe);
   }
 
   submit() {

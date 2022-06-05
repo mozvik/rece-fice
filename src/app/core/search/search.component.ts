@@ -111,7 +111,6 @@ export class SearchComponent implements OnInit {
         .search(this.inputText, this.selectedItems, 0)
         .pipe(finalize(() => this.isLoading = false))
         .subscribe((result) => {
-          console.log('results :>> ', this.selectedItems, result);
           if (result) {
 
             (this.searchResults = result.items),

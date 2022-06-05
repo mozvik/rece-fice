@@ -143,7 +143,6 @@ export class APIService {
    */
    public postRecipe(formData: any): Observable<any> {
     let fData = new FormData();
-    console.log('formData :>> ', formData);
     fData.append('recipe',JSON.stringify(formData))
 
     for (let i = 0; i < formData.image.length; i++) {
@@ -157,13 +156,11 @@ export class APIService {
 
   public putRecipe(formData: any): Observable<any> {
     let fData = new FormData();
-    console.log('formData :>> ', formData);
     fData.append('recipe',JSON.stringify(formData))
     fData.append('_method','PUT')
 
     for (let i = 0; i < formData.image.length; i++) {
       const ele = formData.image[i];
-      console.log('object :>> ', formData.image);
       fData.append(i.toString(), ele, ele.name)
     }
 

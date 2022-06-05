@@ -67,7 +67,6 @@ export class EditAvatarComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('res :>> ', res);
         if (res === null) {
           this.dialogRef.close();
           this.messageService.showSnackBar('Nincs hozzáférésed, jelentkezz be úrjra', 'error');
@@ -98,7 +97,6 @@ export class EditAvatarComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('res :>> ', res);
         if (res === null) {
           this.dialogRef.close();
           this.messageService.showSnackBar('Nincs hozzáférésed, jelentkezz be úrjra.', 'error');
