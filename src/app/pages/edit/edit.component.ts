@@ -10,7 +10,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'src/app/service/message.service';
 import { OptionsData } from 'src/app/interface/options-data';
 import { AuthService } from 'src/app/service/auth.service';
-import { forkJoin, of } from 'rxjs';
+import { finalize, forkJoin, of } from 'rxjs';
 import { Measurement } from 'src/app/classes/measurement';
 
 @Component({
@@ -36,6 +36,7 @@ export class EditComponent implements OnInit {
   found: boolean = true;
   currentScreenSize: number | undefined 
   selectedId: any
+  isLoading: boolean = false;
   recipe: Recipe = new Recipe();
   uploadedImages: File[] = []
   dialogDeleteRef: any
@@ -266,9 +267,11 @@ export class EditComponent implements OnInit {
     });
   }
   submitForm() {
+    this.isLoading = true;
     this.createRecipe()
-    
-    this.apiService.putRecipe(this.recipe).subscribe({
+    this.apiService.putRecipe(this.recipe)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
       next: (response: any) => {
         this.msgService.showSnackBar(`${this.recipe.recipeName} recept sikeresen módosítva.`, 'success')
         if (this.dataService.userRecipeList.length > 0) {
@@ -295,8 +298,6 @@ export class EditComponent implements OnInit {
     this.recipe.directions = this.secondFormGroup.get('directions')?.value.map((direction: { dField: any; }) => direction.dField)
 
     this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value
-    // this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value.map((ingredient: { iQuantity: string; iUnit: string; name: string; }) => ingredient.iQuantity + ' ' + ingredient.iUnit + ';' + ingredient.name)
-
 
     this.recipe.cookingTime = this.fourthFormGroup.get('time')?.value
     this.recipe.servings = this.fourthFormGroup.get('serving')?.value

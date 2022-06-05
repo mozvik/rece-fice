@@ -29,7 +29,14 @@
           color="primary" 
           (click)="submit()" 
           [disabled]="newsletterFormGroup.invalid || isLoading">
-            Feliratkozom
+            <div class="flex flex-row items-center justify-between">
+              <div>Feliratkozom</div>
+              <mat-progress-spinner
+                *ngIf="isLoading"
+                class="ml-4"
+                mode="indeterminate"
+                diameter="24"></mat-progress-spinner>
+            </div>
           </button></div>
       </form>
 

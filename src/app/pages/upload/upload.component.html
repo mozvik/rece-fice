@@ -369,8 +369,16 @@
       || secondFormGroup.invalid || 
       thirdFormGroup.invalid || 
       fourthFormGroup.invalid || 
-      fifthFormGroup.invalid ||isLoading"
-      >Recept feltöltése</button>
+      fifthFormGroup.invalid || isLoading">
+      <div class="flex flex-row items-center justify-between">
+        <div>Recept feltöltése</div>
+        <mat-progress-spinner
+        *ngIf="isLoading"
+        class="ml-4"
+        mode="indeterminate"
+        diameter="24"></mat-progress-spinner>
+      </div>
+      </button>
     
     </div>
   </div>

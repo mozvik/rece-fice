@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { APIService } from '../../service/api.service';
-import { switchMap } from 'rxjs';
+import { finalize, switchMap } from 'rxjs';
 import { Recipe } from 'src/app/classes/recipe';
 import { listAnimation } from 'src/app/animations';
 import { OptionsData } from 'src/app/interface/options-data';
@@ -22,6 +22,7 @@ export class ResultsComponent implements OnInit {
   results: Recipe[] = [];
   state: string = '';
   title: string = 'A keresés eredménye:';
+  isLoading: boolean = false;
 
   searchFilters: any = {
     text: '',
@@ -110,20 +111,31 @@ export class ResultsComponent implements OnInit {
   }
 
   getRecipesFromSearch() {
-    
-    this.apiService.search(this.dataService.searchFilters.text, this.dataService.searchFilters.filters,this.dataService.resultsPageIndex)
+    this.isLoading = true;
+    this.apiService.search(this.dataService.searchFilters.text, this.dataService.searchFilters.filters, this.dataService.resultsPageIndex)
+    .pipe(
+      finalize(() => this.isLoading = false)  
+    )
     .subscribe({
     next: (response: any) => this.results = this.results.concat(this.dataService.createRecipes(response.items))
   })
   }
   getRecipesFromCategory() {
-
-    this.apiService.list(this.state as any, this.dataService.resultsPageIndex).subscribe((response: any) => {
+    this.isLoading = true;
+    this.apiService.list(this.state as any, this.dataService.resultsPageIndex)
+      .pipe(
+        finalize(() => this.isLoading = false)  
+      )
+      .subscribe((response: any) => {
     this.results = this.results.concat(this.dataService.createRecipes(response.items))
     })
   }
   getRecipesFromFridge() {
+    this.isLoading = true;
     this.apiService.fridge(this.dataService.fridgeIngredients, this.dataService.resultsPageIndex, 8)
+      .pipe(
+        finalize(() => this.isLoading = false)  
+      )
       .subscribe((response: any) =>
       this.results = this.results.concat(this.dataService.createRecipes(response.items))
       )

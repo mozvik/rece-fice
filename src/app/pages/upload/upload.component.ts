@@ -194,7 +194,6 @@ export class UploadComponent implements OnInit {
     this.recipe.directions = this.secondFormGroup.get('directions')?.value.map((direction: { dField: any; }) => direction.dField)
 
     this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value
-    //this.recipe.ingredients = this.thirdFormGroup.get('ingredients')?.value.map((ingredient: { iQuantity: string; iUnit: string; iName: string; }) => ingredient.iQuantity + ' ' + ingredient.iUnit + ';' + ingredient.iName)
 
     this.recipe.cookingTime = this.fourthFormGroup.get('time')?.value
     this.recipe.servings = this.fourthFormGroup.get('serving')?.value

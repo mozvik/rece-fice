@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { MessageService } from 'src/app/service/message.service';
 
@@ -54,7 +54,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.isLoading = true;
     this.authService.register(this.registerFormGroup.value)
+    .pipe(
+      finalize(() => this.isLoading = false)  
+    )
     .subscribe(
       {
         next: res => {

@@ -83,9 +83,19 @@
 
       </div>
       
-      <div class="flex flex-col mt-10">
-        <button color="warn" mat-stroked-button type="submit" label=""
-        (click)="register()">FIÓK LÉTREHOZÁSA</button>
+      <div class="flex flex-col mt-10 w-fit">
+        <button color="primary" mat-stroked-button type="submit" label=""
+        (click)="register()">
+          <div class="flex flex-row items-center">
+            <div>FIÓK LÉTREHOZÁSA</div>
+            <mat-progress-spinner
+                *ngIf="isLoading"
+                class="ml-4"
+                mode="indeterminate"
+                diameter="24"></mat-progress-spinner>
+          </div>
+          
+        </button>
       </div>
     </form>
   </div>

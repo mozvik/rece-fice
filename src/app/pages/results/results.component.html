@@ -15,7 +15,16 @@
   <div class="my-10">
     <button mat-stroked-button color="primary" 
     (click)="incrementIndex()"
-    [disabled]="!results.length">Mutass többet</button>
+    [disabled]="!results.length">
+    <div class="flex flex-row items-center justify-between">
+      <div>Mutass többet</div>
+      <mat-progress-spinner
+          *ngIf="isLoading"
+          class="ml-4"
+          mode="indeterminate"
+          diameter="24"></mat-progress-spinner>
+    </div>
+    </button>
   </div>
 </div>
 

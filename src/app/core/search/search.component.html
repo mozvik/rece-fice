@@ -121,8 +121,16 @@
         (click)="submitForm()"
         (ngSubmit)="submitForm()"
         routerLink="/results"
-        [disabled]="isLoading"
-        >{{recipesFound}}</button>
+        [disabled]="isLoading">
+        <div class="flex flex-row items-center justify-between">
+          <div>{{recipesFound}}</div>
+          <mat-progress-spinner
+                  *ngIf="isLoading"
+                  class="ml-4"
+                  mode="indeterminate"
+                  diameter="24"></mat-progress-spinner>
+        </div>
+        </button>
       </div> 
       </form>
     </div>

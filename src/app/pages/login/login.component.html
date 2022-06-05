@@ -25,10 +25,18 @@
         <div class="my-8 forgotten">
           <span (click)="openForgottenPasswordDialog()">Elfelejtetted a jelszavad?</span>
         </div>
-        <div class="">
+        <div>
           <button color="primary" mat-stroked-button type="submit"
           [disabled]="isLoading">
-          Belépés</button>
+          <div class="flex flex-row items-center justify-between">
+            <div>Belépés</div>
+            <mat-progress-spinner
+              *ngIf="isLoading"
+              class="ml-4"
+              mode="indeterminate"
+              diameter="24"></mat-progress-spinner>
+          </div>
+          </button>
           
         </div>
       </form>
@@ -60,7 +68,9 @@
       <div class="mt-8">
         <button
         routerLink="/register"
-        type="button"  color="primary" mat-stroked-button >Regisztráció</button>
+        type="button"  color="primary" mat-stroked-button>
+        Regisztráció
+        </button>
       </div>
       <div class="absolute bottom-0 right-12"><img src="../../../assets/img/pepper.png" alt="" class="w-52 sm:w-72 xl:w-96 filter drop-shadow-xl"></div>
     </div>

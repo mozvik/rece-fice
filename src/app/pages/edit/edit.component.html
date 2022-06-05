@@ -391,8 +391,16 @@
         [disabled]="firstFormGroup.invalid 
         || secondFormGroup.invalid || 
         thirdFormGroup.invalid || 
-        fourthFormGroup.invalid"
-        >Recept módosítása</button>
+        fourthFormGroup.invalid || isLoading">
+        <div class="flex flex-row items-center justify-between">
+          <div>Recept módosítása</div>
+          <mat-progress-spinner
+          *ngIf="isLoading"
+          class="ml-4"
+          mode="indeterminate"
+          diameter="24"></mat-progress-spinner>
+        </div>
+        </button>
       </div>
     </div>
 
