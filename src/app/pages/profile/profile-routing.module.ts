@@ -12,7 +12,7 @@ const routes: Routes = [{
     userRecipes: ProfileUserRecipeResolverService,
     userFavorites: ProfileUserFavsResolverService,
   },
-  runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+  runGuardsAndResolvers: 'always',
   component: ProfileComponent,
 }];
 

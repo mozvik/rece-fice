@@ -118,7 +118,7 @@ export class UserRecipesComponent implements OnInit {
             this.userPageIndexChange.emit(0)
             this.dataService.userRecipePageIndex = 0
             this.dataService.userRecipeList = []
-            this.messageService.showSnackBar('A recept sikeresen törlődött.', 'success')
+            this.messageService.showSnackBar('A recept sikeresen törlölve lett.', 'success')
             this.router.navigate(['/profile'])
           }
         })
