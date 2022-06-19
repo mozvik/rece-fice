@@ -46,12 +46,15 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginFormGroup.value)
       .subscribe({
       next: response => {
-        if (response.hasOwnProperty('errors')) {
-          this.isLoading = false
-          this.errorAPI = response.errors;
-          
-          this.loginFormGroup.controls['email'].setErrors({ emailApi: response.errors.email});
-          this.hasAPIErrors = true
+          if (response.hasOwnProperty('errors')) {
+            this.isLoading = false
+            this.errorAPI = response.errors;
+            if (this.errorAPI.hasOwnProperty('lockout')) {
+              this.loginFormGroup.controls['email'].setErrors({ emailApi: response.errors.lockout});
+            } else {
+              this.loginFormGroup.controls['email'].setErrors({ emailApi: response.errors.email});
+            }
+            this.hasAPIErrors = true
         } else {
           this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created);
           this.router.navigateByUrl('/profile');
