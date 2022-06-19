@@ -16,6 +16,11 @@ import { EditProfileComponent } from './user-profile/edit-profile/edit-profile.c
 import { EditAvatarComponent } from './user-profile/edit-avatar/edit-avatar.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +30,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     UserFavoritesComponent,
     DialogDelete,
     EditProfileComponent,
-    EditAvatarComponent
+    EditAvatarComponent,
+    ManageUsersComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +44,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
   ]
 })
 export class ProfileModule {

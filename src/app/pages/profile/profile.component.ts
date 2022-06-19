@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   user: User | undefined
   userRecipes: Recipe[] = []
   userFavorites: Recipe[] = []
+  userList: User[] = []
   userRecipePageIndex: number = 0
   userRecipeFavoritesPageIndex: number = 0
 
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => { 
         this.userRecipes = this.dataService.createRecipes(data['userRecipes'].items)
         this.userFavorites = this.dataService.createRecipes(data['userFavorites'].items)
+        this.userList = data['userList']
     })
     this.user = this.authService.user
      }

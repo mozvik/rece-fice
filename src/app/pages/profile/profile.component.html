@@ -1,4 +1,3 @@
-<!-- <p>profile works! index: {{userPageIndex}}</p> -->
 <div class="container mx-auto mt-48">
   <mat-tab-group dynamicHeight mat-align-tabs="center"
   class="title-h4"
@@ -7,19 +6,44 @@
     <mat-tab label="Profilom">
       <app-user-profile [user]="user"></app-user-profile>
     </mat-tab>
-    <mat-tab label="Saját receptek">
+    <ng-container *ngIf="user?.role=='1'">
+      <mat-tab label="Felhasználók kezelése">
+        <app-manage-users
+        [userList]="userList"
+        (userPageIndexChange)="userPageIndexChanged($event)"
+        ></app-manage-users>
+      </mat-tab>
+      <mat-tab label="Értékelések moderálása">
+        <!-- <app-user-recipes
+        [user]="userID"
+        [userRecipes]="userRecipes"
+        (userPageIndexChange)="userPageIndexChanged($event)"
+        ></app-user-recipes> -->
+      </mat-tab>
+      <mat-tab label="Receptek moderálása">
+        <!-- <app-user-recipes
+        [user]="userID"
+        [userRecipes]="userRecipes"
+        (userPageIndexChange)="userPageIndexChanged($event)"
+        ></app-user-recipes> -->
+      </mat-tab>
+    </ng-container>
+    <ng-container *ngIf="user?.role!='1'">
+      <mat-tab label="Saját receptek">
       <app-user-recipes
       [user]="userID"
       [userRecipes]="userRecipes"
       (userPageIndexChange)="userPageIndexChanged($event)"
       ></app-user-recipes>
-    </mat-tab>
-    <mat-tab label="Kedvenceim">
-      <app-user-favorites 
-      [user]="userID"
-      [userFavorites]="userFavorites"
-      (userPageIndexChange)="userPageIndexChanged($event)"
-      ></app-user-favorites>
-    </mat-tab>
+      </mat-tab>
+      <mat-tab label="Kedvenceim">
+        <app-user-favorites 
+        [user]="userID"
+        [userFavorites]="userFavorites"
+        (userPageIndexChange)="userPageIndexChanged($event)"
+        ></app-user-favorites>
+      </mat-tab>
+    </ng-container>
+    
   </mat-tab-group>
 </div>

@@ -44,6 +44,25 @@ export class AuthService {
       .get<any[]>(this.serverUrl+ '?credentials', { withCredentials: true })
   }
 
+  public userlist(): Observable<any> {
+    return this.http
+      .get<any[]>(this.serverUrl+ '?userlist', { withCredentials: true })
+  }
+
+  public banUser(userId: string): Observable<any> { 
+    let fData = new FormData();
+    fData.append('id', userId);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?banuser', fData, { withCredentials: true })
+  }
+
+  public activateUser(userId: string): Observable<any> { 
+    let fData = new FormData();
+    fData.append('id', userId);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?activateuser', fData, { withCredentials: true })
+  }
+
   public register(formData: any): Observable<any> { 
     let fData = new FormData();
 

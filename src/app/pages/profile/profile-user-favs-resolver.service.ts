@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Recipe } from 'src/app/classes/recipe';
 import { APIService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
-import { DataService } from 'src/app/service/data.service';
 
 @Injectable({
   providedIn: 'root'

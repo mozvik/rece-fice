@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
           return false
         }
         if (!this.authService.user) {
-          this.authService.user = new User(response.id, response.name, response.email, '', response.avatar, '', true, response.description, response.created)  
+          this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created);  
         }
         return true;
        })

@@ -1,0 +1,67 @@
+
+<div class="min-h-full px-2 md:px-0">
+  <div class="flex gap-5 items-center title-bg-warn px-2 py-3  my-10 w-full md:w-1/2">
+    <mat-icon class="">account_circle</mat-icon>
+    <h3 class="title-h5 inline-block">Felhasználók kezelése</h3>
+  </div>
+  <mat-form-field appearance="standard">
+    <mat-label>Szűrés</mat-label>
+    <input matInput #input (keyup)="applyFilter($event)">
+  </mat-form-field>
+  
+  <div class="mat-elevation-z2 mb-32">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Név </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email cím </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="loginAttempts">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Login próbálkozások</th>
+        <td mat-cell *matCellDef="let row"> {{row.loginAttempts}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="lockoutTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Kizárva </th>
+        <td mat-cell *matCellDef="let row"> {{row.lockoutTime}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktív </th>
+        <td mat-cell *matCellDef="let row"> {{row.active}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="ban">
+        <th mat-header-cell *matHeaderCellDef > Műveletek </th>
+        <td mat-cell *matCellDef="let row">
+          <button 
+          *ngIf="row.role!='1' && row.name!='Admin'"
+          (click)="setUser(row)"
+          [disabled]="isLoading"
+          mat-stroked-button [color]="row.active ? 'warn':'primary'">
+          <div class="flex flex-row items-center justify-between">
+          <div>{{row.active ? 'Letiltás':'Aktiválás'}}</div>
+          </div></button>
+        </td>
+      </ng-container>
+  
+  
+  
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Nincs találat "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>
