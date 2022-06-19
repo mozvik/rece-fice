@@ -20,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { UnixToDatePipe } from 'src/app/pipes/unix-to-date.pipe';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MatSortModule } from '@angular/material/sort';
     DialogDelete,
     EditProfileComponent,
     EditAvatarComponent,
-    ManageUsersComponent
+    ManageUsersComponent,
+    UnixToDatePipe
   ],
   imports: [
     CommonModule,

@@ -16,7 +16,7 @@ import { ErrorIntercept } from './service/error-intercept';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     CoreModule,

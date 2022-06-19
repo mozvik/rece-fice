@@ -104,6 +104,8 @@ export class ManageUsersComponent implements AfterViewInit, OnInit {
         }
         else {
           user.active = true;
+          user.loginAttempts = '0';
+          user.lockoutTime = '0';
           this.messageService.showSnackBar('Sikeres felhasználó módosítás', 'success');
           }
       },
