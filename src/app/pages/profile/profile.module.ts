@@ -21,6 +21,9 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UnixToDatePipe } from 'src/app/pipes/unix-to-date.pipe';
+import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -33,7 +36,8 @@ import { UnixToDatePipe } from 'src/app/pipes/unix-to-date.pipe';
     EditProfileComponent,
     EditAvatarComponent,
     ManageUsersComponent,
-    UnixToDatePipe
+    UnixToDatePipe,
+    ManageReviewsComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +56,8 @@ import { UnixToDatePipe } from 'src/app/pipes/unix-to-date.pipe';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ProfileModule {

@@ -116,7 +116,7 @@ export class APIService {
       .subscribe(data => this._measurements.next(data))
   }
 
-  public search(
+    public search(
     text: string,
     filters: any,
     page: number,
@@ -197,7 +197,27 @@ export class APIService {
 
     return this.http
       .post<any[]>(this.serverUrl + '?review', fData, { withCredentials: true })
-   } 
+  } 
+  
+  public reviews(userId: string): Observable<any> {
+    let query: string = this.serverUrl + '?reviews&userid=' + userId
+    return this.http
+      .get<any[]>(query,{ withCredentials: true })
+  }
+
+  public moderateReview(id: string): Observable<any> { 
+    let fData = new FormData();
+    fData.append('id', id);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?moderatereview', fData, { withCredentials: true })
+  }
+
+  public activateReview(id: string): Observable<any> { 
+    let fData = new FormData();
+    fData.append('id', id);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?activatereview', fData, { withCredentials: true })
+  }
 
    public fridge(ingredients: string[], page: number, itemsPerPage: number = 4): Observable<any[]> {
     return this.http

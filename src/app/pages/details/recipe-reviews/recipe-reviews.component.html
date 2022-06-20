@@ -24,7 +24,7 @@
       </div>
       <mat-card-content class="mx-10 my-5">
         <p>
-          {{review.comment}}
+          {{review.moderated == '0' ? review.comment:'Moderálva'}}
         </p>
       </mat-card-content>
       

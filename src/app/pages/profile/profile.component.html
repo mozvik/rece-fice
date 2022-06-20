@@ -1,4 +1,4 @@
-<div class="container mx-auto mt-48">
+<div class="container mx-auto mt-48 min-h-[85vh]">
   <mat-tab-group dynamicHeight mat-align-tabs="center"
   class="title-h4"
   [(selectedIndex)]="activeProfileTab"
@@ -14,11 +14,10 @@
         ></app-manage-users>
       </mat-tab>
       <mat-tab label="Értékelések moderálása">
-        <!-- <app-user-recipes
-        [user]="userID"
-        [userRecipes]="userRecipes"
+        <app-manage-reviews
+        [userList]="userList"
         (userPageIndexChange)="userPageIndexChanged($event)"
-        ></app-user-recipes> -->
+        ></app-manage-reviews>
       </mat-tab>
       <mat-tab label="Receptek moderálása">
         <!-- <app-user-recipes

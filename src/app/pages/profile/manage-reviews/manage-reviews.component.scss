@@ -17,11 +17,11 @@ td{
   font-size: 1rem;
 }
 
-.mat-column-name, .mat-column-email, .mat-column-loginAttempts, .mat-column-lockoutTime, .mat-column-active {
+.mat-column-recipe, .mat-column-rating, .mat-column-review, .mat-column-created, .mat-column-moderated{
   border-right: 1px solid rgba($textColorMuted,.4);
   padding: 0 .5rem;
 }
-.mat-column-ban{
+.mat-column-moderated{
   padding-left: .5rem;
 }
 
