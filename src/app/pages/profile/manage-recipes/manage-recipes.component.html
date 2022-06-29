@@ -1,0 +1,86 @@
+<div class="px-2 md:px-0">
+  <div class="flex gap-5 items-center title-bg-warn px-2 py-3 my-10 w-full md:w-1/2">
+    <mat-icon class="">list</mat-icon>
+    <h3 class="title-h5 inline-block">Receptek moderálása</h3>
+  </div>
+  <form [formGroup]="filterGroup" class="flex flex-row items-center">
+    <mat-form-field appearance="standard" class="mr-10">
+      <mat-label>Recept készítője</mat-label>
+        
+        <mat-select formControlName="user">
+            <mat-option *ngFor="let option of userList" [value]="option">
+              {{option.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-progress-spinner
+      *ngIf="isLoading"
+      class="ml-4"
+      mode="indeterminate"
+      diameter="24">
+    </mat-progress-spinner>
+  </form>
+
+  <div class="mat-elevation-z2 mb-32">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="recipe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Recept </th>
+        <td mat-cell *matCellDef="let row"> {{row.recipeName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ingredients">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hozzávalók </th>
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngFor="let item of row.ingredients">
+            <span>{{item.name}}</span><br>
+          </ng-container>  
+          
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="directions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Elkészítése </th>
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngFor="let item of row.directions">
+            <span>{{item}}</span><br>
+          </ng-container>
+        </td>
+      </ng-container>
+  
+
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Létrehozva </th>
+        <td mat-cell *matCellDef="let row"> {{row.created}} </td>
+      </ng-container>
+  
+        
+      <ng-container matColumnDef="moderated">
+        <th mat-header-cell *matHeaderCellDef > Műveletek </th>
+        <td mat-cell *matCellDef="let row">
+          <button 
+          *ngIf="row.moderated != ''"
+          (click)="moderateRecipe(row)"
+          [disabled]="isLoading"
+          mat-stroked-button [color]="row.moderated == '0' ? 'warn':'primary'">
+          <div class="flex flex-row items-center justify-between">
+          <div>{{row.moderated == '0' ? 'Moderálás':'Visszaállítás'}} </div>
+          </div></button>
+        </td>
+      </ng-container>
+      
+  
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Nincs találat "{{input.value}}"</td>
+      </tr>
+
+      
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>

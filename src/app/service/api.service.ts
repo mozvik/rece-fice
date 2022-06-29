@@ -219,6 +219,20 @@ export class APIService {
       .post<any[]>(this.serverUrl+ '?activatereview', fData, { withCredentials: true })
   }
 
+  public moderateRecipe(id: string): Observable<any> { 
+    let fData = new FormData();
+    fData.append('id', id);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?moderaterecipe', fData, { withCredentials: true })
+  }
+
+  public activateRecipe(id: string): Observable<any> { 
+    let fData = new FormData();
+    fData.append('id', id);
+    return this.http
+      .post<any[]>(this.serverUrl+ '?activaterecipe', fData, { withCredentials: true })
+  }
+
    public fridge(ingredients: string[], page: number, itemsPerPage: number = 4): Observable<any[]> {
     return this.http
     .get<any[]>(this.serverUrl + '?fridge&q=' + ingredients.join(',') + '&page=' + page.toString() + '&itemsPerPage=' + itemsPerPage.toString(),{ withCredentials: true })

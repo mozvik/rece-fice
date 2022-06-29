@@ -24,6 +24,7 @@ import { UnixToDatePipe } from 'src/app/pipes/unix-to-date.pipe';
 import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ManageRecipesComponent } from './manage-recipes/manage-recipes.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     EditAvatarComponent,
     ManageUsersComponent,
     UnixToDatePipe,
-    ManageReviewsComponent
+    ManageReviewsComponent,
+    ManageRecipesComponent
   ],
   imports: [
     CommonModule,

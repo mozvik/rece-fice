@@ -20,11 +20,10 @@
         ></app-manage-reviews>
       </mat-tab>
       <mat-tab label="Receptek moderálása">
-        <!-- <app-user-recipes
-        [user]="userID"
-        [userRecipes]="userRecipes"
+        <app-manage-recipes
+        [userList]="userList"
         (userPageIndexChange)="userPageIndexChanged($event)"
-        ></app-user-recipes> -->
+        ></app-manage-recipes>
       </mat-tab>
     </ng-container>
     <ng-container *ngIf="user?.role!='1'">
