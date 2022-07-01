@@ -4,6 +4,7 @@
     <ng-container *ngFor="let recipe of results; let i=index"
     class="border">
     <app-recipe-card 
+    *ngIf="recipe.moderated != '1'"
     [recipe]="recipe"
     (urlClicked)="navigateToDetails($event)"
     (categoryClicked)="navigateToCategory($event)"

@@ -22,12 +22,13 @@ export class Recipe {
   reviews?: any[];
   labels?: any[];
   creator?: any;
+  moderated?: string;
 
   get id() {
     return this.recipeId 
   } 
 
-  constructor(recipeId: string = '', recipeName: string = '', ingredients: any[] = [], directions: string[] = [], created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: any[] = [], labels: any[] = [], creator: any = '') {
+  constructor(recipeId: string = '', recipeName: string = '', ingredients: any[] = [], directions: string[] = [], created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: any[] = [], labels: any[] = [], creator: any = '', moderated: string = '0') {
     this.recipeId = recipeId;
     this.recipeName = recipeName;
     this.ingredients = ingredients;
@@ -57,6 +58,7 @@ export class Recipe {
     this.reviews = reviews;
     this.labels = labels;
     this.creator = creator;
+    this.moderated = moderated;
   }
 
 
