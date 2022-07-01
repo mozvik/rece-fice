@@ -26,7 +26,7 @@ export class AppComponent {
         if (!response || response.length === 0) {
           this.authService.user = undefined;
         } else if (!this.authService.user) {
-          this.authService.user = new User(response.id, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created);
+          this.authService.user = new User(response.id, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created, response.totalReviews, response.totalRecipes, response.totalFavorites);
         }
       })
     ).subscribe()

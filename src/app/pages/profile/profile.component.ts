@@ -34,13 +34,13 @@ export class ProfileComponent implements OnInit {
     private apiService: APIService,
     private dataService: DataService,
     private authService: AuthService) {
-    this.activatedRoute.data.subscribe(data => { 
-        this.userRecipes = this.dataService.createRecipes(data['userRecipes'].items)
-        this.userFavorites = this.dataService.createRecipes(data['userFavorites'].items)
-        this.userList = data['userList']
+    this.activatedRoute.data.subscribe(data => {
+      this.userRecipes = this.dataService.createRecipes(data['userRecipes'].items)
+      this.userFavorites = this.dataService.createRecipes(data['userFavorites'].items)
+      this.userList = data['userList']
     })
     this.user = this.authService.user
-     }
+  }
 
   ngOnInit(): void {
   }
