@@ -8,8 +8,7 @@
       (ngSubmit)="login()">
         <mat-form-field hideRequiredMarker color="primary" class="flex flex-col mb-10">
             <input id="email" type="email" name="email" placeholder="Email cím"  aria-describedby="input-help" matInput formControlName="email" />
-            <mat-error *ngIf="hasAPIErrors && email?.errors?.['emailApi']">{{email?.errors?.['emailApi']}}</mat-error>
-            
+            <mat-error *ngIf="errorAPI != undefined">{{email?.errors?.['emailApi']}}</mat-error>
             <mat-error *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
             <mat-error *ngIf="!email?.errors?.['required'] && !email?.errors?.['emailApi'] && email?.errors && email?.dirty && email?.touched"

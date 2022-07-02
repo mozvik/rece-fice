@@ -7,6 +7,7 @@ import { finalize } from 'rxjs';
 
 import { User } from 'src/app/classes/user';
 import { AuthService } from 'src/app/service/auth.service';
+import { DataService } from 'src/app/service/data.service';
 import { MessageService } from 'src/app/service/message.service';
 
 
@@ -18,13 +19,16 @@ import { MessageService } from 'src/app/service/message.service';
 export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
-  errorAPI: any
+  errorAPI: any = undefined
   hasAPIErrors: boolean = false
   forgottenPasswordRef: any;
 
  
   public loginFormGroup = new FormGroup({
-    email: new FormControl('', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required]),
+    email: new FormControl({
+      value: '',
+      disabled: false
+    }, [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required]),
     password: new FormControl('', [Validators.required]),
   })
   get email() { return this.loginFormGroup.get('email'); }
@@ -33,6 +37,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private dataService: DataService,
     public dialogForgottenPassword: MatDialog
   ) { }
 
@@ -42,12 +47,13 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.isLoading = true;
-    
     this.authService.login(this.loginFormGroup.value)
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe({
-      next: response => {
+        next: response => {
           if (response.hasOwnProperty('errors')) {
-            this.isLoading = false
             this.errorAPI = response.errors;
             if (this.errorAPI.hasOwnProperty('lockout')) {
               this.loginFormGroup.controls['email'].setErrors({ emailApi: response.errors.lockout});
@@ -55,9 +61,11 @@ export class LoginComponent implements OnInit {
               this.loginFormGroup.controls['email'].setErrors({ emailApi: response.errors.email});
             }
             this.hasAPIErrors = true
-        } else {
-          this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created, response.totalReviews, response.totalRecipes, response.totalFavorites);
-          this.router.navigateByUrl('/profile');
+          } else {
+            console.log('response :>> ', response);
+            this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created, response.totalReviews, response.totalRecipes, response.totalFavorites);
+            this.dataService.activeProfileTab = 0
+            this.router.navigateByUrl('/profile');
         }
       }
     })
