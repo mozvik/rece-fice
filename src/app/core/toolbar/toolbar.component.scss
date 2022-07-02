@@ -15,10 +15,7 @@ li button{
 }
 #userBar, #mobileImgWrapper{
   img{
-    padding-top: 55px;
-    //position: absolute;
-    //top: 50px;
-    // left: 50%;
+    padding-top: 5px;
   }
 }
 
@@ -37,6 +34,11 @@ li button{
 }
 
 @media (min-width: 1024px){
+  #userBar, #mobileImgWrapper{
+    img{
+      padding-top: 55px;
+    }
+  }
   #mainBar::before{
     content: "";
     position: absolute;
