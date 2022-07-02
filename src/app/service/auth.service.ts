@@ -129,7 +129,7 @@ export class AuthService {
     fData.append('recipeId', recipeId);
     fData.append('flag', flag.toString());
     return this.http
-      .post<any[]>(this.serverUrl+ '?favorites', fData, { withCredentials: true })
+      .post<any[]>(this.serverUrl+ '?favorite', fData, { withCredentials: true })
   }
 
   public resetPassword(token: string, password1: string, password2: string): Observable<any> { 
