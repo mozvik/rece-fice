@@ -5,10 +5,10 @@
 
     <div class="flex flex-row justify-between py-5 details-divider-small header-info italic text-base">
         <div class="mx-2 basis-1/8">
-          <img class="rounded-full border mr-5" [src]="creatorInfo?.avatar === '' ? 'assets/img/empty-profile.png':creatorInfo?.avatar" alt="" width="120">
+          <img class="rounded-full border mr-5" [src]="recipe.creator.avatar === '' ? 'assets/img/empty-profile.png':recipe.creator.avatar" alt="" width="120">
         </div>
         <div class="basis-1/2 ml-5">
-          <div>Beküldője: {{creatorInfo?.name}}</div>
+          <div>Beküldője: {{recipe.creator.name}}</div>
           <div class="rating-lead">Értékelése:
             <ng-container *ngFor="let rv of [].constructor(5); let i = index">
             

@@ -19,7 +19,6 @@ export class DetailsComponent implements OnInit {
   favs: string[] = [];
   categories: OptionsData[] = [];
   user: User | undefined;
-  creatorInfo: any | undefined;
   selectedId: any
   recipe: Recipe = new Recipe();
   similarRecipes: Recipe[] = []
@@ -56,10 +55,7 @@ export class DetailsComponent implements OnInit {
         this.similarRecipes = this.dataService.createRecipes(data.items);
         return this.authService.userInfo(this.recipe.userId!.toString());
       })
-    ).subscribe(userInfo => { 
-      this.creatorInfo = userInfo;
-      
-    })
+    ).subscribe()
 
     this.apiService.categories.subscribe((categories) => this.categories = categories);
     

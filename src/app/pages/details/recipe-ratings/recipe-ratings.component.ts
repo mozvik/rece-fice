@@ -35,7 +35,7 @@ export class RecipeRatingsComponent implements OnInit {
     return this.authService.user?.userId
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
 
   submit() {
