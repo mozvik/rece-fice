@@ -160,7 +160,8 @@ export class UploadComponent implements OnInit {
     this.apiService.postRecipe(this.recipe)
       .pipe(finalize(() => this.isLoading = false))
       .subscribe({
-      next: (response: any) => {
+        next: (response: any) => {
+          console.log('response :>> ', response);
           if (response != null) {
             
             first.reset();
@@ -175,7 +176,8 @@ export class UploadComponent implements OnInit {
             this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')
         }
       },
-      error: (error: any) => {
+        error: (error: any) => {
+        console.log(error)
         this.messageService.showSnackBar('Sikertelen feltöltés!', 'error')
        }
     })

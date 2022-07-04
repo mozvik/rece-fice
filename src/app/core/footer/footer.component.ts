@@ -32,15 +32,18 @@ export class FooterComponent implements OnInit {
   submit(): void {
     this.isLoading = true;
     this.apiService.subscribeGuest(this.newsletterFormGroup.value.email)
-      .pipe(finalize(() => this.isLoading = false))
+    .pipe(finalize(() => this.isLoading = false))
     .subscribe({
       next: (response: any) => {
+        if (response.hasOwnProperty('duplicated')) { 
+          this.messageService.showSnackBar(response.duplicated, 'error')
+          return
+        }
+
         this.newsletterFormGroup.reset();
         this.messageService.showSnackBar(response, 'success')
       },
-      error: (error: any) => {
-        this.messageService.showSnackBar(error, 'error')
-      }
+      error: (error: any) => this.messageService.showSnackBar(error, 'error')
     })
   }
 }

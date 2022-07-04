@@ -13,14 +13,14 @@
     
     <div class="col-span-4 py-5 px-10 flex flex-col items-start">
       <h3 class="title-h5">Feliratkozás hírlevélre</h3>
-      <form class="flex flex-col py-5" [formGroup]="newsletterFormGroup">
+      <form class="flex flex-col py-5 w-full" [formGroup]="newsletterFormGroup">
         <div class="flex flex-row items-center">
-          <mat-form-field class="pr-3" appearance="legacy" color="primary">
+          <mat-form-field class="w-full" appearance="legacy" color="primary">
             <mat-label>Add meg az email címed</mat-label>
             <input matInput placeholder="valami@mail.com" value="" formControlName="email">
           </mat-form-field>
         </div>
-        <mat-checkbox class="my-3"  color="primary"
+        <mat-checkbox class="my-3"  color="warn"
          name="gdpr" formControlName="gdpr">Check me
         </mat-checkbox>
         <div class="mt-3">
