@@ -4,7 +4,7 @@
     
     [options]="customOptions">
       <ng-template carouselSlide *ngFor="let slide of recipe?.image; index as i">
-        <img [src]="slide">
+        <img src={{slide}}>
       </ng-template>
       
     </owl-carousel-o>
