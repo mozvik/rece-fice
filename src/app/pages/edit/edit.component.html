@@ -391,7 +391,7 @@
         [disabled]="firstFormGroup.invalid 
         || secondFormGroup.invalid || 
         thirdFormGroup.invalid || 
-        fourthFormGroup.invalid || isLoading">
+        fourthFormGroup.invalid || (fifthFormGroup.invalid && uploadedImages.length == 0) || isLoading">
         <div class="flex flex-row items-center justify-between">
           <div>Recept módosítása</div>
           <mat-progress-spinner
