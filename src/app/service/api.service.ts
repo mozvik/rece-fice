@@ -184,7 +184,13 @@ export class APIService {
       '&itemsPerPage=' + itemsPerPage.toString() + 
       '&user=' + userId.toString() +
       '&recipe=' + recipeId, { withCredentials: true })
-}
+  }
+  
+  public recipeCount(): Observable<any> {
+    let query: string = this.serverUrl + '?recipecount'
+    return this.http
+      .get<any[]>(query,{ withCredentials: true })
+  }
  
  
   public review(recipeId: number, userId: string, rating: number, comment: string=''): Observable<any> {

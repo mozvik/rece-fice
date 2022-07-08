@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../service/data.service';
+import { APIService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-headline',
@@ -7,8 +7,15 @@ import { DataService } from '../../service/data.service';
   styleUrls: ['./headline.component.scss']
 })
 export class HeadlineComponent implements OnInit {
-  
-  constructor(public dataService: DataService) { }
+  recipeCount: string | undefined;
+
+  constructor(private apiService: APIService) {
+    this.apiService.recipeCount().subscribe(
+      (data: any) => {
+        this.recipeCount = data.totalRecipes;
+      }
+    );
+   }
 
   ngOnInit(): void {
   }
