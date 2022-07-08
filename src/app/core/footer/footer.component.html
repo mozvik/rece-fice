@@ -21,8 +21,7 @@
           </mat-form-field>
         </div>
         <mat-checkbox class="my-3"  color="warn"
-         name="gdpr" formControlName="gdpr">Check me
-        </mat-checkbox>
+         name="gdpr" formControlName="gdpr">Elolvastam és elfogadom a <a class="gdpr" routerLink="/adatvedelem" target="_blank">felhasználási feltételeket</a>.<sup>*</sup></mat-checkbox>
         <div class="mt-3">
           <button 
           mat-stroked-button 
@@ -48,7 +47,7 @@
         <li (click)="dataService.toggleSearch()">Receptkeresés</li>
         <li routerLink="fridge">Mi van otthon?</li>
         <li routerLink="contact">Kapcsolatfelvétel</li>
-        <li routerLink="">Adatvédelmi tájékoztató</li>
+        <li routerLink="adatvedelem">Adatvédelmi tájékoztató</li>
       </ul>
     </div>
   </div>

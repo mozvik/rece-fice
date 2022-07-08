@@ -9,7 +9,7 @@
         <p>Küldj üzenetet az űrlapon keresztül,
           vagy látogasd meg discord szerverünket</p>
       </div>
-      <div class="mt-8"><button mat-stroked-button color="primary" class="w-fit"><mat-icon svgIcon="discord"></mat-icon></button></div>
+      <a href="https://discord.com/" target="_blank"><div class="mt-8"><button mat-stroked-button color="primary" class="w-fit"><mat-icon svgIcon="discord"></mat-icon></button></div></a>
       <div class=""><img src="../../../assets/img/tomato.png" alt="" class="w-52 sm:w-72 xl:w-96 filter drop-shadow-xl"></div>
     </div>
 
@@ -54,7 +54,7 @@
           class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
       </mat-form-field>
       <div class=" mb-12">
-        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a felhasználási feltételeket.<sup>*</sup></mat-checkbox>
+        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a <a class="gdpr" routerLink="/adatvedelem" target="_blank">felhasználási feltételeket</a>.<sup>*</sup></mat-checkbox>
        
         <mat-error *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
         class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
