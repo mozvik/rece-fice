@@ -35,7 +35,7 @@
             </button>
           </div>
 
-          <div *ngIf="user && creatorInfo?.id != user?.userId">
+          <div *ngIf="user && recipe.creator.id != user.userId">
             <button  *ngIf="!isFav" mat-stroked-button color="warn" (click)="setFav()">
               <mat-icon>favorite_outline</mat-icon>
             </button>
