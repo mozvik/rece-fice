@@ -28,5 +28,14 @@
   
   <button mat-button [mat-dialog-close]="false" >Mégsem</button>
   <button mat-button (click)="openInput()" cdkFocusInitial>Fotó csere</button>
-  <button color="primary" mat-button [disabled]="isLoading || !selected" (click)="upload()">Feltöltés</button>
+  <button color="primary" mat-button [disabled]="isLoading || !selected" (click)="upload()">
+    <div class="flex flex-row items-center justify-between">
+      <div>Feltöltés</div>
+      <mat-progress-spinner
+      *ngIf="isLoading"
+      class="ml-4"
+      mode="indeterminate"
+      diameter="24"></mat-progress-spinner>
+    </div>
+  </button>
 </div>

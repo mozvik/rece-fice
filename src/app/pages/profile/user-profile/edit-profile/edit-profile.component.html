@@ -68,5 +68,14 @@
   <button mat-button [mat-dialog-close]="false"  color="primary">Mégsem</button>
   <button mat-button 
   (click)="update()"
-  cdkFocusInitial color="primary" [disabled]="isLoading">Adatok módosítása</button>
+  cdkFocusInitial color="primary" [disabled]="isLoading">
+  <div class="flex flex-row items-center justify-between">
+    <div>Adatok módosítása</div>
+    <mat-progress-spinner
+          *ngIf="isLoading"
+          class="ml-4"
+          mode="indeterminate"
+          diameter="24"></mat-progress-spinner>
+  </div>
+  </button>
 </div>
