@@ -12,6 +12,7 @@ import { DataService } from 'src/app/service/data.service';
   styleUrls: ['./fridge.component.scss']
 })
 export class FridgeComponent implements OnInit {
+  isLoading: boolean = false;
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   ingredients: string[] = [];
@@ -39,7 +40,7 @@ export class FridgeComponent implements OnInit {
   }
 
   submitForm() {
-
+    this.isLoading = true;
     this.dataService.resultsPageIndex = 0
     this.dataService.fridgeIngredients = this.ingredients
     this.router.navigate(['/results', 'fridge']);
