@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-  <div class="flex flex-col lg:flex-row mt-64 mb-32 h-full wrapper">
+  <div class="flex flex-col lg:flex-row mt-64 mb-32 h-full wrapper" [style.visibility]="!isLoggedIn ? 'visible' : 'hidden'">
     <div class="basis-auto w-full flex flex-col p-20">
       <h4 class="title-h4 mb-12">Belépés</h4>
       <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p><br>

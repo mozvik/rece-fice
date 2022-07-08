@@ -17,7 +17,7 @@ import { MessageService } from 'src/app/service/message.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  isLoggedIn: boolean = false;
   isLoading: boolean = false;
   errorAPI: any = undefined
   hasAPIErrors: boolean = false
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
             }
             this.hasAPIErrors = true
           } else {
-            console.log('response :>> ', response);
+            this.isLoggedIn = true;
             this.authService.user = new User(response.userId, response.name, response.email, response.password, response.avatar, response.role, response.active, response.description, response.created, response.totalReviews, response.totalRecipes, response.totalFavorites);
             this.dataService.activeProfileTab = 0
             this.router.navigateByUrl('/profile');
