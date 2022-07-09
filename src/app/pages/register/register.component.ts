@@ -19,8 +19,8 @@ export class RegisterComponent implements OnInit {
   public registerFormGroup = new FormGroup({
     email: new FormControl('', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    passwordNew: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    passwordNew: new FormControl(''),
+    passwordConfirm: new FormControl(''),
     gdpr: new FormControl('', [Validators.required]),
     subscribe: new FormControl(''),
   },
@@ -33,6 +33,13 @@ export class RegisterComponent implements OnInit {
       else {
         control.get("passwordNew")?.setErrors(null);
         control.get("passwordConfirm")?.setErrors(null);
+      }
+
+      if (control.value.passwordNew.length < 8) {
+        control.get("passwordNew")?.setErrors({ minlength: "error" });
+      }
+      if (control.value.passwordConfirm.length < 8) {
+        control.get("passwordConfirm")?.setErrors({ minlength: "error" });
       }
       return null;
     },

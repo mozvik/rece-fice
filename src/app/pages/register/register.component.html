@@ -43,7 +43,7 @@
         <mat-error *ngIf="passwordNew?.errors?.['required'] && (passwordNew?.dirty || passwordNew?.touched)"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
         <mat-error *ngIf="passwordNew?.errors?.['minlength'] && (passwordNew?.dirty || passwordNew?.touched)"
-        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen</mat-error>
+        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen!</mat-error>
         <mat-error *ngIf="passwordNew?.errors?.['notSame'] && (passwordNew?.dirty || passwordNew?.touched )"
         class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
         <mat-error *ngIf="passwordNew?.errors?.['passwordNew']"
@@ -59,7 +59,7 @@
         <mat-error *ngIf="passwordConfirm?.errors?.['required'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
         class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
         <mat-error *ngIf="passwordConfirm?.errors?.['minlength'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
-        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen</mat-error>
+        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen!</mat-error>
         <mat-error *ngIf="passwordConfirm?.errors?.['notSame'] && (passwordConfirm?.dirty || passwordConfirm?.touched )"
         class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
         <mat-error *ngIf="passwordConfirm?.errors?.['passwordConfirm']"
