@@ -31,10 +31,17 @@ export class RecoveryComponent implements OnInit {
         control.get("password2")?.setErrors(null);
         control.get("password1")?.setErrors(null);
       }
+
+      if (control.value.password1.length < 8) {
+        control.get("password1")?.setErrors({ minlength: "error" });
+      }
+      if (control.value.password2.length < 8) {
+        control.get("password2")?.setErrors({ minlength: "error" });
+      }
       return null;
     },
   })
-  //Validators.minLength(8)
+
 
   get password1() { return this.resetPasswordFormGroup.get('password1'); }
   get password2() { return this.resetPasswordFormGroup.get('password2'); }

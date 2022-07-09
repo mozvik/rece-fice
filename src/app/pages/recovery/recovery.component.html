@@ -14,17 +14,20 @@
       (ngSubmit)="reset()">
       <h3 class="title-h5 mb-10">Új jelszó beállítása</h3>
         <mat-form-field hideRequiredMarker color="primary" class="flex flex-col mb-10">
-            <input id="password1" type="password1" name="password1" placeholder="Jelszó"  aria-describedby="input-help" matInput formControlName="password1" />
+            <input id="password1" type="password" name="password1" placeholder="Jelszó"  aria-describedby="input-help" matInput formControlName="password1" />
             <mat-error *ngIf="hasAPIErrors && password1?.errors?.['pwApi']">{{password1?.errors?.['pwApi']}}</mat-error>
-            
+            <mat-error *ngIf="password1?.errors?.['minlength']"
+      >&nbsp;Minimum 8 karakter legyen</mat-error>
             <mat-error *ngIf="password1?.errors?.['required'] && (password1?.dirty || password1?.touched)"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
             
           </mat-form-field>
         <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-10">
-          <input id="password2" type="password2" name="password2" placeholder="Jelszó újra" aria-describedby="input-help" matInput formControlName="password2" />
+          <input id="password2" type="password" name="password2" placeholder="Jelszó újra" aria-describedby="input-help" matInput formControlName="password2" />
           <mat-error *ngIf="password2?.errors?.['required'] && (password2?.dirty || password2?.touched)"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+          <mat-error *ngIf="password2?.errors?.['minlength']"
+      >&nbsp;Minimum 8 karakter legyen</mat-error>
           <mat-error *ngIf="hasAPIErrors && password2?.errors?.['pwApi']">{{password2?.errors?.['pwApi']}}</mat-error>
           <mat-error *ngIf="password2?.errors?.['notSame'] && (password2?.dirty || password2?.touched )"
           class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
