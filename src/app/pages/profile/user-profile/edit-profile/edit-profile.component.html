@@ -8,12 +8,10 @@
     hintLabel="Min. 4 karakter"
     class="flex flex-col mt-5 lg:w-5/12">
       <input id="name" type="name" name="name" placeholder="Név"  aria-describedby="input-help" matInput formControlName="name" />
-      <mat-hint align="end">{{editFormGroup.get('name')?.value?.length || 0}}/4</mat-hint>
-      <mat-error *ngIf="name?.errors?.['name']">{{name?.errors?.['name']}}</mat-error>
-      
+      <mat-hint align="end">{{editFormGroup.get('name')?.value?.length || 0}}/4</mat-hint>      
       <mat-error *ngIf="name?.errors?.['required'] && name?.dirty"
       class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-      <mat-error *ngIf="!name?.errors?.['minlength'] || !name?.errors?.['nameApi'] && name?.errors && name?.dirty && name?.touched"
+      <mat-error *ngIf="name?.errors?.['minlength'] || name?.errors?.['name'] && name?.dirty"
       >&nbsp;Minimum 4 karakter legyen</mat-error>
     </mat-form-field>
     <mat-form-field hideRequiredMarker color="primary"
@@ -36,7 +34,7 @@
 
     <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col lg:w-5/12 mt-4"
     hintLabel="Jelenlegi jelszavad">
-      <input id="passwordCurrent" type="passwordCurrent" name="passwordCurrent" placeholder="Jelenlegi jelszó" aria-describedby="input-help" matInput formControlName="passwordCurrent" />
+      <input id="passwordCurrent" type="password" name="passwordCurrent" placeholder="Jelenlegi jelszó" aria-describedby="input-help" matInput formControlName="passwordCurrent" />
       <mat-error *ngIf="passwordCurrent?.errors?.['passwordCurrent']"
       class="input-help text-danger">&nbsp;{{passwordCurrent.errors['passwordCurrent']}}</mat-error>
       <mat-error *ngIf="passwordCurrent?.errors?.['required'] && (passwordCurrent?.dirty || passwordCurrent?.touched)"
@@ -45,14 +43,20 @@
     <div class="lg:w-5/12"></div>
     <mat-form-field hideRequiredMarker  color="primary" 
     hintLabel="Új jelszavad" class="flex flex-col lg:w-5/12 my-4">
-      <input id="passwordNew" type="passwordNew" name="passwordNew" placeholder="Új jelszó" aria-describedby="input-help" matInput formControlName="passwordNew" />
+      <input id="passwordNew" type="password" name="passwordNew" placeholder="Új jelszó" aria-describedby="input-help" matInput formControlName="passwordNew" />
+      <mat-hint align="end">{{editFormGroup.get('passwordNew')?.value?.length || 0}}/8</mat-hint>
+      <mat-error *ngIf="passwordNew?.errors?.['minlength']"
+      >&nbsp;Minimum 8 karakter legyen</mat-error>
       <mat-error *ngIf="passwordNew?.errors?.['passwordNew']"
       class="input-help text-danger">&nbsp;{{passwordNew.errors['passwordNew']}}</mat-error>
       <mat-error *ngIf="passwordNew?.errors?.['notSame'] && (passwordNew?.dirty || passwordNew?.touched )"
       class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
     </mat-form-field>
     <mat-form-field hideRequiredMarker  color="primary" hintLabel="Új jelszavad mégegyszer" class="flex flex-col lg:w-5/12 my-4">
-      <input id="passwordNewCheck" type="passwordNewCheck" name="passwordNewCheck" placeholder="Új jelszó újra" aria-describedby="input-help" matInput formControlName="passwordNewCheck" />
+      <input id="passwordNewCheck" type="password" name="passwordNewCheck" placeholder="Új jelszó újra" aria-describedby="input-help" matInput formControlName="passwordNewCheck" />
+      <mat-hint align="end">{{editFormGroup.get('passwordNewCheck')?.value?.length || 0}}/8</mat-hint> 
+      <mat-error *ngIf="passwordNewCheck?.errors?.['minlength']"
+      >&nbsp;Minimum 8 karakter legyen</mat-error>
       <mat-error *ngIf="passwordNewCheck?.errors?.['passwordNewCheck']"
       class="input-help text-danger">&nbsp;{{passwordNewCheck.errors['passwordNewCheck']}}</mat-error>
       <mat-error *ngIf="passwordNewCheck?.errors?.['notSame'] && (passwordNewCheck?.dirty || passwordNewCheck?.touched )"

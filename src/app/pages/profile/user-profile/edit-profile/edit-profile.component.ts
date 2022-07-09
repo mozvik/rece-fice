@@ -33,6 +33,13 @@ export class EditProfileComponent implements OnInit {
         control.get("passwordNewCheck")?.setErrors(null);
         control.get("passwordNew")?.setErrors(null);
       }
+
+      if (control.value.passwordNew.length < 8) {
+        control.get("passwordNew")?.setErrors({ minlength: "error" });
+      }
+      if (control.value.passwordNewCheck.length < 8) {
+        control.get("passwordNewCheck")?.setErrors({ minlength: "error" });
+      }
       return null;
     },
   })
@@ -67,7 +74,6 @@ export class EditProfileComponent implements OnInit {
         }
 
         if (res.hasOwnProperty('errors')) {
-          
           for (const key in res.errors) {
             const err: any = {}
             err[key] = res.errors[key]
