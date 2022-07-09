@@ -26,13 +26,13 @@ export class RegisterComponent implements OnInit {
   },
   {
     validators: (control) => {
-      if (control.value.passwordNew !== control.value.passwordCheck) {
-        control.get("passwordCheck")?.setErrors({ notSame: true });
-        control.get("password1")?.setErrors({ notSame: true });
+      if (control.value.passwordNew !== control.value.passwordConfirm) {
+        control.get("passwordNew")?.setErrors({ notSame: true });
+        control.get("passwordConfirm")?.setErrors({ notSame: true });
       }
       else {
-        control.get("passwordCheck")?.setErrors(null);
-        control.get("password1")?.setErrors(null);
+        control.get("passwordNew")?.setErrors(null);
+        control.get("passwordConfirm")?.setErrors(null);
       }
       return null;
     },
