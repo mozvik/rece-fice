@@ -17,7 +17,7 @@
             <input id="password1" type="password" name="password1" placeholder="Jelszó"  aria-describedby="input-help" matInput formControlName="password1" />
             <mat-error *ngIf="hasAPIErrors && password1?.errors?.['pwApi']">{{password1?.errors?.['pwApi']}}</mat-error>
             <mat-error *ngIf="password1?.errors?.['minlength']"
-      >&nbsp;Minimum 8 karakter legyen</mat-error>
+      >&nbsp;Minimum 8 karakter legyen!</mat-error>
             <mat-error *ngIf="password1?.errors?.['required'] && (password1?.dirty || password1?.touched)"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
             
@@ -27,7 +27,7 @@
           <mat-error *ngIf="password2?.errors?.['required'] && (password2?.dirty || password2?.touched)"
             class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
           <mat-error *ngIf="password2?.errors?.['minlength']"
-      >&nbsp;Minimum 8 karakter legyen</mat-error>
+      >&nbsp;Minimum 8 karakter legyen!</mat-error>
           <mat-error *ngIf="hasAPIErrors && password2?.errors?.['pwApi']">{{password2?.errors?.['pwApi']}}</mat-error>
           <mat-error *ngIf="password2?.errors?.['notSame'] && (password2?.dirty || password2?.touched )"
           class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
@@ -42,6 +42,5 @@
       </form>
 
     </div>
-    <h3 class="title-h5 pt-20">token ok</h3>
   </ng-template>
 </div>

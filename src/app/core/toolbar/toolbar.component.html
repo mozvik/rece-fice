@@ -9,14 +9,6 @@
 [class.toolbarScroll]="toolbarDown">
    <mat-toolbar id="userBar"
   class="flex flex-row justify-between"> 
-      <!-- <img src="./assets/img/pot.png"
-          alt=""
-          width="80" id="pot"
-          class=""/>
-      <img src="./assets/img/flame.png"
-          alt=""
-          width="50" id="flame"
-          class=""/> -->
       <div>
         <img src="./assets/img/logo.png"
               alt=""
@@ -96,6 +88,7 @@
       <li *ngIf="!isLoggedIn" class="transform -translate-y-1">
         <button mat-icon-button
           routerLink="/login"
+          title="Bejelentkezés"
         ><mat-icon>login</mat-icon>
       </button>
     
@@ -103,11 +96,13 @@
       <li *ngIf="isLoggedIn" class="transform -translate-y-1">
         <button mat-icon-button
         (click)="logout()"
+        title="Kijelentkezés"
         ><mat-icon>logout</mat-icon></button>
       </li>
       <li  class="transform -translate-y-1">
         <button mat-icon-button
         (click)="toggleSearch()"
+        title="Keresés"
         ><mat-icon>search</mat-icon></button>
       </li>
     </ul>
