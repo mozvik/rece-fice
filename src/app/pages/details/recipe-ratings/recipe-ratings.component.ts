@@ -43,11 +43,13 @@ export class RecipeRatingsComponent implements OnInit {
     this.apiService.review(Number(this.recipe!.id), this.authService.user!.userId, this.rating, this.comment).pipe(finalize(() => this.isLoading = false)).subscribe({
       next: (data) => {
         this.recipe?.reviews?.push({
-          created: data.created,
+          created: new Date().toLocaleString(),
           comment: data.comment,
           rating: data.rating,
           userName: this.authService.user?.name,
-          userId: this.authService.user?.userId
+          userId: this.authService.user?.userId,
+          moderated: '0',
+          avatar: this.authService.user?.avatar
         })
         this.rated = true;
         this.messageService.showSnackBar('Értékelés sikeres', 'success')

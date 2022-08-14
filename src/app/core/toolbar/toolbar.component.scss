@@ -26,9 +26,8 @@ li button{
 
 #desktopBar.toolbarScroll{
   position: fixed;
-  
   top: -126px;
-  background:  $info;
+  background: $backgroundColor;
   margin-bottom: 0; 
   z-index: 2; 
 }

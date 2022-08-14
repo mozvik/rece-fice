@@ -16,7 +16,7 @@
               <span class="normal-case non-italic" *ngIf="i >= recipe.averageRating()">&#9734;</span>
             </ng-container>
           </div>
-          <div>Beküldve: {{recipe.created | date:'yyy. MM. d. H:ss'}}</div>
+          <div>Beküldve: {{recipe.created | date:'yyy. MM. dd. hh:ss a'}}</div>
         </div>
         <div class="basis-full text-right social">
           <div>

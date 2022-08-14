@@ -2,7 +2,7 @@
   (closed)="$event ? isSearchOpen=false:''" [isSearchOpen]="isSearchOpen">
 </app-search>
 
-<div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full z-10" 
+<div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full z-10 lg:px-10" 
 
 (window:scroll)="onScroll($event)"
 [@toolbarSlideDown]="toolbarDown"

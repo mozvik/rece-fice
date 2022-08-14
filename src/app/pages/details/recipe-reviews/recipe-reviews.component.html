@@ -3,7 +3,7 @@
     <p *ngIf="recipe.reviews.length == 0" class="my-5 created">Nem érkezett még értékelés</p>
     <mat-card [style.background]="review.userId == userId ? 'gainsboro':''" class="example-card my-5 mr-1" *ngFor="let review of recipe.reviews">
       <div class="flex flex-row justify-start ">
-        <div class="mx-2 basis-1/8">
+        <div class="mx-2 basis-1/8" >
           <img class="rounded-full mr-5" 
           [src]="review.avatar === '' ? 'assets/img/empty-profile.png':review.avatar" alt="" width="75"
           >
@@ -18,8 +18,8 @@
             </span> 
            
         </div>
-        <div class="basis-full text-right">
-          <div class="created">{{review.created | date:'yyy. MM. d. H:ss'}}</div>
+        <div class="basis-2/5 text-right">
+          <div class="created">{{review.created | date:'yyy. MM. dd. hh:ss a'}}</div>
         </div>
       </div>
       <mat-card-content class="mx-10 my-5">
