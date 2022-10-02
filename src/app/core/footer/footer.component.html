@@ -1,48 +1,77 @@
 <div class="container mx-auto p-5 lg:px-0">
-  <div class="lg:grid lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x ">
+  <div class="lg:grid lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x">
     <div class="col-span-4 flex flex-col gap-10 py-5 px-10 items-center">
-      <img src="../../../assets/img/logo.png"  alt="" width="141" height="74">
-      <img src="../../../assets/img/footer-logo-text.png"  alt="" width="360" height="74">
+      <img src="../../../assets/img/logo.png" alt="" width="141" height="74" />
+      <img
+        src="../../../assets/img/footer-logo-text.png"
+        alt=""
+        width="360"
+        height="74"
+      />
       <div class="flex gap-5">
-        <a href="https://facebook.com" target="_blank"><button mat-icon-button><mat-icon svgIcon="facebook"></mat-icon></button></a>
-        <a href="https://twitter.com" target="_blank"><button mat-icon-button><mat-icon svgIcon="twitter"></mat-icon></button></a>
-        <a href="https://instagram.com" target="_blank"><button mat-icon-button><mat-icon svgIcon="instagram"></mat-icon></button></a>
-       
+        <a href="https://facebook.com" target="_blank"
+          ><button mat-icon-button>
+            <mat-icon svgIcon="facebook"></mat-icon></button
+        ></a>
+        <a href="https://twitter.com" target="_blank"
+          ><button mat-icon-button>
+            <mat-icon svgIcon="twitter"></mat-icon></button
+        ></a>
+        <a href="https://instagram.com" target="_blank"
+          ><button mat-icon-button>
+            <mat-icon svgIcon="instagram"></mat-icon></button
+        ></a>
       </div>
     </div>
-    
+
     <div class="col-span-4 py-5 px-10 flex flex-col items-start">
       <h3 class="title-h5">Feliratkozás hírlevélre</h3>
       <form class="flex flex-col py-5 w-full" [formGroup]="newsletterFormGroup">
         <div class="flex flex-row items-center">
           <mat-form-field class="w-full" appearance="legacy" color="primary">
             <mat-label>Add meg az email címed</mat-label>
-            <input matInput placeholder="valami@mail.com" value="" formControlName="email">
+            <input
+              matInput
+              placeholder="valami@mail.com"
+              value=""
+              formControlName="email"
+            />
           </mat-form-field>
         </div>
-        <mat-checkbox class="my-3" color="warn"
-         name="gdpr" formControlName="gdpr">
-         <div class="flex flex-col justify-start lg:flex-row">
-          <p>Elfogadom a</p>
-          <p><a class="gdpr" routerLink="/adatvedelem" target="_blank"> felhasználási feltételeket</a>.<sup>*</sup></p>
-         </div></mat-checkbox>
+        <mat-checkbox
+          class="my-3"
+          color="warn"
+          name="gdpr"
+          formControlName="gdpr"
+        >
+          <div class="flex flex-col justify-start lg:flex-row">
+            <p>Elfogadom a</p>
+            <p>
+              <a class="gdpr" routerLink="/adatvedelem" target="_blank">
+                felhasználási feltételeket</a
+              >.<sup>*</sup>
+            </p>
+          </div></mat-checkbox
+        >
         <div class="mt-3">
-          <button 
-          mat-stroked-button 
-          color="primary" 
-          (click)="submit()" 
-          [disabled]="newsletterFormGroup.invalid || isLoading">
+          <button
+            mat-stroked-button
+            color="primary"
+            (click)="submit()"
+            [disabled]="newsletterFormGroup.invalid || isLoading"
+          >
             <div class="flex flex-row items-center justify-between">
               <div>Feliratkozom</div>
               <mat-progress-spinner
                 *ngIf="isLoading"
                 class="ml-4"
                 mode="indeterminate"
-                diameter="24"></mat-progress-spinner>
+                diameter="24"
+              ></mat-progress-spinner>
             </div>
-          </button></div>
+          </button>
+        </div>
       </form>
-
     </div>
 
     <div class="col-span-4 py-5 px-10 text-xl leading-10">

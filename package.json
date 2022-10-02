@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "style": "npx prettier --write .",
     "explore": "source-map-explorer dist/**/*.js",
     "bundle-analyzer": "webpack-bundle-analyzer dist/rece-fice/stats.json"
   },

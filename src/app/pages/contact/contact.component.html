@@ -1,78 +1,158 @@
-
 <div class="container mt-64 mx-auto">
   <div class="flex flex-col lg:flex-row mt-58 mb-32 h-full wrapper">
     <div class="basis-auto w-full flex flex-col justify-between p-20">
       <div>
         <h4 class="title-h3 mb-12">Kapcsolat</h4>
-        <p>Ha bármilyen problémád, észrevételed van
-          az oldallal kapcsolatban, ne tartsd magadban.</p>
-        <p>Küldj üzenetet az űrlapon keresztül,
-          vagy látogasd meg discord szerverünket</p>
+        <p>
+          Ha bármilyen problémád, észrevételed van az oldallal kapcsolatban, ne
+          tartsd magadban.
+        </p>
+        <p>
+          Küldj üzenetet az űrlapon keresztül, vagy látogasd meg discord
+          szerverünket
+        </p>
       </div>
-      <a href="https://discord.com/" target="_blank"><div class="mt-8"><button mat-stroked-button color="primary" class="w-fit"><mat-icon svgIcon="discord"></mat-icon></button></div></a>
-      <div class=""><img src="../../../assets/img/tomato.png" alt="" class="w-52 sm:w-72 xl:w-96 filter drop-shadow-xl"></div>
+      <a href="https://discord.com/" target="_blank"
+        ><div class="mt-8">
+          <button mat-stroked-button color="primary" class="w-fit">
+            <mat-icon svgIcon="discord"></mat-icon>
+          </button></div
+      ></a>
+      <div class="">
+        <img
+          src="../../../assets/img/tomato.png"
+          alt=""
+          class="w-52 sm:w-72 xl:w-96 filter drop-shadow-xl"
+        />
+      </div>
     </div>
 
     <div class="hidden lg:block basis-1/12">
       <div class="flex flex-col items-center py-20">
-        <mat-divider [vertical]="true" class="mb-4 w-1" style="height: 480px"></mat-divider>   
+        <mat-divider
+          [vertical]="true"
+          class="mb-4 w-1"
+          style="height: 480px"
+        ></mat-divider>
       </div>
     </div>
 
-    <div class="block lg:hidden flex flex-row w-full col-span-2 justify-center items-center">
+    <div
+      class="block lg:hidden flex flex-row w-full col-span-2 justify-center items-center"
+    >
       <mat-divider class="w-5/6"></mat-divider>
     </div>
 
-
     <div class="basis-auto w-full p-20 relative">
+      <form
+        action=""
+        class="flex flex-col"
+        #contact
+        [formGroup]="contactFormGroup"
+        (ngSubmit)="sendMessage(contact)"
+      >
+        <mat-form-field
+          hideRequiredMarker
+          color="primary"
+          class="flex flex-col mb-8"
+        >
+          <input
+            id="messageFrom"
+            type="text"
+            name="messageFrom"
+            placeholder="Név"
+            aria-describedby="input-help"
+            matInput
+            formControlName="messageFrom"
+          />
+          <mat-error
+            *ngIf="messageFrom?.errors?.['required'] && (messageFrom?.dirty || messageFrom?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field
+          hideRequiredMarker
+          color="primary"
+          class="flex flex-col mb-8"
+        >
+          <input
+            id="emailFrom"
+            type="email"
+            name="emailFrom"
+            placeholder="Email cím"
+            aria-describedby="input-help"
+            matInput
+            formControlName="emailFrom"
+          />
 
-      <form action="" class="flex flex-col"
-      #contact
-      [formGroup]="contactFormGroup"
-      (ngSubmit)="sendMessage(contact)">
-      <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-8">
-        <input id="messageFrom" type="text" name="messageFrom" placeholder="Név" aria-describedby="input-help" matInput formControlName="messageFrom" />
-        <mat-error *ngIf="messageFrom?.errors?.['required'] && (messageFrom?.dirty || messageFrom?.touched)"
-          class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-      </mat-form-field>
-      <mat-form-field hideRequiredMarker color="primary" class="flex flex-col mb-8">
-        <input id="emailFrom" type="email" name="emailFrom" placeholder="Email cím"  aria-describedby="input-help" matInput formControlName="emailFrom" />
-        
-        <mat-error *ngIf="emailFrom?.errors?.['required'] && (emailFrom?.dirty || emailFrom?.touched)"
-        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="!emailFrom?.errors?.['required'] && emailFrom?.errors && emailFrom?.dirty && emailFrom?.touched"
-        >&nbsp;Rossz email formátum</mat-error>
-      </mat-form-field>
-      <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-12">
-        <textarea matInput formControlName="message"
+          <mat-error
+            *ngIf="emailFrom?.errors?.['required'] && (emailFrom?.dirty || emailFrom?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+          <mat-error
+            *ngIf="!emailFrom?.errors?.['required'] && emailFrom?.errors && emailFrom?.dirty && emailFrom?.touched"
+            >&nbsp;Rossz email formátum</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field
+          hideRequiredMarker
+          color="primary"
+          class="flex flex-col mb-12"
+        >
+          <textarea
+            matInput
+            formControlName="message"
             placeholder="Üzenet szövege"
             cdkTextareaAutosize
             #autosizedTxtArea="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"
-            cdkAutosizeMaxRows="5"></textarea>
-        <mat-error *ngIf="message?.errors?.['required'] && (message?.dirty || message?.touched)"
-          class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-      </mat-form-field>
-      <div class=" mb-12">
-        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a <a class="gdpr" routerLink="/adatvedelem" target="_blank">felhasználási feltételeket</a>.<sup>*</sup></mat-checkbox>
-       
-        <mat-error *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
-        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="gdpr?.errors?.['gdpr']"
-        class="input-help text-danger">&nbsp;{{gdpr.errors['gdpr']}}</mat-error>
+            cdkAutosizeMaxRows="5"
+          ></textarea>
+          <mat-error
+            *ngIf="message?.errors?.['required'] && (message?.dirty || message?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+        </mat-form-field>
+        <div class="mb-12">
+          <mat-checkbox
+            [disableRipple]="true"
+            formControlName="gdpr"
+            name="gdpr"
+            required
+            color="warn"
+            inputId="gdpr"
+            >Elolvastam és elfogadom a
+            <a class="gdpr" routerLink="/adatvedelem" target="_blank"
+              >felhasználási feltételeket</a
+            >.<sup>*</sup></mat-checkbox
+          >
 
-      </div>
-     
-      
+          <mat-error
+            *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+          <mat-error
+            *ngIf="gdpr?.errors?.['gdpr']"
+            class="input-help text-danger"
+            >&nbsp;{{ gdpr.errors["gdpr"] }}</mat-error
+          >
+        </div>
 
-      <div class="">
-        <button color="primary" mat-stroked-button type="submit"
-        [disabled]="isLoading">
-        Üzenet küldése</button>
-        
-      </div>
+        <div class="">
+          <button
+            color="primary"
+            mat-stroked-button
+            type="submit"
+            [disabled]="isLoading"
+          >
+            Üzenet küldése
+          </button>
+        </div>
       </form>
-      
     </div>
   </div>
 </div>

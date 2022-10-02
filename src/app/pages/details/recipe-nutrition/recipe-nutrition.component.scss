@@ -1,12 +1,12 @@
 @import "../../../../mixins";
 @import "../../../../colors";
-.mat-table{
+.mat-table {
   width: 100%;
   font-family: $fontLora;
   background-color: $backgroundColor;
   border-bottom: none;
-  tr:last-child{
-    .mat-cell{
+  tr:last-child {
+    .mat-cell {
       border-bottom: none;
     }
   }
@@ -23,7 +23,7 @@
   text-align: left;
 }
 
-.mat-icon{
+.mat-icon {
   font-size: 3rem;
   height: 3rem;
   width: 3rem;

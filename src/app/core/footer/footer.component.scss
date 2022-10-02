@@ -1,27 +1,29 @@
 @import "../../../colors";
 
-.container{
+.container {
   border-top: 1px solid $textColorMuted;
   color: $textColor;
   background-color: $backgroundColor;
 }
 
-::ng-deep  .mat-form-field-label, .mat-input-element::placeholder, .mat-focused {
-  color: $textColorMuted!important;
+::ng-deep .mat-form-field-label,
+.mat-input-element::placeholder,
+.mat-focused {
+  color: $textColorMuted !important;
 }
-::ng-deep .mat-checkbox-frame { 
-  border-color: grey!important;
+::ng-deep .mat-checkbox-frame {
+  border-color: grey !important;
 }
-li{
-  transition: color .3s ease-in-out;
+li {
+  transition: color 0.3s ease-in-out;
 }
 
-li:hover{
-  transition: color .3s ease-in-out;
+li:hover {
+  transition: color 0.3s ease-in-out;
   color: $orangeRedDark;
   cursor: pointer;
 }
 
-a.gdpr{
+a.gdpr {
   color: $info;
 }

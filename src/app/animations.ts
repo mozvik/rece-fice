@@ -1,47 +1,58 @@
-import { animation, style, animate, trigger, transition, useAnimation, state, keyframes, AnimationMetadata, query, stagger, sequence } from '@angular/animations';
+import {
+  animation,
+  style,
+  animate,
+  trigger,
+  transition,
+  useAnimation,
+  state,
+  keyframes,
+  AnimationMetadata,
+  query,
+  stagger,
+  sequence,
+} from '@angular/animations';
 
-export const chevronRotate = trigger('chevronRotate' ,[
-  state(
-    'true', style({ transform: "rotate(-180deg)" })
-  ),
-  state(
-    'false', style({ transform: "rotate(0deg)" })
-  ),
+export const chevronRotate = trigger('chevronRotate', [
+  state('true', style({ transform: 'rotate(-180deg)' })),
+  state('false', style({ transform: 'rotate(0deg)' })),
   transition('false <=> true', [
-    animate('400ms cubic-bezier(0.35, 0, 0.25, 1)')
-  ])
+    animate('400ms cubic-bezier(0.35, 0, 0.25, 1)'),
+  ]),
 ]);
 
 export const scaleEnterAnimation: AnimationMetadata[] = [
   transition(':enter', [
     style({ opacity: 0, transform: 'scale(0)' }),
-    animate('500ms ease', style({ opacity: 1, transform: 'scale(1)' }))
+    animate('500ms ease', style({ opacity: 1, transform: 'scale(1)' })),
   ]),
 ];
 
 export const hoverImageAnimation: AnimationMetadata[] = [
   transition(':enter', [
-    style({ opacity: 0}),
-    animate('500ms ease', style({ opacity: 1}))
+    style({ opacity: 0 }),
+    animate('500ms ease', style({ opacity: 1 })),
   ]),
   transition(':leave', [
-    style({ opacity: 1}),
-    animate('500ms ease', style({ opacity: 0}))
-  ])
-]
+    style({ opacity: 1 }),
+    animate('500ms ease', style({ opacity: 0 })),
+  ]),
+];
 
-export const listAnimation =  trigger('listAnimation', [
+export const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
-    query(':enter', [
-      style({opacity: 0, transform: 'scale(0)'}),
-      stagger(50, [
-        animate('300ms ease',
-        style({ opacity: 1, transform: 'none' }))
-      ])
-    ],
-    {optional: true})
-  ])
-])
+    query(
+      ':enter',
+      [
+        style({ opacity: 0, transform: 'scale(0)' }),
+        stagger(50, [
+          animate('300ms ease', style({ opacity: 1, transform: 'none' })),
+        ]),
+      ],
+      { optional: true }
+    ),
+  ]),
+]);
 
 export const openClose = trigger('openClose', [
   state(
@@ -64,36 +75,33 @@ export const openClose = trigger('openClose', [
   ]),
 ]);
 
-export const collapseSubMenu =  trigger("collapseSubMenu", [
-  transition(":enter", [
-    style({ height: 0, overflow: "hidden" }),
-    query(".nav-link", [
-      style({ opacity: 0, transform: "translateY(-50px)" })
-    ]),
+export const collapseSubMenu = trigger('collapseSubMenu', [
+  transition(':enter', [
+    style({ height: 0, overflow: 'hidden' }),
+    query('.nav-link', [style({ opacity: 0, transform: 'translateY(-50px)' })]),
     sequence([
-      animate("200ms", style({ height: "*" })),
-      query(".nav-link", [
+      animate('200ms', style({ height: '*' })),
+      query('.nav-link', [
         stagger(-30, [
-          animate("150ms ease", style({ opacity: 1, transform: "none" }))
-        ])
-      ])
-    ])
+          animate('150ms ease', style({ opacity: 1, transform: 'none' })),
+        ]),
+      ]),
+    ]),
   ]),
 
-  transition(":leave", [
-    
-    style({ height: "*", overflow: "hidden" }),
-    query(".nav-link", [style({ opacity: 1, transform: "none" })]),
+  transition(':leave', [
+    style({ height: '*', overflow: 'hidden' }),
+    query('.nav-link', [style({ opacity: 1, transform: 'none' })]),
     sequence([
-      query(".nav-link", [
+      query('.nav-link', [
         stagger(50, [
           animate(
-            "300ms ease",
-            style({ opacity: 0, transform: "translateY(-50px)" })
-          )
-        ])
+            '300ms ease',
+            style({ opacity: 0, transform: 'translateY(-50px)' })
+          ),
+        ]),
       ]),
-      animate("200ms", style({ height: 0 }))
-    ])
+      animate('200ms', style({ height: 0 })),
+    ]),
   ]),
-])
+]);

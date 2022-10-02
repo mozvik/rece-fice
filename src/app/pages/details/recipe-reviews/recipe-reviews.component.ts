@@ -5,19 +5,16 @@ import { AuthService } from 'src/app/service/auth.service';
 @Component({
   selector: 'app-recipe-reviews',
   templateUrl: './recipe-reviews.component.html',
-  styleUrls: ['./recipe-reviews.component.scss']
+  styleUrls: ['./recipe-reviews.component.scss'],
 })
 export class RecipeReviewsComponent implements OnInit {
-
   @Input() recipe: Recipe | undefined;
 
   get userId() {
-    return this.authService.user?.userId
-  }
-  
-  constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
+    return this.authService.user?.userId;
   }
 
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {}
 }

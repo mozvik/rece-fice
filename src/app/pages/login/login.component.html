@@ -1,56 +1,111 @@
 <div class="container mx-auto">
-  <div class="flex flex-col lg:flex-row mt-64 mb-32 h-full wrapper" [style.visibility]="!isLoggedIn ? 'visible' : 'hidden'">
+  <div
+    class="flex flex-col lg:flex-row mt-64 mb-32 h-full wrapper"
+    [style.visibility]="!isLoggedIn ? 'visible' : 'hidden'"
+  >
     <div class="basis-auto w-full flex flex-col p-20">
       <h4 class="title-h4 mb-12">Belépés</h4>
-      <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p><br>
-      <form action="" class="flex flex-col"
-      [formGroup]="loginFormGroup"
-      (ngSubmit)="login()">
-        <mat-form-field hideRequiredMarker color="primary" class="flex flex-col mb-10">
-            <input id="email" type="email" name="email" placeholder="Email cím"  aria-describedby="input-help" matInput formControlName="email" />
-            <mat-error *ngIf="errorAPI != undefined">{{email?.errors?.['emailApi']}}</mat-error>
-            <mat-error *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
-            class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-            <mat-error *ngIf="!email?.errors?.['required'] && !email?.errors?.['emailApi'] && email?.errors && email?.dirty && email?.touched"
-            >&nbsp;Rossz email formátum</mat-error>
-          </mat-form-field>
-        <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col mb-10">
-          <input id="password" type="password" name="password" placeholder="Jelszó" aria-describedby="input-help" matInput formControlName="password" />
-          <mat-error *ngIf="password?.errors?.['required'] && (password?.dirty || password?.touched)"
-            class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-            
+      <p>Ha már regisztrált felhasználó vagy, lépj be itt:</p>
+      <br />
+      <form
+        action=""
+        class="flex flex-col"
+        [formGroup]="loginFormGroup"
+        (ngSubmit)="login()"
+      >
+        <mat-form-field
+          hideRequiredMarker
+          color="primary"
+          class="flex flex-col mb-10"
+        >
+          <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="Email cím"
+            aria-describedby="input-help"
+            matInput
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="errorAPI != undefined"
+            >{{email?.errors?.['emailApi']}}</mat-error
+          >
+          <mat-error
+            *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+          <mat-error
+            *ngIf="!email?.errors?.['required'] && !email?.errors?.['emailApi'] && email?.errors && email?.dirty && email?.touched"
+            >&nbsp;Rossz email formátum</mat-error
+          >
         </mat-form-field>
-        
+        <mat-form-field
+          hideRequiredMarker
+          color="primary"
+          class="flex flex-col mb-10"
+        >
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Jelszó"
+            aria-describedby="input-help"
+            matInput
+            formControlName="password"
+          />
+          <mat-error
+            *ngIf="password?.errors?.['required'] && (password?.dirty || password?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+        </mat-form-field>
+
         <div class="my-8 forgotten">
-          <span (click)="openForgottenPasswordDialog()">Elfelejtetted a jelszavad?</span>
+          <span (click)="openForgottenPasswordDialog()"
+            >Elfelejtetted a jelszavad?</span
+          >
         </div>
         <div>
-          <button color="primary" mat-stroked-button type="submit"
-          [disabled]="isLoading">
-          <div class="flex flex-row items-center justify-between">
-            <div>Belépés</div>
-            <mat-progress-spinner
-              *ngIf="isLoading"
-              class="ml-4"
-              mode="indeterminate"
-              diameter="24"></mat-progress-spinner>
-          </div>
+          <button
+            color="primary"
+            mat-stroked-button
+            type="submit"
+            [disabled]="isLoading"
+          >
+            <div class="flex flex-row items-center justify-between">
+              <div>Belépés</div>
+              <mat-progress-spinner
+                *ngIf="isLoading"
+                class="ml-4"
+                mode="indeterminate"
+                diameter="24"
+              ></mat-progress-spinner>
+            </div>
           </button>
-          
         </div>
       </form>
-      
     </div>
     <div class="hidden lg:block basis-1/12">
       <div class="flex flex-col items-center py-20">
-        <mat-divider [vertical]="true" class="mb-4" style="width: 1px; height:150px"></mat-divider>
+        <mat-divider
+          [vertical]="true"
+          class="mb-4"
+          style="width: 1px; height: 150px"
+        ></mat-divider>
         <span class="text-center block py-5">Vagy</span>
-        <mat-divider [vertical]="true" class="mt-4" style="width: 1px; height:150px"></mat-divider>
+        <mat-divider
+          [vertical]="true"
+          class="mt-4"
+          style="width: 1px; height: 150px"
+        ></mat-divider>
       </div>
-      
     </div>
-    
-    <div class="block lg:hidden flex flex-row w-full col-span-2 justify-center items-center">
+
+    <div
+      class="block lg:hidden flex flex-row w-full col-span-2 justify-center items-center"
+    >
       <mat-divider class="w-2/5"></mat-divider>
       <span class="text-center block">Vagy</span>
       <mat-divider class="w-2/5"></mat-divider>
@@ -58,7 +113,11 @@
 
     <div class="basis-auto w-full p-20 relative">
       <h4 class="title-h4 mb-12">Regisztráció</h4>
-      <p>Hozz létre egy felhasználói fiókot, hogy hozzáférj a következő szolgáltatásokhoz: </p><br>
+      <p>
+        Hozz létre egy felhasználói fiókot, hogy hozzáférj a következő
+        szolgáltatásokhoz:
+      </p>
+      <br />
       <ul class="list-disc my-4 pl-6">
         <li class="">Receptfeltöltés</li>
         <li class="">Értékelések, hozzászólások</li>
@@ -66,12 +125,21 @@
       </ul>
       <div class="mt-8">
         <button
-        routerLink="/register"
-        type="button"  color="primary" mat-stroked-button>
-        Regisztráció
+          routerLink="/register"
+          type="button"
+          color="primary"
+          mat-stroked-button
+        >
+          Regisztráció
         </button>
       </div>
-      <div class="absolute bottom-0 right-12"><img src="../../../assets/img/pepper.png" alt="" class="w-52 sm:w-72 xl:w-96 filter drop-shadow-xl"></div>
+      <div class="absolute bottom-0 right-12">
+        <img
+          src="../../../assets/img/pepper.png"
+          alt=""
+          class="w-52 sm:w-72 xl:w-96 filter drop-shadow-xl"
+        />
+      </div>
     </div>
   </div>
 </div>

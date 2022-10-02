@@ -1,44 +1,47 @@
 @import "../../../mixins";
 @import "../../../colors";
 
-li button{
+li button {
   @include source-upper;
 }
-.mat-menu-item{
+.mat-menu-item {
   @include source;
 }
 
-#userBar, #mainBar, .mat-toolbar {
+#userBar,
+#mainBar,
+.mat-toolbar {
   color: $textColor;
   background-color: $backgroundColor;
-
 }
-#userBar, #mobileImgWrapper{
-  img{
+#userBar,
+#mobileImgWrapper {
+  img {
     padding-top: 5px;
   }
 }
 
-.mat-toolbar{
+.mat-toolbar {
   color: $backgroundColorDarker;
   background: $orangeRedDark;
 }
 
-#desktopBar.toolbarScroll{
+#desktopBar.toolbarScroll {
   position: fixed;
   top: -126px;
   background: $backgroundColor;
-  margin-bottom: 0; 
-  z-index: 2; 
+  margin-bottom: 0;
+  z-index: 2;
 }
 
-@media (min-width: 1024px){
-  #userBar, #mobileImgWrapper{
-    img{
+@media (min-width: 1024px) {
+  #userBar,
+  #mobileImgWrapper {
+    img {
       padding-top: 55px;
     }
   }
-  #mainBar::before{
+  #mainBar::before {
     content: "";
     position: absolute;
     top: 0;
@@ -47,10 +50,10 @@ li button{
     pointer-events: none;
     height: 126px;
     border-bottom: 1px solid $textColor;
-    
-    opacity: .3;
+
+    opacity: 0.3;
   }
-  #mainBar::after{
+  #mainBar::after {
     content: "";
     position: absolute;
     top: 0;
@@ -60,20 +63,20 @@ li button{
     height: 122px;
     border-bottom: 1px solid $textColor;
     pointer-events: none;
-    opacity: .3;
+    opacity: 0.3;
   }
-   #pot{
-    transform: translate(-50%,-80%)
+  #pot {
+    transform: translate(-50%, -80%);
   }
-  #flame{
-    transform: translate(32%, -100%)
+  #flame {
+    transform: translate(32%, -100%);
   }
 }
-@media (min-width: 1280px){
-  #pot{
-    transform: translate(-50%,-30%)
+@media (min-width: 1280px) {
+  #pot {
+    transform: translate(-50%, -30%);
   }
-  #flame{
-    transform: translate(32%, -41%)
+  #flame {
+    transform: translate(32%, -41%);
   }
 }

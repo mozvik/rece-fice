@@ -1,41 +1,59 @@
-<h4 mat-dialog-title class="mat-typography text-2xl normal-case">Profilkép feltöltése</h4>
+<h4 mat-dialog-title class="mat-typography text-2xl normal-case">
+  Profilkép feltöltése
+</h4>
 <div class="underline-bold"></div>
 <div class="content">
   <div class="image mt-6 relative">
-    <div *ngIf="user.avatar !== '' && user.avatar !== null && !preview" class=" absolute  bottom-0 left-0">
+    <div
+      *ngIf="user.avatar !== '' && user.avatar !== null && !preview"
+      class="absolute bottom-0 left-0"
+    >
       <button mat-mini-fab color="warn" (click)="delete()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-    <img *ngIf="!preview && (user.avatar === '' || user.avatar === null); else elseBlock" src="assets/img/empty-profile.png" alt="">
+    <img
+      *ngIf="
+        !preview && (user.avatar === '' || user.avatar === null);
+        else elseBlock
+      "
+      src="assets/img/empty-profile.png"
+      alt=""
+    />
     <ng-template #elseBlock>
-      <img [src]="preview ? preview:user.avatar" alt="">
+      <img [src]="preview ? preview : user.avatar" alt="" />
     </ng-template>
   </div>
-  <div class="flex flex-col lg:flex-row lg:flex-wrap lg:gap-5 lg:justify-between">
+  <div
+    class="flex flex-col lg:flex-row lg:flex-wrap lg:gap-5 lg:justify-between"
+  >
     <input
-    #avatar_file_input
-    type="file"
-    [accept]="accept"
-    hidden
-    (change)="handleFile($event.target.files)"
+      #avatar_file_input
+      type="file"
+      [accept]="accept"
+      hidden
+      (change)="handleFile($event.target.files)"
     />
-    
   </div>
 </div>
 <div class="underline-normal my-6"></div>
 <div mat-dialog-actions class="flex flex-row justify-between">
-  
-  <button mat-button [mat-dialog-close]="false" >Mégsem</button>
+  <button mat-button [mat-dialog-close]="false">Mégsem</button>
   <button mat-button (click)="openInput()" cdkFocusInitial>Fotó csere</button>
-  <button color="primary" mat-button [disabled]="isLoading || !selected" (click)="upload()">
+  <button
+    color="primary"
+    mat-button
+    [disabled]="isLoading || !selected"
+    (click)="upload()"
+  >
     <div class="flex flex-row items-center justify-between">
       <div>Feltöltés</div>
       <mat-progress-spinner
-      *ngIf="isLoading"
-      class="ml-4"
-      mode="indeterminate"
-      diameter="24"></mat-progress-spinner>
+        *ngIf="isLoading"
+        class="ml-4"
+        mode="indeterminate"
+        diameter="24"
+      ></mat-progress-spinner>
     </div>
   </button>
 </div>

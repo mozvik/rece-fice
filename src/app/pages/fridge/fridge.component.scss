@@ -1,22 +1,21 @@
 @import "../../../mixins";
 
-.pantry{
-  img{
+.pantry {
+  img {
     max-width: 360px;
     width: 100%;
     height: auto;
   }
 }
 
-.content p{
+.content p {
   @include lora;
 }
 
 @media screen and (min-width: 768px) {
-  .pantry{
-    img{
+  .pantry {
+    img {
       max-width: 680px;
     }
   }
 }
-

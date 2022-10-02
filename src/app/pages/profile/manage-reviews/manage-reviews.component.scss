@@ -5,26 +5,30 @@ table {
   width: 100%;
 }
 
-th{
+th {
   @include source;
   font-size: 1.3rem;
   font-weight: bold;
 }
 
-td{
+td {
   text-transform: none;
   @include lora-italic;
   font-size: 1rem;
 }
 
-.mat-column-recipe, .mat-column-rating, .mat-column-review, .mat-column-created, .mat-column-moderated{
-  border-right: 1px solid rgba($textColorMuted,.4);
-  padding: 0 .5rem;
+.mat-column-recipe,
+.mat-column-rating,
+.mat-column-review,
+.mat-column-created,
+.mat-column-moderated {
+  border-right: 1px solid rgba($textColorMuted, 0.4);
+  padding: 0 0.5rem;
 }
-.mat-column-moderated{
-  padding-left: .5rem;
+.mat-column-moderated {
+  padding-left: 0.5rem;
 }
 
-.mat-elevation-z2 {    
+.mat-elevation-z2 {
   overflow-x: auto;
- }
+}

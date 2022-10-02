@@ -9,93 +9,112 @@ import { MessageService } from 'src/app/service/message.service';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
   isLoading: boolean = false;
 
-  public editFormGroup = new FormGroup({
-    name: new FormControl(this.user.name, [Validators.required, Validators.minLength(4)]),
-    description: new FormControl(this.user.description),
-    email: new FormControl(this.user.email, [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.required]),
-    passwordCurrent: new FormControl('', [Validators.required]),
-    passwordNew: new FormControl(''),
-    passwordNewCheck: new FormControl(''),
-    id: new FormControl(this.user.userId),
-  },
-  {
-    validators: (control) => {
-      if (control.value.passwordNew !== control.value.passwordNewCheck) {
-        control.get("passwordNewCheck")?.setErrors({ notSame: true });
-        control.get("passwordNew")?.setErrors({ notSame: true });
-      }
-      else {
-        control.get("passwordNewCheck")?.setErrors(null);
-        control.get("passwordNew")?.setErrors(null);
-      }
-
-      if (control.value.passwordNew.length < 8) {
-        control.get("passwordNew")?.setErrors({ minlength: "error" });
-      }
-      if (control.value.passwordNewCheck.length < 8) {
-        control.get("passwordNewCheck")?.setErrors({ minlength: "error" });
-      }
-      return null;
+  public editFormGroup = new FormGroup(
+    {
+      name: new FormControl(this.user.name, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      description: new FormControl(this.user.description),
+      email: new FormControl(this.user.email, [
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        Validators.required,
+      ]),
+      passwordCurrent: new FormControl('', [Validators.required]),
+      passwordNew: new FormControl(''),
+      passwordNewCheck: new FormControl(''),
+      id: new FormControl(this.user.userId),
     },
-  })
-  get name() { return this.editFormGroup.get('name'); }
-  get passwordNewCheck() { return this.editFormGroup.get('passwordNewCheck'); }
-  get description() { return this.editFormGroup.get('description'); }
-  get email() { return this.editFormGroup.get('email'); }
-  get passwordNew() { return this.editFormGroup.get('passwordNew'); }
-  get passwordCurrent() { return this.editFormGroup.get('passwordCurrent'); }
+    {
+      validators: (control) => {
+        if (control.value.passwordNew !== control.value.passwordNewCheck) {
+          control.get('passwordNewCheck')?.setErrors({ notSame: true });
+          control.get('passwordNew')?.setErrors({ notSame: true });
+        } else {
+          control.get('passwordNewCheck')?.setErrors(null);
+          control.get('passwordNew')?.setErrors(null);
+        }
+
+        if (control.value.passwordNew.length < 8) {
+          control.get('passwordNew')?.setErrors({ minlength: 'error' });
+        }
+        if (control.value.passwordNewCheck.length < 8) {
+          control.get('passwordNewCheck')?.setErrors({ minlength: 'error' });
+        }
+        return null;
+      },
+    }
+  );
+  get name() {
+    return this.editFormGroup.get('name');
+  }
+  get passwordNewCheck() {
+    return this.editFormGroup.get('passwordNewCheck');
+  }
+  get description() {
+    return this.editFormGroup.get('description');
+  }
+  get email() {
+    return this.editFormGroup.get('email');
+  }
+  get passwordNew() {
+    return this.editFormGroup.get('passwordNew');
+  }
+  get passwordCurrent() {
+    return this.editFormGroup.get('passwordCurrent');
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public user: User,
     private dialogRef: MatDialogRef<EditProfileComponent>,
     private authService: AuthService,
     private messageService: MessageService,
-    private router: Router) { }
-   
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
-  
+  ngOnInit(): void {}
+
   update() {
     this.isLoading = true;
     this.authService.userUpdate(this.editFormGroup.value).subscribe({
-
       next: (res) => {
         this.isLoading = false;
         if (res === null) {
           this.dialogRef.close();
-          this.messageService.showSnackBar('Nincs hozzáférésed, jelentkezz be úrjra', 'error');
+          this.messageService.showSnackBar(
+            'Nincs hozzáférésed, jelentkezz be úrjra',
+            'error'
+          );
           this.router.navigateByUrl('/login');
         }
 
         if (res.hasOwnProperty('errors')) {
           for (const key in res.errors) {
-            const err: any = {}
-            err[key] = res.errors[key]
-            
+            const err: any = {};
+            err[key] = res.errors[key];
+
             this.editFormGroup.controls[key].setErrors(err);
             this.editFormGroup.controls[key].markAsTouched();
           }
-        }
-        else {
-          this.authService.user!.name = res.name
-          this.authService.user!.email = res.email
-          this.authService.user!.description = res.description
-          this.messageService.showSnackBar('Sikeres profil módosítás', 'success');
+        } else {
+          this.authService.user!.name = res.name;
+          this.authService.user!.email = res.email;
+          this.authService.user!.description = res.description;
+          this.messageService.showSnackBar(
+            'Sikeres profil módosítás',
+            'success'
+          );
           this.dialogRef.close(true);
         }
-
       },
       error: (err) => {
         this.isLoading = false;
-      }
-    }
-      );
+      },
+    });
   }
-  
 }

@@ -1,85 +1,197 @@
-<h4 mat-dialog-title class="mat-typography text-2xl normal-case">Profil szerkesztése</h4>
+<h4 mat-dialog-title class="mat-typography text-2xl normal-case">
+  Profil szerkesztése
+</h4>
 <div class="underline-bold"></div>
 <div mat-dialog-content>
-  <form action="" class="flex flex-col lg:flex-row lg:flex-wrap lg:gap-5 lg:justify-between"
-  [formGroup]="editFormGroup"
+  <form
+    action=""
+    class="flex flex-col lg:flex-row lg:flex-wrap lg:gap-5 lg:justify-between"
+    [formGroup]="editFormGroup"
   >
-    <mat-form-field hideRequiredMarker color="primary" 
-    hintLabel="Min. 4 karakter"
-    class="flex flex-col mt-5 lg:w-5/12">
-      <input id="name" type="name" name="name" placeholder="Név"  aria-describedby="input-help" matInput formControlName="name" />
-      <mat-hint align="end">{{editFormGroup.get('name')?.value?.length || 0}}/4</mat-hint>      
-      <mat-error *ngIf="name?.errors?.['required'] && name?.dirty"
-      class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-      <mat-error *ngIf="name?.errors?.['minlength'] || name?.errors?.['name'] && name?.dirty"
-      >&nbsp;Minimum 4 karakter legyen</mat-error>
+    <mat-form-field
+      hideRequiredMarker
+      color="primary"
+      hintLabel="Min. 4 karakter"
+      class="flex flex-col mt-5 lg:w-5/12"
+    >
+      <input
+        id="name"
+        type="name"
+        name="name"
+        placeholder="Név"
+        aria-describedby="input-help"
+        matInput
+        formControlName="name"
+      />
+      <mat-hint align="end"
+        >{{ editFormGroup.get("name")?.value?.length || 0 }}/4</mat-hint
+      >
+      <mat-error
+        *ngIf="name?.errors?.['required'] && name?.dirty"
+        class="input-help text-danger"
+        >&nbsp;Kötelező kitölteni</mat-error
+      >
+      <mat-error
+        *ngIf="name?.errors?.['minlength'] || name?.errors?.['name'] && name?.dirty"
+        >&nbsp;Minimum 4 karakter legyen</mat-error
+      >
     </mat-form-field>
-    <mat-form-field hideRequiredMarker color="primary"
-    hintLabel="Ezzel fogsz tudni bejelentkezni" class="flex flex-col mt-5 lg:w-5/12">
-      <input id="email" type="email" name="email" placeholder="Email cím"  aria-describedby="input-help" matInput formControlName="email" />
-      <mat-error *ngIf="email?.errors?.['email']"
-      class="input-help text-danger">&nbsp;{{email.errors['email']}}
+    <mat-form-field
+      hideRequiredMarker
+      color="primary"
+      hintLabel="Ezzel fogsz tudni bejelentkezni"
+      class="flex flex-col mt-5 lg:w-5/12"
+    >
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="Email cím"
+        aria-describedby="input-help"
+        matInput
+        formControlName="email"
+      />
+      <mat-error *ngIf="email?.errors?.['email']" class="input-help text-danger"
+        >&nbsp;{{ email.errors["email"] }}
       </mat-error>
-      <mat-error *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
-      class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-      <mat-error *ngIf="email?.errors?.['pattern'] && (email?.dirty || email?.touched)"
-      >&nbsp;Nem megfelelő email formátum</mat-error>
-    </mat-form-field>
-    
-    <mat-form-field hideRequiredMarker color="primary"
-    hintLabel="Írj pár szót magadról" class="flex flex-col mt-4 lg:w-full">
-      <textarea matInput placeholder="Magamról..." formControlName="description"></textarea>
-      
+      <mat-error
+        *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
+        class="input-help text-danger"
+        >&nbsp;Kötelező kitölteni</mat-error
+      >
+      <mat-error
+        *ngIf="email?.errors?.['pattern'] && (email?.dirty || email?.touched)"
+        >&nbsp;Nem megfelelő email formátum</mat-error
+      >
     </mat-form-field>
 
-    <mat-form-field hideRequiredMarker  color="primary" class="flex flex-col lg:w-5/12 mt-4"
-    hintLabel="Jelenlegi jelszavad">
-      <input id="passwordCurrent" type="password" name="passwordCurrent" placeholder="Jelenlegi jelszó" aria-describedby="input-help" matInput formControlName="passwordCurrent" />
-      <mat-error *ngIf="passwordCurrent?.errors?.['passwordCurrent']"
-      class="input-help text-danger">&nbsp;{{passwordCurrent.errors['passwordCurrent']}}</mat-error>
-      <mat-error *ngIf="passwordCurrent?.errors?.['required'] && (passwordCurrent?.dirty || passwordCurrent?.touched)"
-      class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
+    <mat-form-field
+      hideRequiredMarker
+      color="primary"
+      hintLabel="Írj pár szót magadról"
+      class="flex flex-col mt-4 lg:w-full"
+    >
+      <textarea
+        matInput
+        placeholder="Magamról..."
+        formControlName="description"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field
+      hideRequiredMarker
+      color="primary"
+      class="flex flex-col lg:w-5/12 mt-4"
+      hintLabel="Jelenlegi jelszavad"
+    >
+      <input
+        id="passwordCurrent"
+        type="password"
+        name="passwordCurrent"
+        placeholder="Jelenlegi jelszó"
+        aria-describedby="input-help"
+        matInput
+        formControlName="passwordCurrent"
+      />
+      <mat-error
+        *ngIf="passwordCurrent?.errors?.['passwordCurrent']"
+        class="input-help text-danger"
+        >&nbsp;{{ passwordCurrent.errors["passwordCurrent"] }}</mat-error
+      >
+      <mat-error
+        *ngIf="passwordCurrent?.errors?.['required'] && (passwordCurrent?.dirty || passwordCurrent?.touched)"
+        class="input-help text-danger"
+        >&nbsp;Kötelező kitölteni</mat-error
+      >
     </mat-form-field>
     <div class="lg:w-5/12"></div>
-    <mat-form-field hideRequiredMarker  color="primary" 
-    hintLabel="Új jelszavad" class="flex flex-col lg:w-5/12 my-4">
-      <input id="passwordNew" type="password" name="passwordNew" placeholder="Új jelszó" aria-describedby="input-help" matInput formControlName="passwordNew" />
-      <mat-hint align="end">{{editFormGroup.get('passwordNew')?.value?.length || 0}}/8</mat-hint>
+    <mat-form-field
+      hideRequiredMarker
+      color="primary"
+      hintLabel="Új jelszavad"
+      class="flex flex-col lg:w-5/12 my-4"
+    >
+      <input
+        id="passwordNew"
+        type="password"
+        name="passwordNew"
+        placeholder="Új jelszó"
+        aria-describedby="input-help"
+        matInput
+        formControlName="passwordNew"
+      />
+      <mat-hint align="end"
+        >{{ editFormGroup.get("passwordNew")?.value?.length || 0 }}/8</mat-hint
+      >
       <mat-error *ngIf="passwordNew?.errors?.['minlength']"
-      >&nbsp;Minimum 8 karakter legyen</mat-error>
-      <mat-error *ngIf="passwordNew?.errors?.['passwordNew']"
-      class="input-help text-danger">&nbsp;{{passwordNew.errors['passwordNew']}}</mat-error>
-      <mat-error *ngIf="passwordNew?.errors?.['notSame'] && (passwordNew?.dirty || passwordNew?.touched )"
-      class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
+        >&nbsp;Minimum 8 karakter legyen</mat-error
+      >
+      <mat-error
+        *ngIf="passwordNew?.errors?.['passwordNew']"
+        class="input-help text-danger"
+        >&nbsp;{{ passwordNew.errors["passwordNew"] }}</mat-error
+      >
+      <mat-error
+        *ngIf="passwordNew?.errors?.['notSame'] && (passwordNew?.dirty || passwordNew?.touched )"
+        class="input-help text-danger"
+        >&nbsp;A két jelszó nem azonos</mat-error
+      >
     </mat-form-field>
-    <mat-form-field hideRequiredMarker  color="primary" hintLabel="Új jelszavad mégegyszer" class="flex flex-col lg:w-5/12 my-4">
-      <input id="passwordNewCheck" type="password" name="passwordNewCheck" placeholder="Új jelszó újra" aria-describedby="input-help" matInput formControlName="passwordNewCheck" />
-      <mat-hint align="end">{{editFormGroup.get('passwordNewCheck')?.value?.length || 0}}/8</mat-hint> 
+    <mat-form-field
+      hideRequiredMarker
+      color="primary"
+      hintLabel="Új jelszavad mégegyszer"
+      class="flex flex-col lg:w-5/12 my-4"
+    >
+      <input
+        id="passwordNewCheck"
+        type="password"
+        name="passwordNewCheck"
+        placeholder="Új jelszó újra"
+        aria-describedby="input-help"
+        matInput
+        formControlName="passwordNewCheck"
+      />
+      <mat-hint align="end"
+        >{{
+          editFormGroup.get("passwordNewCheck")?.value?.length || 0
+        }}/8</mat-hint
+      >
       <mat-error *ngIf="passwordNewCheck?.errors?.['minlength']"
-      >&nbsp;Minimum 8 karakter legyen</mat-error>
-      <mat-error *ngIf="passwordNewCheck?.errors?.['passwordNewCheck']"
-      class="input-help text-danger">&nbsp;{{passwordNewCheck.errors['passwordNewCheck']}}</mat-error>
-      <mat-error *ngIf="passwordNewCheck?.errors?.['notSame'] && (passwordNewCheck?.dirty || passwordNewCheck?.touched )"
-      class="input-help text-danger">&nbsp;A két jelszó nem azonos!</mat-error>
+        >&nbsp;Minimum 8 karakter legyen</mat-error
+      >
+      <mat-error
+        *ngIf="passwordNewCheck?.errors?.['passwordNewCheck']"
+        class="input-help text-danger"
+        >&nbsp;{{ passwordNewCheck.errors["passwordNewCheck"] }}</mat-error
+      >
+      <mat-error
+        *ngIf="passwordNewCheck?.errors?.['notSame'] && (passwordNewCheck?.dirty || passwordNewCheck?.touched )"
+        class="input-help text-danger"
+        >&nbsp;A két jelszó nem azonos!</mat-error
+      >
     </mat-form-field>
-    
   </form>
 
   <div class="underline-normal mt-6"></div>
 </div>
 <div mat-dialog-actions class="flex flex-row justify-between">
-  
-  <button mat-button [mat-dialog-close]="false"  color="primary">Mégsem</button>
-  <button mat-button 
-  (click)="update()"
-  cdkFocusInitial color="primary" [disabled]="isLoading">
-  <div class="flex flex-row items-center justify-between">
-    <div>Adatok módosítása</div>
-    <mat-progress-spinner
-          *ngIf="isLoading"
-          class="ml-4"
-          mode="indeterminate"
-          diameter="24"></mat-progress-spinner>
-  </div>
+  <button mat-button [mat-dialog-close]="false" color="primary">Mégsem</button>
+  <button
+    mat-button
+    (click)="update()"
+    cdkFocusInitial
+    color="primary"
+    [disabled]="isLoading"
+  >
+    <div class="flex flex-row items-center justify-between">
+      <div>Adatok módosítása</div>
+      <mat-progress-spinner
+        *ngIf="isLoading"
+        class="ml-4"
+        mode="indeterminate"
+        diameter="24"
+      ></mat-progress-spinner>
+    </div>
   </button>
 </div>

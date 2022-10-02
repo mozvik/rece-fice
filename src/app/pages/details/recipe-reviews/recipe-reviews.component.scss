@@ -1,31 +1,31 @@
 @import "../../../../colors";
 @import "../../../../mixins";
 
-.mat-card{
+.mat-card {
   background-color: rgba($backgroundColorDarker, 0.25);
 }
 
-.title{
+.title {
   font-family: $fontOswald;
   font-size: 1rem;
 }
 
-.created{
+.created {
   @include lora-italic;
   font-size: 1rem;
 }
 
-.mat-card-content{
+.mat-card-content {
   @include lora;
 }
 
-.rating{
+.rating {
   font-style: normal;
   font-size: 1.4rem;
   color: #ffd740;
 }
 
-.rating-lead{
+.rating-lead {
   @include lora-italic;
   font-size: 1rem;
 }

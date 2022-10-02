@@ -1,30 +1,32 @@
-@import '../../../colors.scss';
-@import '../../../mixins.scss';
-.recipe-card{
+@import "../../../colors.scss";
+@import "../../../mixins.scss";
+.recipe-card {
   max-width: 360px;
 }
 
-.card-subtitle{
+.card-subtitle {
   font-size: 1rem;
   font-family: $fontOswald;
 }
-.title-h6, .user, .category{
-  transition: color .4s ease;
- 
+.title-h6,
+.user,
+.category {
+  transition: color 0.4s ease;
 }
 
-.title-h6:hover, .user:hover, .category:hover{
+.title-h6:hover,
+.user:hover,
+.category:hover {
   color: $orangeRedDark;
-  transition: color .4s ease;
+  transition: color 0.4s ease;
 }
 
-.rating{
-  
+.rating {
   font-size: 1.4rem;
   color: #ffd740;
 }
 
-.rating-text{
+.rating-text {
   font-size: 1.1rem;
   font-family: $fontSource;
 }

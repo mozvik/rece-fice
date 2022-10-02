@@ -7,31 +7,30 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  @Input() user: User | undefined
-  constructor(public profileDialog: MatDialog) { }
+  @Input() user: User | undefined;
+  constructor(public profileDialog: MatDialog) {}
 
-  profileDialogRef: any
-  avatarDialogRef: any
+  profileDialogRef: any;
+  avatarDialogRef: any;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openEditProfileDialog() {
-    this.profileDialogRef = this.profileDialog.open(EditProfileComponent, 
-      { data: this.user }
-    );
+    this.profileDialogRef = this.profileDialog.open(EditProfileComponent, {
+      data: this.user,
+    });
 
-    this.profileDialogRef.afterClosed().subscribe()
+    this.profileDialogRef.afterClosed().subscribe();
   }
 
   openEditAvatarDialog() {
-    this.avatarDialogRef = this.profileDialog.open(EditAvatarComponent, 
-      { data: this.user }
-    );
+    this.avatarDialogRef = this.profileDialog.open(EditAvatarComponent, {
+      data: this.user,
+    });
 
-    this.avatarDialogRef.afterClosed().subscribe()
+    this.avatarDialogRef.afterClosed().subscribe();
   }
 }

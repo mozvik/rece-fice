@@ -11,7 +11,7 @@ import { openClose } from 'src/app/animations';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  animations: [ openClose ],    
+  animations: [openClose],
 })
 export class SearchComponent implements OnInit {
   @Input() isSearchOpen = false;
@@ -57,7 +57,9 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.categories.subscribe((categories) =>       this.categories = categories);
+    this.apiService.categories.subscribe(
+      (categories) => (this.categories = categories)
+    );
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
     this.apiService.difficulties.subscribe(
       (difficulties) => (this.difficulties = difficulties)
@@ -109,10 +111,9 @@ export class SearchComponent implements OnInit {
       this.isLoading = true;
       this.apiService
         .search(this.inputText, this.selectedItems, 0)
-        .pipe(finalize(() => this.isLoading = false))
+        .pipe(finalize(() => (this.isLoading = false)))
         .subscribe((result) => {
           if (result) {
-
             (this.searchResults = result.items),
               result.itemCount
                 ? (this.recipesFound =
@@ -127,13 +128,18 @@ export class SearchComponent implements OnInit {
 
   submitForm() {
     this.closed.emit(true);
-    
-    this.dataService.searchFilters = {advanced: true, text: this.inputText, filters: this.selectedItems };
+
+    this.dataService.searchFilters = {
+      advanced: true,
+      text: this.inputText,
+      filters: this.selectedItems,
+    };
     this.dataService.resultsPageIndex = 0;
 
-    this.router.navigateByUrl('/results/', {skipLocationChange: true}).then(() => {
+    this.router
+      .navigateByUrl('/results/', { skipLocationChange: true })
+      .then(() => {
         this.router.navigate(['/results', 'search']);
-    });
-    
+      });
   }
 }

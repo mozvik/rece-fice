@@ -1,17 +1,24 @@
-form, input, label, small {
-  font-family: 'Lora', sans-serif;
+form,
+input,
+label,
+small {
+  font-family: "Lora", sans-serif;
   font-size: 1.15rem;
 }
-button, .p-button-label{
-  font-family: 'Oswald', serif!important;
-  letter-spacing: .1rem;
+button,
+.p-button-label {
+  font-family: "Oswald", serif !important;
+  letter-spacing: 0.1rem;
 }
-.input-help{
-  font-size: .9rem;
+.input-help {
+  font-size: 0.9rem;
 }
 
 @media (min-width: 992px) {
-  form, input, label, small {
+  form,
+  input,
+  label,
+  small {
     font-size: 1.35rem;
   }
 }

@@ -8,15 +8,15 @@ import { MessageService } from 'src/app/service/message.service';
 @Component({
   selector: 'app-recipe-ratings',
   templateUrl: './recipe-ratings.component.html',
-  styleUrls: ['./recipe-ratings.component.scss']
+  styleUrls: ['./recipe-ratings.component.scss'],
 })
 export class RecipeRatingsComponent implements OnInit {
-
-  @Input() recipe: Recipe | undefined
+  @Input() recipe: Recipe | undefined;
   constructor(
     private apiService: APIService,
     private messageService: MessageService,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) {}
 
   rated: boolean = false;
   rating: number = 0;
@@ -25,38 +25,45 @@ export class RecipeRatingsComponent implements OnInit {
   isLoading: boolean = false;
 
   public get reviewed(): boolean {
-    return this.recipe?.reviews?.find(rv => rv.userId == this.authService.user?.userId)
+    return this.recipe?.reviews?.find(
+      (rv) => rv.userId == this.authService.user?.userId
+    );
   }
 
   public get isLoggedIn() {
-    return !!this.authService.isLoggedIn
+    return !!this.authService.isLoggedIn;
   }
   public get currentUserId() {
-    return this.authService.user?.userId
+    return this.authService.user?.userId;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submit() {
     this.isLoading = true;
-    this.apiService.review(Number(this.recipe!.id), this.authService.user!.userId, this.rating, this.comment).pipe(finalize(() => this.isLoading = false)).subscribe({
-      next: (data) => {
-        this.recipe?.reviews?.push({
-          created: new Date().toLocaleString(),
-          comment: data.comment,
-          rating: data.rating,
-          userName: this.authService.user?.name,
-          userId: this.authService.user?.userId,
-          moderated: '0',
-          avatar: this.authService.user?.avatar
-        })
-        this.rated = true;
-        this.messageService.showSnackBar('Értékelés sikeres', 'success')
-      },
-      error: (err) => this.messageService.showSnackBar(err.error, 'error')
-    }
+    this.apiService
+      .review(
+        Number(this.recipe!.id),
+        this.authService.user!.userId,
+        this.rating,
+        this.comment
       )
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (data) => {
+          this.recipe?.reviews?.push({
+            created: new Date().toLocaleString(),
+            comment: data.comment,
+            rating: data.rating,
+            userName: this.authService.user?.name,
+            userId: this.authService.user?.userId,
+            moderated: '0',
+            avatar: this.authService.user?.avatar,
+          });
+          this.rated = true;
+          this.messageService.showSnackBar('Értékelés sikeres', 'success');
+        },
+        error: (err) => this.messageService.showSnackBar(err.error, 'error'),
+      });
   }
-
 }

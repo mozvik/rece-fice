@@ -1,20 +1,30 @@
 <div class="container flex flex-row justify-center mt-8 mb-40 mx-auto">
-  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center"  [@listAnimation]="results.length">
-  <ng-container *ngFor="let recipe of userFavorites; let i=index">
-
-    <app-recipe-card 
-    [canEdit]="false"
-    [canDelete]="false"
-    [recipe]="recipe"
-    (urlClicked)="navigateToDetails($event)"
-    (categoryClicked)="navigateToCategory($event)"
-    (userClicked)="navigateToUserProfile($event)"
-    (editClicked)="navigateToEditRecipe(recipe.recipeId)"
-    (deleteClicked)="openDeleteDialog(recipe)">
-    </app-recipe-card>
-  </ng-container>
+  <div
+    class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center"
+    [@listAnimation]="results.length"
+  >
+    <ng-container *ngFor="let recipe of userFavorites; let i = index">
+      <app-recipe-card
+        [canEdit]="false"
+        [canDelete]="false"
+        [recipe]="recipe"
+        (urlClicked)="navigateToDetails($event)"
+        (categoryClicked)="navigateToCategory($event)"
+        (userClicked)="navigateToUserProfile($event)"
+        (editClicked)="navigateToEditRecipe(recipe.recipeId)"
+        (deleteClicked)="openDeleteDialog(recipe)"
+      >
+      </app-recipe-card>
+    </ng-container>
   </div>
 </div>
-<div class="text-center m-5"><button mat-stroked-button color="primary" 
-  (click)="incrementIndex()"
-  [disabled]="!results.length">Mutass többet</button></div>
+<div class="text-center m-5">
+  <button
+    mat-stroked-button
+    color="primary"
+    (click)="incrementIndex()"
+    [disabled]="!results.length"
+  >
+    Mutass többet
+  </button>
+</div>

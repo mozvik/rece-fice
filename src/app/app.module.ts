@@ -11,26 +11,26 @@ import { AuthService } from './service/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorIntercept } from './service/error-intercept';
 
-
-
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     CoreModule,
     BrowserAnimationsModule,
 
     //SharedModule.forRoot(),
   ],
-  providers: [APIService, DataService, IconService, MessageService, AuthService,
+  providers: [
+    APIService,
+    DataService,
+    IconService,
+    MessageService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorIntercept,
-      multi: true
-  }],
-  bootstrap: [AppComponent]
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { 
-}
+export class AppModule {}

@@ -10,12 +10,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
-  declarations: [
-    LoginComponent,
-    DialogForgottenPassword
-  ],
+  declarations: [LoginComponent, DialogForgottenPassword],
   imports: [
     CommonModule,
     LoginRoutingModule,
@@ -27,7 +24,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+  ],
 })
-export class LoginModule { }
+export class LoginModule {}

@@ -9,24 +9,18 @@ import { APIService } from 'src/app/service/api.service';
   selector: 'app-recipe-thumbnail',
   templateUrl: './recipe-thumbnail.component.html',
   styleUrls: ['./recipe-thumbnail.component.scss'],
-  animations: [
-    trigger(
-      'enterHoverAnimation', hoverImageAnimation
-    )
-  ],
+  animations: [trigger('enterHoverAnimation', hoverImageAnimation)],
 })
 export class RecipeThumbnailComponent implements OnInit {
-
   @Input() recipe: Recipe | undefined;
-  
+
   difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
   showImgOverlay: boolean = false;
 
-  constructor(
-  private apiService: APIService) { }
+  constructor(private apiService: APIService) {}
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
     this.apiService.difficulties.subscribe(
       (difficulties) => (this.difficulties = difficulties)

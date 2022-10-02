@@ -1,20 +1,20 @@
 {
-    "name": "ati/rece-fice",
-    "autoload": {
-        "psr-4": {
-            "Ati\\ReceFice\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "mozvik",
-            "email": "mozvik@yahoo.com"
-        }
-    ],
-    "config": {
-        "vendor-dir": "src/api/vendor"
-    },
-    "require": {
-        "phpmailer/phpmailer": "^6.6"
+  "name": "ati/rece-fice",
+  "autoload": {
+    "psr-4": {
+      "Ati\\ReceFice\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "mozvik",
+      "email": "mozvik@yahoo.com"
+    }
+  ],
+  "config": {
+    "vendor-dir": "src/api/vendor"
+  },
+  "require": {
+    "phpmailer/phpmailer": "^6.6"
+  }
 }

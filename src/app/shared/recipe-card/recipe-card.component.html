@@ -1,58 +1,86 @@
-<div *ngIf="recipe" class="recipe-card flex flex-col justify-between h-full"
-[ngClass]="small ? 'border-b-0':'border-b-2'"
+<div
+  *ngIf="recipe"
+  class="recipe-card flex flex-col justify-between h-full"
+  [ngClass]="small ? 'border-b-0' : 'border-b-2'"
 >
-  <app-recipe-thumbnail 
-  class="hover:cursor-pointer"
-  [recipe]="recipe"
-  (click)="urlEmit(recipe.recipeId)">
-  ></app-recipe-thumbnail>
+  <app-recipe-thumbnail
+    class="hover:cursor-pointer"
+    [recipe]="recipe"
+    (click)="urlEmit(recipe.recipeId)"
+  >
+    ></app-recipe-thumbnail
+  >
   <div class="flex flex-col justify-between grow">
-    <div class=" grow">
+    <div class="grow">
       <div *ngIf="!small" class="flex flex-row">
         <div class="rating" *ngFor="let rv of [].constructor(5); let i = index">
-          <ng-container *ngIf="i < recipe.averageRating()">&#9733;</ng-container>
-          <ng-container *ngIf="i >= recipe.averageRating()">&#9734;</ng-container>
-          
-        
+          <ng-container *ngIf="i < recipe.averageRating()"
+            >&#9733;</ng-container
+          >
+          <ng-container *ngIf="i >= recipe.averageRating()"
+            >&#9734;</ng-container
+          >
         </div>
-        <div class="rating-text normal-case flex flex-row items-center">&nbsp; Értékelés: {{recipe.averageRating() | number: '1.0-1'}} &#183; {{recipe.totalRatings()}} szavazat
+        <div class="rating-text normal-case flex flex-row items-center">
+          &nbsp; Értékelés:
+          {{ recipe.averageRating() | number: "1.0-1" }} &#183;
+          {{ recipe.totalRatings() }} szavazat
         </div>
-      
       </div>
-      <div 
-      [ngClass]="small ? 'py-5':''" 
-      class="title-h6 hover:cursor-pointer"
-      (click)="urlEmit(recipe.recipeId)">{{recipe.recipeName}}
+      <div
+        [ngClass]="small ? 'py-5' : ''"
+        class="title-h6 hover:cursor-pointer"
+        (click)="urlEmit(recipe.recipeId)"
+      >
+        {{ recipe.recipeName }}
       </div>
     </div>
-    
-    <div *ngIf="!small" class="card-subtitle flex flex-row justify-between my-3 uppercase">
-      <div class="flex flex-row items-center hover:cursor-pointer user"
-      (click)="userEmit(recipe.creator.id)">
-        <div>&nbsp;{{recipe.creator.name}}</div>
+
+    <div
+      *ngIf="!small"
+      class="card-subtitle flex flex-row justify-between my-3 uppercase"
+    >
+      <div
+        class="flex flex-row items-center hover:cursor-pointer user"
+        (click)="userEmit(recipe.creator.id)"
+      >
+        <div>&nbsp;{{ recipe.creator.name }}</div>
       </div>
-      <div class="flex flex-row items-center hover:cursor-pointer category"
-      (click)="categoryEmit(recipe.category.name)"><div>{{recipe.category.name}}</div>
+      <div
+        class="flex flex-row items-center hover:cursor-pointer category"
+        (click)="categoryEmit(recipe.category.name)"
+      >
+        <div>{{ recipe.category.name }}</div>
       </div>
     </div>
-    <div *ngIf="!small" class="card-subtitle flex flex-row justify-end mb-2 uppercase">
+    <div
+      *ngIf="!small"
+      class="card-subtitle flex flex-row justify-end mb-2 uppercase"
+    >
       <div *ngIf="canEdit">
-        <button mat-stroked-button disableRipple="false" class="text-sm"
-        title="Recept szerkesztése"
-        color="primary"
-        (click)="editEmit()"
-        ><mat-icon>edit_outline</mat-icon>
+        <button
+          mat-stroked-button
+          disableRipple="false"
+          class="text-sm"
+          title="Recept szerkesztése"
+          color="primary"
+          (click)="editEmit()"
+        >
+          <mat-icon>edit_outline</mat-icon>
         </button>
       </div>
       <div class="ml-2" *ngIf="canDelete">
-        <button mat-stroked-button disableRipple="false" class="text-sm"
-        color="warn"
-        title="Recept törlése"
-        (click)="deleteEmit()"
-        ><mat-icon>delete_outline</mat-icon>
+        <button
+          mat-stroked-button
+          disableRipple="false"
+          class="text-sm"
+          color="warn"
+          title="Recept törlése"
+          (click)="deleteEmit()"
+        >
+          <mat-icon>delete_outline</mat-icon>
         </button>
       </div>
-      
     </div>
   </div>
 </div>

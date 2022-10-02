@@ -1,38 +1,42 @@
 <div class="my-5">
   <div class="slider">
-    <owl-carousel-o 
-    
-    [options]="customOptions">
-      <ng-template carouselSlide *ngFor="let slide of recipe?.image; index as i">
-        <img src={{slide}}>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template
+        carouselSlide
+        *ngFor="let slide of recipe?.image; index as i"
+      >
+        <img src="{{ slide }}" />
       </ng-template>
-      
     </owl-carousel-o>
   </div>
   <div class="description flex justify-between px-1 py-6">
     <div>
       <div class="h-img-th text-base uppercase">Elkészítési idő</div>
-      <div class="h-img-td italic">{{recipe?.cookingTime}} perc</div>
+      <div class="h-img-td italic">{{ recipe?.cookingTime }} perc</div>
     </div>
     <div>
       <div class="h-img-th text-base uppercase">Nehézség</div>
-      <div class="h-img-td italic">{{recipe?.difficulty.name}}</div>
+      <div class="h-img-td italic">{{ recipe?.difficulty.name }}</div>
     </div>
     <div>
       <div class="h-img-th text-base uppercase">Költség</div>
-      <div class="h-img-td italic">{{recipe?.cost.name}}</div>
+      <div class="h-img-td italic">{{ recipe?.cost.name }}</div>
     </div>
     <div>
       <div class="h-img-th text-base uppercase">Konyha</div>
-      <div class="h-img-td italic">{{recipe?.nationality.name}}</div>
+      <div class="h-img-td italic">{{ recipe?.nationality.name }}</div>
     </div>
   </div>
   <mat-chip-list>
     <ng-container *ngFor="let label of recipe?.labels">
-      <mat-chip color="warn" selected class="chips hover:cursor-pointer" (click)="clickOnLabel(label.id)">
-        {{label.name}}
+      <mat-chip
+        color="warn"
+        selected
+        class="chips hover:cursor-pointer"
+        (click)="clickOnLabel(label.id)"
+      >
+        {{ label.name }}
       </mat-chip>
     </ng-container>
   </mat-chip-list>
- 
 </div>

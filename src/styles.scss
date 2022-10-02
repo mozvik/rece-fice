@@ -7,12 +7,8 @@
 @import "mixins";
 @import "colors";
 
-
-
-
 /* You can add global styles to this file, and also import other style files */
 :root {
-
   --orangeRed: rgb(255, 112, 85); /*#ff7055*/
   --orangeRedDark: #df3e10;
 
@@ -22,12 +18,11 @@
   --backgroundColor: #fffef7;
   --backgroundColorDarker: #eae8e0;
 
-  --aa: #DF3E10;
-  --ab: #2D3A4B;
-  --ac: #EAE0D5;
-  --ad: #2292A4;
-  --ae: #0A8754;
-
+  --aa: #df3e10;
+  --ab: #2d3a4b;
+  --ac: #eae0d5;
+  --ad: #2292a4;
+  --ae: #0a8754;
 }
 
 body,
@@ -35,8 +30,8 @@ html {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: $textColor!important;
-  background: $backgroundColor!important;
+  color: $textColor !important;
+  background: $backgroundColor !important;
   margin: 0 auto;
   font-size: 15px;
   font-family: $fontSource;
@@ -49,71 +44,75 @@ input:focus,
   box-shadow: none;
   outline: none;
 }
-button, .mat-button-wrapper, .mat-tab-label-content {
+button,
+.mat-button-wrapper,
+.mat-tab-label-content {
   @include source;
   // letter-spacing: .05rem;
 }
-.title{
+.title {
   text-transform: uppercase;
   font-style: normal;
   font-family: $fontPoppins;
 }
-.title-h1{
+.title-h1 {
   @extend .title;
   font-size: 3.5rem;
- }
- .title-h2{
-   @extend .title;
-   font-size: 3.0rem;
- }
- .title-h3{
-   @extend .title;
-   font-size: 2.5rem;
-  }
-  .title-h4{
-    @extend .title;
-    font-size: 2.0rem;
-  }
-  .title-h5{
-    @extend .title;
-    font-size: 1.5rem;
-  }
-  .title-h6{
-    @extend .title;
-    font-size: 1.25rem;
-  }
+}
+.title-h2 {
+  @extend .title;
+  font-size: 3rem;
+}
+.title-h3 {
+  @extend .title;
+  font-size: 2.5rem;
+}
+.title-h4 {
+  @extend .title;
+  font-size: 2rem;
+}
+.title-h5 {
+  @extend .title;
+  font-size: 1.5rem;
+}
+.title-h6 {
+  @extend .title;
+  font-size: 1.25rem;
+}
 
-.title-bg-info{
+.title-bg-info {
   background-color: $info;
 }
-.title-bg-warn{
+.title-bg-warn {
   background-color: $orangeRedDark;
   color: $backgroundColorDarker;
 }
 
-.underline-bold, .underline-normal, .underline-thin{
+.underline-bold,
+.underline-normal,
+.underline-thin {
   width: 100%;
   background-color: $orangeRedDark;
 }
-.underline-bold{
+.underline-bold {
   height: 6px;
 }
-.underline-normal{
+.underline-normal {
   height: 3px;
 }
-.underline-thin{
+.underline-thin {
   height: 1px;
 }
 
-.snack-success{
+.snack-success {
   background: green;
   color: $backgroundColor;
 }
-.snack-info{
+.snack-info {
   background: dodgerblue;
   color: $backgroundColor;
 }
-.snack-error{
+.snack-error {
   background: brown;
   color: $backgroundColor;
 }
@@ -131,16 +130,15 @@ button, .mat-button-wrapper, .mat-tab-label-content {
   font-family: $fontOswald;
   font-size: 1.1rem;
 }
-.mat-divider{
-  margin: 0 auto!important;
+.mat-divider {
+  margin: 0 auto !important;
 }
-.mat-option-text{
+.mat-option-text {
   @include source;
 }
 
-.mat-imput-element::placeholder, .mat-form-field{
+.mat-imput-element::placeholder,
+.mat-form-field {
   @include source;
   font-size: 1.2rem;
 }
-
-

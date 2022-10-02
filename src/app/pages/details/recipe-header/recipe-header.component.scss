@@ -1,33 +1,34 @@
 @import "../../../../mixins";
 
-img{
-    display: block;
-    width: auto;
-    height: 100%;
-    height: 300px;
-    object-fit: cover;
+img {
+  display: block;
+  width: auto;
+  height: 100%;
+  height: 300px;
+  object-fit: cover;
 }
 
-.h-img-th{
+.h-img-th {
   font-family: $fontOswald;
 }
 
-.h-img-td{
+.h-img-td {
   font-family: $fontLora;
 }
 
-.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
-  transform: none !important;}
+.mat-sidenav-container,
+.mat-sidenav-content,
+.mat-tab-body-content {
+  transform: none !important;
+}
 
-  @media screen and (min-width: 1280px) {
-   
-    img{
-      height: 380px;
-    }
+@media screen and (min-width: 1280px) {
+  img {
+    height: 380px;
   }
-  @media screen and (min-width: 1536px) {
-    
-    img{
-      height: 500px;
-    }
+}
+@media screen and (min-width: 1536px) {
+  img {
+    height: 500px;
   }
+}

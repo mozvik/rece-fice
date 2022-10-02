@@ -7,10 +7,9 @@ import { APIService } from 'src/app/service/api.service';
 @Component({
   selector: 'app-recipe-card',
   templateUrl: './recipe-card.component.html',
-  styleUrls: ['./recipe-card.component.scss']
+  styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent implements OnInit {
-
   @Input() recipe: Recipe | undefined;
   @Input() canEdit: boolean = false;
   @Input() canDelete: boolean = false;
@@ -21,15 +20,11 @@ export class RecipeCardComponent implements OnInit {
   @Output() editClicked = new EventEmitter<boolean>();
   @Output() deleteClicked = new EventEmitter<boolean>();
 
-  constructor(
-     private apiService: APIService,
-     private router: Router
-  ) {}
+  constructor(private apiService: APIService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  urlEmit(id: string) { 
+  urlEmit(id: string) {
     this.urlClicked.emit(id);
   }
   userEmit(id: string) {
@@ -38,13 +33,13 @@ export class RecipeCardComponent implements OnInit {
   categoryEmit(id: string) {
     this.categoryClicked.emit(id);
 
-    const catType = this.apiService.listType.find(type => type.name.toLowerCase() === id)
+    const catType = this.apiService.listType.find(
+      (type) => type.name.toLowerCase() === id
+    );
 
     if (catType) {
-      this.router.navigateByUrl(`/results/${catType.id.toLowerCase()}`);  
+      this.router.navigateByUrl(`/results/${catType.id.toLowerCase()}`);
     }
-    
-
   }
   editEmit() {
     this.editClicked.emit(true);

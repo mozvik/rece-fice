@@ -6,17 +6,28 @@
 
   <table mat-table [dataSource]="recipe?.ingredients" class="">
     <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element;index as i" class="text-xl"> {{i + 1.}} </td>
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element; index as i" class="text-xl">
+        {{ i + 1 }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Qty </th>
-      <td mat-cell *matCellDef="let element" class="text-lg"> {{element.quantity | number: '1.0-2'}}&nbsp;{{element.measurementShortName}} </td>
+      <th mat-header-cell *matHeaderCellDef>Qty</th>
+      <td mat-cell *matCellDef="let element" class="text-lg">
+        {{ element.quantity | number: "1.0-2" }}&nbsp;{{
+          element.measurementShortName
+        }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element" class="text-lg"> {{element.name}} </td>
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element" class="text-lg">
+        {{ element.name }}
+      </td>
     </ng-container>
-    <tr mat-row *matRowDef="let row; columns: ['position','quantity','name']"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['position', 'quantity', 'name']"
+    ></tr>
   </table>
 </div>

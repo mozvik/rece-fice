@@ -14,14 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [
-    EditComponent,
-    DialogDeleteImage,
-  ],
+  declarations: [EditComponent, DialogDeleteImage],
   imports: [
     CommonModule,
     EditRoutingModule,
@@ -32,11 +28,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule, 
+    MatSelectModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+  ],
 })
-export class EditModule { }
+export class EditModule {}

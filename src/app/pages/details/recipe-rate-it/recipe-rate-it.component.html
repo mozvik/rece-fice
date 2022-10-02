@@ -1,9 +1,10 @@
 <div>
-  <button mat-icon-button 
-  [disableRipple]="true"
-  *ngFor="let rating of ratings; index as i"
-  (click)="toggleStar(i)">
-    <mat-icon>{{rating === 0 ? 'star_outline':'star'}}</mat-icon>
+  <button
+    mat-icon-button
+    [disableRipple]="true"
+    *ngFor="let rating of ratings; index as i"
+    (click)="toggleStar(i)"
+  >
+    <mat-icon>{{ rating === 0 ? "star_outline" : "star" }}</mat-icon>
   </button>
-
 </div>

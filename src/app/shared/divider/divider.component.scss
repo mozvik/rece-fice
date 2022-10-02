@@ -1,51 +1,51 @@
 @import "../../../mixins";
 @import "../../../colors";
 
-.wrapper{
-  width:fit-content;
+.wrapper {
+  width: fit-content;
   margin: 0 auto;
 }
 
-.diviLeft{
+.diviLeft {
   @include dancing;
-  transform: translate(-.5rem,.5rem);
+  transform: translate(-0.5rem, 0.5rem);
   margin-left: 1rem;
-  >div{
+  > div {
     font-size: 1.75rem;
-    opacity: .4;
+    opacity: 0.4;
     color: $textColor;
   }
 }
-.diviRight{
+.diviRight {
   @include poppins;
   margin-left: 3rem;
   margin-right: 1rem;
-  transform: translate(.5rem,-.5rem);
-  >div{
+  transform: translate(0.5rem, -0.5rem);
+  > div {
     font-size: 1.4rem;
     color: $textColor;
-   }
+  }
 }
 
-img{
+img {
   height: 100%;
-  opacity: .5;
+  opacity: 0.5;
   display: inline-block;
 }
 
-@media screen and ( min-width: 960px ){
-  .diviLeft{
+@media screen and (min-width: 960px) {
+  .diviLeft {
     margin-left: 4rem;
-    transform: translate(-4rem,.7rem);
-    >div{
+    transform: translate(-4rem, 0.7rem);
+    > div {
       font-size: 3.5rem;
     }
   }
-  .diviRight{
+  .diviRight {
     margin-left: 4rem;
     margin-right: 4rem;
-    transform: translate(4rem,-.7rem);
-    >div{
+    transform: translate(4rem, -0.7rem);
+    > div {
       font-size: 3rem;
       line-height: 3rem;
     }

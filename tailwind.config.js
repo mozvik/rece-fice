@@ -4,7 +4,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       sans: ["Source Sans Pro", "sans-serif"],
-    }
+    },
   },
   plugins: [],
-}
+};

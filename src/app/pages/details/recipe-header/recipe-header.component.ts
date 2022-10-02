@@ -11,15 +11,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-recipe-header',
   templateUrl: './recipe-header.component.html',
-  styleUrls: ['./recipe-header.component.scss']
+  styleUrls: ['./recipe-header.component.scss'],
 })
 export class RecipeHeaderComponent implements OnInit {
-
   //https://animate.style/
   //animate.css osztályai a fenti linken megtalálhatóak
 
-  @Input() recipe: Recipe | undefined
-  
+  @Input() recipe: Recipe | undefined;
+
   customOptions: OwlOptions = {
     loop: true,
     autoWidth: true,
@@ -31,10 +30,10 @@ export class RecipeHeaderComponent implements OnInit {
     animateOut: 'animate__flipOutY',
     dots: true,
     navSpeed: 700,
-    navText: ["Előző", 'Következő'],
+    navText: ['Előző', 'Következő'],
     items: 1,
-    nav: true
-  }
+    nav: true,
+  };
   nationalities: OptionsData[] = [];
   difficulties: OptionsData[] = [];
   costs: OptionsData[] = [];
@@ -43,7 +42,8 @@ export class RecipeHeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataService,
-    private apiService: APIService) { }
+    private apiService: APIService
+  ) {}
 
   ngOnInit(): void {
     this.apiService.costs.subscribe((costs) => (this.costs = costs));
@@ -55,11 +55,14 @@ export class RecipeHeaderComponent implements OnInit {
     );
     this.apiService.labels.subscribe((labels) => (this.labels = labels));
   }
-  
+
   clickOnLabel(id: number) {
-    this.dataService.searchFilters = {advanced: true, text: '', filters: { label: [id]}};
+    this.dataService.searchFilters = {
+      advanced: true,
+      text: '',
+      filters: { label: [id] },
+    };
     this.dataService.resultsPageIndex = 0;
     this.router.navigate(['/results', 'search']);
-    
   }
 }

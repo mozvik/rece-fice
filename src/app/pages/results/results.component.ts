@@ -11,13 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss'],
-  animations: [
-   
-    listAnimation
-  ]
+  animations: [listAnimation],
 })
 export class ResultsComponent implements OnInit {
-
   categories: OptionsData[] = [];
   results: Recipe[] = [];
   state: string = '';
@@ -26,17 +22,19 @@ export class ResultsComponent implements OnInit {
 
   searchFilters: any = {
     text: '',
-    filters: []
+    filters: [],
   };
-  
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dataService: DataService,
-    private apiService: APIService,) {
-    
-    this.apiService.categories.subscribe((categories) => this.categories = categories);
-    
+    private apiService: APIService
+  ) {
+    this.apiService.categories.subscribe(
+      (categories) => (this.categories = categories)
+    );
+
     this.activatedRoute.params
       .pipe(
         switchMap((params) => {
@@ -44,100 +42,111 @@ export class ResultsComponent implements OnInit {
 
           return this.activatedRoute.data;
         })
-    ).subscribe({
-      next: data => {
-        this.results = this.dataService.createRecipes(data['recipes'].items)
+      )
+      .subscribe({
+        next: (data) => {
+          this.results = this.dataService.createRecipes(data['recipes'].items);
 
-        if (this.state === 'search' || this.state === 'fridge') { 
-          this.title = 'A keresés eredménye:';
-        } else {
-          this.title = this.apiService.listType.filter((d) => d.id === this.state)[0]?.name
-        }
-      },
-      error: err => {
-        this.router.navigate(['/home']);
-       }
-    })}
-
-  ngOnInit(): void {
-    
-
+          if (this.state === 'search' || this.state === 'fridge') {
+            this.title = 'A keresés eredménye:';
+          } else {
+            this.title = this.apiService.listType.filter(
+              (d) => d.id === this.state
+            )[0]?.name;
+          }
+        },
+        error: (err) => {
+          this.router.navigate(['/home']);
+        },
+      });
   }
 
-  navigateToDetails(id: string) { 
-    this.router.navigateByUrl(`/details/${id}`)
+  ngOnInit(): void {}
+
+  navigateToDetails(id: string) {
+    this.router.navigateByUrl(`/details/${id}`);
   }
 
   navigateToCategory(id: string) {
-    let cat = ''
+    let cat = '';
     switch (id) {
       case '1':
-        cat = 'appetiser'
+        cat = 'appetiser';
         break;
       case '2':
-          cat = 'soup'
+        cat = 'soup';
         break;
       case '3':
-          cat = 'maincourse'
+        cat = 'maincourse';
         break;
-       case '4':
-          cat = 'sidedish'
+      case '4':
+        cat = 'sidedish';
         break;
       case '5':
-          cat = 'dessert'
+        cat = 'dessert';
         break;
       case '6':
-          cat = 'drink'
+        cat = 'drink';
         break;
       default:
-        cat = ''
+        cat = '';
         break;
     }
     this.router.navigate(['/results', cat]);
   }
 
   incrementIndex(): void {
-    this.dataService.resultsPageIndex++
+    this.dataService.resultsPageIndex++;
     if (this.state === 'search') {
-      this.getRecipesFromSearch()
+      this.getRecipesFromSearch();
+    } else if (this.state === 'fridge') {
+      this.getRecipesFromFridge();
+    } else if (this.apiService.listType.filter((d) => d.id === this.state)) {
+      this.getRecipesFromCategory();
     }
-    else if (this.state === 'fridge') { 
-      this.getRecipesFromFridge()
-    }
-    else if (this.apiService.listType.filter((d) => d.id === this.state)){ 
-      this.getRecipesFromCategory()
-    }
-   
   }
 
   getRecipesFromSearch() {
     this.isLoading = true;
-    this.apiService.search(this.dataService.searchFilters.text, this.dataService.searchFilters.filters, this.dataService.resultsPageIndex)
-    .pipe(
-      finalize(() => this.isLoading = false)  
-    )
-    .subscribe({
-    next: (response: any) => this.results = this.results.concat(this.dataService.createRecipes(response.items))
-  })
+    this.apiService
+      .search(
+        this.dataService.searchFilters.text,
+        this.dataService.searchFilters.filters,
+        this.dataService.resultsPageIndex
+      )
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (response: any) =>
+          (this.results = this.results.concat(
+            this.dataService.createRecipes(response.items)
+          )),
+      });
   }
   getRecipesFromCategory() {
     this.isLoading = true;
-    this.apiService.list(this.state as any, this.dataService.resultsPageIndex)
-      .pipe(
-        finalize(() => this.isLoading = false)  
-      )
+    this.apiService
+      .list(this.state as any, this.dataService.resultsPageIndex)
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((response: any) => {
-    this.results = this.results.concat(this.dataService.createRecipes(response.items))
-    })
+        this.results = this.results.concat(
+          this.dataService.createRecipes(response.items)
+        );
+      });
   }
   getRecipesFromFridge() {
     this.isLoading = true;
-    this.apiService.fridge(this.dataService.fridgeIngredients, this.dataService.resultsPageIndex, 8)
-      .pipe(
-        finalize(() => this.isLoading = false)  
+    this.apiService
+      .fridge(
+        this.dataService.fridgeIngredients,
+        this.dataService.resultsPageIndex,
+        8
       )
-      .subscribe((response: any) =>
-      this.results = this.results.concat(this.dataService.createRecipes(response.items))
-      )
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe(
+        (response: any) =>
+          (this.results = this.results.concat(
+            this.dataService.createRecipes(response.items)
+          ))
+      );
   }
 }

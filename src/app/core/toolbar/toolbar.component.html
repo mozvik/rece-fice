@@ -1,41 +1,49 @@
-<app-search 
-  (closed)="$event ? isSearchOpen=false:''" [isSearchOpen]="isSearchOpen">
+<app-search
+  (closed)="$event ? (isSearchOpen = false) : ''"
+  [isSearchOpen]="isSearchOpen"
+>
 </app-search>
 
-<div id="desktopBar" class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full z-10 lg:px-10" 
-
-(window:scroll)="onScroll($event)"
-[@toolbarSlideDown]="toolbarDown"
-[class.toolbarScroll]="toolbarDown">
-   <mat-toolbar id="userBar"
-  class="flex flex-row justify-between"> 
-      <div>
-        <img src="./assets/img/logo.png"
-              alt=""
-              width="141"
-              routerLink="/"
-              class="hover:cursor-pointer"/>
-      </div>
-      <div *ngIf="isLoggedIn">
-        <button mat-button
-        routerLink="/profile"> {{user?.name}} <mat-icon>person_outline</mat-icon></button>
-      </div>
+<div
+  id="desktopBar"
+  class="container hidden lg:block mx-auto pt-0 absolute top-0 left-0 right-0 w-full z-10 lg:px-10"
+  (window:scroll)="onScroll($event)"
+  [@toolbarSlideDown]="toolbarDown"
+  [class.toolbarScroll]="toolbarDown"
+>
+  <mat-toolbar id="userBar" class="flex flex-row justify-between">
+    <div>
+      <img
+        src="./assets/img/logo.png"
+        alt=""
+        width="141"
+        routerLink="/"
+        class="hover:cursor-pointer"
+      />
+    </div>
+    <div *ngIf="isLoggedIn">
+      <button mat-button routerLink="/profile">
+        {{ user?.name }} <mat-icon>person_outline</mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
   <mat-toolbar id="mainBar" class="flex flex-row justify-between w-100">
-    <div class="basis-1/8">
-      
-    </div>
+    <div class="basis-1/8"></div>
     <ul class="flex flex-row justify-between basis-auto text-center">
       <li class="">
-        <button mat-button
+        <button
+          mat-button
           class=""
           aria-current="page"
           routerLink="/home"
           id="homeLink"
-          >Főoldal</button>
+        >
+          Főoldal
+        </button>
       </li>
       <li class="">
-        <button mat-button
+        <button
+          mat-button
           class=""
           role="button"
           data-bs-toggle=""
@@ -44,88 +52,97 @@
           [matMenuTriggerFor]="recipeMenu"
           (menuOpened)="dropdownCollapsed = false"
           (menuClosed)="dropdownCollapsed = true"
-        >Receptek<mat-icon [@chevronRotate]="!dropdownCollapsed">
-          arrow_drop_down
-          </mat-icon></button>
+        >
+          Receptek<mat-icon [@chevronRotate]="!dropdownCollapsed">
+            arrow_drop_down
+          </mat-icon>
+        </button>
       </li>
-      <mat-menu #recipeMenu="matMenu" xPosition="after"
-      >
-        <button mat-menu-item
-        [routerLink]="['/results', 'appetiser']">Előételek</button>
-        <button mat-menu-item
-        [routerLink]="['/results', 'soup']">Levesek</button>
-        <button mat-menu-item
-        [routerLink]="['/results', 'maincourse']">Főételek</button>
-        <button mat-menu-item
-        [routerLink]="['/results', 'sidedish']">Köretek</button>
-        <button mat-menu-item
-        [routerLink]="['/results', 'dessert']">Desszertek</button>
-        <button mat-menu-item
-        [routerLink]="['/results', 'drink']">Italok</button>
+      <mat-menu #recipeMenu="matMenu" xPosition="after">
+        <button mat-menu-item [routerLink]="['/results', 'appetiser']">
+          Előételek
+        </button>
+        <button mat-menu-item [routerLink]="['/results', 'soup']">
+          Levesek
+        </button>
+        <button mat-menu-item [routerLink]="['/results', 'maincourse']">
+          Főételek
+        </button>
+        <button mat-menu-item [routerLink]="['/results', 'sidedish']">
+          Köretek
+        </button>
+        <button mat-menu-item [routerLink]="['/results', 'dessert']">
+          Desszertek
+        </button>
+        <button mat-menu-item [routerLink]="['/results', 'drink']">
+          Italok
+        </button>
       </mat-menu>
-    
+
       <li class="">
-        <button mat-button
+        <button
+          mat-button
           class=""
           routerLink="/upload"
-          (click)="'isOpen=false'"
+          (click)="('isOpen=false')"
           tabindex="-1"
           aria-disabled="true"
-          >Receptfeltöltés</button>
+        >
+          Receptfeltöltés
+        </button>
       </li>
       <li class="">
-        <button mat-button
+        <button
+          mat-button
           class=""
           routerLink="/fridge"
           tabindex="-1"
           aria-disabled="true"
-          >Mi van itthon?</button>
+        >
+          Mi van itthon?
+        </button>
       </li>
-    
     </ul>
-    <ul class="flex flex-row basis-1/8 ">
-     
+    <ul class="flex flex-row basis-1/8">
       <li *ngIf="!isLoggedIn" class="transform -translate-y-1">
-        <button mat-icon-button
-          routerLink="/login"
-          title="Bejelentkezés"
-        ><mat-icon>login</mat-icon>
-      </button>
-    
+        <button mat-icon-button routerLink="/login" title="Bejelentkezés">
+          <mat-icon>login</mat-icon>
+        </button>
       </li>
       <li *ngIf="isLoggedIn" class="transform -translate-y-1">
-        <button mat-icon-button
-        (click)="logout()"
-        title="Kijelentkezés"
-        ><mat-icon>logout</mat-icon></button>
+        <button mat-icon-button (click)="logout()" title="Kijelentkezés">
+          <mat-icon>logout</mat-icon>
+        </button>
       </li>
-      <li  class="transform -translate-y-1">
-        <button mat-icon-button
-        (click)="toggleSearch()"
-        title="Keresés"
-        ><mat-icon>search</mat-icon></button>
+      <li class="transform -translate-y-1">
+        <button mat-icon-button (click)="toggleSearch()" title="Keresés">
+          <mat-icon>search</mat-icon>
+        </button>
       </li>
     </ul>
- 
   </mat-toolbar>
 </div>
 
-<div id="mobileBar" class="container fixed top-0 left-0 right-0 mx-auto z-10 lg:hidden min-w-full">
- 
+<div
+  id="mobileBar"
+  class="container fixed top-0 left-0 right-0 mx-auto z-10 lg:hidden min-w-full"
+>
   <mat-toolbar>
-   <div class="container flex flex-row justify-between  min-w-full">
-    <button mat-icon-button (click)="toggleSidenav()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">menu</mat-icon></button>
-    <div class="relative" id="mobileImgWrapper" style="width: 50px; height: 50px" (click)="'isOpen = !isOpen'">
-      <img src="./assets/img/mobile-logo.png"
-          alt=""
-          width="85"
-          class=""/>
-     
+    <div class="container flex flex-row justify-between min-w-full">
+      <button mat-icon-button (click)="toggleSidenav()" [disableRipple]="true">
+        <mat-icon style="font-size: 2rem">menu</mat-icon>
+      </button>
+      <div
+        class="relative"
+        id="mobileImgWrapper"
+        style="width: 50px; height: 50px"
+        (click)="('isOpen = !isOpen')"
+      >
+        <img src="./assets/img/mobile-logo.png" alt="" width="85" class="" />
+      </div>
+      <button mat-icon-button (click)="toggleSearch()" [disableRipple]="true">
+        <mat-icon style="font-size: 2rem">search</mat-icon>
+      </button>
     </div>
-    <button mat-icon-button (click)="toggleSearch()" [disableRipple]="true"><mat-icon style="font-size: 2rem;">search</mat-icon></button>
-   </div>
-   
-    
   </mat-toolbar>
 </div>
-

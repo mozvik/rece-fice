@@ -25,10 +25,37 @@ export class Recipe {
   moderated?: string;
 
   get id() {
-    return this.recipeId 
-  } 
+    return this.recipeId;
+  }
 
-  constructor(recipeId: string = '', recipeName: string = '', ingredients: any[] = [], directions: string[] = [], created: string = '', updated: string = '', userId: string = '', cookingTime: number = 1, difficulty: any = '', cost: any = '', category: any = '', nationality: any = '', image1: string = '', image2: string = '', image3: string = '', calorie: number = 0, protein: number = 0, carbonhydrate: number = 0, fat: number = 0, sugar: number = 0, servings: number = 1, ratings: number = 0, reviews: any[] = [], labels: any[] = [], creator: any = '', moderated: string = '0') {
+  constructor(
+    recipeId: string = '',
+    recipeName: string = '',
+    ingredients: any[] = [],
+    directions: string[] = [],
+    created: string = '',
+    updated: string = '',
+    userId: string = '',
+    cookingTime: number = 1,
+    difficulty: any = '',
+    cost: any = '',
+    category: any = '',
+    nationality: any = '',
+    image1: string = '',
+    image2: string = '',
+    image3: string = '',
+    calorie: number = 0,
+    protein: number = 0,
+    carbonhydrate: number = 0,
+    fat: number = 0,
+    sugar: number = 0,
+    servings: number = 1,
+    ratings: number = 0,
+    reviews: any[] = [],
+    labels: any[] = [],
+    creator: any = '',
+    moderated: string = '0'
+  ) {
     this.recipeId = recipeId;
     this.recipeName = recipeName;
     this.ingredients = ingredients;
@@ -43,10 +70,10 @@ export class Recipe {
     this.nationality = nationality;
     this.image = [image1];
     if (image2 != '' && image2 != null) {
-      this.image.push(image2)
+      this.image.push(image2);
     }
     if (image3 != '' && image3 != null) {
-      this.image.push(image3)
+      this.image.push(image3);
     }
     this.calorie = calorie;
     this.protein = protein;
@@ -61,13 +88,11 @@ export class Recipe {
     this.moderated = moderated;
   }
 
-
-
   // public getIngredients(): any[] {
   //   if (this.ingredients && this.ingredients.length > 0) {
   //     const returnArr: any = []
   //     for (const row of this.ingredients) {
-  //       const arr = row.split(';') 
+  //       const arr = row.split(';')
   //       const obj = {
   //         quantity: arr[0].split(' ')[0],
   //         unit: arr[0].split(' ')[1],
@@ -84,31 +109,36 @@ export class Recipe {
     return [
       {
         name: 'Kalória',
-        quantity: this.calorie
+        quantity: this.calorie,
       },
       {
         name: 'Szénhidrát',
-        quantity: this.carbonhydrate
+        quantity: this.carbonhydrate,
       },
       {
         name: 'Fehérje',
-        quantity: this.protein
+        quantity: this.protein,
       },
       {
         name: 'Zsír',
-        quantity: this.fat
+        quantity: this.fat,
       },
       {
         name: 'Cukor',
-        quantity: this.sugar
-      }
-    ]
+        quantity: this.sugar,
+      },
+    ];
   }
 
   averageRating(): number {
     if (this.reviews) {
       if (this.reviews.length > 0) {
-        return this.reviews.reduce((acc, curr) => Number(acc) + Number(curr.rating), 0) / this.reviews.length
+        return (
+          this.reviews.reduce(
+            (acc, curr) => Number(acc) + Number(curr.rating),
+            0
+          ) / this.reviews.length
+        );
       }
     }
     return 0;
@@ -116,9 +146,8 @@ export class Recipe {
 
   totalRatings(): number {
     if (this.reviews) {
-        return this.reviews.length
+      return this.reviews.length;
     }
     return 0;
   }
-  
 }

@@ -1,11 +1,11 @@
 @import "../../../../mixins";
 @import "../../../../colors";
-.mat-table{
+.mat-table {
   font-family: $fontLora;
   background-color: $backgroundColor;
   border-bottom: none;
-  tr:last-child{
-    .mat-cell{
+  tr:last-child {
+    .mat-cell {
       border-bottom: none;
     }
   }
@@ -13,13 +13,13 @@
 
 .mat-column-position {
   width: 2rem;
-  border-right: 1px solid rgba($textColorMuted,.4);
+  border-right: 1px solid rgba($textColorMuted, 0.4);
   padding: 0 2rem;
   text-align: center;
 }
 .mat-column-quantity {
   width: auto;
-  border-right: 1px solid rgba($textColorMuted,.4);
+  border-right: 1px solid rgba($textColorMuted, 0.4);
   padding: 1rem 2rem;
   text-align: left;
 }
@@ -29,7 +29,7 @@
   text-align: left;
 }
 
-.mat-icon{
+.mat-icon {
   font-size: 3rem;
   height: 3rem;
   width: 3rem;

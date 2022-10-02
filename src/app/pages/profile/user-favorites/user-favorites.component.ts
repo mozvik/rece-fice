@@ -8,20 +8,16 @@ import { APIService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { DataService } from 'src/app/service/data.service';
 
-
 @Component({
   selector: 'app-user-favorites',
   templateUrl: './user-favorites.component.html',
   styleUrls: ['./user-favorites.component.scss'],
-  animations: [
-      listAnimation 
-  ],
+  animations: [listAnimation],
 })
 export class UserFavoritesComponent implements OnInit {
-
-  @Input() user: string | undefined
-  @Input() userFavorites: Recipe[] | undefined
-  @Input() userPageIndex: number = 0
+  @Input() user: string | undefined;
+  @Input() userFavorites: Recipe[] | undefined;
+  @Input() userPageIndex: number = 0;
   @Output() userPageIndexChange: EventEmitter<number> = new EventEmitter();
 
   results: Recipe[] = [];
@@ -32,56 +28,66 @@ export class UserFavoritesComponent implements OnInit {
     private apiService: APIService,
     private authService: AuthService,
     public dialogDelete: MatDialog,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.apiService.categories.subscribe((categories) => this.categories = categories);   
+    this.apiService.categories.subscribe(
+      (categories) => (this.categories = categories)
+    );
   }
-  navigateToDetails(id: string) { 
-    this.router.navigateByUrl(`/details/${id}`)
+  navigateToDetails(id: string) {
+    this.router.navigateByUrl(`/details/${id}`);
   }
-
 
   navigateToCategory(id: string) {
-    let cat = ''
+    let cat = '';
     switch (id) {
       case '1':
-        cat = 'appetiser'
+        cat = 'appetiser';
         break;
       case '2':
-          cat = 'soup'
+        cat = 'soup';
         break;
       case '3':
-          cat = 'maincourse'
+        cat = 'maincourse';
         break;
-       case '4':
-          cat = 'sidedish'
+      case '4':
+        cat = 'sidedish';
         break;
       case '5':
-          cat = 'dessert'
+        cat = 'dessert';
         break;
       case '6':
-          cat = 'drink'
+        cat = 'drink';
         break;
       default:
-        cat = ''
+        cat = '';
         break;
     }
     this.router.navigate(['/results', cat]);
   }
 
   incrementIndex(): void {
-    this.dataService.userRecipePageIndex++
-    this.userPageIndexChange.emit(this.dataService.userRecipePageIndex)
-    this.moreRecipes()
+    this.dataService.userRecipePageIndex++;
+    this.userPageIndexChange.emit(this.dataService.userRecipePageIndex);
+    this.moreRecipes();
   }
 
   moreRecipes() {
-    this.apiService.list('userrecipes', this.dataService.userRecipePageIndex, 4, this.authService.user?.userId).subscribe({
-      next: (response: any) => {
-        this.userFavorites = this.userFavorites!.concat(this.dataService.createRecipes(response.items))
-      }
-    })
-   
+    this.apiService
+      .list(
+        'userrecipes',
+        this.dataService.userRecipePageIndex,
+        4,
+        this.authService.user?.userId
+      )
+      .subscribe({
+        next: (response: any) => {
+          this.userFavorites = this.userFavorites!.concat(
+            this.dataService.createRecipes(response.items)
+          );
+        },
+      });
   }
 }

@@ -12,22 +12,21 @@ import { MatButtonModule } from '@angular/material/button';
     DividerComponent,
     RecipeThumbnailComponent,
     RecipeCardComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
   ],
-  imports: [CommonModule,MatIconModule,MatButtonModule
-  ],
+  imports: [CommonModule, MatIconModule, MatButtonModule],
   exports: [
     CommonModule,
     DividerComponent,
     RecipeThumbnailComponent,
-    RecipeCardComponent
-  ]
+    RecipeCardComponent,
+  ],
 })
 export class SharedModule {
   // static forRoot() {
   //   return {
   //     ngModule: SharedModule,
-  //     providers: [ APIService, DataService, IconService, MessageService ]                      
+  //     providers: [ APIService, DataService, IconService, MessageService ]
   //   };
   // }
- }
+}

@@ -1,100 +1,194 @@
 <div class="container mx-auto relative px-3 lg:px-0">
-  <div class="flex flex-col items-center justify-center wrapper w-full lg:w-1/2 lg:ml-auto mt-48 mb-16 p-14" >
-    <div class="absolute -top-24 lg:top-28 left-0"><img src="../../../assets/img/cinnamon.png" alt="" class="w-1/2 lg:w-3/4 2xl:w-full filter drop-shadow-xl"></div>
-    <h4 class="title-h4 mb-8 text-center">Felhasználói fiók létrehozása</h4><br>
-    
-    <form action="" 
-    [formGroup]="registerFormGroup"
-    class="flex flex-col">
-      <mat-form-field class="flex flex-col mb-8"
-      
-        appearance="legacy">
-        <input id="email" type="email" name="email" placeholder="Email cím" aria-describedby="input-help" matInput formControlName="email"/>
-        
-        <mat-error *ngIf="email?.errors?.['email']"
-      class="input-help text-danger">&nbsp;{{email.errors['email']}}
-      </mat-error>
-      <mat-error *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
-        class="input-help text-danger">&nbsp;Kötelező kitölteni
-      </mat-error>
-      <mat-error *ngIf="email?.errors?.['pattern'] && (email?.dirty || email?.touched)"
-      >&nbsp;Nem megfelelő email formátum</mat-error>
+  <div
+    class="flex flex-col items-center justify-center wrapper w-full lg:w-1/2 lg:ml-auto mt-48 mb-16 p-14"
+  >
+    <div class="absolute -top-24 lg:top-28 left-0">
+      <img
+        src="../../../assets/img/cinnamon.png"
+        alt=""
+        class="w-1/2 lg:w-3/4 2xl:w-full filter drop-shadow-xl"
+      />
+    </div>
+    <h4 class="title-h4 mb-8 text-center">Felhasználói fiók létrehozása</h4>
+    <br />
+
+    <form action="" [formGroup]="registerFormGroup" class="flex flex-col">
+      <mat-form-field class="flex flex-col mb-8" appearance="legacy">
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Email cím"
+          aria-describedby="input-help"
+          matInput
+          formControlName="email"
+        />
+
+        <mat-error
+          *ngIf="email?.errors?.['email']"
+          class="input-help text-danger"
+          >&nbsp;{{ email.errors["email"] }}
+        </mat-error>
+        <mat-error
+          *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)"
+          class="input-help text-danger"
+          >&nbsp;Kötelező kitölteni
+        </mat-error>
+        <mat-error
+          *ngIf="email?.errors?.['pattern'] && (email?.dirty || email?.touched)"
+          >&nbsp;Nem megfelelő email formátum</mat-error
+        >
       </mat-form-field>
       <div class="flex flex-col">
-        <mat-form-field class="flex flex-col mb-8"
-        appearance="legacy">
-          <input id="name" type="name" name="name" placeholder="Hogyan szólíthatunk" aria-describedby="input-help" matInput  formControlName="name" />
-          <mat-hint align="end">{{name?.value?.length || 0}}/4</mat-hint>
-          <mat-error *ngIf="name?.errors?.['name']">{{name?.errors?.['name']}}</mat-error>
-      
-          <mat-error *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)"
-          class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-          <mat-error *ngIf="name?.errors?.['minlength'] && (name?.dirty || name?.touched)"
-          >&nbsp;Minimum 4 karakter legyen</mat-error>
+        <mat-form-field class="flex flex-col mb-8" appearance="legacy">
+          <input
+            id="name"
+            type="name"
+            name="name"
+            placeholder="Hogyan szólíthatunk"
+            aria-describedby="input-help"
+            matInput
+            formControlName="name"
+          />
+          <mat-hint align="end">{{ name?.value?.length || 0 }}/4</mat-hint>
+          <mat-error
+            *ngIf="name?.errors?.['name']"
+            >{{name?.errors?.['name']}}</mat-error
+          >
 
-        </mat-form-field>  
-          
+          <mat-error
+            *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+          <mat-error
+            *ngIf="name?.errors?.['minlength'] && (name?.dirty || name?.touched)"
+            >&nbsp;Minimum 4 karakter legyen</mat-error
+          >
+        </mat-form-field>
       </div>
       <div class="flex flex-col">
-        <mat-form-field class="flex flex-col mb-8"
-        appearance="legacy">
-        <input id="password" type="password" placeholder="Jelszó" name="password" aria-describedby="input-help" matInput formControlName="passwordNew"/>
-        <mat-hint align="end">{{passwordNew?.value?.length || 0}}/8</mat-hint>
-        <mat-error *ngIf="passwordNew?.errors?.['required'] && (passwordNew?.dirty || passwordNew?.touched)"
-            class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="passwordNew?.errors?.['minlength'] && (passwordNew?.dirty || passwordNew?.touched)"
-        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen!</mat-error>
-        <mat-error *ngIf="passwordNew?.errors?.['notSame'] && (passwordNew?.dirty || passwordNew?.touched )"
-        class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
-        <mat-error *ngIf="passwordNew?.errors?.['passwordNew']"
-        class="input-help text-danger">&nbsp;{{passwordNew.errors['passwordNew']}}</mat-error>
-      </mat-form-field> 
+        <mat-form-field class="flex flex-col mb-8" appearance="legacy">
+          <input
+            id="password"
+            type="password"
+            placeholder="Jelszó"
+            name="password"
+            aria-describedby="input-help"
+            matInput
+            formControlName="passwordNew"
+          />
+          <mat-hint align="end"
+            >{{ passwordNew?.value?.length || 0 }}/8</mat-hint
+          >
+          <mat-error
+            *ngIf="passwordNew?.errors?.['required'] && (passwordNew?.dirty || passwordNew?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+          <mat-error
+            *ngIf="passwordNew?.errors?.['minlength'] && (passwordNew?.dirty || passwordNew?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Minimum 8 karakter legyen!</mat-error
+          >
+          <mat-error
+            *ngIf="passwordNew?.errors?.['notSame'] && (passwordNew?.dirty || passwordNew?.touched )"
+            class="input-help text-danger"
+            >&nbsp;A két jelszó nem azonos</mat-error
+          >
+          <mat-error
+            *ngIf="passwordNew?.errors?.['passwordNew']"
+            class="input-help text-danger"
+            >&nbsp;{{ passwordNew.errors["passwordNew"] }}</mat-error
+          >
+        </mat-form-field>
       </div>
       <div class="flex flex-col">
-        <mat-form-field class="flex flex-col mb-8"
-        appearance="legacy">
-
-        <input id="passwordConfirm" type="password" placeholder="Jelszó újra" name="passwordConfirm" aria-describedby="input-help" matInput formControlName="passwordConfirm" />
-        <mat-hint align="end">{{passwordConfirm?.value?.length || 0}}/8</mat-hint>
-        <mat-error *ngIf="passwordConfirm?.errors?.['required'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
-        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="passwordConfirm?.errors?.['minlength'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
-        class="input-help text-danger">&nbsp;Minimum 8 karakter legyen!</mat-error>
-        <mat-error *ngIf="passwordConfirm?.errors?.['notSame'] && (passwordConfirm?.dirty || passwordConfirm?.touched )"
-        class="input-help text-danger">&nbsp;A két jelszó nem azonos</mat-error>
-        <mat-error *ngIf="passwordConfirm?.errors?.['passwordConfirm']"
-        class="input-help text-danger">&nbsp;{{passwordConfirm.errors['passwordConfirm']}}</mat-error>
-      </mat-form-field> 
+        <mat-form-field class="flex flex-col mb-8" appearance="legacy">
+          <input
+            id="passwordConfirm"
+            type="password"
+            placeholder="Jelszó újra"
+            name="passwordConfirm"
+            aria-describedby="input-help"
+            matInput
+            formControlName="passwordConfirm"
+          />
+          <mat-hint align="end"
+            >{{ passwordConfirm?.value?.length || 0 }}/8</mat-hint
+          >
+          <mat-error
+            *ngIf="passwordConfirm?.errors?.['required'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Kötelező kitölteni</mat-error
+          >
+          <mat-error
+            *ngIf="passwordConfirm?.errors?.['minlength'] && (passwordConfirm?.dirty || passwordConfirm?.touched)"
+            class="input-help text-danger"
+            >&nbsp;Minimum 8 karakter legyen!</mat-error
+          >
+          <mat-error
+            *ngIf="passwordConfirm?.errors?.['notSame'] && (passwordConfirm?.dirty || passwordConfirm?.touched )"
+            class="input-help text-danger"
+            >&nbsp;A két jelszó nem azonos</mat-error
+          >
+          <mat-error
+            *ngIf="passwordConfirm?.errors?.['passwordConfirm']"
+            class="input-help text-danger"
+            >&nbsp;{{ passwordConfirm.errors["passwordConfirm"] }}</mat-error
+          >
+        </mat-form-field>
       </div>
       <div class="">
-
-        <mat-checkbox [disableRipple]="false" 
-        color="warn" formControlName="subscribe" name="subscribe" inputId="subscribe">A hírlevelére feliratkozom</mat-checkbox>
-
+        <mat-checkbox
+          [disableRipple]="false"
+          color="warn"
+          formControlName="subscribe"
+          name="subscribe"
+          inputId="subscribe"
+          >A hírlevelére feliratkozom</mat-checkbox
+        >
       </div>
       <div class="">
+        <mat-checkbox
+          [disableRipple]="true"
+          formControlName="gdpr"
+          name="gdpr"
+          required
+          color="warn"
+          inputId="gdpr"
+          >Elolvastam és elfogadom a felhasználási feltételeket.<sup
+            >*</sup
+          ></mat-checkbox
+        >
 
-        <mat-checkbox [disableRipple]="true" formControlName="gdpr" name="gdpr" required color="warn" inputId="gdpr">Elolvastam és elfogadom a felhasználási feltételeket.<sup>*</sup></mat-checkbox>
-       
-        <mat-error *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
-        class="input-help text-danger">&nbsp;Kötelező kitölteni</mat-error>
-        <mat-error *ngIf="gdpr?.errors?.['gdpr']"
-        class="input-help text-danger">&nbsp;{{gdpr.errors['gdpr']}}</mat-error>
-
+        <mat-error
+          *ngIf="gdpr?.errors?.['required'] && (gdpr?.dirty || gdpr?.touched)"
+          class="input-help text-danger"
+          >&nbsp;Kötelező kitölteni</mat-error
+        >
+        <mat-error *ngIf="gdpr?.errors?.['gdpr']" class="input-help text-danger"
+          >&nbsp;{{ gdpr.errors["gdpr"] }}</mat-error
+        >
       </div>
-      
+
       <div class="flex flex-col mt-10 w-fit">
-        <button color="primary" mat-stroked-button type="submit" label=""
-        (click)="register()">
+        <button
+          color="primary"
+          mat-stroked-button
+          type="submit"
+          label=""
+          (click)="register()"
+        >
           <div class="flex flex-row items-center">
             <div>FIÓK LÉTREHOZÁSA</div>
             <mat-progress-spinner
-                *ngIf="isLoading"
-                class="ml-4"
-                mode="indeterminate"
-                diameter="24"></mat-progress-spinner>
+              *ngIf="isLoading"
+              class="ml-4"
+              mode="indeterminate"
+              diameter="24"
+            ></mat-progress-spinner>
           </div>
-          
         </button>
       </div>
     </form>

@@ -1,31 +1,41 @@
 @import "../../../colors";
 
-p, form, input, label, small, ul, span {
-  font-family: 'Lora', sans-serif;
+p,
+form,
+input,
+label,
+small,
+ul,
+span {
+  font-family: "Lora", sans-serif;
   font-size: 1.15rem;
 }
-button{
-  font-family: 'Oswald', serif!important;
-  letter-spacing: .1rem;
+button {
+  font-family: "Oswald", serif !important;
+  letter-spacing: 0.1rem;
 }
-.input-help{
-  font-size: .9rem;
+.input-help {
+  font-size: 0.9rem;
 }
-.forgotten span{
-  transition: all .4s ease-in-out;
+.forgotten span {
+  transition: all 0.4s ease-in-out;
 }
-.forgotten span:hover{
-  transition: all .4s ease-in-out;
+.forgotten span:hover {
+  transition: all 0.4s ease-in-out;
   cursor: pointer;
   color: $orangeRedDark;
 }
-.wrapper{
+.wrapper {
   border: 1px solid $orangeRedDark;
 }
 
-
 @media (min-width: 992px) {
-  p, form, input, label, small, ul {
+  p,
+  form,
+  input,
+  label,
+  small,
+  ul {
     font-size: 1.35rem;
   }
 }

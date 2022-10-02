@@ -5,26 +5,30 @@ table {
   width: 100%;
 }
 
-th{
+th {
   @include source;
   font-size: 1.3rem;
   font-weight: bold;
 }
 
-td{
+td {
   text-transform: none;
   @include lora-italic;
   font-size: 1rem;
 }
 
-.mat-column-name, .mat-column-email, .mat-column-loginAttempts, .mat-column-lockoutTime, .mat-column-active {
-  border-right: 1px solid rgba($textColorMuted,.4);
-  padding: 0 .5rem;
+.mat-column-name,
+.mat-column-email,
+.mat-column-loginAttempts,
+.mat-column-lockoutTime,
+.mat-column-active {
+  border-right: 1px solid rgba($textColorMuted, 0.4);
+  padding: 0 0.5rem;
 }
-.mat-column-ban{
-  padding-left: .5rem;
+.mat-column-ban {
+  padding-left: 0.5rem;
 }
 
-.mat-elevation-z2 {    
+.mat-elevation-z2 {
   overflow-x: auto;
- }
+}

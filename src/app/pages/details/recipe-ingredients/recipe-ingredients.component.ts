@@ -4,15 +4,12 @@ import { Recipe } from 'src/app/classes/recipe';
 @Component({
   selector: 'app-recipe-ingredients',
   templateUrl: './recipe-ingredients.component.html',
-  styleUrls: ['./recipe-ingredients.component.scss']
+  styleUrls: ['./recipe-ingredients.component.scss'],
 })
 export class RecipeIngredientsComponent implements OnInit {
+  @Input() recipe: Recipe | undefined;
 
-  @Input() recipe: Recipe | undefined
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -6,20 +6,22 @@ import { ProfileUserFavsResolverService } from './profile-user-favs-resolver.ser
 import { ProfileUserRecipeResolverService } from './profile-user-recipe-resolver.service';
 import { ProfileComponent } from './profile.component';
 
-const routes: Routes = [{
-  path: '',
-  canActivate: [AuthGuard],
-  resolve: {
-    userRecipes: ProfileUserRecipeResolverService,
-    userFavorites: ProfileUserFavsResolverService,
-    userList: ProfileManageUsersResolverService
+const routes: Routes = [
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    resolve: {
+      userRecipes: ProfileUserRecipeResolverService,
+      userFavorites: ProfileUserFavsResolverService,
+      userList: ProfileManageUsersResolverService,
+    },
+    runGuardsAndResolvers: 'always',
+    component: ProfileComponent,
   },
-  runGuardsAndResolvers: 'always',
-  component: ProfileComponent,
-}];
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProfileRoutingModule { }
+export class ProfileRoutingModule {}

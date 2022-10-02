@@ -1,137 +1,140 @@
-<div class="container" id="s-modal"
-    (click)="closeModal($event)"
-    (window:keyup)="$event.key == 'Escape' ? closed.emit(true):''"
-    [style]="isSearchOpen ? 'display: block':'display: none'"
-    >
-    <div 
-    [@openClose]="isSearchOpen ? 'open' : 'closed'"
-    class="" 
-    id="s-content">
-      <form action=""
-      
+<div
+  class="container"
+  id="s-modal"
+  (click)="closeModal($event)"
+  (window:keyup)="$event.key == 'Escape' ? closed.emit(true) : ''"
+  [style]="isSearchOpen ? 'display: block' : 'display: none'"
+>
+  <div [@openClose]="isSearchOpen ? 'open' : 'closed'" class="" id="s-content">
+    <form
+      action=""
       [formGroup]="searchForm"
-      class="grid lg:grid-cols-3 col-auto lg:col-span-3  justify-items-center">
+      class="grid lg:grid-cols-3 col-auto lg:col-span-3 justify-items-center"
+    >
       <div class="col-auto lg:col-span-3 justify-self-end">
-        <button
-        mat-button
-        (click)="closed.emit(true)"
-        class=""><mat-icon>
-          close
-          </mat-icon></button>
+        <button mat-button (click)="closed.emit(true)" class="">
+          <mat-icon> close </mat-icon>
+        </button>
       </div>
       <div class="filter-item text-center col-auto lg:col-span-3 pb-20">
         <h4 class="title-h4">Részletes kereső</h4>
       </div>
-      
-      <div class="filter-item flex flex-col justify-end mb-10">
-        <mat-form-field color="primary" >
-          <input type="text"
-                placeholder="Keresés név alapján"
-                matInput
-                formControlName="searchCtrl"
-                [matAutocomplete]="auto"
-                >
 
-          <mat-autocomplete #auto="matAutocomplete"
-          [displayWith]="getOptionText"
-          (optionSelected)="onSelect($event)"
+      <div class="filter-item flex flex-col justify-end mb-10">
+        <mat-form-field color="primary">
+          <input
+            type="text"
+            placeholder="Keresés név alapján"
+            matInput
+            formControlName="searchCtrl"
+            [matAutocomplete]="auto"
+          />
+
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            [displayWith]="getOptionText"
+            (optionSelected)="onSelect($event)"
           >
-            <mat-option *ngFor="let option of searchResults" [value]="option"
-            >
-              {{option.recipeName}}
+            <mat-option *ngFor="let option of searchResults" [value]="option">
+              {{ option.recipeName }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </div>
-       
+
       <div class="filter-item flex flex-col justify-end mb-10">
         <mat-form-field color="primary">
-          <mat-select 
-          placeholder="Kategória"
-          [formControlName]="'categoryCtrl'" 
-          [multiple]="true" #multiSelect
+          <mat-select
+            placeholder="Kategória"
+            [formControlName]="'categoryCtrl'"
+            [multiple]="true"
+            #multiSelect
           >
-            
             <mat-option *ngFor="let option of categories" [value]="option">
-              {{option.name}}
+              {{ option.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
         <mat-form-field color="primary">
-          <mat-select 
-          placeholder="Nemzetközi konyha"
-          [formControlName]="'nationalityCtrl'" 
-          [multiple]="true" #multiSelect
+          <mat-select
+            placeholder="Nemzetközi konyha"
+            [formControlName]="'nationalityCtrl'"
+            [multiple]="true"
+            #multiSelect
           >
-           
             <mat-option *ngFor="let option of nationalities" [value]="option">
-              {{option.name}}
+              {{ option.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
         <mat-form-field color="primary">
-          <mat-select 
-          placeholder="Címkék"
-          [formControlName]="'labelCtrl'" 
-          [multiple]="true" #multiSelect
+          <mat-select
+            placeholder="Címkék"
+            [formControlName]="'labelCtrl'"
+            [multiple]="true"
+            #multiSelect
           >
-            
             <mat-option *ngFor="let option of labels" [value]="option">
-              {{option.name}}
+              {{ option.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
         <mat-form-field color="primary">
-          <mat-select 
-          placeholder="Nehézség"
-          [formControlName]="'difficultyCtrl'" 
-          [multiple]="true" #multiSelect
+          <mat-select
+            placeholder="Nehézség"
+            [formControlName]="'difficultyCtrl'"
+            [multiple]="true"
+            #multiSelect
           >
-           
             <mat-option *ngFor="let option of difficulties" [value]="option">
-              {{option.name}}
+              {{ option.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="filter-item flex flex-col justify-end mb-10">
         <mat-form-field color="primary">
-          <mat-select 
-          placeholder="Ár"
-          [formControlName]="'costCtrl'" 
-          [multiple]="true" #multiSelect
+          <mat-select
+            placeholder="Ár"
+            [formControlName]="'costCtrl'"
+            [multiple]="true"
+            #multiSelect
           >
-            
             <mat-option *ngFor="let option of costs" [value]="option">
-              {{option.name}}
+              {{ option.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-       
+
       <div class="col-auto lg:col-span-3 mb-5 mt-12">
-        <button mat-stroked-button color="primary" id="searchSubmit"
-        type="submit"
-        (click)="submitForm()"
-        (ngSubmit)="submitForm()"
-        routerLink="/results"
-        [disabled]="isLoading">
-        <div class="flex flex-row items-center justify-between">
-          <div>{{recipesFound}}</div>
-          <mat-progress-spinner
-                  *ngIf="isLoading"
-                  class="ml-4"
-                  mode="indeterminate"
-                  diameter="24"></mat-progress-spinner>
-        </div>
+        <button
+          mat-stroked-button
+          color="primary"
+          id="searchSubmit"
+          type="submit"
+          (click)="submitForm()"
+          (ngSubmit)="submitForm()"
+          routerLink="/results"
+          [disabled]="isLoading"
+        >
+          <div class="flex flex-row items-center justify-between">
+            <div>{{ recipesFound }}</div>
+            <mat-progress-spinner
+              *ngIf="isLoading"
+              class="ml-4"
+              mode="indeterminate"
+              diameter="24"
+            ></mat-progress-spinner>
+          </div>
         </button>
-      </div> 
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
 </div>

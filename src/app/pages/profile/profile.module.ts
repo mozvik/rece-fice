@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { DialogDelete, UserRecipesComponent } from './user-recipes/user-recipes.component';
+import {
+  DialogDelete,
+  UserRecipesComponent,
+} from './user-recipes/user-recipes.component';
 import { UserFavoritesComponent } from './user-favorites/user-favorites.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -26,7 +29,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ManageRecipesComponent } from './manage-recipes/manage-recipes.component';
 
-
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -39,7 +41,7 @@ import { ManageRecipesComponent } from './manage-recipes/manage-recipes.componen
     ManageUsersComponent,
     UnixToDatePipe,
     ManageReviewsComponent,
-    ManageRecipesComponent
+    ManageRecipesComponent,
   ],
   imports: [
     CommonModule,
@@ -59,9 +61,7 @@ import { ManageRecipesComponent } from './manage-recipes/manage-recipes.componen
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+  ],
 })
-export class ProfileModule {
-
- }
+export class ProfileModule {}

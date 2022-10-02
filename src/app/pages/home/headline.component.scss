@@ -1,20 +1,20 @@
 @import "../../../mixins";
 @import "../../../colors";
 
-.container{
+.container {
   @include lora;
 }
 
-#h-list{
+#h-list {
   color: $green;
 }
-#h-search{
+#h-search {
   color: $info;
 }
-#h-upload{
+#h-upload {
   color: $orangeRedDark;
 }
-#logoMain{
+#logoMain {
   width: 100%;
   min-height: 700px;
   background-image: url("../../../assets/img/hero-mobile.jpg");
@@ -23,86 +23,88 @@
   background-repeat: no-repeat;
   background-position: top center;
 }
-.hero-title{
+.hero-title {
   @include poppins;
   color: $backgroundColor;
   font-size: 3.25rem;
   font-weight: 400;
 }
-.hero-subtitle{
- @include dancing;
- color: $backgroundColor;
- font-size: 2rem;
- opacity: .85;
+.hero-subtitle {
+  @include dancing;
+  color: $backgroundColor;
+  font-size: 2rem;
+  opacity: 0.85;
 }
 
-#about{
+#about {
   width: 100%;
 }
 
-.headline-img, .headline-txt{
+.headline-img,
+.headline-txt {
   min-width: 360px;
-  img{
+  img {
     min-width: 100%;
   }
 }
 
-.headline-txt{
-  border: 2px solid rgba($orangeRedDark, .5);
+.headline-txt {
+  border: 2px solid rgba($orangeRedDark, 0.5);
 }
 
-@media (min-width: 1024px){
-  
-  
-  .hero-subtitle{
+@media (min-width: 1024px) {
+  .hero-subtitle {
     opacity: 0;
     animation: reveal-subtitle 2.2s ease-out 1.9s 1 forwards;
   }
-#logoMain{
-  background-image: none;
-  position: relative;
-  div{
-    overflow: hidden;
-    .hero-title{
-      font-size: 4.0rem;
-      z-index: 1;
+  #logoMain {
+    background-image: none;
+    position: relative;
+    div {
+      overflow: hidden;
+      .hero-title {
+        font-size: 4rem;
+        z-index: 1;
+        opacity: 0;
+        animation: reveal-title 0.9s ease-out 0.9s 1 forwards;
+      }
+      .title-row-2 {
+        animation: reveal-title-2 0.9s ease-out 0.9s 1 forwards;
+      }
+    }
+    .img-1,
+    .img-2,
+    .img-3,
+    .img-4 {
+      position: absolute;
+      width: 100%;
+      height: 700px;
       opacity: 0;
-      animation: reveal-title 0.9s ease-out 0.9s 1 forwards;
+      background-image: url("../../../assets/img/hero-desktop.jpg");
+      background-repeat: no-repeat;
     }
-    .title-row-2{
-    animation: reveal-title-2 0.9s ease-out 0.9s 1 forwards;
-    }
-  }
-  .img-1, .img-2, .img-3, .img-4{
-    position: absolute;
-    width: 100%;
-    height: 700px;
-    opacity: 0;
-    background-image: url("../../../assets/img/hero-desktop.jpg");
-    background-repeat: no-repeat;
-    }
-    .img-1{
+    .img-1 {
       background-position: center -180px;
       height: 100px;
       top: 0;
       left: 0;
       animation: roll-in-from-left 0.6s ease-out 0.3s 1 forwards;
     }
-    .img-2{
+    .img-2 {
       background-position: center -280px;
       height: 300px;
       top: 100px;
       right: 0;
       animation: roll-in-from-right 0.7s ease-out 0.2s 1 forwards;
     }
-    .img-3{
+    .img-3 {
       background-position: center -580px;
       height: 200px;
       top: 400px;
       left: 0;
       animation: roll-in-from-left 0.5s ease-out 0.4s 1 forwards;
     }
-    .img-4{
+    .img-4 {
       background-position: center -780px;
       height: 100px;
       top: 600px;
@@ -111,15 +113,15 @@
     }
   }
   @keyframes reveal-subtitle {
-    0%{
+    0% {
       opacity: 0;
     }
     100% {
-      opacity: .85;
+      opacity: 0.85;
     }
   }
   @keyframes reveal-title {
-    0%{
+    0% {
       opacity: 0;
       transform: translateY(100%);
     }
@@ -128,7 +130,7 @@
     }
   }
   @keyframes reveal-title-2 {
-    0%{
+    0% {
       opacity: 0;
       transform: translateY(-100%);
     }
@@ -162,16 +164,16 @@
   }
 }
 @media (min-width: 1280px) {
-  #logoMain{
-    div{
-      .hero-title{
+  #logoMain {
+    div {
+      .hero-title {
         font-size: 6rem;
         font-weight: 400;
       }
     }
-  
-  .hero-subtitle{
-    font-size: 3rem;
+
+    .hero-subtitle {
+      font-size: 3rem;
+    }
   }
-}
 }

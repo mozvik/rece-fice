@@ -1,6 +1,8 @@
 <div class="">
-  <div class="flex flex-col lg:flex-row gap-5 my-10 mx-5 lg:mx-0 items-center md:items-start justify-between">
-    <div class=" basis-1/2 normal-case ">
+  <div
+    class="flex flex-col lg:flex-row gap-5 my-10 mx-5 lg:mx-0 items-center md:items-start justify-between"
+  >
+    <div class="basis-1/2 normal-case">
       <div class="flex gap-5 items-center title-bg-warn px-2 py-3">
         <mat-icon class="">account_circle</mat-icon>
         <h3 class="title-h5 inline-block">Profilom</h3>
@@ -9,45 +11,59 @@
         <div class="flex my-20 justify-between">
           <div class="">
             <div class="relative w-max image">
-              <img [src]="user?.avatar === '' || user?.avatar === null ? 'assets/img/empty-profile.png':user?.avatar " width="150" alt="" class="rounded-full border-4 avatar">
+              <img
+                [src]="
+                  user?.avatar === '' || user?.avatar === null
+                    ? 'assets/img/empty-profile.png'
+                    : user?.avatar
+                "
+                width="150"
+                alt=""
+                class="rounded-full border-4 avatar"
+              />
               <div class="absolute bottom-0 right-0">
-                <button mat-mini-fab color="warn"(click)="openEditAvatarDialog()">
+                <button
+                  mat-mini-fab
+                  color="warn"
+                  (click)="openEditAvatarDialog()"
+                >
                   <mat-icon>edit</mat-icon>
                 </button>
               </div>
             </div>
           </div>
           <div class="mx-10 grow">
-            <h3 class="username">{{user?.name}}</h3>
-            <p class="date mt-5">Tagság kezdete: {{user?.created}}</p>
+            <h3 class="username">{{ user?.name }}</h3>
+            <p class="date mt-5">Tagság kezdete: {{ user?.created }}</p>
           </div>
           <div>
-            <button mat-mini-fab color="warn"
-            (click)="openEditProfileDialog()">
-            
+            <button mat-mini-fab color="warn" (click)="openEditProfileDialog()">
               <mat-icon>edit</mat-icon>
             </button>
           </div>
         </div>
       </div>
       <div>
-        <p class="date mt-5"><b>{{user?.totalRecipes}}</b> feltöltött recept</p>
-        <p class="date mt-5"><b>{{user?.totalReviews}}</b> értékelés</p>
-        <p class="date mt-5"><b>{{user?.totalFavorites}}</b> kedvenc recept</p>
+        <p class="date mt-5">
+          <b>{{ user?.totalRecipes }}</b> feltöltött recept
+        </p>
+        <p class="date mt-5">
+          <b>{{ user?.totalReviews }}</b> értékelés
+        </p>
+        <p class="date mt-5">
+          <b>{{ user?.totalFavorites }}</b> kedvenc recept
+        </p>
       </div>
-      <br><hr><br>
+      <br />
+      <hr />
+      <br />
       <div>
-        <p class="date">{{user?.description}}</p>
-        <div class="list my-5">
-         
-        </div>
+        <p class="date">{{ user?.description }}</p>
+        <div class="list my-5"></div>
       </div>
     </div>
     <div class="mx-10">
-      <img src="../../../../assets/img/kivi.png" alt="">
+      <img src="../../../../assets/img/kivi.png" alt="" />
     </div>
   </div>
-
-
-
 </div>

@@ -9,15 +9,12 @@ import { DataService } from '../../service/data.service';
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  animations: [
-    chevronRotate,
-    collapseSubMenu
-  ]
+  animations: [chevronRotate, collapseSubMenu],
 })
 export class SidebarComponent implements OnInit {
   events: string[] = [];
 
-  currentScreenSize: number | undefined; 
+  currentScreenSize: number | undefined;
   submenuCollapsed: boolean = true;
 
   get isLoggedIn(): boolean {
@@ -25,40 +22,36 @@ export class SidebarComponent implements OnInit {
   }
 
   get isSidebarOpened() {
-    return this.dataService.sidenavOpened && this.currentScreenSize! < 2
+    return this.dataService.sidenavOpened && this.currentScreenSize! < 2;
   }
-  set isSidebarOpened(value: boolean) { 
+  set isSidebarOpened(value: boolean) {
     this.dataService.sidenavOpened = value;
   }
 
-  get user(): User | undefined { 
+  get user(): User | undefined {
     return this.authService.user;
   }
-
 
   constructor(
     public dataService: DataService,
     private authService: AuthService,
-    private router: Router) 
-  {
-    this.dataService.currentScreenSize.subscribe(size => {
+    private router: Router
+  ) {
+    this.dataService.currentScreenSize.subscribe((size) => {
       this.currentScreenSize = size;
-    })
-   }
-
-  ngOnInit(): void {
+    });
   }
+
+  ngOnInit(): void {}
 
   closeSideBar() {
     this.dataService.sidenavOpened = false;
   }
 
   logout() {
-    this.closeSideBar()
-    this.authService.logout().subscribe()
-    this.authService.user = undefined
-    this.router.navigateByUrl('/login')
+    this.closeSideBar();
+    this.authService.logout().subscribe();
+    this.authService.user = undefined;
+    this.router.navigateByUrl('/login');
   }
-
 }
-

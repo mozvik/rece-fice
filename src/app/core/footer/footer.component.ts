@@ -8,42 +8,40 @@ import { MessageService } from 'src/app/service/message.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-
-
   public newsletterFormGroup = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     gdpr: ['', Validators.requiredTrue],
-  })
+  });
   isLoading: boolean = false;
- 
+
   constructor(
     private fb: FormBuilder,
     public dataService: DataService,
     public apiService: APIService,
     private messageService: MessageService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submit(): void {
     this.isLoading = true;
-    this.apiService.subscribeGuest(this.newsletterFormGroup.value.email)
-    .pipe(finalize(() => this.isLoading = false))
-    .subscribe({
-      next: (response: any) => {
-        if (response.hasOwnProperty('duplicated')) { 
-          this.messageService.showSnackBar(response.duplicated, 'error')
-          return
-        }
+    this.apiService
+      .subscribeGuest(this.newsletterFormGroup.value.email)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (response: any) => {
+          if (response.hasOwnProperty('duplicated')) {
+            this.messageService.showSnackBar(response.duplicated, 'error');
+            return;
+          }
 
-        this.newsletterFormGroup.reset();
-        this.messageService.showSnackBar(response, 'success')
-      },
-      error: (error: any) => this.messageService.showSnackBar(error, 'error')
-    })
+          this.newsletterFormGroup.reset();
+          this.messageService.showSnackBar(response, 'success');
+        },
+        error: (error: any) => this.messageService.showSnackBar(error, 'error'),
+      });
   }
 }

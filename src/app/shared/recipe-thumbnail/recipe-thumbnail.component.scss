@@ -1,27 +1,26 @@
-@import '../../../colors.scss';
-@import '../../../mixins.scss';
+@import "../../../colors.scss";
+@import "../../../mixins.scss";
 
 .img-overlay {
   @include lora-italic;
   font-size: 1.1rem;
   pointer-events: none;
 }
-.card-image img{
+.card-image img {
   width: 358px;
   height: 220px;
-  object-fit: cover;  
-  transition: all .4s ease;
+  object-fit: cover;
+  transition: all 0.4s ease;
 }
-.card-image{
+.card-image {
   position: relative;
   background: var(--textColor);
   color: var(--backgroundColor);
   overflow: hidden;
 }
 
-.card-image:hover img{
-
-  opacity: .4;
+.card-image:hover img {
+  opacity: 0.4;
   transform: scale(1.05);
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }

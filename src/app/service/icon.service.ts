@@ -10,23 +10,28 @@ export enum Icons {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IconService {
-  baseURL: string = location.origin
+  baseURL: string = location.origin;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
-  ) { }
+  ) {}
 
   public registerIcons(): void {
-    this.loadIcons(Object.values(Icons),'../assets/svg');
+    this.loadIcons(Object.values(Icons), '../assets/svg');
   }
 
   private loadIcons(iconKeys: string[], iconUrl: string): void {
-    iconKeys.forEach(key => {
-      this.matIconRegistry.addSvgIcon(key, this.domSanitizer.bypassSecurityTrustResourceUrl(`${iconUrl}/${key}.svg`));
+    iconKeys.forEach((key) => {
+      this.matIconRegistry.addSvgIcon(
+        key,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          `${iconUrl}/${key}.svg`
+        )
+      );
     });
   }
 }

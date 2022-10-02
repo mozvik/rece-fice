@@ -7,12 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [
-    ResultsComponent,
-  ],
+  declarations: [ResultsComponent],
   imports: [
     CommonModule,
     ResultsRoutingModule,
@@ -20,7 +18,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class ResultsModule { }
+export class ResultsModule {}

@@ -3,22 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { FridgeRoutingModule } from './fridge-routing.module';
 import { FridgeComponent } from './fridge.component';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [
-    FridgeComponent
-  ],
+  declarations: [FridgeComponent],
   imports: [
     CommonModule,
     FridgeRoutingModule,
     MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+  ],
 })
-export class FridgeModule { }
+export class FridgeModule {}

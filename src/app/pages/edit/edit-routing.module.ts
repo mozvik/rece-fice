@@ -4,18 +4,20 @@ import { AuthGuard } from 'src/app/auth/auth.guard';
 import { EditResolverService } from './edit-resolver.service';
 import { EditComponent } from './edit.component';
 
-const routes: Routes = [{
-  path: '',
-  canActivate: [AuthGuard],
-  resolve: {
-    recipe: EditResolverService
+const routes: Routes = [
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    resolve: {
+      recipe: EditResolverService,
+    },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    component: EditComponent,
   },
-  runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-  component: EditComponent
-}];
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EditRoutingModule { }
+export class EditRoutingModule {}

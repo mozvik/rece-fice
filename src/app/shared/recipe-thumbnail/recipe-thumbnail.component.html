@@ -1,12 +1,26 @@
-<div class="card-image relative"
-  (mouseover)="showImgText()" (mouseout)="hideImgText()">
-  
-  <img [src]="recipe?.moderated == '1' ? '../../../assets/img/moderated.png':recipe?.image[0]" alt="" width="358" height="220" alt="image not found">
-  <div 
-    *ngIf="showImgOverlay" [@enterHoverAnimation]
-    class="img-overlay absolute left-8 top-8">
-    <div class="mb-2">Elkészítési ideje: {{recipe.cookingTime}} perc</div>
-    <div class="mb-2">Nehézsége: {{recipe.difficulty.name}}</div>
-    <div class="">Költsége: {{recipe.cost.name}}</div>
+<div
+  class="card-image relative"
+  (mouseover)="showImgText()"
+  (mouseout)="hideImgText()"
+>
+  <img
+    [src]="
+      recipe?.moderated == '1'
+        ? '../../../assets/img/moderated.png'
+        : recipe?.image[0]
+    "
+    alt=""
+    width="358"
+    height="220"
+    alt="image not found"
+  />
+  <div
+    *ngIf="showImgOverlay"
+    [@enterHoverAnimation]
+    class="img-overlay absolute left-8 top-8"
+  >
+    <div class="mb-2">Elkészítési ideje: {{ recipe.cookingTime }} perc</div>
+    <div class="mb-2">Nehézsége: {{ recipe.difficulty.name }}</div>
+    <div class="">Költsége: {{ recipe.cost.name }}</div>
   </div>
 </div>

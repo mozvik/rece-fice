@@ -14,23 +14,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    HomeComponent,
-    HeadlineComponent,
-    FeaturedComponent,
-  ],
+  declarations: [HomeComponent, HeadlineComponent, FeaturedComponent],
   imports: [
     CommonModule,
     SharedModule,
     HomeRoutingModule,
-    MatDividerModule, 
+    MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatTabsModule,
-  ]
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

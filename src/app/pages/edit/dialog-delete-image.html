@@ -1,11 +1,22 @@
 <h1 mat-dialog-title class="mat-typography title-h4"></h1>
 <div mat-dialog-content>
   <div>
-    <h4 class="text-xl">Ez a kép visszavonhatatlanul törlődni fog a szerverről.</h4>
+    <h4 class="text-xl">
+      Ez a kép visszavonhatatlanul törlődni fog a szerverről.
+    </h4>
   </div>
   <div class="text-xl">Valóban ezt akarod?</div>
 </div>
 <div mat-dialog-actions>
-  <button mat-stroked-button color="primary" [mat-dialog-close]="false" >Mégsem</button>
-  <button mat-stroked-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Törlés jóváhagyása</button>
+  <button mat-stroked-button color="primary" [mat-dialog-close]="false">
+    Mégsem
+  </button>
+  <button
+    mat-stroked-button
+    color="warn"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Törlés jóváhagyása
+  </button>
 </div>

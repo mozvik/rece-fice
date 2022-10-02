@@ -1,11 +1,11 @@
-.card-footer:hover{
+.card-footer:hover {
   cursor: pointer;
 }
 
-.recipe-card{
-  border-bottom: 1px solid rgba(var(--textColorRGB),.2);
+.recipe-card {
+  border-bottom: 1px solid rgba(var(--textColorRGB), 0.2);
   max-width: 360px;
 }
-span{
-  color: rgba(var(--textColorRGB),.2);
+span {
+  color: rgba(var(--textColorRGB), 0.2);
 }

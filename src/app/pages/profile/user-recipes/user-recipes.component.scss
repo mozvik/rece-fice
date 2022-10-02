@@ -1,25 +1,24 @@
-@import '../../../../colors.scss';
-@import '../../../../mixins.scss';
+@import "../../../../colors.scss";
+@import "../../../../mixins.scss";
 
-.container{
+.container {
   font-size: 15px;
   font-family: $fontOswald;
 }
-button{
+button {
   @include oswald;
-  letter-spacing: .05rem;
+  letter-spacing: 0.05rem;
 }
 .mat-icon {
   font-size: 1.75rem;
-  height: 1.75rem ;
+  height: 1.75rem;
   width: 1.75rem;
 }
 
-
-.recipe-card{
-  border-bottom: 1px solid rgba($textColor,.2);
+.recipe-card {
+  border-bottom: 1px solid rgba($textColor, 0.2);
   max-width: 360px;
 }
-span{
-  color: rgba($textColor,.2);
+span {
+  color: rgba($textColor, 0.2);
 }

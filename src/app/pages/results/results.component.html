@@ -1,31 +1,36 @@
 <div class="container flex flex-col items-center mt-52 mx-auto">
-  <h3 class="mb-32 title-h4">{{title}}</h3>
-  <div class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center" [@listAnimation]="results.length">
-    <ng-container *ngFor="let recipe of results; let i=index"
-    class="border">
-    <app-recipe-card 
-    *ngIf="recipe.moderated != '1'"
-    [recipe]="recipe"
-    (urlClicked)="navigateToDetails($event)"
-    (categoryClicked)="navigateToCategory($event)"
-    (userClicked)="navigateToUserProfile($event)">
-    </app-recipe-card>
-
+  <h3 class="mb-32 title-h4">{{ title }}</h3>
+  <div
+    class="recipe-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-20 justify-center"
+    [@listAnimation]="results.length"
+  >
+    <ng-container *ngFor="let recipe of results; let i = index" class="border">
+      <app-recipe-card
+        *ngIf="recipe.moderated != '1'"
+        [recipe]="recipe"
+        (urlClicked)="navigateToDetails($event)"
+        (categoryClicked)="navigateToCategory($event)"
+        (userClicked)="navigateToUserProfile($event)"
+      >
+      </app-recipe-card>
     </ng-container>
   </div>
   <div class="my-10">
-    <button mat-stroked-button color="primary" 
-    (click)="incrementIndex()"
-    [disabled]="!results.length">
-    <div class="flex flex-row items-center justify-between">
-      <div>Mutass többet</div>
-      <mat-progress-spinner
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="incrementIndex()"
+      [disabled]="!results.length"
+    >
+      <div class="flex flex-row items-center justify-between">
+        <div>Mutass többet</div>
+        <mat-progress-spinner
           *ngIf="isLoading"
           class="ml-4"
           mode="indeterminate"
-          diameter="24"></mat-progress-spinner>
-    </div>
+          diameter="24"
+        ></mat-progress-spinner>
+      </div>
     </button>
   </div>
 </div>
-

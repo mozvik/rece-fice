@@ -1,106 +1,141 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" 
-  mode="over"
-  fixedInViewport="true"
-  fixedTopGap=56
-  [(opened)]="isSidebarOpened" 
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    mode="over"
+    fixedInViewport="true"
+    fixedTopGap="56"
+    [(opened)]="isSidebarOpened"
   >
-  <nav id="mobileNavbar" 
-  class="w-60 relative">
+    <nav id="mobileNavbar" class="w-60 relative">
       <ul class="sideMenu">
         <li class="nav-item">
-          <button mat-button
+          <button
+            mat-button
             (click)="closeSideBar()"
             aria-current="page"
             routerLink="/home"
             id="homeLink"
-            >Főoldal</button>
+          >
+            Főoldal
+          </button>
         </li>
-        <li
-          class="nav-item">
-          <button  (click)="submenuCollapsed = !submenuCollapsed"
-          mat-button
+        <li class="nav-item">
+          <button
+            (click)="submenuCollapsed = !submenuCollapsed"
+            mat-button
             class=""
             role="button"
             data-bs-toggle=""
             aria-expanded="false"
-          >Receptek<mat-icon [@chevronRotate]="!submenuCollapsed">
-            arrow_drop_down
-            </mat-icon></button>
+          >
+            Receptek<mat-icon [@chevronRotate]="!submenuCollapsed">
+              arrow_drop_down
+            </mat-icon>
+          </button>
         </li>
-        <ul *ngIf="!submenuCollapsed" 
-        [@collapseSubMenu]
-        class="nav-item">
-          <li class="nav-link"><button
-            (click)="closeSideBar()" 
-            [routerLink]="['/results', 'appetiser']" mat-button>Előételek</button>
+        <ul *ngIf="!submenuCollapsed" [@collapseSubMenu] class="nav-item">
+          <li class="nav-link">
+            <button
+              (click)="closeSideBar()"
+              [routerLink]="['/results', 'appetiser']"
+              mat-button
+            >
+              Előételek
+            </button>
           </li>
-          <li class="nav-link"><button
-            (click)="closeSideBar()" 
-            [routerLink]="['/results', 'soup']" mat-button>Levesek</button>
+          <li class="nav-link">
+            <button
+              (click)="closeSideBar()"
+              [routerLink]="['/results', 'soup']"
+              mat-button
+            >
+              Levesek
+            </button>
           </li>
-          <li class="nav-link"><button
-            (click)="closeSideBar()" 
-            [routerLink]="['/results', 'maincourse']" mat-button>Főételek</button>
+          <li class="nav-link">
+            <button
+              (click)="closeSideBar()"
+              [routerLink]="['/results', 'maincourse']"
+              mat-button
+            >
+              Főételek
+            </button>
           </li>
-          <li class="nav-link"><button
-            (click)="closeSideBar()" 
-            [routerLink]="['/results', 'sidedish']" mat-button>Köretek</button>
+          <li class="nav-link">
+            <button
+              (click)="closeSideBar()"
+              [routerLink]="['/results', 'sidedish']"
+              mat-button
+            >
+              Köretek
+            </button>
           </li>
-          <li class="nav-link"><button
-            (click)="closeSideBar()" 
-            [routerLink]="['/results', 'dessert']" mat-button>Desszertek</button>
+          <li class="nav-link">
+            <button
+              (click)="closeSideBar()"
+              [routerLink]="['/results', 'dessert']"
+              mat-button
+            >
+              Desszertek
+            </button>
           </li>
-          <li class="nav-link"><button 
-            (click)="closeSideBar()" 
-            [routerLink]="['/results', 'drink']" 
-            mat-button>Italok</button></li>
+          <li class="nav-link">
+            <button
+              (click)="closeSideBar()"
+              [routerLink]="['/results', 'drink']"
+              mat-button
+            >
+              Italok
+            </button>
+          </li>
         </ul>
-      
+
         <li class="nav-item">
-          <button mat-button
+          <button
+            mat-button
             class=""
             routerLink="/upload"
             (click)="closeSideBar()"
             tabindex="-1"
             aria-disabled="true"
-            >Receptfeltöltés</button>
+          >
+            Receptfeltöltés
+          </button>
         </li>
         <li class="nav-item">
-          <button mat-button
-          (click)="closeSideBar()"
+          <button
+            mat-button
+            (click)="closeSideBar()"
             routerLink="/fridge"
             href="#"
             tabindex="-1"
             aria-disabled="true"
-            >Mi van itthon?</button>
+          >
+            Mi van itthon?
+          </button>
         </li>
-      
       </ul>
     </nav>
     <mat-divider></mat-divider>
     <div class="flex flex-row justify-between mx-8 mt-10">
       <div *ngIf="!isLoggedIn" class="transform -translate-y-1">
-        <button mat-icon-button
-        (click)="closeSideBar()"
-          routerLink="/login"
-          ><mat-icon>login</mat-icon>
+        <button mat-icon-button (click)="closeSideBar()" routerLink="/login">
+          <mat-icon>login</mat-icon>
         </button>
       </div>
       <div *ngIf="isLoggedIn" class="transform -translate-y-1">
-        <button mat-icon-button
-        (click)="logout()"
-        ><mat-icon>logout</mat-icon></button>
+        <button mat-icon-button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
       </div>
       <div *ngIf="isLoggedIn">
-        <button mat-button
-        (click)="closeSideBar()"
-        routerLink="/profile"> {{user?.name}} <mat-icon>person_outline</mat-icon></button>
+        <button mat-button (click)="closeSideBar()" routerLink="/profile">
+          {{ user?.name }} <mat-icon>person_outline</mat-icon>
+        </button>
       </div>
-      
     </div>
   </mat-sidenav>
-  
 
   <mat-sidenav-content>
     <router-outlet></router-outlet>

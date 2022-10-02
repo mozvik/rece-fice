@@ -8,11 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
-  declarations: [
-    RecoveryComponent
-  ],
+  declarations: [RecoveryComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -20,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RecoveryRoutingModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
-  ]
+    MatInputModule,
+  ],
 })
-export class RecoveryModule { }
+export class RecoveryModule {}

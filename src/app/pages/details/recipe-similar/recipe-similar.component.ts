@@ -8,12 +8,11 @@ import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-recipe-similar',
   templateUrl: './recipe-similar.component.html',
-  styleUrls: ['./recipe-similar.component.scss']
+  styleUrls: ['./recipe-similar.component.scss'],
 })
 export class RecipeSimilarComponent implements OnInit {
-
-  @Input() recipe: Recipe | undefined
-  @Input() similarRecipes: Recipe[] | undefined
+  @Input() recipe: Recipe | undefined;
+  @Input() similarRecipes: Recipe[] | undefined;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -27,26 +26,22 @@ export class RecipeSimilarComponent implements OnInit {
     pullDrag: true,
     dots: false,
     navSpeed: 700,
-    navText: ["Előző", 'Következő'],
+    navText: ['Előző', 'Következő'],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
       600: {
-        items: 2
+        items: 2,
       },
-      
     },
-    nav: true
-  }
-  
-  constructor(
-    private router: Router,
-  ) {  }
+    nav: true,
+  };
 
-  ngOnInit(): void {
-  }
-  navigateToDetails(id: string) { 
-    this.router.navigateByUrl(`/details/${id}`)
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {}
+  navigateToDetails(id: string) {
+    this.router.navigateByUrl(`/details/${id}`);
   }
 }

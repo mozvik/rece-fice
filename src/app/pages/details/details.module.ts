@@ -8,7 +8,7 @@ import { RecipeHeaderComponent } from './recipe-header/recipe-header.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { RecipeDirectionsComponent } from './recipe-directions/recipe-directions.component';
 import { RecipeIngredientsComponent } from './recipe-ingredients/recipe-ingredients.component';
 import { RecipeNutritionComponent } from './recipe-nutrition/recipe-nutrition.component';
@@ -20,7 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RecipeReviewsComponent } from './recipe-reviews/recipe-reviews.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     RecipeSimilarComponent,
     RecipeRatingsComponent,
     RecipeRateItComponent,
-    RecipeReviewsComponent
+    RecipeReviewsComponent,
   ],
   imports: [
     CommonModule,
@@ -47,8 +47,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
   ],
-  
 })
-export class DetailsModule { }
+export class DetailsModule {}

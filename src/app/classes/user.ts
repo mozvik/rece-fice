@@ -11,8 +11,21 @@ export class User {
   totalReviews: number;
   totalRecipes: number;
   totalFavorites: number;
-  
-  constructor(userId: string = '', name: string = '', email: string = '', password: string = '', avatar: string = '', role: string = '', active: boolean = false, description: string = '', created: string = '', totalReviews: number = 0, totalRecipes: number = 0, totalFavorites: number = 0) {
+
+  constructor(
+    userId: string = '',
+    name: string = '',
+    email: string = '',
+    password: string = '',
+    avatar: string = '',
+    role: string = '',
+    active: boolean = false,
+    description: string = '',
+    created: string = '',
+    totalReviews: number = 0,
+    totalRecipes: number = 0,
+    totalFavorites: number = 0
+  ) {
     this.userId = userId;
     this.name = name;
     this.email = email;
