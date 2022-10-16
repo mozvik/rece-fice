@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/src/api/settings.php
 # Only exists if Bazel was run
 /bazel-out
 
@@ -49,3 +50,5 @@ Thumbs.db
 .netlify
 
 /vendor/
+
+
