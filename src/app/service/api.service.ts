@@ -309,7 +309,9 @@ export class APIService {
   }
 
   public deleteRecipe(recipeId: string | undefined) {
-    return this.http.delete(this.serverUrl + '?recipe&id=' + recipeId);
+    return this.http.delete(this.serverUrl + '?recipe&id=' + recipeId, {
+      withCredentials: true,
+    });
   }
 
   /****Form Spree api */
