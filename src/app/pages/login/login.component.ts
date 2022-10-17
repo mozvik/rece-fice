@@ -135,14 +135,16 @@ export class DialogForgottenPassword {
     this.isLoading = true;
     this.authService
       .passwordRecovery(this.email2.value)
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(finalize(() => {
+        this.isLoading = false
+        this.dialogRef.close();
+      }))
       .subscribe((response) => {
         if (response.hasOwnProperty('errors')) {
           this.apiError = response.errors;
           this.email2.setErrors({ emailApi: response.errors.email });
           return;
         } else {
-          this.dialogRef.close();
           this.messageService.showSnackBar(
             `A(z) ${this.email2.value} email címre elküldtük egy visszaigazoló levelet`,
             'success'
