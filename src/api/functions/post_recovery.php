@@ -29,18 +29,18 @@ if($response===true) {
     //Server settings
     $mail->SMTPDebug = 0;                      // Enable verbose debug output
     $mail->isSMTP();                           // Set mailer to use SMTP
-    $mail->Host = 'mail.elin.hu';              // Specify main and backup SMTP servers
+    $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                    // Enable SMTP authentication
-    $mail->Username = 'info@esoguides.hu';     // SMTP username
-    $mail->Password = '5610Levelek';           // SMTP password
+    $mail->Username = 'recefice.recepttar@gmail.com';     // SMTP username
+    $mail->Password = 'fwukybwymzqxppey';           // SMTP password
     $mail->SMTPSecure = 'tls';                 // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                         // TCP port to connect to
     $mail->CharSet = 'UTF-8';
     //Recipients
-    $mail->setFrom('recefice@esoguides.hu', 'Recefice Recepttár');   //feladó
+    $mail->setFrom('recefice.recepttar@gmail.com', 'Recefice Recepttár');   //feladó
     //$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
     //$mail->addAddress('joe@example.net');          //címzett, Name is optional
-    $mail->addReplyTo('recefice@esoguides.hu', 'Recefice Recepttár');
+    $mail->addReplyTo('recefice.recepttar@gmail.com', 'Recefice Recepttár');
     //$mail->addCC('cc@example.com');
     //$mail->addBCC('bcc@example.com');
   
@@ -55,13 +55,13 @@ if($response===true) {
     $mail->addAddress($email); 
     $mail->send();
     } catch (Exception $e) {
-      $errors['email'] = 'Hiba a levelek küldése közben!'; 
+      $errors['email'] = 'Hiba a levelek küldése közben! ' . $e->getMessage(); 
       $response = new Response(200, false, [
           'errors' => $errors]);
       return $response;
       die();
     }
 
-    $response = new Response(200, false, [$token]);
+    $response = new Response(200, false, []);
 }
 

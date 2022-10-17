@@ -49,6 +49,3 @@ Thumbs.db
 .netlify
 
 /vendor/
-
-
-src/api/settings.php
