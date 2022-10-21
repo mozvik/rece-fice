@@ -29,18 +29,18 @@ if($response===true) {
     //Server settings
     $mail->SMTPDebug = 0;                      // Enable verbose debug output
     $mail->isSMTP();                           // Set mailer to use SMTP
-    $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
+    $mail->Host = MAILER_HOST;              // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                    // Enable SMTP authentication
-    $mail->Username = 'recefice.recepttar@gmail.com';     // SMTP username
-    $mail->Password = 'fwukybwymzqxppey';           // SMTP password
+    $mail->Username = MAILER_USERNAME;     // SMTP username
+    $mail->Password = MAILER_PASSWORD;           // SMTP password
     $mail->SMTPSecure = 'tls';                 // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                         // TCP port to connect to
     $mail->CharSet = 'UTF-8';
     //Recipients
-    $mail->setFrom('recefice.recepttar@gmail.com', 'Recefice Recepttár');   //feladó
+    $mail->setFrom(MAILER_USERNAME, 'Recefice Recepttár');   //feladó
     //$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
     //$mail->addAddress('joe@example.net');          //címzett, Name is optional
-    $mail->addReplyTo('recefice.recepttar@gmail.com', 'Recefice Recepttár');
+    $mail->addReplyTo(MAILER_USERNAME, 'Recefice Recepttár');
     //$mail->addCC('cc@example.com');
     //$mail->addBCC('bcc@example.com');
   
@@ -51,7 +51,7 @@ if($response===true) {
     //Content
     $mail->isHTML(true);               // Set email format to HTML
     $mail->Subject = 'Jelszó visszaállítás';
-    $mail->Body = '<h1>Kattintson a következő linkre a jelszó visszaállításához:</h1><br><a href="' . RECOVERY_URL . '/' . $token.'" target="_blank">Új jelszó beállítása</a>';
+    $mail->Body = '<h1>Kattintson a következő linkre a jelszó visszaállításához:</h1><br><a href="' . RECOVERY_URL . '/index.php?token=' . $token.'" target="_blank">Új jelszó beállítása</a>';
     $mail->addAddress($email); 
     $mail->send();
     } catch (Exception $e) {

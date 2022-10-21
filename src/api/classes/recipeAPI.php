@@ -377,7 +377,7 @@ abstract class RecipeAPI
     
   }
 
-  private static function uploadImages($images)
+  public static function uploadImages($images)
   {
     $arr = [];
    

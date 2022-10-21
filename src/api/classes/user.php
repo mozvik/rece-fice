@@ -522,17 +522,17 @@ class User{
         $conn = null;
       } catch (PDOException $e) {
         error_log($e->getMessage());
-        return new Response(400, true, $e->getMessage());
+        return ['pdo' => 'Adatbázis hiba!'];
       }
 
       if (is_array($recoveryTimer)) {
         if (time() - (int)$recoveryTimer[0] > 3600) { // 1 óra
-          return new Response(200, false, ['error' => 'A token érvényessége lejárt']);
+          return ['expired' => 'A token érvényessége lejárt'];
         }
-        return new Response(200, false, ['token' => $token]);
+        return true;
       }
       else{
-        return new Response(200, false, ['error' => 'Érvénytelen token']);
+        return ['format' => 'Érvénytelen token formátum!'];
       }
      
     }
