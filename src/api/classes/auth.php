@@ -363,67 +363,9 @@ abstract class Auth{
   
   public static function resetPassword($password, $token)
   {
-      $errors = [];
-  
-    //   if (!isset($_POST['password1']) && !isset($_POST['password2']) && !isset($_POST['token'])) {
-    //       $errors['request'] = 'Bad request';
-    //       $response = new Response(400, true, $errors);
-    //       return $response;
-    //       die();
-    //   }
-  
-    //   $password1 = filter_input(INPUT_POST, 'password1', FILTER_DEFAULT);
-    //   if (empty($password1)) {
-    //       $errors['password1'] = 'Kötelező kitölteni!';
-    //   } elseif (!$password1) {
-    //       $errors['password1'] = 'Érvénytelen formátum!';
-    //   }
-    //   $password2 = filter_input(INPUT_POST, 'password2', FILTER_DEFAULT);
-    //   if (empty($password2)) {
-    //       $errors['password2'] = 'Kötelező kitölteni!';
-    //   } elseif (!$password2) {
-    //       $errors['password2'] = 'Érvénytelen formátum!';
-    //   }
-  
-    //   if (!empty($password1) && $password1 !== $password2) {
-    //       $errors['password1'] = 'A két jelszó nem azonos!';
-    //       $errors['password2'] = 'A két jelszó nem azonos!';
-    //   }
-  
-    //   if (mb_strlen($password1) < 8) {
-    //       $errors['password1'] = 'Minimum 8 karakter legyen!';
-    //   }
-    //   if (mb_strlen($password2) < 8) {
-    //       $errors['password2'] = 'Minimum 8 karakter legyen!';
-    //   }  
-  
-    //   $token = filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
-    //   $tokenCheck = User::validateRecoveryToken($token);
-    //   if (empty($token)) {
-    //       $errors['token'] = 'Hiányzó token';
-    //   } elseif (!$token) {
-    //       $errors['token'] = 'Érvénytelen token';
-    //   } elseif (isset($tokenCheck->response['error'])) {
-    //       $errors['token'] = $tokenCheck->response['error'];
-    //   }
-  
-  
-    //   if (!empty($password1) && $password1 !== $password2) {
-    //       $errors['password1'] = 'A két jelszó nem azonos!';
-    //       $errors['password2'] = 'A két jelszó nem azonos!';
-    //   }
-    //   if (!empty($errors)) {
-    //       $response = new Response(200, false, [
-    //           'errors' => $errors
-    //       ]);
-    //       return $response;
-    //       die();
-    //   }
-  
       $passwordHash = User::generateHash($password);
       $response = User::passwordRecovery($token, $passwordHash);
-  
-      return $response;
+       return $response;
   }
 
   public static function activateUser()

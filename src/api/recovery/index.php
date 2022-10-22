@@ -1,8 +1,9 @@
 <?php
 require_once("../settings.php");
-spl_autoload_register(function ($type) {
-  require_once("../classes/$type.php");
-});
+require_once("../classes/user.php");
+require_once("../classes/auth.php");
+require_once("../classes/dbmodel.php");
+require_once("../classes/response.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['token'])) {
   $token = filter_input(INPUT_GET, 'token', FILTER_DEFAULT);
@@ -162,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password']) && isset(
       </form>
     </div>
 
-    <div class="new-password-box <?php echo $_SERVER['REQUEST_METHOD'] === 'GET' && !isset($passwordOk) ? 'hidden' : '' ?>">
+    <div class="new-password-box <?php echo $_SERVER['REQUEST_METHOD'] === 'POST' && isset($passwordOk) ? '' : 'hidden' ?>">
       <div class="inner-container">
         <h3>Sikeres jelszóváltoztatás!</h3>
         <input type="button" id="backToLoginPage" value="Vissza a recepttárba">

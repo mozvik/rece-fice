@@ -6,11 +6,17 @@ header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 
 require_once("settings.php");
+require_once("classes/dbmodel.php");
+require_once("classes/auth.php");
+require_once("classes/listBuilder.php");
+require_once("classes/page.php");
+require_once("classes/recipe.php");
+require_once("classes/recipeAPI.php");
+require_once("classes/recipeBuilder.php");
+require_once("classes/response.php");
+require_once("classes/session.php");
+require_once("classes/user.php");
 
-spl_autoload_register(function($type)
-{
-    require_once("classes/$type.php");
-});
 
 
 ini_set('session.cookie_secure', "1");
