@@ -18,6 +18,7 @@ export class UserFavoritesComponent implements OnInit {
   @Input() user: string | undefined;
   @Input() userFavorites: Recipe[] | undefined;
   @Input() userPageIndex: number = 0;
+  @Input() userFavoritesTotal: number = 0;
   @Output() userPageIndexChange: EventEmitter<number> = new EventEmitter();
 
   results: Recipe[] = [];

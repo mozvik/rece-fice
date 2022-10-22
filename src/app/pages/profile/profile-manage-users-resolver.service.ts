@@ -17,6 +17,8 @@ export class ProfileManageUsersResolverService implements Resolve<User[]> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): User[] | Observable<User[]> | Promise<User[]> {
-    return this.authService.user?.role == '1' ? this.authService.userlist():[];
+    return this.authService.user?.role == '1'
+      ? this.authService.userlist()
+      : [];
   }
 }

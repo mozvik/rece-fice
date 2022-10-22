@@ -23,7 +23,7 @@
     mat-stroked-button
     color="primary"
     (click)="incrementIndex()"
-    [disabled]="!results.length"
+    [disabled]="userRecipes?.length >= userRecipesTotal"
   >
     Mutass többet
   </button>

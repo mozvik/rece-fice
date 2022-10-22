@@ -23,7 +23,7 @@
     mat-stroked-button
     color="primary"
     (click)="incrementIndex()"
-    [disabled]="!results.length"
+    [disabled]="userFavorites?.length >= userFavoritesTotal"
   >
     Mutass többet
   </button>

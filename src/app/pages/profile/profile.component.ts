@@ -20,6 +20,8 @@ export class ProfileComponent implements OnInit {
   userList: User[] = [];
   userRecipePageIndex: number = 0;
   userRecipeFavoritesPageIndex: number = 0;
+  userRecipesTotal: number = 0;
+  userFavoritesTotal: number = 0;
 
   get activeProfileTab() {
     return this.dataService.activeProfileTab;
@@ -42,6 +44,8 @@ export class ProfileComponent implements OnInit {
         data['userFavorites'].items
       );
       this.userList = data['userList'];
+      this.userRecipesTotal = data['userRecipes'].totalResults;
+      this.userFavoritesTotal = data['userFavorites'].totalResults;
     });
     this.user = this.authService.user;
   }

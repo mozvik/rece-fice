@@ -135,10 +135,12 @@ export class DialogForgottenPassword {
     this.isLoading = true;
     this.authService
       .passwordRecovery(this.email2.value)
-      .pipe(finalize(() => {
-        this.isLoading = false
-        this.dialogRef.close();
-      }))
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.dialogRef.close();
+        })
+      )
       .subscribe((response) => {
         if (response.hasOwnProperty('errors')) {
           this.apiError = response.errors;

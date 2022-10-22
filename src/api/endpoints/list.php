@@ -80,7 +80,8 @@ switch ($listRequestName[$idx]) {
     }
     $query = "SELECT * FROM recipe WHERE userId = ?
         ORDER BY created DESC LIMIT " . $itemsPerPage . " OFFSET " . $page * $itemsPerPage;
-    $response = new Response(200, false, ListBuilder::getUserRecipes($query, $_GET['user']));
+    $totalQuery = "SELECT COUNT(userId) FROM recipe WHERE userId = ?";
+    $response = new Response(200, false, ListBuilder::getUserRecipes($query, $totalQuery, $_GET['user']));
     return;
     break;
   case 'userfavorites':
@@ -95,7 +96,11 @@ switch ($listRequestName[$idx]) {
       JOIN recipe ON user_favorites.recipeId = recipe.recipeId
       WHERE user_favorites.userId = ? AND recipe.moderated != 1
         ORDER BY created DESC LIMIT " . $itemsPerPage . " OFFSET " . $page * $itemsPerPage;
-    $response = new Response(200, false, ListBuilder::getUserRecipes($query, $_GET['user']));
+      $totalQuery="SELECT COUNT(recipe.userId)
+        FROM user_favorites
+        JOIN recipe ON user_favorites.recipeId = recipe.recipeId
+        WHERE user_favorites.userId = ? AND recipe.moderated != 1";
+    $response = new Response(200, false, ListBuilder::getUserRecipes($query, $totalQuery, $_GET['user']));
     return;
     break;
   case 'similar':

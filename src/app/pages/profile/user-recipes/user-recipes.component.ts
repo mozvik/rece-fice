@@ -26,6 +26,7 @@ export class UserRecipesComponent implements OnInit {
   @Input() user: string | undefined;
   @Input() userRecipes: Recipe[] | undefined;
   @Input() userPageIndex: number = 0;
+  @Input() userRecipesTotal: number = 0;
   @Output() userPageIndexChange: EventEmitter<number> = new EventEmitter();
 
   results: Recipe[] = [];

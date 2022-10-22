@@ -1,7 +1,7 @@
 <?php
 abstract class ListBuilder{
 
-  public static function getUserRecipes($query, $userId)
+  public static function getUserRecipes($query, $totalQuery, $userId)
   {
     $conn = DBmodel::connect();
     
@@ -14,11 +14,21 @@ abstract class ListBuilder{
       $response = new Response(400, true, $e->getMessage());
       die();
     }
+    try {
+      $st = $conn->prepare($totalQuery);
+      $st->execute([$userId]);
+      $total = $st->fetchColumn();
+    } catch (PDOException $e) {
+      error_log($e->getMessage());
+      $response = new Response(400, true, $e->getMessage());
+      die();
+    }
+
     $conn = null;
   
     $recipes = RecipeBuilder::add($recipes);
   
-    return ["itemCount" => count($recipes), "totalResults" => 'N/A', "items" => $recipes];
+    return ["itemCount" => count($recipes), "totalResults" => $total, "items" => $recipes];
   }
 
   public static function getList($query, $idx = NULL)
