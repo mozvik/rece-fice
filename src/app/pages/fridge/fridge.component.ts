@@ -36,6 +36,9 @@ export class FridgeComponent implements OnInit {
   }
 
   submitForm() {
+    if (this.ingredients.length == 0) {
+      return;
+    }
     this.isLoading = true;
     this.dataService.resultsPageIndex = 0;
     this.dataService.fridgeIngredients = this.ingredients;
