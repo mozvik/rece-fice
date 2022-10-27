@@ -72,7 +72,7 @@ function getTotalItems($searchArray)
     }
     $nationalityQuery = substr($nationalityQuery, 0, strrpos($nationalityQuery, ' OR')) . " )";
   }
-  $conn = DBconnection();
+  $conn = DBmodel::connect();
 
   try{
     $sql = "SELECT DISTINCT recipe.recipeId 
@@ -179,7 +179,7 @@ function multiSearch($searchArray, $page, $itemsPerPage)
     }
     $nationalityQuery = substr($nationalityQuery, 0, strrpos($nationalityQuery, ' OR')) . " )";
   }
-  $conn = DBconnection();
+  $conn = DBmodel::connect();
 
   try {
 

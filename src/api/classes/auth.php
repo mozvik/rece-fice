@@ -136,7 +136,7 @@ abstract class Auth{
   
       $session = Session::getBySessionId(session_id());
   
-      if ($session != null && Session::generateToken($_SESSION['userdata']['sid'] . $_SESSION['userdata']['email'] . SECRET_KEY) === $session->stoken) {
+      if ($session != null && isset($_SESSION['userdata']) && Session::generateToken($_SESSION['userdata']['sid'] . $_SESSION['userdata']['email'] . SECRET_KEY) === $session->stoken) {
           $session->updateSessionTime();
           return true;
       }

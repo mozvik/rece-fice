@@ -49,7 +49,6 @@ abstract class ListBuilder{
       die();
     }
     $conn = null;
-  
     $recipes = RecipeBuilder::add($recipes);
   
     return ["itemCount" => count($recipes), "totalResults" => 'N/A', "items" => $recipes];
