@@ -48,4 +48,8 @@ Thumbs.db
 # Local Netlify folder
 .netlify
 
+# Docker
+Dockerfile
+
 /vendor/
+docker-compose.yaml
