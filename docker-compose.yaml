@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    ports: 
+      - 3366:3306
+    command:          
+      --default-authentication-plugin=mysql_native_password
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - ./src/dump/recefice.sql:/docker-entrypoint-initdb.d/recefice.sql
+      - persistent:/var/lib/mysql
+
+  php-env:
+    build: .
+    restart: always
+    volumes: 
+      - ./src/api:/var/www/html/api
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8082:8080
+   
+volumes:
+    persistent:
