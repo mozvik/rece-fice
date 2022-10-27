@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://teszt.esoguides.hu/api',
+  apiUrl: '/api',
+  // apiUrl: 'https://teszt.esoguides.hu/api',
 };
