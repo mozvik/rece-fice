@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs';
 import { User } from './classes/user';
-import { APIService } from './service/api.service';
 import { AuthService } from './service/auth.service';
 import { DataService } from './service/data.service';
 import { IconService } from './service/icon.service';
@@ -18,31 +17,33 @@ export class AppComponent {
     private authService: AuthService
   ) {
     this.iconService.registerIcons();
-    this.authService
-      .credentials()
-      .pipe(
-        map((response) => {
-          if (!response || response.length === 0) {
-            this.authService.user = undefined;
-          } else if (!this.authService.user) {
-            this.authService.user = new User(
-              response.id,
-              response.name,
-              response.email,
-              response.password,
-              response.avatar,
-              response.role,
-              response.active,
-              response.description,
-              response.created,
-              response.totalReviews,
-              response.totalRecipes,
-              response.totalFavorites
-            );
-          }
-        })
-      )
-      .subscribe();
+
+    const initUser = this.authService
+    .credentials()
+    .pipe(
+      map((response) => {
+        if (!response || response.length === 0) {
+          this.authService.user = undefined;
+        } else if (!this.authService.user) {
+          this.authService.user = new User(
+            response.id,
+            response.name,
+            response.email,
+            response.password,
+            response.avatar,
+            response.role,
+            response.active,
+            response.description,
+            response.created,
+            response.totalReviews,
+            response.totalRecipes,
+            response.totalFavorites
+          );
+        }
+      })
+    );
+
+    initUser.subscribe();
   }
 
   ngOnInit(): void {}
