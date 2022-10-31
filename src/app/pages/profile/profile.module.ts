@@ -21,13 +21,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UnixToDatePipe } from 'src/app/pipes/unix-to-date.pipe';
 import { ManageReviewsComponent } from './manage-reviews/manage-reviews.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ManageRecipesComponent } from './manage-recipes/manage-recipes.component';
+import { MatPaginatorService } from 'src/app/service/mat.paginator.service';
 
 @NgModule({
   declarations: [
@@ -62,6 +66,12 @@ import { ManageRecipesComponent } from './manage-recipes/manage-recipes.componen
     MatInputModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+  ],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useClass: MatPaginatorService,
+    },
   ],
 })
 export class ProfileModule {}
