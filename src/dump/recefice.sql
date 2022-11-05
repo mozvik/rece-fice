@@ -1063,13 +1063,6 @@ ALTER TABLE `nationality`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `rating`
---
-ALTER TABLE `rating`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `recipeid` (`recipeid`);
-
---
 -- A tábla indexei `recipe`
 --
 ALTER TABLE `recipe`
@@ -1173,12 +1166,6 @@ ALTER TABLE `nationality`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT a táblához `rating`
---
-ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT a táblához `recipe`
 --
 ALTER TABLE `recipe`
@@ -1218,12 +1205,6 @@ ALTER TABLE `direction`
 ALTER TABLE `ingredient`
   ADD CONSTRAINT `ingredient_ibfk_1` FOREIGN KEY (`measurementId`) REFERENCES `measurement` (`id`),
   ADD CONSTRAINT `ingredient_ibfk_2` FOREIGN KEY (`recipeId`) REFERENCES `recipe` (`recipeId`);
-
---
--- Megkötések a táblához `rating`
---
-ALTER TABLE `rating`
-  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`recipeid`) REFERENCES `recipe` (`recipeId`);
 
 --
 -- Megkötések a táblához `recipe`

@@ -131,7 +131,7 @@ abstract class Auth{
   {
       Session::deleteExpiredSessions(time() - SESSION_TIMEOUT); 
       if (!isset($_SESSION) && !isset($_SESSION['userdata']) && !$_SESSION['userdata']['loggedIn']) {
-          return false; 
+        return false;
       }
   
       $session = Session::getBySessionId(session_id());

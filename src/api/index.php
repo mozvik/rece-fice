@@ -17,10 +17,8 @@ require_once("classes/response.php");
 require_once("classes/session.php");
 require_once("classes/user.php");
 
-
-
-ini_set('session.cookie_secure', "1");
-ini_set('session.cookie_samesite', 'None');
+// ini_set('session.cookie_secure', "0");
+// ini_set('session.cookie_samesite', 'None');
 session_start();
 
 $sid = session_id();

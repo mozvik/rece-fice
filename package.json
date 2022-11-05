@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --disable-host-check --host 0.0.0.0 -o",
-    "build": "ng build",
+    "build": "ng build && docker build --pull --rm -f Dockerfile-php-env-74 -t mozvik/recefice-php-env:v1.0 . && docker push mozvik/recefice-php-env:v1.0",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "style": "npx prettier --write .",

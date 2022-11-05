@@ -1,4 +1,6 @@
 <?php
+// ini_set('session.cookie_secure', 0);
+// ini_set('session.cookie_samesite', 'None');
 
 $environmentVariables = [
   "DB_DSN" => getenv("DB_DSN"),

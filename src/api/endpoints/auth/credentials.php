@@ -1,7 +1,6 @@
 <?php
-
 if (!Auth::userAuthentication()) {
-  $response = new Response(200, false, null);
+  $response = new Response(200, false, "!Auth::userAuthentication() ".session_id());
   return;
 }
 
@@ -11,7 +10,7 @@ $user->passwordHash = '';
 $userStats = User::getUserStatistics($_SESSION['userdata']['userId']);
 
 if (!$user || !$userStats) {
-  $response = new Response(200, false, null);
+  $response = new Response(200, false, '!$user || !$userStats');
   return;
 }
 

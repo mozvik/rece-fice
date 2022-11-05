@@ -52,4 +52,10 @@ Thumbs.db
 Dockerfile
 
 /vendor/
-docker-compose.yaml
+docker-compose*.yaml
+apache2.conf
+docker-images
+Dockerfile-httpd
+Dockerfile-mariadb-109
+Dockerfile-php-env-74
+src/.htaccess
