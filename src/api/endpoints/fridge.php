@@ -42,9 +42,9 @@ WHERE ";
 
   if (is_array($ingredients)) {
     foreach ($ingredients as $key => $value) {
-      $sql .= "ingredient.name LIKE :word" . $key . " AND ";
+      $sql .= "ingredient.name LIKE :word" . $key . " OR ";
     }
-    $sql = substr($sql, 0, strrpos($sql, ' AND'));
+    $sql = substr($sql, 0, strrpos($sql, ' OR'));
   } else {
     $sql .= "ingredient.name LIKE :word";
   }
