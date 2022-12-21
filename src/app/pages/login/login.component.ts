@@ -148,7 +148,7 @@ export class DialogForgottenPassword {
           return;
         } else {
           this.messageService.showSnackBar(
-            `A(z) ${this.email2.value} email címre elküldtük egy visszaigazoló levelet`,
+            `A(z) ${this.email2.value} email címre elküldtünk egy visszaigazoló levelet`,
             'success'
           );
         }
