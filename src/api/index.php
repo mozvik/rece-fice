@@ -20,7 +20,6 @@ require_once("classes/user.php");
 // ini_set('session.cookie_secure', "0");
 // ini_set('session.cookie_samesite', 'None');
 session_start();
-
 $sid = session_id();
 
 $resource = urldecode(strtok($_SERVER['QUERY_STRING'], '&'));
@@ -32,7 +31,6 @@ if (!$route) {
 } else {
   require('endpoints/'.$route);
 }
-
 
 if (isset($response) && $response instanceof Response) {
   if ($response->isError) {
@@ -71,7 +69,7 @@ function routeTo($resource)
     'costs' => 'costs.php',//
     'labels' => 'labels.php',//
     'search' => 'search.php',//
-    'recipe' => 'recipe.php',//--get ok|put ok|post ok|del ok
+    'recipe' => 'recipe.php',//
     'list' => 'list.php',//
     'review' => 'review.php',//
     'reviews' => 'reviews.php',//
@@ -80,7 +78,7 @@ function routeTo($resource)
     'login' => 'auth/login.php',//
     'register' => 'auth/register.php',//
     'logout' => 'auth/logout.php',//
-    'recovery' => 'auth/recovery.php',//php render kell
+    'recovery' => 'auth/recovery.php',//
     'reset' => 'auth/reset.php',//
     'credentials' => 'auth/credentials.php',//
     'userlist' => 'auth/userlist.php',//
