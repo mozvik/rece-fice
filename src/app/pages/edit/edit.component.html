@@ -538,7 +538,7 @@
             secondFormGroup.invalid ||
             thirdFormGroup.invalid ||
             fourthFormGroup.invalid ||
-            (fifthFormGroup.invalid && uploadedImages.length == 0) ||
+            !fifthFormGroup.valid ||
             isLoading
           "
         >

@@ -25,11 +25,6 @@ abstract class RecipeAPI
 
   public static function Put()
   {
-    if(!Auth::userAuthentication()){
-      $response = new Response(200, false, null);
-      return $response;
-      die();
-    }
     
     $recipe = new Recipe(json_decode($_POST['recipe'], true));
     $files = $_FILES;
@@ -151,12 +146,7 @@ abstract class RecipeAPI
 
   public static function Post()
   {
-    if(!Auth::userAuthentication()){
-      $response = new Response(200, false, 'Authorization failed');
-      return $response;
-      die();
-    }
-    
+        
       $recipe = new Recipe(json_decode($_POST['recipe'], true));
       $files = $_FILES;
       
