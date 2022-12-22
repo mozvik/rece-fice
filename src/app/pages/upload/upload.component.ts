@@ -182,7 +182,6 @@ export class UploadComponent implements OnInit {
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (response: any) => {
-          console.log('response :>> ', response);
           if (response != null) {
             first.reset();
             second.reset();
@@ -197,7 +196,6 @@ export class UploadComponent implements OnInit {
           }
         },
         error: (error: any) => {
-          console.log(error);
           this.messageService.showSnackBar('Sikertelen feltöltés!', 'error');
         },
       });

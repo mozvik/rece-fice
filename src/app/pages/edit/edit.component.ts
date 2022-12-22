@@ -343,8 +343,6 @@ export class EditComponent implements OnInit {
       ? fArray.push(...this.fifthFormGroup.get('photos')?.value)
       : '';
     this.recipe.image = fArray;
-
-    console.log('this.recipe :>> ', this.recipe);
   }
 }
 
